@@ -1,0 +1,259 @@
+Northlane — AI-tanácsadás vállalatoknak ==> Northlane - AI consulting for businesses
+A Northlane felméri, hol termel értéket az AI a cégedben, megtervezi és élesíti a bevezetést, és addig marad, amíg az eredmény a mérlegben is látszik. ==> Northlane assesses where AI creates value in your business, designs and launches the rollout, and stays until the result shows up on your balance sheet.
+aria-label="Northlane – főoldal" ==> aria-label="Northlane - home"
+aria-label="Fő navigáció" ==> aria-label="Main navigation"
+>Szolgáltatások< ==> >Services<
+>Módszer< ==> >Method<
+>Eredmények< ==> >Results<
+>Csomagok< ==> >Packages<
+>GYIK< ==> >FAQ<
+Felmérő hívás <svg ==> Assessment call <svg
+>Ingyenes felmérő hívás< ==> >Free assessment call<
+aria-label="Menü" ==> aria-label="Menu"
+<b>ÚJ</b> EU AI Act-kész bevezetési keretrendszer ==> <b>NEW</b> EU AI Act-ready rollout framework
+aria-label="Mesterséges intelligencia, ami a mérlegben is látszik." ==> aria-label="Artificial intelligence that hits the bottom line."
+<span class="ln-i metal">Mesterséges intelligencia,</span> ==> <span class="ln-i metal">Artificial intelligence</span>
+<span class="metal-dim">ami a mérlegben is látszik.</span> ==> <span class="metal-dim">that hits the bottom line.</span>
+A Northlane megmutatja, hol termel valódi értéket az AI a cégedben. Megtervezzük, élesítjük és betanítjuk a csapatodat, és addig maradunk, amíg az eredmény a P&amp;L-ben is megjelenik. ==> Northlane shows you where AI creates real value in your business. We design it, launch it and train your team, and we stay until the result appears in your P&amp;L.
+Ingyenes AI-felmérés <svg ==> Free AI assessment <svg
+>Ügyféleredmények< ==> >Client results<
+aria-label="5 csillag" ==> aria-label="5 stars"
+<b>4,9/5</b> · 64 hazai vállalat<br>vezetőinek értékelése alapján ==> <b>4.9/5</b> · based on ratings from<br>executives at 64 companies
+aria-label="Példa: AI-lehetőségtérkép egy ügyfélnek" ==> aria-label="Example: AI opportunity map for a client"
+<span class="mono">AI-lehetőségtérkép</span><b>Kvarc Bank Zrt.</b> ==> <span class="mono">AI opportunity map</span><b>Kvarc Bank Inc.</b>
+<i></i>2. hét ==> <i></i>Week 2
+<span>AI-ÉRETTSÉG</span> ==> <span>AI MATURITY</span>
+Hitelkérelem-előszűrés ==> Loan application pre-screening
+<span>Ügyfélszolgálati asszisztens</span> ==> <span>Customer support assistant</span>
+<span>Számlafeldolgozás</span> ==> <span>Invoice processing</span>
+Lemorzsolódás-előrejelzés ==> Churn prediction
+<b>186 M Ft</b> ==> <b>$510K</b>
+<b>142 M Ft</b> ==> <b>$390K</b>
+<b>64 M Ft</b> ==> <b>$175K</b>
+<b>51 M Ft</b> ==> <b>$140K</b>
+<span>Becsült éves hatás</span><b>443 M Ft</b> ==> <span>Estimated annual impact</span><b>$1.2M</b>
+Roadmap jóváhagyva<small>Igazgatóság · ma 09:42</small> ==> Roadmap approved<small>Board · today 09:42</small>
+Pilot · 6. hét · élesben ==> Pilot · week 6 · live
+Átl. kezelési idő ==> Avg. handling time
+Görgess tovább <svg ==> Keep scrolling <svg
+Hazai közép- és nagyvállalatok bíznak bennünk a pénzügytől a gyártásig ==> Mid-size and large companies trust us, from finance to manufacturing
+danubia logisztika ==> danubia logistics
+Aurum Biztosító ==> Aurum Insurance
+Tiszavölgy Energia ==> Tisza Valley Energy
+<span class="label">Szolgáltatások</span> ==> <span class="label">Services</span>
+Stratégiától az éles rendszerig. <span class="dim">Egyetlen csapattal.</span> ==> From strategy to a live system. <span class="dim">With one team.</span>
+Nem adunk át 80 oldalas prezentációt és nem tűnünk el. Ugyanazok a szakértők mérnek fel, építenek és tanítanak. ==> We don't hand over an 80-page presentation and vanish. The same experts assess, build and teach.
+<li>Adatok<span ==> <li>Data<span
+<li>Folyamatok<span ==> <li>Processes<span
+<li>Technológia<span ==> <li>Technology<span
+<li>Emberek<span ==> <li>People<span
+<li>Irányítás<span ==> <li>Governance<span
+Legnagyobb rés: belső AI-kompetencia ==> Biggest gap: in-house AI skills
+<span class="mono">Top 3 lehetőség</span> ==> <span class="mono">Top 3 opportunities</span>
+<i></i>Hitel-előszűrés ==> <i></i>Loan pre-screening
+<i></i>Ügyfél-asszisztens ==> <i></i>Customer assistant
+<i></i>Számlák</span> ==> <i></i>Invoices</span>
+01 · Felmérés ==> 01 · Assessment
+AI-stratégia és érettségi audit ==> AI strategy and maturity audit
+Két hét alatt öt dimenzióban felmérjük a szervezetet, és ROI szerint rangsorolt lehetőséglistát adunk. A szakértői véleményt valós adatokkal támasztjuk alá. ==> In two weeks we assess your organization across five dimensions and give you an opportunity list ranked by ROI. We back expert opinion with real data.
+Beérkező számla<small>412 / nap</small> ==> Incoming invoice<small>412 / day</small>
+AI-kinyerés<small>99,2% pontos</small> ==> AI extraction<small>99.2% accurate</small>
+ERP-rögzítés<small>SAP S/4</small> ==> ERP entry<small>SAP S/4</small>
+Jóváhagyás<small>csak kivétel</small> ==> Approval<small>exceptions only</small>
+<i></i>Átfutás: 4 nap → 6 óra ==> <i></i>Turnaround: 4 days → 6 hrs
+<i></i>87% emberi beavatkozás nélkül ==> <i></i>87% without human intervention
+<i></i>Teljes naplózás ==> <i></i>Full audit log
+02 · Automatizálás ==> 02 · Automation
+Folyamat-automatizálás, ami a meglévő rendszereidre épül ==> Process automation built on your existing systems
+Számlák, szerződések, ügyfélkérések, riportok. Ott veszi át az AI az ismétlődő munkát, ahol az ember csak másol és ellenőriz. ==> Invoices, contracts, customer requests, reports. AI takes over the repetitive work wherever a person is only copying and checking.
+Mennyi a felmondási idő a Danubiával kötött szállítói szerződésben? ==> What's the notice period in our supplier contract with Danubia?
+<b>90 nap</b>, írásban, a 14.2 pont szerint. ==> <b>90 days</b>, in writing, per clause 14.2.
+Szallitoi_szerzodes_2023.pdf · 7. o. ==> Supplier_agreement_2023.pdf · p. 7
+03 · Tudás ==> 03 · Knowledge
+Belső AI-asszisztens ==> Internal AI assistant
+A céges dokumentumaidból válaszol, mindig forrásmegjelöléssel, jogosultságkezeléssel. ==> It answers from your company documents, always with sources and permission controls.
+ERP · olvasás/írás ==> ERP · read/write
+CRM · olvasás ==> CRM · read
+NAV Online Számla<small>API · szinkron</small> ==> Tax Authority e-Invoice<small>API · sync</small>
+04 · Integráció ==> 04 · Integration
+Adat és infrastruktúra ==> Data and infrastructure
+EU-s felhő vagy saját szerver. A modell oda megy, ahol az adat van. ==> EU cloud or your own servers. The model goes where the data is.
+<div class="row">Pénzügy<b>86%</b> ==> <div class="row">Finance<b>86%</b>
+<div class="row">Ügyfélszolgálat<b>74%</b> ==> <div class="row">Support<b>74%</b>
+<div class="row">Értékesítés<b>61%</b> ==> <div class="row">Sales<b>61%</b>
+05 · Emberek ==> 05 · People
+Képzés és változáskezelés ==> Training and change management
+Szerepkörre szabott AI-akadémia, hogy az eszközt tényleg használják is, ne csak megvegyék. ==> A role-tailored AI academy, so the tool actually gets used and not just bought.
+06 · Megfelelőség ==> 06 · Compliance
+EU AI Act, GDPR és belső irányítás, már az első naptól ==> EU AI Act, GDPR and internal governance, from day one
+Minden use case kockázati besorolást, dokumentációt és felelőst kap. A jogi és az IT-biztonsági csapat a kezdetektől látja, mi történik. ==> Every use case gets a risk classification, documentation and an owner. Legal and IT security see what's happening from the start.
+Kockázati besorolás ==> Risk classification
+DPIA-támogatás ==> DPIA support
+Modellnaplózás ==> Model logging
+AI-szabályzat ==> AI policy
+Amiben hiszünk ==> What we believe
+A legtöbb AI-projekt nem a modellen bukik el, hanem azon, hogy senki nem döntötte el, melyik üzleti problémát kell megoldania. Mi ezzel kezdjük. ==> Most AI projects don't fail on the model. They fail because nobody decided which business problem it should solve. That's where we start.
+<b>Szabó Márton</b>alapító partner, Northlane ==> <b>Martin Szabo</b>founding partner, Northlane
+>9 hét< ==> >9 wks<
+Eredmények számokban ==> Results in numbers
+Számok, amiket <span class="dim">az ügyfeleink könyvelése is igazol.</span> ==> Numbers <span class="dim">our clients' books confirm too.</span>
+vállalati ügyfél 2021 óta, a pénzügytől a gyártásig ==> enterprise clients since 2021, from finance to manufacturing
+élesben futó AI-megoldás, nem pilot-temető ==> AI solutions running live, not a pilot graveyard
+átlagos költségcsökkenés az érintett folyamatokban ==> average cost reduction in the affected processes
+<small>hét</small></div><p>a medián idő a megbízástól az első éles eredményig ==> <small>wks</small></div><p>median time from engagement to first live result
+Négy lépés az ötlettől <span class="dim">a mérhető eredményig.</span> ==> Four steps from idea <span class="dim">to measurable result.</span>
+Minden szakasz végén van döntési pont. Ha a számok nem jönnek ki, megállunk, és ezt mi mondjuk ki elsőként. ==> Every phase ends with a decision point. If the numbers don't work out, we stop, and we're the first to say so.
+>2 hét< ==> >2 weeks<
+<h3>Felmérés</h3> ==> <h3>Assessment</h3>
+Interjúk a vezetőkkel és a terepen dolgozókkal, folyamat- és adattérkép. Megnézzük, hol megy el a legtöbb idő és pénz. ==> Interviews with leaders and people in the field, plus process and data maps. We look at where most time and money go.
+12–15 strukturált interjú ==> 12-15 structured interviews
+AI-érettségi pontszám 5 dimenzióban ==> AI maturity score across 5 dimensions
+Folyamat-hőtérkép időráfordítással ==> Process heat map with time spent
+<span>Folyamat-hőtérkép</span><span>óra / hét</span> ==> <span>Process heat map</span><span>hrs / week</span>
+<span></span><span class="h">H</span><span class="h">K</span><span class="h">Sz</span><span class="h">Cs</span><span class="h">P</span> ==> <span></span><span class="h">M</span><span class="h">T</span><span class="h">W</span><span class="h">T</span><span class="h">F</span>
+<span>Számlázás</span> ==> <span>Invoicing</span>
+<span>Ügyfélkérések</span> ==> <span>Customer requests</span>
+<span>Riportolás</span> ==> <span>Reporting</span>
+<span>Beszerzés</span> ==> <span>Procurement</span>
+<span>HR-ügyintézés</span> ==> <span>HR admin</span>
+>1 hét< ==> >1 week<
+Stratégia és roadmap ==> Strategy and roadmap
+ROI, megvalósíthatóság és kockázat szerint rangsoroljuk a lehetőségeket, és 90 napos ütemtervet készítünk felelősökkel. ==> We rank opportunities by ROI, feasibility and risk, and build a 90-day plan with owners.
+Rangsorolt use case-portfólió ==> Ranked use case portfolio
+Üzleti eset (business case) minden tételre ==> A business case for every item
+Vezetői workshop és döntés ==> Leadership workshop and decision
+<span>90 napos roadmap</span> ==> <span>90-day roadmap</span>
+Hitel-előszűrés<div ==> Loan pre-screening<div
+Ügyfél-asszisztens<div ==> Customer assistant<div
+Számlafeldolgozás<div ==> Invoice processing<div
+AI-akadémia<div ==> AI academy<div
+Irányítási keret<div ==> Governance framework<div
+<span>1. hó</span><span>2. hó</span><span>3. hó</span> ==> <span>Month 1</span><span>Month 2</span><span>Month 3</span>
+6–8 hét ==> 6-8 weeks
+Pilot élesben ==> Live pilot
+Nem demót építünk, hanem a valós rendszereidhez kötött, valós felhasználókkal futó megoldást, előre rögzített sikerkritériumokkal. ==> We don't build a demo. We build a solution connected to your real systems, running with real users, against success criteria agreed up front.
+Mérési baseline az indulás előtt ==> Measurement baseline before launch
+Stop/go döntési pont a 3. héten ==> Stop/go decision point in week 3
+Heti eredményriport a szponzornak ==> Weekly results report for the sponsor
+<span>Kezelési idő / ügy (perc)</span> ==> <span>Handling time / case (min)</span>
+<span>Aurum Biztosító</span> ==> <span>Aurum Insurance</span>
+<span>Kárbejelentés</span> ==> <span>Claims</span>
+Szerződés-<br>módosítás ==> Contract<br>changes
+<span>Panasz</span> ==> <span>Complaint</span>
+Infó-<br>kérés ==> Info<br>request
+Előtte</span> ==> Before</span>
+Pilot után</span> ==> After pilot</span>
+>folyamatos< ==> >ongoing<
+Skálázás és átadás ==> Scale and handover
+Ami működik, azt kiterjesztjük, ami nem, azt lezárjuk. A végén a csapatod önállóan üzemelteti és fejleszti a megoldásokat. ==> We extend what works and close what doesn't. In the end your team runs and develops the solutions on its own.
+Üzemeltetési kézikönyv és monitoring ==> Operations manual and monitoring
+Belső AI-felelősök kinevezése és képzése ==> Appointing and training internal AI owners
+Negyedéves felülvizsgálat ==> Quarterly review
+<span>Átadási csomag</span><span>Ferrum Gyártás</span> ==> <span>Handover package</span><span>Ferrum Manufacturing</span>
+<span>BELSŐ<br>ÜZEMELTETÉS</span> ==> <span>IN-HOUSE<br>OPERATIONS</span>
+Üzemeltetési kézikönyv<span>v2.1</span> ==> Operations manual<span>v2.1</span>
+Monitoring-dashboard<span>élő</span> ==> Monitoring dashboard<span>live</span>
+AI-felelősök (6 fő)<span>képezve</span> ==> AI owners (6 people)<span>trained</span>
+Ügyfeleink mondták ==> Our clients say
+Vezetők, akik már <span class="dim">nem kísérleteznek.</span> ==> Leaders who <span class="dim">no longer experiment.</span>
+Minden idézet mögött egy élesben futó megoldás és egy mért eredmény áll. Referenciahívást szívesen szervezünk. ==> Behind every quote is a solution running live and a measured result. We're happy to arrange a reference call.
+Két hét alatt többet tudtunk meg a saját folyamatainkról, mint az előző két évben. A roadmap első három pontja azóta élesben fut. ==> In two weeks we learned more about our own processes than in the previous two years. The first three items on the roadmap have been running live ever since.
+−41% adminisztrációs idő ==> −41% admin time
+<b>Horváth Gábor</b><span>COO, Danubia Logisztika</span> ==> <b>Gabriel Horvath</b><span>COO, Danubia Logistics</span>
+A számlafeldolgozás átfutása 4 napról 6 órára csökkent. A pénzügyi igazgatónk azóta minden negyedévben megkérdezi, mi a következő lépés. ==> Invoice processing turnaround dropped from 4 days to 6 hours. Since then our CFO asks every quarter what the next step is.
+<span class="res">4 nap → 6 óra</span> ==> <span class="res">4 days → 6 hrs</span>
+<b>Nagy Péter</b><span>Pénzügyi vezető, Pannon Retail</span> ==> <b>Peter Nagy</b><span>Head of Finance, Pannon Retail</span>
+A Northlane két ötletünkre is nemet mert mondani, és igazuk lett. Tanácsadótól ritkán hall ilyet az ember. ==> Northlane dared to say no to two of our ideas, and they were right. You rarely hear that from a consultant.
+2 projekt megállítva időben ==> 2 projects stopped in time
+<b>Farkas Dániel</b><span>Ügyvezető, Medicor</span> ==> <b>Daniel Farkas</b><span>Managing Director, Medicor</span>
+Az ügyfélszolgálati asszisztens a beérkező kérdések 63%-át önállóan lezárja, a kollégák pedig végre a nehéz esetekkel foglalkozhatnak. ==> The support assistant closes 63% of incoming questions on its own, and my colleagues can finally focus on the hard cases.
+63% önálló lezárás ==> 63% resolved autonomously
+<b>Kiss Eszter</b><span>Ügyfélélmény-igazgató, Aurum Biztosító</span> ==> <b>Esther Kiss</b><span>Customer Experience Director, Aurum Insurance</span>
+A jogi csapatunk is nyugodtan alhatott: minden döntésnek volt kockázati besorolása és dokumentációja, már az első héttől. ==> Our legal team could sleep easy too: every decision had a risk classification and documentation from the very first week.
+<b>Dr. Varga Judit</b><span>Jogi igazgató, Kvarc Bank</span> ==> <b>Dr. Judith Varga</b><span>General Counsel, Kvarc Bank</span>
+Az előrejelző modell három hónap alatt 18%-kal csökkentette a lemorzsolódást a kulcsügyfeleink körében. ==> The prediction model reduced churn among our key customers by 18% in three months.
+−18% lemorzsolódás ==> −18% churn
+<b>Balogh Réka</b><span>Kereskedelmi igazgató, Tiszavölgy Energia</span> ==> <b>Rebecca Balogh</b><span>Sales Director, Tisza Valley Energy</span>
+Nem slide-okat kaptunk, hanem egy működő rendszert és egy csapatot, amelyik üzemeltetni is tudja. ==> We didn't get slides. We got a working system and a team that can run it too.
+9 hét az élesítésig ==> 9 weeks to launch
+<b>Tóth Bence</b><span>CIO, Ferrum Gyártás</span> ==> <b>Ben Toth</b><span>CIO, Ferrum Manufacturing</span>
+A képzési program után a csapat fele maga hozott új use case-t. Ez volt az igazi fordulópont, nem maga a technológia. ==> After the training program, half the team came up with new use cases themselves. That was the real turning point, not the technology.
+120+ belső AI-ötlet ==> 120+ internal AI ideas
+<b>Molnár Anna</b><span>HR-igazgató, Hexa Telekom</span> ==> <b>Anna Molnar</b><span>HR Director, Hexa Telecom</span>
+Fix ár, fix határidő, és mindkettőt tartották. Ennyi a véleményem. ==> Fixed price, fixed deadline, and they kept both. That's my review.
+0 Ft túllépés ==> $0 overrun
+<b>Szűcs Ádám</b><span>CFO, Kvarc Bank</span> ==> <b>Adam Szucs</b><span>CFO, Kvarc Bank</span>
+Átlátható csomagok. <span class="dim">Fix ár, fix határidő.</span> ==> Transparent packages. <span class="dim">Fixed price, fixed deadline.</span>
+A legtöbb ügyfelünk felméréssel kezd, és a pilot árából levonjuk a felmérés díjának 50%-át. ==> Most of our clients start with an assessment, and we deduct 50% of the assessment fee from the price of the pilot.
+<span class="p-name">Felmérés</span> ==> <span class="p-name">Assessment</span>
+Tiszta kép arról, hol éri meg az AI, és hol nem. ==> A clear picture of where AI pays off and where it doesn't.
+1,45 M Ft <small>egyszeri</small> ==> $4,000 <small>one-time</small>
+2 hét · nettó ár ==> 2 weeks · net price
+Felmérést kérek <svg ==> Request assessment <svg
+12–15 vezetői és szakértői interjú ==> 12-15 leadership and expert interviews
+AI-érettségi audit 5 dimenzióban ==> AI maturity audit across 5 dimensions
+ROI szerint rangsorolt lehetőséglista ==> Opportunity list ranked by ROI
+90 napos roadmap</li> ==> 90-day roadmap</li>
+Félnapos vezetői workshop ==> Half-day leadership workshop
+LEGNÉPSZERŰBB ==> MOST POPULAR
+Egy use case élesben, mért eredménnyel, 6–8 hét alatt. ==> One use case live, with a measured result, in 6-8 weeks.
+4,9 M Ft-tól ==> From $13,500
+6–8 hét · nettó ár · sikerdíj-opcióval ==> 6-8 weeks · net price · success-fee option
+Pilotot indítok <svg ==> Start a pilot <svg
+A Felmérés csomag teljes tartalma ==> Everything in the Assessment package
+1 use case élesítése a valós rendszereidben ==> 1 use case launched in your real systems
+Integráció (ERP, CRM, dokumentumtár) ==> Integration (ERP, CRM, document store)
+KPI-baseline és heti eredményriport ==> KPI baseline and weekly results report
+Felhasználói képzés a pilot csapatnak ==> User training for the pilot team
+Opcionális sikerdíj: a díj 30%-a eredményhez kötve ==> Optional success fee: 30% of the fee tied to results
+<span class="p-name">Partnerség</span> ==> <span class="p-name">Partnership</span>
+Külsős AI-vezető és csapat, akik folyamatosan szállítanak. ==> An external AI lead and team who deliver continuously.
+1,2 M Ft <small>/ hó-tól</small> ==> $3,300 <small>/ mo and up</small>
+min. 6 hónap · nettó ár ==> min. 6 months · net price
+Beszéljünk <svg ==> Let's talk <svg
+Dedikált, külsős AI-vezető (fractional Head of AI) ==> Dedicated external AI lead (fractional Head of AI)
+Folyamatos use case-fejlesztés és -üzemeltetés ==> Ongoing use case development and operation
+AI-irányítási és megfelelőségi keretrendszer ==> AI governance and compliance framework
+Belső AI-akadémia, szerepkörönként ==> Internal AI academy, by role
+Negyedéves vezetői eredményriport ==> Quarterly executive results report
+Minden ár nettó, az ÁFA-t nem tartalmazza. Az első felmérő hívás ingyenes, és nem jár kötelezettséggel. ==> All prices are net and exclude VAT. The first assessment call is free and carries no obligation.
+Kérdések, amiket <span class="dim">minden vezető feltesz.</span> ==> Questions <span class="dim">every executive asks.</span>
+<b>Kovács Dóra</b><span>partner · válasz 24 órán belül</span> ==> <b>Dora Kovacs</b><span>partner · replies within 24 hours</span>
+>Írj nekem< ==> >Email me<
+Kell már adattudós csapat ahhoz, hogy elkezdjük? ==> Do we already need a data science team to get started?
+Nem. Ügyfeleink többségénél nincs dedikált AI-csapat, amikor elkezdünk. A pilotot mi építjük, közben pedig kijelöljük és betanítjuk azokat a belső kollégákat, akik később átveszik az üzemeltetést. ==> No. Most of our clients have no dedicated AI team when we start. We build the pilot, and along the way we select and train the internal colleagues who will take over operations later.
+Milyen AI-modellekkel dolgoztok? ==> Which AI models do you work with?
+Modellfüggetlenek vagyunk. A feladathoz, a költségkerethez és az adatvédelmi igényekhez választunk: kereskedelmi modelleket EU-s adatközpontból, vagy nyílt forrású modelleket a saját infrastruktúrádon. Nincs viszonteladói jutalékunk. ==> We're model-agnostic. We choose based on the task, the budget and privacy needs: commercial models from an EU data center, or open-source models on your own infrastructure. We earn no reseller commission.
+Mi történik a cégünk adataival? ==> What happens to our company's data?
+Az adatok az EU-ban maradnak. Titoktartási szerződést (NDA) kötünk, és szükség esetén adatfeldolgozói megállapodást is. Az adataiddal nem tanítunk publikus modellt. Minden hozzáférés naplózott, és a projekt végén visszaadjuk vagy töröljük. ==> Data stays in the EU. We sign a non-disclosure agreement (NDA) and, if needed, a data processing agreement. We never train a public model on your data. All access is logged, and at the end of the project we return or delete everything.
+Mennyi idő alatt térül meg? ==> How long until it pays for itself?
+A megbízástól az első éles eredményig a medián 9 hét. A lezárt pilotjaink átlagosan 5,5 hónap alatt hozták vissza a teljes projektköltséget. Ezt a számítást a felmérés végén a te adataiddal is elvégezzük, mielőtt bármire igent mondanál. ==> From engagement to first live result the median is 9 weeks. Our completed pilots earned back the full project cost in 5.5 months on average. We run that calculation with your data at the end of the assessment, before you say yes to anything.
+Hogyan érint minket az EU AI Act? ==> How does the EU AI Act affect us?
+Minden use case-t már a tervezésnél kockázati kategóriába sorolunk, és elkészítjük a szükséges dokumentációt, emberi felügyeleti pontokat és naplózást. Így nem utólag kell megfelelővé tenni a rendszert. ==> We assign every use case a risk category at the design stage and prepare the required documentation, human oversight points and logging. That way you don't have to make the system compliant after the fact.
+Mi van, ha a pilot nem hozza a vártat? ==> What if the pilot doesn't deliver?
+A 3. héten van egy stop/go döntési pont. Ha a korai mérések nem igazolják az üzleti esetet, megállunk, és csak a ledolgozott időt számlázzuk. Sikerdíjas konstrukcióban a díj 30%-a csak az előre rögzített KPI elérésekor esedékes. ==> There's a stop/go decision point in week 3. If early measurements don't confirm the business case, we stop and bill only for the time worked. In a success-fee arrangement, 30% of the fee is due only when the pre-agreed KPI is hit.
+>Következő lépés< ==> >Next step<
+Nézzük meg együtt, <span class="dim">hol dolgozhat nálatok az AI.</span> ==> Let's find out together <span class="dim">where AI can work for you.</span>
+30 perces felmérő hívás egy partnerünkkel. A végén legalább három konkrét lehetőséget kapsz, akkor is, ha végül nem velünk dolgozol. ==> A 30-minute assessment call with one of our partners. At the end you get at least three concrete opportunities, even if you end up not working with us.
+subject=AI%20felm%C3%A9r%C5%91%20h%C3%ADv%C3%A1s ==> subject=AI%20assessment%20call
+Felmérő hívást foglalok <svg ==> Book an assessment call <svg
+30 perc, ingyenes ==> 30 minutes, free
+Kötelezettség nélkül ==> No obligation
+Kérésre NDA-val ==> NDA on request
+AI-tanácsadás és -bevezetés hazai közép- és nagyvállalatoknak. Budapest · Bécs ==> AI consulting and rollout for mid-size and large companies. Budapest · Vienna
+<h4>Szolgáltatások</h4> ==> <h4>Services</h4>
+>AI-stratégia< ==> >AI strategy<
+>Automatizálás< ==> >Automation<
+>AI-asszisztensek< ==> >AI assistants<
+>Képzés< ==> >Training<
+<h4>Cég</h4> ==> <h4>Company</h4>
+>Ügyfeleink< ==> >Our clients<
+<h4>Kapcsolat</h4> ==> <h4>Contact</h4>
+>Felmérő hívás</a> ==> >Assessment call</a>
+© 2026 Northlane Kft. Minden jog fenntartva. ==> © 2026 Northlane Inc. All rights reserved.
+>Adatvédelem< ==> >Privacy<
+>Impresszum< ==> >Imprint<
+>ÁSZF< ==> >Terms<
+hello@northlane.hu ==> hello@northlane.com
+toLocaleString('hu-HU') ==> toLocaleString('en-US')
+<span class="res">EU AI Act-kész</span> ==> <span class="res">EU AI Act-ready</span>

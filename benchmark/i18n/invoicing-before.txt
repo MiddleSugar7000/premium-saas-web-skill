@@ -1,0 +1,139 @@
+Számlakör – Online számlázás kisvállalkozásoknak ==> Billcircle – Online invoicing for small businesses
+Számlakör: egyszerű, NAV-kompatibilis online számlázó program egyéni és kisvállalkozásoknak. Számla kiállítása percek alatt, bárhonnan. ==> Billcircle: simple, tax-authority-compliant online invoicing software for freelancers and small businesses. Issue an invoice in minutes, from anywhere.
+Számlakör főoldal ==> Billcircle home
+aria-label="Fő navigáció" ==> aria-label="Main navigation"
+>Funkciók< ==> >Features<
+>Hogyan működik< ==> >How it works<
+>Árak< ==> >Pricing<
+>GYIK< ==> >FAQ<
+>Belépés< ==> >Log in<
+Ingyenes kipróbálás ==> Free trial
+Online számlázó kisvállalkozásoknak ==> Online invoicing for small businesses
+Számlázz <em>két perc alatt</em>, a NAV-ot pedig bízd ránk. ==> Invoice <em>in two minutes</em> and leave the tax authority to us.
+A Számlakör egyszerű, átlátható számlázó program egyéni vállalkozóknak, Kft-knek és Bt-knek. Állíts ki számlát böngészőből vagy telefonról — az adatszolgáltatás automatikusan megy a NAV Online Számla rendszerébe. ==> Billcircle is simple, transparent invoicing software for freelancers, LLCs and partnerships. Issue invoices from your browser or phone, and the data reporting goes automatically to the tax authority's online invoice system.
+Kezdd el ingyen ==> Start for free
+Nézd meg, hogyan működik ==> See how it works
+30 napig ingyenes ==> Free for 30 days
+Nem kell bankkártya ==> No credit card needed
+Bármikor lemondható ==> Cancel anytime
+aria-label="Példa számla a Számlakörben" ==> aria-label="Example invoice in Billcircle"
+<b>NAV: befogadva</b><span>2 másodperce</span> ==> <b>Tax authority: accepted</b><span>2 seconds ago</span>
+<p class="inv-title">Számla</p> ==> <p class="inv-title">Invoice</p>
+SZK-2026 ==> BC-2026
+Kifizetve ==> Paid
+<small>Eladó</small><b>Kovács Design Kft.</b><br><span style="color:var(--muted)">Budapest, Király u. 12.</span> ==> <small>Seller</small><b>Kovacs Design LLC</b><br><span style="color:var(--muted)">12 King St., Budapest</span>
+<small>Vevő</small><b>Mókus Kávézó Bt.</b><br><span style="color:var(--muted)">Szeged, Kárász u. 4.</span> ==> <small>Buyer</small><b>Squirrel Café LLP</b><br><span style="color:var(--muted)">4 Main St., Szeged</span>
+<span>Tétel</span><span>Bruttó</span> ==> <span>Item</span><span>Gross</span>
+<span>Arculattervezés (logó, színpaletta)</span><span>190 500 Ft</span> ==> <span>Brand identity design (logo, color palette)</span><span>$520</span>
+<span>Étlap nyomdai előkészítés</span><span>63 500 Ft</span> ==> <span>Menu print preparation</span><span>$175</span>
+<span>Közösségi média sablonok (10 db)</span><span>44 450 Ft</span> ==> <span>Social media templates (10 pcs)</span><span>$120</span>
+Fizetendő (27% ÁFA-val) ==> Total due (incl. 27% VAT)
+<strong>298 450 Ft</strong> ==> <strong>$815</strong>
+<b>E-mailben elküldve</b><span>PDF + fizetési link</span> ==> <b>Sent by email</b><span>PDF + payment link</span>
+Magyar kisvállalkozásoknak tervezve, a hazai szabályokhoz igazítva. ==> Designed for small businesses and adapted to local regulations.
+<b>2 perc</b><span>egy számla átlagosan</span> ==> <b>2 min</b><span>per invoice on average</span>
+<b>100%</b><span>NAV Online Számla kompatibilis</span> ==> <b>100%</b><span>compatible with the tax authority's online invoicing</span>
+<b>0 Ft</b><span>az első 30 nap</span> ==> <b>$0</b><span>for the first 30 days</span>
+<span class="eyebrow">Funkciók</span> ==> <span class="eyebrow">Features</span>
+Minden, ami a számlázáshoz kell. Semmi, ami nem. ==> Everything invoicing needs. Nothing it doesn't.
+Nem könyvelőprogram, nem vállalatirányítási rendszer. Egy gyors, tiszta eszköz, amivel a számlázás végre nem nyűg. ==> Not accounting software, not an ERP. A fast, clean tool that finally makes invoicing painless.
+Automatikus NAV adatszolgáltatás ==> Automatic tax authority reporting
+Minden kiállított számla adatai valós időben kerülnek a NAV Online Számla rendszerébe. Ha valami hibás, azonnal szólunk — még mielőtt a vevőhöz érne. ==> The data of every invoice you issue goes to the tax authority's online invoice system in real time. If something is wrong, we tell you right away, before it reaches your customer.
+aria-label="Példa NAV beküldési napló" ==> aria-label="Example tax authority submission log"
+>Befogadva< ==> >Accepted<
+(sztornó) ==> (void)
+Ismétlődő számlák ==> Recurring invoices
+Havidíjas ügyfeleid vannak? Állítsd be egyszer, a Számlakör minden hónapban magától kiállítja és elküldi. ==> Have monthly-fee clients? Set it up once and Billcircle issues and sends the invoice by itself every month.
+Fizetési emlékeztetők ==> Payment reminders
+Udvarias, automatikus e-mail a lejárt számlákról. Te nem kellemetlenkedsz, a pénz mégis megérkezik. ==> Polite, automatic emails about overdue invoices. You don't have to be awkward, and the money still arrives.
+Mobilon is teljes értékű ==> Fully featured on mobile too
+Számlázz a helyszínen, a kocsiból vagy a kávézóból. Ugyanaz a tudás, telefonra méretezve. ==> Invoice on site, from the car or from the café. The same power, sized for your phone.
+Könyvelői hozzáférés ==> Accountant access
+Hívd meg a könyvelődet, aki egy kattintással letölti a havi számlákat. Nincs több e-mailes PDF-kergetés. ==> Invite your accountant, who downloads the monthly invoices in one click. No more chasing PDFs by email.
+Átlátható kimutatások ==> Clear reports
+Bevétel, kintlévőség, legjobb ügyfelek — egy pillantással látod, hol tart a vállalkozásod. ==> Revenue, outstanding balances, top clients: see at a glance where your business stands.
+<span class="eyebrow">Hogyan működik</span> ==> <span class="eyebrow">How it works</span>
+Regisztrációtól az első számláig: tíz perc. ==> From sign-up to your first invoice: ten minutes.
+Add meg a cégadatokat ==> Enter your company details
+Elég az adószám — a cégnevet és a címet automatikusan kitöltjük. Feltöltheted a logódat is. ==> Your tax ID is enough: we fill in the company name and address automatically. You can upload your logo too.
+Kösd össze a NAV-val ==> Connect to the tax authority
+Lépésről lépésre végigvezetünk a technikai felhasználó létrehozásán. Egyszer kell megcsinálni. ==> We walk you step by step through creating the technical user. You only have to do it once.
+Állítsd ki az első számlát ==> Issue your first invoice
+Válaszd ki a vevőt és a tételeket, kattints a „Kiállítás” gombra. A számla elmegy e-mailben és a NAV-hoz is. ==> Choose the customer and the items and click “Issue”. The invoice goes out by email and to the tax authority too.
+<span class="eyebrow">Árak</span> ==> <span class="eyebrow">Pricing</span>
+Egyszerű árazás, rejtett költségek nélkül ==> Simple pricing with no hidden costs
+Minden csomag 30 napig ingyenes. Az árak nettó árak, havonta értendők. ==> Every plan is free for 30 days. Prices are net and per month.
+aria-label="Számlázási időszak" ==> aria-label="Billing period"
+>Havi< ==> >Monthly<
+>Éves <span ==> >Annual <span
+<h3>Kezdő</h3> ==> <h3>Starter</h3>
+Induló egyéni vállalkozóknak, akik havonta néhány számlát állítanak ki. ==> For new freelancers who issue a few invoices a month.
+<b data-monthly="0" data-yearly="0">0 Ft</b><span>/ hó</span> ==> <b data-monthly="0" data-yearly="0">$0</b><span>/ mo</span>
+Örökké ingyenes ==> Free forever
+Havi 10 számla ==> 10 invoices a month
+NAV adatszolgáltatás ==> Tax authority reporting
+PDF és e-mail küldés ==> PDF and email sending
+>1 felhasználó< ==> >1 user<
+Kezdés ingyen ==> Start for free
+Legnépszerűbb ==> Most popular
+<h3>Vállalkozó</h3> ==> <h3>Business</h3>
+A legtöbb kisvállalkozásnak ennyi bőven elég — és még marad is. ==> More than enough for most small businesses, with room to spare.
+<b data-monthly="2990" data-yearly="2390">2 990 Ft</b><span>/ hó</span> ==> <b data-monthly="9" data-yearly="7">$9</b><span>/ mo</span>
+data-note-yearly="Évente 28 680 Ft-ként fizetve" ==> data-note-yearly="Billed annually at $84"
+Korlátlan számla ==> Unlimited invoices
+Automatikus fizetési emlékeztető ==> Automatic payment reminders
+Saját logó a számlán ==> Your own logo on the invoice
+30 nap ingyen ==> 30 days free
+<h3>Csapat</h3> ==> <h3>Team</h3>
+Több kollégának, telephelynek vagy pénznemnek. ==> For multiple colleagues, locations or currencies.
+<b data-monthly="6990" data-yearly="5590">6 990 Ft</b><span>/ hó</span> ==> <b data-monthly="19" data-yearly="15">$19</b><span>/ mo</span>
+data-note-yearly="Évente 67 080 Ft-ként fizetve" ==> data-note-yearly="Billed annually at $180"
+Minden a Vállalkozó csomagból ==> Everything in Business
+Akár 10 felhasználó, jogosultságokkal ==> Up to 10 users, with permissions
+Devizás számlák (EUR, USD) ==> Foreign-currency invoices (EUR, USD)
+Több számlatömb ==> Multiple invoice number series
+Elsőbbségi ügyfélszolgálat ==> Priority support
+Felhasználóink mondták ==> Our users say
+Akik már nem a számlázással töltik az estéiket ==> People who no longer spend their evenings on invoicing
+„Korábban Excelben számláztam, és rettegtem a NAV-tól. Most két perc az egész, és soha többet nem kell rá gondolnom.” ==> “I used to invoice in Excel and dreaded the tax authority. Now the whole thing takes two minutes and I never have to think about it again.”
+aria-hidden="true">NE</div><div><b>Nagy Eszter</b><span>grafikus, egyéni vállalkozó</span> ==> aria-hidden="true">EN</div><div><b>Esther Nagy</b><span>graphic designer, freelancer</span>
+„Az ismétlődő számlák miatt váltottunk. Húsz havidíjas ügyfelünk van, és ezek mostantól maguktól mennek ki.” ==> “We switched because of recurring invoices. We have twenty monthly-fee clients, and those now go out by themselves.”
+aria-hidden="true">TB</div><div><b>Tóth Balázs</b><span>ügyvezető, webfejlesztő Kft.</span> ==> aria-hidden="true">BT</div><div><b>Blake Toth</b><span>managing director, web development LLC</span>
+„A könyvelőm a legboldogabb: hónap végén mindent egy helyen talál, nem kell tőlem semmit kérnie.” ==> “My accountant is the happiest: at month end everything is in one place and doesn't need to ask me for anything.”
+aria-hidden="true">SK</div><div><b>Szabó Kata</b><span>kozmetikus szalon tulajdonos</span> ==> aria-hidden="true">KS</div><div><b>Kate Szabo</b><span>beauty salon owner</span>
+<span class="eyebrow">GYIK</span> ==> <span class="eyebrow">FAQ</span>
+Gyakori kérdések ==> Frequently asked questions
+Megfelel a Számlakör a magyar jogszabályoknak? ==> Is Billcircle compliant with local regulations?
+Igen. A számlák tartalmazzák az ÁFA-törvény szerinti összes kötelező adatot, és az adatszolgáltatás automatikusan teljesül a NAV Online Számla rendszere felé. ==> Yes. Invoices contain all the data required by VAT law, and reporting to the tax authority's online invoice system happens automatically.
+Alanyi adómentes vagyok. Használhatom? ==> I'm exempt from VAT as a small taxpayer. Can I use it?
+Természetesen. Beállíthatod az alanyi adómentességet, és a számlákon automatikusan megjelenik a szükséges hivatkozás. Az ÁFA-keret közelítéséről figyelmeztetést is küldünk. ==> Of course. You can set your VAT exemption and the required reference appears on your invoices automatically. We'll also warn you when you approach the VAT threshold.
+Át tudom hozni az ügyfeleimet egy másik programból? ==> Can I bring my customers over from another program?
+Igen, a partnereket és termékeket CSV- vagy Excel-fájlból is importálhatod. Ha elakadsz, ügyfélszolgálatunk ingyen segít az átállásban. ==> Yes, you can import partners and products from a CSV or Excel file. If you get stuck, our support team helps with the switch for free.
+Mi történik a próbaidő lejárta után? ==> What happens after the trial ends?
+Ha nem választasz fizetős csomagot, a fiókod automatikusan a Kezdő csomagra vált — semmi nem vész el, és nem terhelünk meg váratlanul. ==> If you don't choose a paid plan, your account automatically switches to the Starter plan. Nothing is lost, and we never charge you unexpectedly.
+Hol tárolják az adataimat? ==> Where is my data stored?
+Az adatokat az Európai Unión belüli szervereken, titkosítva tároljuk, a GDPR előírásainak megfelelően. Napi biztonsági mentés készül. ==> Data is stored encrypted on servers within the European Union, in line with GDPR. Daily backups are made.
+Az első számlád ma már kimehet. ==> Your first invoice can go out today.
+Regisztrálj 30 napos ingyenes próbára — bankkártya nélkül, kötelezettség nélkül. ==> Sign up for a 30-day free trial, with no credit card and no obligation.
+>E-mail cím</label> ==> >Email address</label>
+te@vallalkozasod.hu ==> you@yourbusiness.com
+>Kipróbálom</button> ==> >Try it</button>
+Online számlázó program magyar kisvállalkozásoknak. Egyszerű, gyors és NAV-kompatibilis. ==> Online invoicing software for small businesses. Simple, fast and tax-authority compliant.
+<h4>Termék</h4> ==> <h4>Product</h4>
+<h4>Cég</h4> ==> <h4>Company</h4>
+>Rólunk< ==> >About<
+>Kapcsolat< ==> >Contact<
+<h4>Jogi</h4> ==> <h4>Legal</h4>
+>ÁSZF< ==> >Terms<
+>Adatvédelem< ==> >Privacy<
+>Impresszum< ==> >Imprint<
+Minden jog fenntartva. ==> All rights reserved.
+Készült Magyarországon ==> Made in Hungary
+// Havi / éves árak váltása ==> // Monthly / annual price toggle
+// Regisztrációs űrlap ==> // Sign-up form
+toLocaleString('hu-HU') ==> toLocaleString('en-US')
+const fmt = n => Number(n) ==> const fmt = n => '$' + Number(n)
++ ' Ft' ==> + ''
+Kérjük, adj meg egy érvényes e-mail címet. ==> Please enter a valid email address.
+Köszönjük! Hamarosan küldjük a regisztrációs linket a(z) ' + input.value + ' címre. ==> Thanks! We will send the sign-up link to ' + input.value + ' shortly.
+Számlakör ==> Billcircle

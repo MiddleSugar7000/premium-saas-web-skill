@@ -1,0 +1,185 @@
+Kovács Bence — UX/UI designer ==> Ben Kovacs - UX/UI designer
+Kovács Bence UX/UI designer portfóliója. Digitális termékek tervezése fintech, egészségügyi és SaaS csapatoknak, a kutatástól a pixelpontos átadásig. ==> Ben Kovacs' UX/UI design portfolio. Designing digital products for fintech, healthcare and SaaS teams, from research to pixel-perfect handoff.
+aria-label="Kovács Bence, vissza az oldal tetejére" ==> aria-label="Ben Kovacs, back to top of page"
+aria-label="Fő navigáció" ==> aria-label="Main navigation"
+>Munkák</a> ==> >Work</a>
+>Folyamat</a> ==> >Process</a>
+>Rólam</a> ==> >About</a>
+>Együttműködés</a> ==> >Working together</a>
+Novembertől szabad kapacitás ==> Available from November
+>Írj nekem ==> >Write to me
+(UX/UI designer)<br>Budapest, HU — 47.49° É ==> (UX/UI designer)<br>Budapest, HU - 47.49° N
+Független 2023 óta<br>9 év · 46 kiadott termék ==> Independent since 2023<br>9 years · 46 shipped products
+<span class="sr">Kovács Bence, UX/UI designer — </span><span class="nm">Bence</span> ==> <span class="sr">Ben Kovacs, UX/UI designer - </span><span class="nm">Ben</span>
+alt="Kovács Bence fekete-fehér portréja" ==> alt="Black and white portrait of Ben Kovacs"
+● Kovács Bence ==> ● Ben Kovacs
+<span class="nm">Bence</span><span class="caret"></span> ==> <span class="nm">Ben</span><span class="caret"></span>
+<strong>Digitális termékeket tervezek</strong> fintech-, egészségügyi és SaaS-csapatoknak. A felhasználói kutatástól a pixelpontos fejlesztői átadásig dolgozom, hogy a bonyolult dolgok egyszerűnek tűnjenek. ==> <strong>I design digital products</strong> for fintech, healthcare and SaaS teams. I work from user research to pixel-perfect developer handoff so complicated things feel simple.
+Nézd meg a munkáimat ==> See my work
+data-cursor>Rólam ==> data-cursor>About
+Kiválasztott munkák ==> Selected work
+2023 — 2026 ==> 2023 - 2026
+Esettanulmányok · 04 ==> Case studies · 04
+Termékek, amelyek <span class="dim">mérhetően jobban működnek.</span> ==> Products that <span class="dim">measurably work better.</span>
+Minden projekt egy üzleti problémával kezdődött, és egy számmal zárult. Íme négy a kedvenceim közül. ==> Every project started with a business problem and ended with a number. Here are four of my favorites.
+<span>Mobilapp</span><span>Fintech</span><span>Lead designer</span> ==> <span>Mobile app</span><span>Fintech</span><span>Lead designer</span>
+Egy neobank onboardingját és mindennapi pénzügyi nézetét terveztem újra. 14 nap helyett 6 perc alatt lehet számlát nyitni, és az egyenleg végre azt mutatja, amire az embereknek valóban szükségük van: hogy mennyit költhetnek még. ==> I redesigned a neobank's onboarding and its everyday finance view. You can now open an account in 6 minutes instead of 14 days, and the balance finally shows what people actually need: how much they can still spend.
+<small>aktiváció az első héten</small> ==> <small>activation in the first week</small>
+<b>6 perc</b><small>számlanyitás 14 nap helyett</small> ==> <b>6 min</b><small>account opening instead of 14 days</small>
+<small>App Store, 12 ezer értékelés</small> ==> <small>App Store, 12k ratings</small>
+Esettanulmány kérése ==> Request case study
+● Biztonságos ==> ● Secure
+<small>Elkölthető október végéig</small><b>284 560 <i>Ft</i></b> ==> <small>Left to spend until end of October</small><b>715 <i>EUR</i></b>
+<span>Utalás</span><span>Kártyák</span><span>Célok</span> ==> <span>Transfer</span><span>Cards</span><span>Goals</span>
+<p>Kávézó, Gozsdu<small>Ma, 08:42</small></p><b>−1 290</b> ==> <p>Café, Gozsdu<small>Today, 08:42</small></p><b>−3.20</b>
+<p>Fizetés<small>Okt. 10.</small></p><b class="u">+612 000</b> ==> <p>Salary<small>Oct 10</small></p><b class="u">+1,540</b>
+<p>Albérlet<small>Okt. 05.</small></p><b>−245 000</b> ==> <p>Rent<small>Oct 05</small></p><b>−615</b>
+<small>aktiváció</small> ==> <small>activation</small>
+<small>átlagos onboarding</small> ==> <small>average onboarding</small>
+Orvosom<span>_</span> ==> MyDoctor<span>_</span>
+<span>Webapp</span><span>Egészségügy</span><span>UX-kutatás</span> ==> <span>Web app</span><span>Healthcare</span><span>UX research</span>
+Időpontfoglaló platform magánrendelőknek. 22 interjú után derült ki, hogy a betegek nem orvost keresnek, hanem a legkorábbi szabad időpontot. Ezért a teljes foglalási folyamatot e köré szerveztük át. ==> An appointment booking platform for private practices. After 22 interviews it became clear that patients aren't looking for a doctor, they're looking for the earliest available slot. So we reorganized the whole booking flow around that.
+<small>lemorzsolódás foglalás közben</small> ==> <small>drop-off during booking</small>
+<b>3 lépés</b><small>a korábbi 7 helyett</small> ==> <b>3 steps</b><small>instead of the previous 7</small>
+<small>SUS-pontszám a teszteken</small> ==> <small>SUS score in tests</small>
+orvosom.hu/foglalas ==> mydoctor.com/booking
+<b>Dr. Nagy Eszter</b><small>Bőrgyógyász · Budapest XIII.</small> ==> <b>Dr. Esther Nagy</b><small>Dermatologist · Budapest District XIII</small>
+<div class="ph-av">NE</div> ==> <div class="ph-av">EN</div>
+<div class="d">H<b>14</b></div><div class="d">K<b>15</b></div><div class="d">Sze<b>16</b></div><div class="d">Cs<b>17</b></div><div class="d">P<b>18</b></div> ==> <div class="d">M<b>14</b></div><div class="d">T<b>15</b></div><div class="d">W<b>16</b></div><div class="d">T<b>17</b></div><div class="d">F<b>18</b></div>
+>Szerda, okt. 16. · 09:15</span><span>Foglalás →</span> ==> >Wednesday, Oct 16 · 09:15</span><span>Book →</span>
+<b>3 lépés</b><small>foglalás</small> ==> <b>3 steps</b><small>booking</small>
+Egy 9 termékből álló SaaS-csomag közös design rendszere: 140 komponens, Figma-változók és kódba szinkronizált tokenek. A rendszer ma 5 csapat 38 fejlesztőjének munkáját gyorsítja. ==> The shared design system for a suite of 9 SaaS products: 140 components, Figma variables and tokens synced into code. Today the system speeds up the work of 38 developers across 5 teams.
+<span>Tokenek</span> ==> <span>Tokens</span>
+<small>dokumentált komponens</small> ==> <small>documented components</small>
+<b>2,4×</b><small>gyorsabb szállítás új funkcióknál</small> ==> <b>2.4×</b><small>faster delivery on new features</small>
+<small>WCAG 2.2 megfelelés</small> ==> <small>WCAG 2.2 compliance</small>
+<span>Színtokenek</span> ==> <span>Color tokens</span>
+>Elsődleges</span> ==> >Primary</span>
+>Másodlagos</span> ==> >Secondary</span>
+>Szöveges</span> ==> >Text</span>
+>Siker</span> ==> >Success</span>
+Értesítés <span class="tgl anim"> ==> Notification <span class="tgl anim">
+Sötét mód <span class="tgl on"> ==> Dark mode <span class="tgl on">
+atlas@ceg.hu ==> atlas@company.com
+Flotta<span>_</span> ==> Fleet<span>_</span>
+<span>Dashboard</span><span>Logisztika</span><span>Adatvizualizáció</span> ==> <span>Dashboard</span><span>Logistics</span><span>Data visualization</span>
+Valós idejű irányítópult egy 1 200 járműves fuvarozónak. A diszpécserek eddig 6 képernyőt figyeltek egyszerre, most egyet. A kivételek kerülnek előtérbe, nem a zaj. ==> A real-time dashboard for a carrier with 1,200 vehicles. Dispatchers used to watch 6 screens at once, now they watch one. Exceptions come to the front, not the noise.
+<small>reakcióidő késéseknél</small> ==> <small>reaction time on delays</small>
+<b>6 → 1</b><small>képernyő műszakonként</small> ==> <b>6 → 1</b><small>screens per shift</small>
+<small>napi aktív diszpécser</small> ==> <small>daily active dispatchers</small>
+<div class="kpi">Úton<b>1 084</b><em>▲ 3,2%</em></div> ==> <div class="kpi">On the road<b>1,084</b><em>▲ 3.2%</em></div>
+<div class="kpi">Késésben<b>17</b> ==> <div class="kpi">Delayed<b>17</b>
+<div class="kpi">Kiszállítva<b>9 312</b> ==> <div class="kpi">Delivered<b>9,312</b>
+<div class="bars">Heti teljesítés<div> ==> <div class="bars">Weekly performance<div>
+<span class="label">Filozófia</span> ==> <span class="label">Philosophy</span>
+A jó felületet nem észreveszik, hanem használják. Azon dolgozom, hogy a termékedben minden kattintásnak oka legyen, és egy se maradjon felesleges. ==> A good interface isn't noticed, it's used. I work to make sure every click in your product has a reason and none is wasted.
+aria-label="Számokban" ==> aria-label="In numbers"
+<sup>év</sup></b><p>tapasztalat termék- és interakciótervezésben ==> <sup>yrs</sup></b><p>of experience in product and interaction design
+kiadott digitális termék, 11 iparágban ==> shipped digital products across 11 industries
+átlagos konverziónövekedés az újratervezések után ==> average conversion increase after redesigns
+felhasználói interjú és usability-teszt ==> user interviews and usability tests
+<span class="label">Folyamat</span> ==> <span class="label">Process</span>
+Hat lépés a megérzéstől <span class="dim">a mérhető eredményig.</span> ==> Six steps from hunch <span class="dim">to measurable result.</span>
+Nem vízesés és nem káosz. Rövid ciklusokban haladunk, és minden szakasz végén van valami, amit kipróbálhatsz, vagy ami alapján dönthetsz. ==> Not waterfall and not chaos. We move in short cycles, and every phase ends with something you can try or base a decision on.
+„Nem találom, hol látom, mennyit költhetek még ebben a hónapban.”<small>P04 · interjú</small> ==> “I can't find where I see how much I can still spend this month.”<small>P04 · interview</small>
+„Három képernyő egy utalásért? Inkább felhívom a bankot.”<small>P11 · interjú</small> ==> “Three screens for one transfer? I'd rather call the bank.”<small>P11 · interview</small>
+Az emberek nem az egyenlegre kíváncsiak, hanem arra, mennyi marad. ==> People don't care about the balance, they care about what's left.
+<h3>Feltárás</h3><p>Interjúk, adatelemzés és versenytárs-audit. Kiderítjük, mi a valódi probléma, mielőtt egyetlen képernyőt is rajzolnánk. ==> <h3>Discovery</h3><p>Interviews, data analysis and a competitor audit. We find out what the real problem is before drawing a single screen.
+<div class="node">Belépés<small>01</small></div> ==> <div class="node">Sign-in<small>01</small></div>
+<div class="node">Áttekintés<small>02</small></div> ==> <div class="node">Overview<small>02</small></div>
+<div class="node">Utalás<small>03</small></div> ==> <div class="node">Transfer<small>03</small></div>
+<div class="node end">Kész ✓<small>04</small></div> ==> <div class="node end">Done ✓<small>04</small></div>
+<h3>Struktúra és folyamatok</h3><p>Információs architektúra, user flow-k és wireframe-ek. A legrövidebb út a felhasználó céljáig. ==> <h3>Structure and flows</h3><p>Information architecture, user flows and wireframes. The shortest path to the user's goal.
+Push-értesítések <span ==> Push notifications <span
+Biometrikus belépés <span ==> Biometric sign-in <span
+Heti összesítő <span ==> Weekly summary <span
+<h3>Prototípus</h3><p>Kattintható, valósághű prototípusok Figmában és ProtoPie-ban. ==> <h3>Prototype</h3><p>Clickable, realistic prototypes in Figma and ProtoPie.
+<small>feladat-sikeresség</small> ==> <small>task success</small>
+<h3>Validálás</h3><p>Usability-tesztek valódi felhasználókkal, még a fejlesztés előtt. ==> <h3>Validation</h3><p>Usability tests with real users, before development.
+<h3>Fejlesztői átadás</h3><p>Dokumentált komponensek, tokenek és állapotok. A fejlesztőknek nem kell találgatniuk. ==> <h3>Developer handoff</h3><p>Documented components, tokens and states. Developers don't have to guess.
+<small>konverzió · 90 nap</small> ==> <small>conversion · 90 days</small>
+<h3>Mérés és iteráció</h3><p>A bevezetés után is figyeljük a számokat, és ahol kell, finomítunk. ==> <h3>Measurement and iteration</h3><p>We keep watching the numbers after launch and refine where needed.
+Eszközök, amelyekkel nap mint nap dolgozom ==> Tools I work with every day
+aria-label="Eszközök: Figma, FigJam, ProtoPie, Framer, Maze, Dovetail, Notion, Linear, Jira, Webflow" ==> aria-label="Tools: Figma, FigJam, ProtoPie, Framer, Maze, Dovetail, Notion, Linear, Jira, Webflow"
+<span class="label">Rólam</span> ==> <span class="label">About</span>
+Szia, Bence vagyok. <span class="dim">Hidat építek az üzlet és az emberek között.</span> ==> Hi, I'm Ben. <span class="dim">I build bridges between business and people.</span>
+Grafikusként kezdtem, de hamar rájöttem, hogy jobban érdekel, <strong>miért</strong> kattint valaki valahová, mint az, hogy milyen színű a gomb. Azóta startupokkal, ügynökségekkel és nagyvállalati csapatokkal dolgozom. ==> I started as a graphic designer, but I soon realized I'm more interested in <strong>why</strong> someone clicks somewhere than in what color the button is. Since then I've worked with startups, agencies and enterprise teams.
+Hiszek a rövid visszacsatolási körökben, az őszinte usability-tesztekben és abban, hogy egy jó design rendszer a fejlesztők legjobb barátja. ==> I believe in short feedback loops, honest usability tests and the idea that a good design system is a developer's best friend.
+<span>Termékstratégia</span><span>UX-kutatás</span><span>Interakciótervezés</span><span>UI design</span><span>Design rendszerek</span><span>Prototipizálás</span><span>Akadálymentesség</span><span>Workshop-facilitálás</span> ==> <span>Product strategy</span><span>UX research</span><span>Interaction design</span><span>UI design</span><span>Design systems</span><span>Prototyping</span><span>Accessibility</span><span>Workshop facilitation</span>
+<time>2023 — most</time><h4>Független UX/UI designer<small>Fintech, egészségügyi és SaaS ügyfelek</small></h4><span class="badge now">Jelenleg</span> ==> <time>2023 - now</time><h4>Independent UX/UI designer<small>Fintech, healthcare and SaaS clients</small></h4><span class="badge now">Current</span>
+<time>2020 — 2023</time><h4>Lead Product Designer<small>Nordlight Studio · 8 fős designcsapat vezetése</small></h4><span class="badge">3 év</span> ==> <time>2020 - 2023</time><h4>Lead Product Designer<small>Nordlight Studio · leading a team of 8 designers</small></h4><span class="badge">3 yrs</span>
+<time>2018 — 2020</time><h4>Senior UX Designer<small>Fintera Labs · mobilbanki termékek</small></h4><span class="badge">2 év</span> ==> <time>2018 - 2020</time><h4>Senior UX Designer<small>Fintera Labs · mobile banking products</small></h4><span class="badge">2 yrs</span>
+<time>2017 — 2018</time><h4>UX/UI Designer<small>Pixelkert Ügynökség · webes és e-kereskedelmi projektek</small></h4><span class="badge">1 év</span> ==> <time>2017 - 2018</time><h4>UX/UI Designer<small>Pixelgarden Agency · web and e-commerce projects</small></h4><span class="badge">1 yr</span>
+<time>2013 — 2017</time><h4>MOME, Média design BA<small>Budapest</small></h4><span class="badge">Tanulmányok</span> ==> <time>2013 - 2017</time><h4>MOME, BA in Media Design<small>Budapest</small></h4><span class="badge">Studies</span>
+<span class="label">Visszajelzések</span> ==> <span class="label">Feedback</span>
+Amit a csapatok <span class="dim">mondanak.</span> ==> What teams <span class="dim">say.</span>
+Nem csak képernyőket adok át. A legtöbb ügyfelemmel a projekt után is együtt dolgozom tovább. ==> I don't just hand over screens. I keep working with most of my clients after the project ends.
+Bence két hét alatt jobban megértette az ügyfeleinket, mint mi két év alatt. <span class="dim">Az új onboarding az első hónapban visszahozta a teljes projekt árát, és azóta is ő az első, akit felhívunk.</span> ==> Ben understood our customers better in two weeks than we did in two years. <span class="dim">The new onboarding earned back the entire project cost in the first month, and he's still the first person we call.</span>
+<p>Szabó Anna<small>Product Director, Lumen</small></p> ==> <p>Anna Szabo<small>Product Director, Lumen</small></p>
+Végre egy designer, aki fejlesztői fejjel is gondolkodik. Az átadott tokenek és állapotleírások miatt alig volt kérdésünk a sprint alatt. ==> Finally a designer who thinks like a developer too. Thanks to the tokens and state descriptions he handed over, we hardly had any questions during the sprint.
+<p>Tóth Márk<small>CTO, Orvosom</small></p> ==> <p>Mark Toth<small>CTO, MyDoctor</small></p>
+A design rendszerünk Bence nélkül ma is egy rendezetlen Figma-fájl lenne. Öt csapat használja, és mindenki szereti. ==> Without Ben, our design system would still be a messy Figma file. Five teams use it and everyone loves it.
+<p>Kiss Réka<small>Head of Design, Atlas</small></p> ==> <p>Rebecca Kiss<small>Head of Design, Atlas</small></p>
+<span class="label">Együttműködés</span> ==> <span class="label">Working together</span>
+Válaszd ki a <span class="dim">neked való formát.</span> ==> Choose the <span class="dim">format that suits you.</span>
+Átlátható keretek, rögzített árak, meglepetések nélkül. Az első 30 perces beszélgetés mindig ingyenes. ==> Clear scope, fixed prices, no surprises. The first 30-minute conversation is always free.
+Gyors diagnózis egy meglévő termékről. ==> A quick diagnosis of an existing product.
+€1 400<small> / egyszeri</small> ==> €1,400<small> / one-time</small>
+Heurisztikus elemzés, 40+ szempont ==> Heuristic analysis, 40+ criteria
+Prioritizált javítási lista ==> Prioritized fix list
+Videós bemutató a csapatnak ==> Video walkthrough for the team
+Átfutás: 5 munkanap ==> Turnaround: 5 working days
+>Auditot kérek< ==> >Request an audit<
+>Legnépszerűbb</span> ==> >Most popular</span>
+Egy kritikus folyamat újratervezése, a végén tesztelt prototípussal. ==> Redesign of one critical flow, ending with a tested prototype.
+€4 800<small> / 3 hét</small> ==> €4,800<small> / 3 weeks</small>
+Kutatás: 6–8 felhasználói interjú ==> Research: 6-8 user interviews
+User flow, wireframe és hi-fi UI ==> User flow, wireframes and hi-fi UI
+Kattintható prototípus és usability-teszt ==> Clickable prototype and usability test
+Fejlesztésre kész átadás ==> Development-ready handoff
+Sprint indítása<span ==> Start a sprint<span
+<h3>Termékpartner</h3><p class="sub">Beágyazott senior designer a csapatodban.</p> ==> <h3>Product partner</h3><p class="sub">An embedded senior designer in your team.</p>
+€6 200<small> / hónap</small> ==> €6,200<small> / month</small>
+Heti 3 nap dedikált kapacitás ==> 3 days a week of dedicated capacity
+Részvétel a sprintekben és a tervezésben ==> Participation in sprints and planning
+Design rendszer építése és karbantartása ==> Building and maintaining the design system
+Havonta felmondható ==> Cancel monthly
+>Beszéljünk róla< ==> >Let's talk about it<
+<span class="label">GYIK</span> ==> <span class="label">FAQ</span>
+Gyakori <span class="dim">kérdések.</span> ==> Frequently asked <span class="dim">questions.</span>
+Milyen típusú projekteket vállalsz? ==> What kinds of projects do you take on?
+Leginkább összetett digitális termékeken dolgozom: mobil- és webalkalmazásokon, SaaS-felületeken, dashboardokon és design rendszereken. Egyszerű bemutatkozó weboldalakat ritkán vállalok, de szívesen ajánlok rá kollégát. ==> I mostly work on complex digital products: mobile and web apps, SaaS interfaces, dashboards and design systems. I rarely take on simple brochure websites, but I'm happy to recommend a colleague.
+Dolgozol külföldi ügyfelekkel is? ==> Do you work with international clients?
+Igen, az ügyfeleim nagyjából fele külföldi, főleg Németországból, Hollandiából és az Egyesült Királyságból. Magyarul és angolul is dolgozom, az együttműködés teljesen remote is lehet. ==> Yes, about half of my clients are international, mainly from Germany, the Netherlands and the United Kingdom. I work in both Hungarian and English, and the collaboration can be fully remote.
+Mennyi idő alatt tudsz kezdeni? ==> How soon can you start?
+Jelenleg novembertől van szabad kapacitásom. Auditot általában 1–2 héten belül el tudok kezdeni, a nagyobb projekteket érdemes 3–4 héttel előre egyeztetni. ==> I currently have availability from November. I can usually start an audit within 1-2 weeks, and larger projects are best arranged 3-4 weeks ahead.
+A fejlesztést is megoldod? ==> Do you handle development too?
+A fejlesztést nem, de szorosan együttműködöm vele. Ismerem a frontend-korlátokat, a tokeneket kódba szinkronizálom, és a sprintek alatt elérhető vagyok a fejlesztőcsapat számára. Ha nincs saját csapatod, megbízható partnereket tudok ajánlani. ==> No, but I work closely with it. I know the frontend constraints, I sync tokens into code and I'm available to the development team during sprints. If you don't have your own team, I can recommend trusted partners.
+Hogyan zajlik az első egyeztetés? ==> What does the first conversation look like?
+Egy ingyenes, 30 perces videóhívással kezdünk, ahol átbeszéljük a célokat, a határidőt és a keretet. 48 órán belül küldök egy rövid ajánlatot a javasolt megközelítéssel és a pontos árral. ==> We start with a free 30-minute video call where we go over the goals, the deadline and the budget. Within 48 hours I send a short proposal with the suggested approach and the exact price.
+<span class="label">Kapcsolat</span> ==> <span class="label">Contact</span>
+Van egy terméked, <span class="dim">ami jobb is lehetne?</span> ==> Got a product <span class="dim">that could be better?</span>
+Írj pár mondatot arról, min dolgozol. 24 órán belül válaszolok, és megbeszéljük, hogyan segíthetek. ==> Write a few sentences about what you're working on. I'll reply within 24 hours and we'll talk about how I can help.
+E-mail másolása ==> Copy email
+30 perces hívás foglalása ==> Book a 30-minute call
+subject=Projekt%20egyeztet%C3%A9s ==> subject=Project%20discussion
+UX/UI designer Budapestről. Olyan digitális termékeket tervezek, amelyeket öröm használni, és amelyeket könnyű megépíteni. ==> A UX/UI designer from Budapest. I design digital products that are a joy to use and easy to build.
+<h5>Oldal</h5> ==> <h5>Site</h5>
+<h5>Közösségi</h5> ==> <h5>Social</h5>
+<h5>Helyi idő</h5> ==> <h5>Local time</h5>
+Budapest — --:-- ==> Budapest - --:--
+Válasz: 24 órán belül ==> Reply: within 24 hours
+BENCE<span>_</span> ==> BEN<span>_</span>
+© 2026 Kovács Bence. Minden jog fenntartva. ==> © 2026 Ben Kovacs. All rights reserved.
+Figmában tervezve, kézzel kódolva. ==> Designed in Figma, hand-coded.
+'Budapest — ' ==> 'Budapest - '
+'hu-HU' ==> 'en-GB'
+'Másolva ✓' ==> 'Copied ✓'
+'E-mail másolása' ==> 'Copy email'
+hello@kovacsbence.hu ==> hello@bencekovacs.com
+Kovács Bence<span class="u">_</span> ==> Ben Kovacs<span class="u">_</span>
+Munkák</a> ==> Work</a>
+Folyamat</a> ==> Process</a>
+Rólam</a> ==> About</a>
+Együttműködés</a> ==> Working together</a>
+Kovács Bence ==> Ben Kovacs

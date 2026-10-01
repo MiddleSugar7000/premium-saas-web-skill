@@ -20,14 +20,14 @@
       "expected_output": "Premium, non-templated page; skill picks a direction itself (no style given).",
       "files": [],
       "prompt_used": "Csinálj nekem egy portfólió oldalt, Kovács Bence vagyok, UX/UI designer.\n\nAz egészet egy index.html fájlba tedd ebbe a mappába.",
-      "prompt_english": "Make me a portfolio site, I'm Bence Kovács, a UX/UI designer.\n\nPut everything in a single index.html file in this folder."
+      "prompt_english": "Make me a portfolio site, I'm Ben Kovacs, a UX/UI designer.\n\nPut everything in a single index.html file in this folder."
     },
     {
       "id": 4,
       "expected_output": "Premium, non-templated page; skill picks a direction itself (no style given).",
       "files": [],
       "prompt_used": "Csinálj landing page-et a Számlakör nevű online számlázó programhoz kisvállalkozásoknak.\n\nAz egészet egy index.html fájlba tedd ebbe a mappába.",
-      "prompt_english": "Make a landing page for Számlakör, an online invoicing app for small businesses.\n\nPut everything in a single index.html file in this folder."
+      "prompt_english": "Make a landing page for Billcircle, an online invoicing app for small businesses.\n\nPut everything in a single index.html file in this folder."
     }
   ]
 }

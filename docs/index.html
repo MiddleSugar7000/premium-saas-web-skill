@@ -192,7 +192,7 @@ footer{padding:80px 0 0;border-top:1px solid var(--line);overflow:hidden}
 <section id="demo" style="padding-top:40px">
   <div class="wrap">
     <div class="head reveal"><p class="kicker">Before / after</p><h2>Four one-line prompts. <span class="dim">No style instructions.</span></h2>
-      <p class="muted" style="margin-top:16px">Left of the handle: plain Claude Opus 5.5. Right: the same model with the skill. The prompts were written in Hungarian, so the pages are in Hungarian. Open the live pages to see the motion.</p></div>
+      <p class="muted" style="margin-top:16px">Left of the handle: plain Claude Opus 5.5. Right: the same model with the skill. The prompts were written in Hungarian, so the pages were generated in Hungarian and then translated to English for this demo (text only, nothing re-generated). Open the live pages to see the motion.</p></div>
     <div id="cmps"></div>
   </div>
 </section>
@@ -269,9 +269,9 @@ footer{padding:80px 0 0;border-top:1px solid var(--line);overflow:hidden}
 <script>
 const demos = [
   { id: "flowpilot", title: "Flowpilot", kind: "AI automation SaaS", prompt: "Make a website for Flowpilot, software that automates teams' work in Slack, Notion and Gmail with AI agents." },
-  { id: "invoicing", title: "Számlakör", kind: "Invoicing SaaS", prompt: "Make a landing page for Számlakör, an online invoicing app for small businesses." },
+  { id: "invoicing", title: "Billcircle", kind: "Invoicing SaaS", prompt: "Make a landing page for Billcircle, an online invoicing app for small businesses." },
   { id: "northlane", title: "Northlane", kind: "AI consulting agency", prompt: "Need a website for Northlane, a company doing AI consulting for businesses." },
-  { id: "portfolio", title: "Bence Kovács", kind: "UX/UI designer portfolio", prompt: "Make me a portfolio site, I'm Bence Kovács, a UX/UI designer." },
+  { id: "portfolio", title: "Ben Kovacs", kind: "UX/UI designer portfolio", prompt: "Make me a portfolio site, I'm Ben Kovacs, a UX/UI designer." },
 ];
 const root = document.getElementById("cmps");
 for (const d of demos) {

@@ -1,0 +1,125 @@
+Northlane – AI tanácsadás vállalatoknak ==> Northlane – AI consulting for businesses
+A Northlane segít a cégeknek a mesterséges intelligencia gyakorlati bevezetésében: stratégia, folyamatautomatizálás, képzés és megvalósítás. ==> Northlane helps companies put artificial intelligence into practice: strategy, process automation, training and delivery.
+aria-label="Northlane főoldal" ==> aria-label="Northlane home"
+aria-label="Menü megnyitása" ==> aria-label="Open menu"
+>Szolgáltatások< ==> >Services<
+>Hogyan dolgozunk< ==> >How we work<
+>Eredmények< ==> >Results<
+>Rólunk< ==> >About<
+>GYIK< ==> >FAQ<
+>Konzultáció kérése< ==> >Request a consultation<
+>AI tanácsadás vállalatoknak< ==> >AI consulting for businesses<
+Mesterséges intelligencia, <em>ami tényleg dolgozik</em> a cégéért. ==> Artificial intelligence that <em>actually works</em> for your business.
+A Northlane segít eljutni az AI-ról szóló beszélgetésektől a mérhető üzleti eredményekig. Stratégiát építünk, folyamatokat automatizálunk, és felkészítjük a csapatát, hogy magabiztosan használja az új eszközöket. ==> Northlane helps you get from conversations about AI to measurable business results. We build strategy, automate processes and prepare your team to use the new tools with confidence.
+Ingyenes első egyeztetés ==> Free first consultation
+>Szolgáltatásaink< ==> >Our services<
+Átlagosan 6–10 hét az első éles AI-megoldásig ==> On average 6-10 weeks to the first live AI solution
+lezárt vállalati projekt ==> completed enterprise projects
+átlagos időmegtakarítás az automatizált folyamatokban ==> average time saved in automated processes
+képzett munkatárs ==> employees trained
+ügyfelünk folytatja velünk a munkát ==> of our clients keep working with us
+A stratégiától a működő rendszerig ==> From strategy to a working system
+Nem eszközöket árulunk, hanem üzleti problémákat oldunk meg. Ott kapcsolódunk be, ahol épp tart az AI-útján. ==> We don't sell tools, we solve business problems. We join in wherever you are on your AI journey.
+AI-stratégia és ütemterv ==> AI strategy and roadmap
+Feltérképezzük, hol hoz valódi értéket az AI a cégében, és priorizált, megvalósítható tervet készítünk. ==> We map where AI brings real value to your business and build a prioritized, achievable plan.
+Felkészültségi felmérés ==> Readiness assessment
+Use case-ek priorizálása megtérülés alapján ==> Use cases prioritized by return
+12–18 hónapos ütemterv ==> 12-18 month roadmap
+Folyamatautomatizálás ==> Process automation
+Az ismétlődő, időrabló feladatokat intelligens munkafolyamatokra cseréljük – a meglévő rendszereibe integrálva. ==> We replace repetitive, time-consuming tasks with intelligent workflows, integrated into your existing systems.
+Dokumentumfeldolgozás ==> Document processing
+Ügyfélszolgálati asszisztensek ==> Customer support assistants
+Belső tudásbázis-kereső ==> Internal knowledge-base search
+Egyedi AI-fejlesztés ==> Custom AI development
+Ahol a dobozos megoldás kevés, ott saját, a cég adataira épülő megoldást tervezünk és építünk. ==> Where an off-the-shelf solution isn't enough, we design and build your own solution on top of your company's data.
+Prototípus 2–4 hét alatt ==> Prototype in 2-4 weeks
+Nyelvi modellek integrálása ==> Language model integration
+Biztonságos, skálázható architektúra ==> Secure, scalable architecture
+Képzés és változásmenedzsment ==> Training and change management
+A technológia csak akkor működik, ha az emberek használják. Gyakorlati képzésekkel visszük végig a csapatot. ==> Technology only works if people use it. We take your team through it with hands-on training.
+Vezetői workshopok ==> Leadership workshops
+Szerepkör-specifikus tréningek ==> Role-specific training
+Belső AI-nagykövet program ==> Internal AI ambassador program
+Adatvédelem és megfelelés ==> Privacy and compliance
+Felelős AI-használat a GDPR és az EU AI Act keretein belül – kockázatkezelés, belső szabályzatok, governance. ==> Responsible AI use within GDPR and the EU AI Act: risk management, internal policies, governance.
+AI Act megfelelőségi felmérés ==> AI Act compliance assessment
+Belső AI-használati szabályzat ==> Internal AI usage policy
+Adatkezelési folyamatok ==> Data handling processes
+Mérés és folyamatos fejlesztés ==> Measurement and continuous improvement
+Minden bevezetett megoldáshoz mérőszámokat rendelünk, és folyamatosan finomítjuk, hogy az eredmény tartós legyen. ==> We attach metrics to every solution we deploy and keep refining it so the result lasts.
+KPI-k és dashboardok ==> KPIs and dashboards
+Negyedéves felülvizsgálat ==> Quarterly review
+Üzemeltetési támogatás ==> Operations support
+Négy lépés, világos eredményekkel ==> Four steps, clear outcomes
+Kis lépésekben haladunk, hogy minden fázis végén legyen valami kézzelfogható – és Ön dönthessen a folytatásról. ==> We move in small steps so every phase ends with something tangible, and you decide whether to continue.
+<h3>Felfedezés</h3> ==> <h3>Discovery</h3>
+Interjúk a vezetőkkel és a csapattal, a folyamatok és az adatok átvilágítása. ==> Interviews with leaders and the team, plus an audit of processes and data.
+1–2 hét ==> 1-2 weeks
+<h3>Stratégia</h3> ==> <h3>Strategy</h3>
+Priorizált lehetőségek, üzleti eset és megtérülési számítás minden javaslathoz. ==> Prioritized opportunities, a business case and an ROI calculation for every proposal.
+>2 hét< ==> >2 weeks<
+A legígéretesebb ötletet valós környezetben, valós felhasználókkal teszteljük. ==> We test the most promising idea in a real environment with real users.
+3–6 hét ==> 3-6 weeks
+<h3>Skálázás</h3> ==> <h3>Scale</h3>
+Bevezetés a teljes szervezetben, képzéssel, méréssel és üzemeltetési támogatással. ==> Rollout across the whole organization with training, measurement and operations support.
+>folyamatos< ==> >ongoing<
+Amit ügyfeleinkkel együtt elértünk ==> What we've achieved together with our clients
+Néhány példa a közelmúlt projektjeiből. Az ügyfeleink kérésére a cégneveket nem tüntetjük fel. ==> A few examples from recent projects. At our clients' request, company names are not shown.
+Gyártás · 600 fő ==> Manufacturing · 600 people
+Gyorsabb ajánlatkészítés ==> Faster quote preparation
+AI-alapú asszisztens, amely a műszaki dokumentációból és a korábbi ajánlatokból készít első tervezetet az értékesítőknek. ==> An AI assistant that drafts a first version for sales reps from technical documentation and previous quotes.
+Pénzügyi szolgáltatás · 250 fő ==> Financial services · 250 people
+Több feldolgozott dokumentum ==> more documents processed
+Automatizált adatkinyerés szerződésekből és számlákból, emberi jóváhagyással a kritikus pontokon. ==> Automated data extraction from contracts and invoices, with human approval at the critical points.
+Kereskedelem · 1 100 fő ==> Retail · 1,100 people
+Önállóan megoldott ügyfélkérés ==> Customer requests resolved on their own
+Ügyfélszolgálati asszisztens a belső tudásbázisra építve, zökkenőmentes átadással az ügyintézőknek. ==> A support assistant built on the internal knowledge base, with a smooth handoff to human agents.
+„Nem egy újabb prezentációt kaptunk, hanem egy működő megoldást – és egy csapatot, amely érti, hogyan használja.” ==> “We didn't get yet another presentation. We got a working solution, and a team that understands how to use it.”
+— Operatív igazgató, hazai gyártóvállalat ==> - COO, domestic manufacturing company
+Az irány, ami előre visz ==> The direction that moves you forward
+A Northlane tanácsadókból, adattudósokból és mérnökökből álló csapat. Abban hiszünk, hogy az AI nem cél, hanem eszköz – és csak akkor ér valamit, ha kézzelfogható üzleti eredményt hoz. ==> Northlane is a team of consultants, data scientists and engineers. We believe AI is a tool, not a goal, and it's only worth something if it delivers a tangible business result.
+Közepes és nagyvállalatokkal dolgozunk a gyártás, a pénzügy, a kereskedelem és a szolgáltatások területén. A stratégiai tervezéstől a megvalósításig egy kézben tartjuk a projektet, így nincs elveszett információ a fázisok között. ==> We work with mid-size and large companies in manufacturing, finance, retail and services. We keep the project in one pair of hands from strategic planning to delivery, so no information gets lost between phases.
+Üzleti eredmény előbb ==> Business results first
+Minden projekt egy mérhető céllal indul – nem egy technológiával. ==> Every project starts with a measurable goal, not with a technology.
+Gyártófüggetlenség ==> Vendor independence
+Azt az eszközt javasoljuk, ami Önnek a legjobb, nem azt, amit éppen árulni kell. ==> We recommend the tool that's best for you, not the one we happen to need to sell.
+Átadható tudás ==> Transferable knowledge
+Úgy dolgozunk, hogy a projekt végére a csapata önállóan is tovább tudja vinni. ==> We work so that by the end of the project your team can carry on independently.
+Felelős AI ==> Responsible AI
+Adatbiztonság, átláthatóság és emberi kontroll minden megoldásban. ==> Data security, transparency and human control in every solution.
+>Gyakori kérdések< ==> >Frequently asked questions<
+Mielőtt felveszi velünk a kapcsolatot ==> Before you get in touch
+Mekkora cégeknek érdemes AI-tanácsadást igénybe venni? ==> What size of company should use AI consulting?
+Jellemzően 50 és 5 000 fő közötti vállalatokkal dolgozunk, de a méretnél fontosabb, hogy legyenek ismétlődő, jól körülhatárolható folyamatok, amelyekben az automatizálás érezhető megtakarítást hoz. ==> We typically work with companies of 50 to 5,000 people, but more important than size is having repetitive, well-defined processes where automation brings noticeable savings.
+Mennyi idő alatt látunk eredményt? ==> How long until we see results?
+Az első működő pilot általában 6–10 héten belül elkészül. A felfedezési és stratégiai fázis végén már konkrét, megtérülési számítással alátámasztott javaslatokat kap. ==> The first working pilot is usually ready within 6-10 weeks. At the end of the discovery and strategy phase you already receive concrete proposals backed by an ROI calculation.
+Mi történik az adatainkkal? ==> What happens to our data?
+Az adatai az Ön kontrollja alatt maradnak. Olyan megoldásokat választunk, amelyek megfelelnek a GDPR-nak és a vállalati biztonsági előírásoknak, és szükség esetén EU-s adatközpontban vagy saját infrastruktúrán futnak. ==> Your data stays under your control. We choose solutions that comply with GDPR and corporate security requirements and, where needed, run in an EU data center or on your own infrastructure.
+Kell, hogy legyen saját IT- vagy adatcsapatunk? ==> Do we need our own IT or data team?
+Nem feltétlenül. A megvalósítást teljes egészében vállaljuk, de ha van belső csapat, szorosan együttműködünk velük, és átadjuk a szükséges tudást az üzemeltetéshez. ==> Not necessarily. We can take on delivery entirely, but if you have an internal team we work closely with them and hand over the knowledge needed to run the solution.
+Hogyan áraznak? ==> How do you price your work?
+A felfedezési és stratégiai fázist fix díjjal végezzük, a megvalósítást projektalapon vagy havi keretszerződésben. Az első egyeztetés díjmentes, és utána írásos ajánlatot küldünk. ==> We do the discovery and strategy phase for a fixed fee, and delivery on a per-project basis or under a monthly retainer. The first consultation is free, and we follow up with a written proposal.
+>Kapcsolat< ==> >Contact<
+Beszéljünk arról, hol tart most. ==> Let's talk about where you are right now.
+Egy 30 perces, díjmentes egyeztetésen átbeszéljük a céljait, és megmutatjuk, hol látjuk a leggyorsabb megtérülést. Kötelezettség nélkül. ==> In a free 30-minute call we'll go through your goals and show you where we see the fastest return. No obligation.
+hello@northlane.hu ==> hello@northlane.com
+>Telefon< ==> >Phone<
++36 1 234 5678 ==> +1 555 234 5678
+>Iroda< ==> >Office<
+<label>Név<input ==> <label>Name<input
+<label>Cég<input ==> <label>Company<input
+<label>Cégméret ==> <label>Company size
+1–49 fő ==> 1-49 people
+50–249 fő ==> 50-249 people
+250–999 fő ==> 250-999 people
+1000+ fő ==> 1000+ people
+Miben segíthetünk? ==> How can we help?
+Pl. szeretnénk automatizálni az ügyfélszolgálati megkeresések egy részét… ==> E.g. we'd like to automate part of our customer support inquiries...
+<button type="submit" class="btn btn-primary">Konzultáció kérése</button> ==> <button type="submit" class="btn btn-primary">Request a consultation</button>
+Egy munkanapon belül válaszolunk. Adatait kizárólag a kapcsolatfelvételhez használjuk. ==> We reply within one business day. We only use your details to get in touch.
+Köszönjük! Megkaptuk az üzenetét, hamarosan jelentkezünk. ==> Thank you! We received your message and will be in touch soon.
+>Folyamat< ==> >Process<
+Minden jog fenntartva. ==> All rights reserved.
+// Mobil menü ==> // Mobile menu
+// Megjelenési animáció görgetéskor ==> // Reveal animation on scroll
+// Kapcsolati űrlap ==> // Contact form

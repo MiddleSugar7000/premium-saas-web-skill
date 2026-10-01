@@ -1,0 +1,61 @@
+Kovács Bence — UX/UI Designer ==> Ben Kovacs - UX/UI Designer
+Kovács Bence UX/UI designer portfóliója: kutatás, interakciótervezés, design rendszerek. ==> Ben Kovacs' UX/UI design portfolio: research, interaction design, design systems.
+aria-label="Fő navigáció" ==> aria-label="Main navigation"
+>Munkák< ==> >Work<
+>Rólam< ==> >About<
+>Folyamat< ==> >Process<
+>Kapcsolat< ==> >Contact<
+aria-label="Téma váltása" ==> aria-label="Toggle theme"
+Nyitott vagyok új projektekre ==> Open to new projects
+Felületek, amiket <em>öröm</em> használni. ==> Interfaces that are a <em>joy</em> to use.
+Kovács Bence vagyok, UX/UI designer. Kutatásra épülő, letisztult digitális termékeket tervezek — az első interjútól a fejlesztésre kész design rendszerig. ==> I'm Ben Kovacs, a UX/UI designer. I design research-driven, clean digital products, from the first interview to a development-ready design system.
+Munkáim megtekintése → ==> View my work →
+>Írj nekem< ==> >Write to me<
+év tapasztalat ==> years of experience
+leszállított projekt ==> projects delivered
+felhasználói interjú ==> user interviews
+design rendszer a nulláról ==> design systems from scratch
+Válogatott munkák ==> Selected work
+>Esettanulmányok< ==> >Case studies<
+Pénzügyi app újratervezése ==> Finance app redesign
+Mobil · UX kutatás ==> Mobile · UX research
+Az onboarding egyszerűsítése 7 lépésről 3-ra, a regisztrációs lemorzsolódás felére csökkent. ==> Onboarding simplified from 7 steps to 3, and sign-up drop-off was cut in half.
+Logisztikai SaaS dashboard ==> Logistics SaaS dashboard
+Web · Adatvizualizáció ==> Web · Data visualization
+Komplex flottaadatok átlátható irányítópulton — a diszpécserek napi rutinja percekkel rövidült. ==> Complex fleet data on a clear dashboard: the dispatchers' daily routine got minutes shorter.
+„Forma” design rendszer ==> “Forma” design system
+Tokenekre épülő komponenskönyvtár három termékcsapatnak, egységes nyelvvel a design és a kód között. ==> A token-based component library for three product teams, with a shared language between design and code.
+Webshop checkout optimalizálás ==> Web shop checkout optimization
+E-commerce · A/B teszt ==> E-commerce · A/B test
+Vendég vásárlás és egyoldalas fizetés bevezetése, iteratív tesztekkel validálva. ==> Guest checkout and a one-page payment flow, validated with iterative tests.
+aria-label="Portré helye" ==> aria-label="Portrait placeholder"
+>Rólam</p> ==> >About</p>
+Hiszek abban, hogy a jó design <em class="serif">láthatatlan</em> — egyszerűen működik. ==> I believe good design is <em class="serif">invisible</em>: it simply works.
+Az elmúlt években startupokkal és nagyvállalati csapatokkal dolgoztam mobil- és webes termékeken. A munkám a felhasználók megértésével kezdődik, és ott ér véget, ahol a fejlesztők pixelpontos, dokumentált terveket kapnak. ==> In recent years I've worked with startups and enterprise teams on mobile and web products. My work starts with understanding users and ends where developers receive pixel-perfect, documented designs.
+Szeretem a rendszerekben gondolkodást, a mikrointerakciókat és azokat a beszélgetéseket, ahol egy whiteboard előtt születik meg a megoldás. ==> I love systems thinking, micro-interactions and the kind of conversations where the solution is born in front of a whiteboard.
+<li>Felhasználói kutatás</li><li>Wireframe &amp; prototípus</li><li>Interakciótervezés</li> ==> <li>User research</li><li>Wireframes &amp; prototypes</li><li>Interaction design</li>
+<li>Design rendszerek</li><li>Akadálymentesség (WCAG)</li><li>Usability teszt</li> ==> <li>Design systems</li><li>Accessibility (WCAG)</li><li>Usability testing</li>
+<li>HTML/CSS alapok</li> ==> <li>HTML/CSS basics</li>
+Hogyan dolgozom ==> How I work
+>A folyamat< ==> >The process<
+<h3>Megértés</h3><p>Interjúk, versenytárs-elemzés és adatok — hogy a valódi problémát oldjuk meg.</p> ==> <h3>Understand</h3><p>Interviews, competitor analysis and data, so we solve the real problem.</p>
+<h3>Struktúra</h3><p>Felhasználói utak, információs architektúra és gyors wireframe-ek.</p> ==> <h3>Structure</h3><p>User flows, information architecture and quick wireframes.</p>
+<h3>Tervezés</h3><p>Vizuális design és kattintható prototípus, valós felhasználókkal tesztelve.</p> ==> <h3>Design</h3><p>Visual design and a clickable prototype, tested with real users.</p>
+<h3>Átadás</h3><p>Dokumentált komponensek és szoros együttműködés a fejlesztőcsapattal.</p> ==> <h3>Handoff</h3><p>Documented components and close collaboration with the development team.</p>
+>Tapasztalat</p> ==> >Experience</p>
+Ahol eddig dolgoztam ==> Where I've worked
+2023 — most ==> 2023 - now
+2021 — 2023 ==> 2021 - 2023
+2019 — 2021 ==> 2019 - 2021
+2018 — 2019 ==> 2018 - 2019
+Digitális ügynökség ==> Digital agency
+SaaS vállalat ==> SaaS company
+Dolgozzunk <em class="serif">együtt.</em> ==> Let's work <em class="serif">together.</em>
+Új termék, egy meglévő felület újragondolása vagy egy design rendszer? Írj pár sort, és 24 órán belül válaszolok. ==> A new product, a rethink of an existing interface or a design system? Drop me a few lines and I'll reply within 24 hours.
+hello@kovacsbence.hu ==> hello@bencekovacs.com
+>Másolás</button> ==> >Copy</button>
+Kovács Bence</span> ==> Ben Kovacs</span>
+Vissza a tetejére ↑ ==> Back to top ↑
+'Másolva ✓' ==> 'Copied ✓'
+'Másolás' ==> 'Copy'
+Kovács Bence</a> ==> Ben Kovacs</a>

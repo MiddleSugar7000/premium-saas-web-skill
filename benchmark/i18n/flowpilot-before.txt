@@ -1,0 +1,182 @@
+Flowpilot – AI ügynökök a csapatod munkájához ==> Flowpilot – AI agents for your team's work
+A Flowpilot AI ügynökökkel automatizálja a csapatok munkáját Slackben, Notionben és Gmailben. ==> Flowpilot automates team work in Slack, Notion and Gmail with AI agents.
+Flowpilot kezdőlap ==> Flowpilot home
+>Integrációk< ==> >Integrations<
+>Hogyan működik< ==> >How it works<
+>Funkciók< ==> >Features<
+>Árak< ==> >Pricing<
+>GYIK< ==> >FAQ<
+Bejelentkezés ==> Log in
+Ingyenes próba ==> Free trial
+aria-label="Menü" ==> aria-label="Menu"
+Új: többlépéses ügynök-láncok ==> New: multi-step agent chains
+A csapatod munkája, <span class="grad">robotpilótán.</span> ==> Your team's work, <span class="grad">on autopilot.</span>
+A Flowpilot AI ügynökei átveszik az ismétlődő feladatokat Slackben, Notionben és Gmailben – összefoglalnak, rendszereznek, válaszolnak és követnek, hogy a csapatod a valódi munkára figyelhessen. ==> Flowpilot's AI agents take over repetitive tasks in Slack, Notion and Gmail: they summarize, organize, reply and follow up so your team can focus on the real work.
+Kezdd el ingyen → ==> Start for free →
+Nézd meg, hogyan működik ==> See how it works
+14 napos ingyenes próba ==> 14-day free trial
+Nem kell bankkártya ==> No credit card needed
+5 perc beállítás ==> 5-minute setup
+Flowpilot ügynök működés közben ==> Flowpilot agent in action
+Ügynök: Ügyfélkérés-kezelő · fut ==> Agent: Customer request handler · running
+Új e-mail: „Árajánlatot kérnénk 40 licencre” ==> New email: “We'd like a quote for 40 licenses”
+Szándék: értékesítési lead · Prioritás: magas · Cég: Nordvik Kft. ==> Intent: sales lead · Priority: high · Company: Nordvik Ltd.
+Elemzés ==> Analysis
+Új bejegyzés létrehozva a „Pipeline” adatbázisban ==> New entry created in the “Pipeline” database
+@Dóra, új meleg lead érkezett – összefoglaló és vázlat csatolva. ==> @Dora, a new warm lead just came in: summary and draft attached.
+Gmail · Vázlat ==> Gmail · Draft
+Válaszvázlat elkészült jóváhagyásra ==> Reply draft ready for approval
+Több mint 2 400 csapat dolgozik gyorsabban a Flowpilottal ==> More than 2,400 teams work faster with Flowpilot
+Kódház ==> Codehouse
+Fénymező ==> Lightfield
+Orbita ==> Orbit
+Ott dolgozik, ahol a csapatod már most is ==> It works where your team already does
+Nincs új felület, amit meg kell tanulni. A Flowpilot ügynökei közvetlenül a megszokott eszközeidben végzik el a munkát. ==> No new interface to learn. Flowpilot's agents do the work directly inside the tools you already use.
+Az ügynökök figyelik a csatornákat, válaszolnak a kérdésekre, és a lényeget eljuttatják a megfelelő emberekhez. ==> Agents watch your channels, answer questions and get the key points to the right people.
+Napi csatorna-összefoglalók ==> Daily channel summaries
+Kérdések megválaszolása a belső tudásbázisból ==> Answers to questions from your internal knowledge base
+Teendők kinyerése a beszélgetésekből ==> Action items pulled out of conversations
+Mindig naprakész dokumentáció, adatbázisok és projekttáblák – kézi másolgatás nélkül. ==> Always up-to-date docs, databases and project boards, with no manual copy-pasting.
+Meeting-jegyzetek automatikus rendezése ==> Meeting notes organized automatically
+Feladatok és státuszok frissítése ==> Tasks and statuses kept up to date
+Heti riportok generálása ==> Weekly reports generated for you
+Rendezett postafiók: az ügynök osztályoz, összefoglal és a te hangodon fogalmaz válaszvázlatot. ==> A tidy inbox: the agent sorts, summarizes and drafts replies in your voice.
+Intelligens címkézés és prioritás ==> Smart labeling and priority
+Válaszvázlatok jóváhagyásra ==> Reply drafts for your approval
+Automatikus utánkövetés ==> Automatic follow-ups
+Három lépés az első ügynöködig ==> Three steps to your first agent
+Nem kell kódolni. Írd le magyarul, mit szeretnél – a Flowpilot megépíti a folyamatot. ==> No coding needed. Describe what you want in plain English and Flowpilot builds the workflow.
+Kapcsold össze az eszközeidet ==> Connect your tools
+Egy kattintással csatlakoztasd a Slack-, Notion- és Gmail-fiókodat biztonságos OAuth-hitelesítéssel. ==> Connect your Slack, Notion and Gmail accounts in one click with secure OAuth.
+Írd le, mit csináljon ==> Describe what it should do
+Természetes nyelven add meg a feladatot, a Flowpilot pedig lépésekre bontja. ==> State the task in natural language and Flowpilot breaks it into steps.
+„Minden péntek 16:00-kor foglald össze a #projekt-alfa csatornát, és tedd be a Notion heti riportba.” ==> “Every Friday at 4 PM, summarize the #project-alpha channel and add it to the Notion weekly report.”
+Indítsd el és kövesd ==> Launch it and follow along
+Az ügynök a háttérben dolgozik. Minden lépést látsz, és a fontos döntéseknél te hagyod jóvá. ==> The agent works in the background. You see every step and approve the important decisions.
+Minden, ami egy megbízható AI-kollégához kell ==> Everything a reliable AI teammate needs
+Kontextusérzékeny ügynökök ==> Context-aware agents
+Ismerik a csapatod dokumentumait, projektjeit és stílusát, így releváns munkát végeznek. ==> They know your team's documents, projects and style, so the work they do is relevant.
+Eszközökön átívelő láncok ==> Cross-tool chains
+Egy e-mailből Notion-feladat, abból Slack-értesítés – egyetlen folyamatban. ==> One email becomes a Notion task, which becomes a Slack notification, all in a single flow.
+Ember a folyamatban ==> Human in the loop
+Állítsd be, mely lépéseknél kérjen jóváhagyást az ügynök, mielőtt cselekszik. ==> Choose which steps need your approval before the agent acts.
+Kész sablonok ==> Ready-made templates
+Több mint 80 bevált sablon értékesítéshez, ügyfélszolgálathoz, HR-hez és projektmenedzsmenthez. ==> More than 80 proven templates for sales, support, HR and project management.
+Átlátható napló ==> Transparent logs
+Minden futás, döntés és módosítás visszakereshető, részletes auditnaplóval. ==> Every run, decision and change is traceable with a detailed audit log.
+Vállalati biztonság ==> Enterprise security
+SOC 2 Type II, GDPR-megfelelés, EU-s adattárolás, és az adataidon nem tanítunk modellt. ==> SOC 2 Type II, GDPR compliance, EU data storage, and we never train models on your data.
+Felhasználási területek ==> Use cases
+Minden csapatnak megvan a maga pilótája ==> Every team gets its own pilot
+>Értékesítés< ==> >Sales<
+>Ügyfélszolgálat< ==> >Support<
+>Projektmenedzsment< ==> >Project management<
+>HR< ==> >HR<
+9,5 óra ==> 9.5 hrs
+megtakarítás fejenként hetente ==> saved per person every week
+automatizált feladat havonta ==> automated tasks per month
+gyorsabb válaszidő ügyfeleknek ==> faster response time for customers
+átlagos felhasználói értékelés ==> average user rating
+>Vélemények< ==> >Testimonials<
+Csapatok, akik már nem néznek vissza ==> Teams that never looked back
+„Reggelente már nem 200 Slack-üzenettel kezdek. A Flowpilot három bekezdésben elmondja, mi történt és mi vár rám.” ==> “I no longer start my mornings with 200 Slack messages. Flowpilot tells me in three paragraphs what happened and what's waiting for me.”
+Kovács Réka ==> Rebecca Kovacs
+Termékvezető, Lumen Labs ==> Head of Product, Lumen Labs
+„Az ügyfélszolgálati e-mailek 60%-ára az ügynök készíti el a vázlatot. Mi csak átnézzük és küldjük.” ==> “The agent drafts 60% of our support emails. We just review and send.”
+Tóth Bence ==> Ben Toth
+Support vezető, Brightway ==> Head of Support, Brightway
+„A Notion-tábláink végre tényleg naprakészek. Senki nem frissít kézzel, mégis minden státusz stimmel.” ==> “Our Notion boards are finally actually up to date. Nobody updates anything by hand, yet every status is right.”
+Szabó Anna ==> Anna Szabo
+>Árak< ==> >Pricing<
+Egyszerű, átlátható csomagok ==> Simple, transparent plans
+Kezdd ingyen, és válts, amikor a csapatod készen áll. ==> Start free and upgrade when your team is ready.
+>Havi< ==> >Monthly<
+Éves számlázás ==> Annual billing
+>Éves < ==> >Annual <
+Kis csapatoknak az első automatizálásokhoz. ==> For small teams building their first automations.
+0 Ft<small> / fő / hó</small> ==> $0<small> / user / mo</small>
+3 aktív ügynök ==> 3 active agents
+500 futás havonta ==> 500 runs per month
+Közösségi támogatás ==> Community support
+Ingyenes kezdés ==> Start for free
+Legnépszerűbb ==> Most popular
+Növekvő csapatoknak, akik komolyan automatizálnak. ==> For growing teams that are serious about automation.
+data-month="7 900" data-year="6 300"><span class="val">7 900</span> Ft<small> / fő / hó</small> ==> data-month="20" data-year="16"><span class="val">$20</span><small> / user / mo</small>
+Korlátlan ügynök ==> Unlimited agents
+10 000 futás havonta ==> 10,000 runs per month
+Többlépéses ügynök-láncok ==> Multi-step agent chains
+Jóváhagyási folyamatok ==> Approval workflows
+Prioritásos támogatás ==> Priority support
+14 napos próba ==> 14-day trial
+Nagyvállalati biztonság és testreszabás. ==> Enterprise security and customization.
+>Egyedi< ==> >Custom<
+Korlátlan futás ==> Unlimited runs
+SSO és SCIM ==> SSO and SCIM
+Dedikált EU-s adattárolás ==> Dedicated EU data storage
+Egyedi integrációk ==> Custom integrations
+Dedikált ügyfélmenedzser ==> Dedicated account manager
+Kapcsolatfelvétel ==> Contact sales
+Gyakori kérdések ==> Frequently asked questions
+Kell programozni tudnom a Flowpilot használatához? ==> Do I need to know how to code to use Flowpilot?
+Nem. Az ügynököket természetes nyelven írod le, vagy kész sablonból indulsz. Fejlesztőknek emellett API és webhookok is elérhetők. ==> No. You describe agents in natural language or start from a ready-made template. For developers, an API and webhooks are also available.
+Biztonságban vannak az adataink? ==> Is our data safe?
+Igen. Az adatokat titkosítva, EU-s adatközpontokban tároljuk, SOC 2 Type II és GDPR-megfeleléssel. Az adataidat soha nem használjuk modellek tanítására. ==> Yes. Data is encrypted and stored in EU data centers, with SOC 2 Type II and GDPR compliance. We never use your data to train models.
+Küldhet-e az ügynök e-mailt a tudtom nélkül? ==> Can an agent send email without my knowledge?
+Csak ha engedélyezed. Alapértelmezés szerint a kifelé irányuló műveletek – például e-mail küldése – jóváhagyást igényelnek, ezt ügynökönként állíthatod. ==> Only if you allow it. By default, outbound actions such as sending an email require approval, and you can configure this per agent.
+Milyen más eszközökkel működik még? ==> What other tools does it work with?
+A Slack, Notion és Gmail mellett támogatjuk a Google Naptárt, a Google Drive-ot, a Jirát, a Linear-t és a HubSpotot. Folyamatosan bővítjük a listát. ==> Besides Slack, Notion and Gmail, we support Google Calendar, Google Drive, Jira, Linear and HubSpot. We keep expanding the list.
+Mi történik a próbaidőszak után? ==> What happens after the trial?
+Automatikusan az ingyenes Starter csomagra váltasz, hacsak nem választasz fizetős csomagot. Semmilyen adat nem vész el. ==> You automatically move to the free Starter plan unless you choose a paid plan. No data is lost.
+Add át a robotmunkát a Flowpilotnak ==> Hand the robot work over to Flowpilot
+Indítsd el az első ügynöködet még ma – 5 perc alatt beállíthatod, és már a héten órákat spórolsz. ==> Launch your first agent today: set it up in 5 minutes and save hours this very week.
+munkahelyi@email.hu ==> you@company.com
+aria-label="E-mail cím" ==> aria-label="Email address"
+AI ügynökök, amelyek elvégzik a csapatod ismétlődő munkáját Slackben, Notionben és Gmailben. ==> AI agents that handle your team's repetitive work in Slack, Notion and Gmail.
+<h4>Termék</h4> ==> <h4>Product</h4>
+>Sablonok< ==> >Templates<
+<h4>Cég</h4> ==> <h4>Company</h4>
+>Rólunk< ==> >About<
+>Karrier< ==> >Careers<
+>Kapcsolat< ==> >Contact<
+<h4>Jogi</h4> ==> <h4>Legal</h4>
+>Adatvédelem< ==> >Privacy<
+>ÁSZF< ==> >Terms<
+>Biztonság< ==> >Security<
+>Cookie-k< ==> >Cookies<
+Minden jog fenntartva. ==> All rights reserved.
+Készült Budapesten ==> Made in Budapest
+Egyetlen lead se csússzon ki a kezedből ==> Never let a single lead slip through
+Az ügynök felismeri a beérkező érdeklődőket, rögzíti őket a Notion CRM-ben, szól a felelős értékesítőnek, és elkészíti a személyre szabott választ. ==> The agent recognizes incoming prospects, logs them in the Notion CRM, alerts the responsible rep and prepares a personalized reply.
+gyorsabb első válasz ==> faster first response
+több lezárt üzlet ==> more closed deals
+Érdeklődő e-mail érkezik ==> Prospect email arrives
+Lead minősítése és cégadatok kiegészítése ==> Lead qualified and company data enriched
+Bejegyzés a Pipeline adatbázisba ==> Entry added to the Pipeline database
+Értesítés a #sales csatornában ==> Notification in #sales
+Gyors, pontos válaszok – éjjel-nappal ==> Fast, accurate answers, around the clock
+A Flowpilot a Notion tudásbázisból válaszvázlatot ír, kategorizálja a jegyeket, és a sürgős eseteket azonnal eszkalálja Slackben. ==> Flowpilot drafts replies from the Notion knowledge base, categorizes tickets and escalates urgent cases in Slack right away.
+rövidebb válaszidő ==> shorter response time
+automatikus vázlat ==> auto-drafted
+Ügyfélkérdés érkezik ==> Customer question arrives
+Releváns cikkek keresése a tudásbázisban ==> Searching the knowledge base for relevant articles
+Válaszvázlat a cég hangnemében ==> Reply draft in your company tone
+Sürgős jegy eszkalálása ==> Urgent ticket escalated
+Projektek, amelyek maguktól naprakészek ==> Projects that keep themselves up to date
+Az ügynök a Slack-beszélgetésekből kinyeri a döntéseket és teendőket, frissíti a Notion-táblákat, és pénteken heti összefoglalót küld az érintetteknek. ==> The agent extracts decisions and action items from Slack conversations, updates the Notion boards and sends a weekly summary to stakeholders on Fridays.
+5 óra ==> 5 hrs
+kevesebb státuszmeeting / hét ==> fewer status meetings per week
+naprakész táblák ==> up-to-date boards
+Döntések és teendők a #projekt-alfa csatornában ==> Decisions and action items in #project-alpha
+Teendők és felelősök kinyerése ==> Action items and owners extracted
+Heti összefoglaló az érintetteknek ==> Weekly summary for stakeholders
+Gördülékeny beléptetés minden új kollégának ==> Smooth onboarding for every new hire
+Új munkatárs érkezésekor az ügynök létrehozza a Notion onboarding oldalát, meghívja a megfelelő Slack-csatornákba, és üdvözlő e-mailt küld. ==> When a new hire joins, the agent creates their Notion onboarding page, invites them to the right Slack channels and sends a welcome email.
+1 nap ==> 1 day
+helyett 10 perc ==> becomes 10 minutes
+elfelejtett lépés ==> forgotten steps
+Aláírt szerződés érkezik ==> Signed contract arrives
+Személyre szabott onboarding oldal ==> Personalized onboarding page
+Meghívás a csapatcsatornákba ==> Invitation to team channels
+Üdvözlő e-mail az első nap részleteivel ==> Welcome email with first-day details
+Kérjük, adj meg egy érvényes e-mail címet. ==> Please enter a valid email address.
+Köszönjük! Hamarosan küldjük a belépési linket a(z) ${email} címre. ==> Thanks! We'll send the sign-in link to ${email} shortly.
