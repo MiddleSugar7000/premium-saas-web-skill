@@ -1,0 +1,126 @@
+# Motion: GSAP + Lenis setup
+
+All five reference sites use GSAP + ScrollTrigger + SplitText. Three of them also use a smooth-scroll layer (Lenis or ScrollSmoother). Since GSAP 3.13 every plugin, including SplitText, is free and on the public CDN.
+
+## Principles (why motion feels premium)
+- **Ease out, never linear** (except scrubbed and infinite loops). `power3.out` / `expo.out` for entrances, `power2.inOut` for state changes.
+- **Short distances, longer durations.** Move 24–60px over 0.8–1.2s. Big moves look cheap.
+- **Stagger is the luxury.** 0.04–0.08s between words/cards creates a cascade that reads as craft.
+- **One hero moment.** The headline reveal + product mockup entrance are the most choreographed thing on the page; everything else is a quiet fade-up.
+- **Respect `prefers-reduced-motion`.** Skip all of it, show final states.
+
+## Boilerplate
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger, SplitText);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (!reduce) {
+  // Smooth scroll, synced with ScrollTrigger
+  const lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add(t => lenis.raf(t * 1000));
+  gsap.ticker.lagSmoothing(0);
+}
+
+document.fonts.ready.then(() => { if (!reduce) initMotion(); });
+
+function initMotion() {
+  // 1. Hero headline: words rise from below a mask, slight 3D tilt
+  const h = SplitText.create('.hero h1', { type: 'words,lines', mask: 'lines' });
+  gsap.from(h.words, { yPercent: 110, rotateX: -40, opacity: 0, transformOrigin: '50% 100%',
+    duration: 1.1, ease: 'expo.out', stagger: 0.06, delay: 0.15 });
+  gsap.from('.hero [data-fade]', { y: 24, opacity: 0, duration: 0.9, ease: 'power3.out', stagger: 0.08, delay: 0.5 });
+  gsap.from('.mock', { y: 80, rotateX: 18, opacity: 0, transformPerspective: 1200, duration: 1.4, ease: 'power3.out', delay: 0.7 });
+
+  // 2. Generic reveal: any [data-reveal] container fades its children up with stagger
+  gsap.utils.toArray('[data-reveal]').forEach(group => {
+    gsap.from(group.children, { y: 40, opacity: 0, duration: 0.9, ease: 'power3.out', stagger: 0.08,
+      scrollTrigger: { trigger: group, start: 'top 82%' } });
+  });
+
+  // 3. Section headings: line-by-line mask reveal
+  gsap.utils.toArray('[data-split]').forEach(el => {
+    const s = SplitText.create(el, { type: 'lines', mask: 'lines' });
+    gsap.from(s.lines, { yPercent: 100, duration: 1, ease: 'expo.out', stagger: 0.1,
+      scrollTrigger: { trigger: el, start: 'top 85%' } });
+  });
+
+  // 4. Scroll-fill text (see recipes §9)
+  gsap.utils.toArray('.fill-text').forEach(el => {
+    const s = SplitText.create(el, { type: 'lines', linesClass: 'line' });
+    s.lines.forEach(l => gsap.to(l, { backgroundPosition: '0% 0', ease: 'none',
+      scrollTrigger: { trigger: l, start: 'top 85%', end: 'bottom 45%', scrub: true } }));
+  });
+
+  // 5. Counters
+  gsap.utils.toArray('[data-count]').forEach(el => {
+    const end = +el.dataset.count, suffix = el.dataset.suffix || '';
+    const o = { v: 0 };
+    gsap.to(o, { v: end, duration: 2, ease: 'power2.out',
+      scrollTrigger: { trigger: el, start: 'top 85%' },
+      onUpdate: () => el.textContent = Math.round(o.v).toLocaleString() + suffix });
+  });
+
+  // 6. Parallax for decorative layers
+  gsap.utils.toArray('[data-speed]').forEach(el => {
+    gsap.to(el, { yPercent: -20 * +el.dataset.speed, ease: 'none',
+      scrollTrigger: { trigger: el.closest('section'), start: 'top bottom', end: 'bottom top', scrub: true } });
+  });
+}
+</script>
+```
+
+## Gotchas found in testing
+- **Gradient text + SplitText:** `background-clip:text` on the parent stops working once SplitText wraps words/lines in their own elements, and the headline turns invisible. Apply the gradient to the split pieces instead (`wordsClass:'w'` + `.display-metal .w{background:inherit;-webkit-background-clip:text;background-clip:text;color:transparent}`), or use a plain color for split headlines. Scroll-fill text (§9 recipes) already applies its gradient per line for this reason.
+- **SplitText lines + responsive:** lines are measured once. Create splits with `autoSplit:true` and build the animation in `onSplit(self){ return gsap.from(self.lines, …) }` so they re-measure on resize; otherwise headings break one word per line after a width change.
+- **Dimming stacked cards:** use `filter:brightness()`, never `opacity`, or the card underneath bleeds through.
+
+## Signature sequences
+
+**Stacking cards** (Davies projects, "how it works" steps):
+```css
+.stack-card{position:sticky;top:96px}  /* each card; give each a slightly larger top: 96px, 112px, 128px for a peek effect */
+```
+```js
+gsap.utils.toArray('.stack-card').forEach((card, i, all) => {
+  if (i === all.length - 1) return;
+  // dim with brightness, NOT opacity: a semi-transparent card lets the next card's text bleed through
+  gsap.to(card, { scale: 0.92, filter: 'brightness(0.45)', ease: 'none',
+    scrollTrigger: { trigger: all[i + 1], start: 'top bottom', end: 'top 96px', scrub: true } });
+});
+```
+
+**Pinned horizontal scroll** (features or case studies):
+```js
+const track = document.querySelector('.h-track');
+gsap.to(track, { x: () => -(track.scrollWidth - innerWidth + 64), ease: 'none',
+  scrollTrigger: { trigger: '.h-pin', pin: true, scrub: 1, end: () => '+=' + track.scrollWidth, invalidateOnRefresh: true } });
+```
+
+**Logo arc** (OptimAI): place N logo tiles on an arc with `transform: rotate(θ) translateY(-R) rotate(-θ)`; scale the center one to 1.4 with a glow behind it; on scroll, rotate the arc container slightly (`rotate: -8 → 8deg`, scrubbed).
+
+**Traveling dot on a connector** (bento workflow): SVG path + `<circle>` with CSS `offset-path: path('…'); animation: travel 3s linear infinite;` `@keyframes travel{to{offset-distance:100%}}`.
+
+**Self-drawing line/sparkline**: `stroke-dasharray: L; stroke-dashoffset: L;` → animate to 0 on enter.
+
+**Preloader** (optional, use only for portfolios/agencies; it slows SaaS conversion): 3–5 accent-colored vertical bars that scale to 0 on `transform-origin: top`, staggered 0.08s, total under 1.2s.
+
+**Custom cursor** (agency/portfolio only): a 12px dot with `mix-blend-mode: exclusion; background:#fff`, scaled ×4 over links. Disable on `(pointer: coarse)`.
+
+## Hover micro-interactions
+- Buttons: arrow `translateX(3px)`, glow blur tightens (14→10px), tactile buttons sink 1px on `:active`.
+- Cards: `translateY(-4px)` + border alpha 0.18 → 0.32 + cursor spotlight. 300ms `cubic-bezier(.2,.8,.2,1)`.
+- Links: underline grows from left (`background-size: 0 1px → 100% 1px`).
+- Images in cards: `scale(1.04)` over 700ms inside an `overflow:hidden` wrapper.
+
+## Performance
+- Animate only `transform` and `opacity` (and `background-position` for the fill effect).
+- Big `filter: blur()` blobs are expensive. Keep them static or drift them slowly; add `will-change: transform` only to things that actually move.
+- On mobile (`max-width: 768px`): halve blur radii, disable magnetic/cursor effects, keep reveals.
+- Call `ScrollTrigger.refresh()` after images load if layout shifts.

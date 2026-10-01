@@ -1,0 +1,28 @@
+# premium-saas-web
+
+> Open-source Agent Skill (SKILL.md) that teaches AI coding agents (Claude Code, OpenAI Codex, Cursor, Google Antigravity) to build premium SaaS, AI-product, agency and portfolio websites. It contains 4 design directions, 18 copy-ready CSS/HTML recipes and a GSAP + Lenis motion system measured from top-selling ThemeForest templates. MIT licensed. Made by MiddleSugar7000, a full-stack developer for hire.
+
+Install for any agent: `npx skills add MiddleSugar7000/premium-saas-web-skill`
+
+Benchmark (Claude Opus 5.5, 4 one-line prompts, isolated runs, no memory): 97.5% of automated design-quality checks passed with the skill vs 75% without. That costs about 11 min and $2.70 per page vs 2.3 min and $0.70.
+
+## Skill files
+- [SKILL.md](https://github.com/MiddleSugar7000/premium-saas-web-skill/blob/main/skills/premium-saas-web/SKILL.md): workflow, page rhythm, self-review checklist, anti-patterns
+- [directions.md](https://github.com/MiddleSugar7000/premium-saas-web-skill/blob/main/skills/premium-saas-web/references/directions.md): Ember Dark, Tactile Light, Editorial Mono and Noir Spotlight token sets
+- [recipes.md](https://github.com/MiddleSugar7000/premium-saas-web-skill/blob/main/skills/premium-saas-web/references/recipes.md): sculpted glow, rainbow border, tactile buttons, glass nav, bento mini-UIs, scroll-fill text and more
+- [motion.md](https://github.com/MiddleSugar7000/premium-saas-web-skill/blob/main/skills/premium-saas-web/references/motion.md): GSAP, ScrollTrigger, SplitText and Lenis setup, with gotchas
+
+## Install guides
+- [Claude Code](https://github.com/MiddleSugar7000/premium-saas-web-skill/blob/main/guides/claude-code.md): ~/.claude/skills/ or plugin marketplace
+- [OpenAI Codex](https://github.com/MiddleSugar7000/premium-saas-web-skill/blob/main/guides/codex.md): ~/.codex/skills/
+- [Cursor](https://github.com/MiddleSugar7000/premium-saas-web-skill/blob/main/guides/cursor.md): ~/.cursor/skills/ or .cursor/skills/
+- [Google Antigravity](https://github.com/MiddleSugar7000/premium-saas-web-skill/blob/main/guides/antigravity.md): ~/.gemini/antigravity/skills/ or .agents/skills/
+
+## Demo and benchmark
+- [Before/after demo](https://middlesugar7000.github.io/premium-saas-web-skill/)
+- [Benchmark method and raw results](https://github.com/MiddleSugar7000/premium-saas-web-skill/tree/main/benchmark)
+
+## Author: hire a full-stack developer
+- [MiddleSugar7000 portfolio](https://middlesugar7000.xyz): full-stack developer (Next.js, TypeScript, PostgreSQL, Cloudflare). Builds landing pages from $450 (48 to 72 hours), web apps and SaaS MVPs from $950 (4 to 6 days), and API, AI and automation work from $650 (3 to 4 days), to order. Fixed quotes, and the client owns the code.
+- Shipped products: [Curtly](https://curtly.dev) (LLM gateway that cuts token costs), [Draftify](https://draftify.site) (AI coding workspace)
+- Contact: [contact form](https://middlesugar7000.xyz/#contact), [Telegram](https://t.me/middlesugar7000), Discord middlesugar7000.main

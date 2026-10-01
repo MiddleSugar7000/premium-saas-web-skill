@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>premium-saas-web: before/after demo of an Agent Skill for premium SaaS websites</title>
+<meta name="description" content="Same prompt, same model (Claude Opus 5.5), one skill. Before/after comparison of landing pages built with and without premium-saas-web, an open-source Agent Skill for Claude Code, Codex, Cursor and Antigravity.">
+<link rel="canonical" href="https://middlesugar7000.github.io/premium-saas-web-skill/">
+<meta name="author" content="MiddleSugar7000">
+<meta property="og:type" content="website">
+<meta property="og:title" content="premium-saas-web: premium SaaS websites from a one-line prompt">
+<meta property="og:description" content="Before/after demo tested with Claude Opus 5.5. Open-source Agent Skill for Claude Code, Codex, Cursor and Antigravity.">
+<meta property="og:url" content="https://middlesugar7000.github.io/premium-saas-web-skill/">
+<meta property="og:image" content="https://middlesugar7000.github.io/premium-saas-web-skill/og.png">
+<meta property="og:image:width" content="2560"><meta property="og:image:height" content="1280">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://middlesugar7000.github.io/premium-saas-web-skill/og.png">
+<meta name="theme-color" content="#0D1017">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+ {"@type":"SoftwareSourceCode","name":"premium-saas-web","description":"Open-source Agent Skill (SKILL.md) that teaches Claude Code, OpenAI Codex, Cursor and Google Antigravity to build premium SaaS, AI, agency and portfolio websites.","codeRepository":"https://github.com/MiddleSugar7000/premium-saas-web-skill","programmingLanguage":["HTML","CSS","JavaScript","Markdown"],"license":"https://opensource.org/licenses/MIT","author":{"@id":"#me"},"keywords":"agent skill, SKILL.md, Claude Code skill, Codex skill, Cursor skill, Antigravity skill, SaaS landing page, web design, Tailwind CSS, GSAP"},
+ {"@type":"Person","@id":"#me","name":"MiddleSugar7000","jobTitle":"Full-stack developer","url":"https://middlesugar7000.xyz","sameAs":["https://github.com/MiddleSugar7000","https://t.me/middlesugar7000","https://x.com/CurtlyAi"],"knowsAbout":["Next.js","TypeScript","PostgreSQL","Cloudflare Workers","SaaS development","Landing page design","AI integrations"]},
+ {"@type":"FAQPage","mainEntity":[
+  {"@type":"Question","name":"What is premium-saas-web?","acceptedAnswer":{"@type":"Answer","text":"An open-source Agent Skill (a SKILL.md folder) that teaches AI coding agents to build premium SaaS, AI-product, agency and portfolio websites, with 4 design directions, 18 CSS recipes and a GSAP + Lenis motion system."}},
+  {"@type":"Question","name":"Which agents does it work with?","acceptedAnswer":{"@type":"Answer","text":"Claude Code, OpenAI Codex, Cursor and Google Antigravity, plus any agent that supports the SKILL.md standard. Install with: npx skills add MiddleSugar7000/premium-saas-web-skill"}},
+  {"@type":"Question","name":"How was it tested?","acceptedAnswer":{"@type":"Answer","text":"With Claude Opus 5.5 in isolated runs: the same four one-line prompts with and without the skill. With the skill 97.5% of automated quality checks passed, without it 75%."}},
+  {"@type":"Question","name":"Can I hire someone to build my website?","acceptedAnswer":{"@type":"Answer","text":"Yes. The author, MiddleSugar7000, is a full-stack developer who builds landing pages from $450, SaaS MVPs from $950 and API or AI integrations from $650. See middlesugar7000.xyz."}}]}
+]}
+</script>
+<style>
+:root{
+  --bg-0:#0D1017;--bg-1:#11141D;--bg-2:#191D2A;--bg-3:#252A32;
+  --line:rgb(148 163 184/.16);--line-2:rgb(148 163 184/.3);
+  --accent:#FF7300;--glow:#FF2A00;--brand-a:#FF4F8B;--brand-b:#8B6CFF;
+  --display:'Sora',system-ui,sans-serif;--body:'Inter Tight',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg-0);color:#fff;font:400 17px/1.6 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%;height:auto}
+.wrap{width:min(1200px,calc(100% - 32px));margin-inline:auto}
+.mono{font-family:var(--mono)}
+.dim{color:rgb(255 255 255/.5)}
+.muted{color:rgb(255 255 255/.62)}
+
+/* nav */
+.nav{position:fixed;top:16px;left:50%;translate:-50% 0;z-index:50;width:min(1200px,calc(100% - 32px));display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 10px 10px 18px;border-radius:16px;background:rgb(255 255 255/.05);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border:1px solid rgb(255 255 255/.08)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px}
+.nav ul{display:flex;gap:26px;list-style:none;padding:0;font-size:14px}
+.nav ul a{color:rgb(255 255 255/.7);transition:color .2s}.nav ul a:hover{color:#fff}
+@media(max-width:760px){.nav ul{display:none}}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:999px;font:500 15px/1.2 var(--mono);transition:transform .25s}
+.btn:hover{transform:translateY(-2px)}
+.btn svg{transition:transform .3s}.btn:hover svg{transform:translateX(3px)}
+.btn-white{background:linear-gradient(90deg,#DBE2E6,#fff 72%);color:#0D1017;position:relative;isolation:isolate}
+.btn-white::after{content:"";position:absolute;z-index:-1;right:0;top:50%;translate:0 -50%;width:80px;height:46px;border-radius:999px;background:linear-gradient(270deg,#5A9FFF,rgb(255 250 107/.2));filter:blur(12px)}
+.btn-ghost{border:1px solid var(--line-2);background:rgb(255 255 255/.04);color:#fff}
+.btn-rainbow{--fill:var(--bg-2);position:relative;isolation:isolate;border-radius:10px;color:#fff;border:2px solid transparent;
+  background:linear-gradient(var(--fill),var(--fill)) padding-box,linear-gradient(#121213 0%,rgb(18 18 19/.6) 80%,rgb(18 18 19/0)) border-box,linear-gradient(90deg,var(--fill),#8765FF,#FFF181,#FF4C52,#734CFF,#8765FF,#FFF181,#FF4C52,#734CFF,var(--fill)) border-box;background-size:400% 100%;animation:rainbow 15s linear infinite}
+.btn-rainbow::before{content:"";position:absolute;z-index:-1;left:50%;bottom:-25%;width:80%;height:40%;translate:-50% 0;background:linear-gradient(90deg,#30E3FF,#8765FF,#FFF181,#FF4C52,#734CFF,#30E3FF,#8765FF,#FFF181,#FF4C52,#734CFF,#30E3FF);background-size:400% 100%;animation:rainbow 15s linear infinite;filter:blur(14px)}
+@keyframes rainbow{to{background-position:400% 0}}
+.btn-brand{background:linear-gradient(135deg,var(--brand-a),var(--brand-b));color:#fff;box-shadow:0 12px 40px -10px rgb(139 108 255/.7),inset 0 1px 0 rgb(255 255 255/.3)}
+
+/* hero */
+.hero{position:relative;overflow:hidden;isolation:isolate;padding:170px 0 90px;text-align:center}
+.glow{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.glow span{position:absolute;display:block}
+.g1{top:-18%;left:50%;width:820px;height:480px;translate:-80% 0;background:var(--glow);filter:blur(100px);opacity:.85;animation:drift 18s ease-in-out infinite alternate}
+.g2{top:-6%;right:-6%;width:360px;height:320px;background:var(--brand-b);filter:blur(120px);opacity:.8}
+.e1{top:-24%;left:50%;width:680px;height:480px;translate:-80% 0;border-radius:200px;background:var(--bg-0);filter:blur(100px)}
+.e2{bottom:-30%;left:50%;width:min(1800px,160vw);height:900px;translate:-50% 0;border-radius:200px;background:var(--bg-0);filter:blur(140px)}
+@keyframes drift{to{transform:translate(50px,20px)}}
+.dots{position:absolute;inset:0;z-index:-1;background-image:radial-gradient(rgb(255 255 255/.08) 1px,transparent 1px);background-size:24px 24px;mask-image:radial-gradient(ellipse at 50% 30%,#000 25%,transparent 70%)}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;padding:7px 14px;border-radius:999px;border:1px solid rgb(255 255 255/.1);background:rgb(255 255 255/.05);backdrop-filter:blur(10px);font-size:14px;color:rgb(255 255 255/.85)}
+.eyebrow i{width:8px;height:8px;border-radius:50%;background:#3BE38B;box-shadow:0 0 12px #3BE38B;animation:pulse 2.4s infinite}
+@keyframes pulse{50%{opacity:.35}}
+h1,h2,h3{font-family:var(--display);font-weight:400}
+h1{font-size:clamp(42px,7vw,84px);line-height:1.05;letter-spacing:-.05em;margin:26px auto 22px;text-wrap:balance;max-width:16ch}
+h2{font-size:clamp(32px,4.6vw,56px);line-height:1.08;letter-spacing:-.045em;text-wrap:balance}
+.lead{font-size:clamp(17px,1.6vw,20px);max-width:640px;margin:0 auto 36px;color:rgb(255 255 255/.62)}
+.cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.cmd{display:inline-flex;align-items:center;gap:10px;margin-top:26px;padding:10px 16px;border-radius:10px;border:1px solid var(--line);background:var(--bg-1);font:500 14px var(--mono);color:rgb(255 255 255/.8);cursor:pointer}
+.cmd b{color:var(--accent);font-weight:500}
+.cmd small{font-size:12px;color:rgb(255 255 255/.45)}
+
+section{padding:110px 0}
+.kicker{font:500 13px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:#FF8A3D;margin-bottom:16px}
+.head{max-width:760px;margin-bottom:56px}
+
+/* comparison */
+.cmp{display:grid;gap:28px;margin-bottom:72px}
+.cmp-top{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap}
+.cmp-top h3{font-size:28px;letter-spacing:-.03em}
+.prompt{margin-top:8px;font-size:15px;color:rgb(255 255 255/.6);max-width:640px}
+.prompt em{color:rgb(255 255 255/.85)}
+.slider{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/10;background:var(--bg-1);box-shadow:0 0 0 1px rgb(90 159 255/.08),0 40px 120px -40px rgb(255 115 0/.35);--pos:50%;user-select:none;touch-action:pan-y}
+.slider img{position:absolute;inset:0;width:100%;height:100%!important;object-fit:cover;object-position:top}
+.slider .after{clip-path:inset(0 0 0 var(--pos))}
+.slider .handle{position:absolute;top:0;bottom:0;left:var(--pos);width:2px;translate:-1px 0;background:#fff;box-shadow:0 0 20px rgb(255 255 255/.6);pointer-events:none}
+.slider .handle::after{content:"⟷";position:absolute;top:50%;left:50%;translate:-50% -50%;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;background:#fff;color:#0D1017;font-size:20px;box-shadow:0 8px 30px rgb(0 0 0/.5)}
+.slider input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0}
+.tag{position:absolute;top:14px;padding:6px 12px;border-radius:8px;font:500 12px var(--mono);backdrop-filter:blur(12px);pointer-events:none}
+.tag.l{left:14px;background:rgb(13 16 23/.75);border:1px solid var(--line-2)}
+.tag.r{right:14px;background:linear-gradient(135deg,#FF2A00,#FF7300);color:#fff}
+.links{display:flex;gap:10px;flex-wrap:wrap}
+.links a{padding:8px 14px;border-radius:999px;border:1px solid var(--line);font:500 13px var(--mono);color:rgb(255 255 255/.75);transition:border-color .2s,color .2s}
+.links a:hover{border-color:var(--line-2);color:#fff}
+.links a.hot{border-color:rgb(255 115 0/.5);color:#FFB27A}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.stat{padding:28px;border-radius:20px;background:var(--bg-2);border:1px solid var(--line);position:relative;overflow:hidden}
+.stat::before{content:"";position:absolute;top:-40%;right:-30%;width:70%;height:70%;border-radius:50%;background:radial-gradient(circle,rgb(255 115 0/.35),transparent 70%);filter:blur(30px)}
+.stat b{display:block;font:600 44px/1 var(--display);letter-spacing:-.04em}
+.stat b span{font-size:20px;color:rgb(255 255 255/.4);font-weight:400}
+.stat p{margin-top:10px;font-size:14px;color:rgb(255 255 255/.55)}
+@media(max-width:900px){.stats{grid-template-columns:1fr 1fr}}
+.note{margin-top:20px;font-size:14px;color:rgb(255 255 255/.5)}
+.note a{text-decoration:underline;text-underline-offset:3px}
+
+/* install */
+.agents{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:28px}
+.agent{padding:22px;border-radius:16px;border:1px solid var(--line);background:var(--bg-1);transition:border-color .3s,translate .3s}
+.agent:hover{border-color:var(--line-2);translate:0 -3px}
+.agent h3{font:600 17px var(--body)}
+.agent code{display:block;margin-top:10px;font:500 12.5px var(--mono);color:rgb(255 255 255/.6);word-break:break-all}
+.agent span{display:inline-block;margin-top:14px;font:500 13px var(--mono);color:#FFB27A}
+@media(max-width:900px){.agents{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.agents{grid-template-columns:1fr}}
+pre{margin-top:18px;padding:18px 20px;border-radius:14px;background:var(--bg-1);border:1px solid var(--line);font:500 15px var(--mono);overflow-x:auto}
+
+/* hire */
+.hire{position:relative;overflow:hidden;isolation:isolate;border-radius:32px;border:1px solid rgb(255 255 255/.08);background:#0E1018;padding:64px;display:grid;grid-template-columns:1.05fr 1fr;gap:48px;align-items:center}
+.hire::before{content:"";position:absolute;z-index:-1;top:-30%;right:-10%;width:60%;height:80%;border-radius:50%;background:radial-gradient(circle,rgb(139 108 255/.7),rgb(255 79 139/.35) 45%,transparent 70%);filter:blur(60px)}
+.hire h2 em{font-style:normal;background:linear-gradient(90deg,#FF7AA8,#A994FF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.prices{display:grid;gap:12px;margin:28px 0}
+.price{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 20px;border-radius:14px;background:radial-gradient(75% 120% at 28% -10%,rgb(255 255 255/.07),transparent),#161925;border:1px solid rgb(255 255 255/.08)}
+.price.feat{border-color:rgb(255 79 139/.5);box-shadow:0 20px 60px -20px rgb(255 79 139/.45)}
+.price b{font:600 26px var(--display);letter-spacing:-.03em;white-space:nowrap}
+.price small{display:block;font-size:13px;color:rgb(255 255 255/.5)}
+.shot{display:block;border-radius:18px;overflow:hidden;border:1px solid rgb(255 255 255/.1);box-shadow:0 40px 100px -30px rgb(0 0 0/.8);transform:perspective(1200px) rotateY(-8deg) rotateX(3deg);transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.shot:hover{transform:none}
+@media(max-width:900px){.hire{grid-template-columns:1fr;padding:36px 22px}.shot{transform:none}}
+
+/* faq */
+details{border-bottom:1px solid var(--line);padding:22px 0}
+summary{cursor:pointer;font-size:19px;font-weight:500;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::after{content:"+";color:rgb(255 255 255/.5);font-size:22px;transition:rotate .3s}
+details[open] summary::after{rotate:45deg}
+details p{margin-top:12px;color:rgb(255 255 255/.62);max-width:760px}
+
+footer{padding:80px 0 0;border-top:1px solid var(--line);overflow:hidden}
+.foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;font-size:14px;color:rgb(255 255 255/.55)}
+.foot a:hover{color:#fff}
+.wordmark{font:600 clamp(40px,10.5vw,160px)/.8 var(--display);letter-spacing:-.06em;text-align:center;margin-top:60px;translate:0 18%;background:linear-gradient(#fff 0%,rgb(255 255 255/0) 85%);-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
+
+.reveal{opacity:0;translate:0 30px;transition:opacity .9s cubic-bezier(.2,.8,.2,1),translate .9s cubic-bezier(.2,.8,.2,1)}
+.reveal.in{opacity:1;translate:0 0}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;translate:0 0}}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Main">
+  <a class="brand" href="#top"><img src="favicon.svg" width="28" height="28" alt=""> premium-saas-web</a>
+  <ul><li><a href="#demo">Demo</a></li><li><a href="#benchmark">Benchmark</a></li><li><a href="#install">Install</a></li><li><a href="#hire">Hire me</a></li></ul>
+  <a class="btn btn-white" href="https://github.com/MiddleSugar7000/premium-saas-web-skill" style="padding:10px 18px;font-size:14px">GitHub <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
+</nav>
+
+<header class="hero" id="top">
+  <div class="glow" aria-hidden="true"><span class="g1"></span><span class="g2"></span><span class="e1"></span><span class="e2"></span></div>
+  <div class="dots" aria-hidden="true"></div>
+  <div class="wrap">
+    <span class="eyebrow"><i></i> Tested with Claude Opus 5.5 · isolated runs · no memory</span>
+    <h1>Same prompt. Same model. <span class="dim">One skill.</span></h1>
+    <p class="lead">premium-saas-web is an open-source Agent Skill that makes Claude Code, Codex, Cursor and Antigravity build SaaS websites that look like top-selling templates. Drag the sliders and compare.</p>
+    <div class="cta">
+      <a class="btn btn-rainbow" href="#demo">See before / after <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></a>
+      <a class="btn btn-ghost" href="https://middlesugar7000.xyz/?utm_source=demo&utm_medium=hero&utm_campaign=premium-saas-web#contact">Hire the author</a>
+    </div>
+    <button class="cmd" id="copy" type="button" title="Copy install command"><b>$</b> npx skills add MiddleSugar7000/premium-saas-web-skill <small id="copied">copy</small></button>
+  </div>
+</header>
+
+<main>
+<section id="demo" style="padding-top:40px">
+  <div class="wrap">
+    <div class="head reveal"><p class="kicker">Before / after</p><h2>Four one-line prompts. <span class="dim">No style instructions.</span></h2>
+      <p class="muted" style="margin-top:16px">Left of the handle: plain Claude Opus 5.5. Right: the same model with the skill. The prompts were written in Hungarian, so the pages are in Hungarian. Open the live pages to see the motion.</p></div>
+    <div id="cmps"></div>
+  </div>
+</section>
+
+<section id="benchmark" style="padding-top:20px">
+  <div class="wrap">
+    <div class="head reveal"><p class="kicker">Benchmark · Claude Opus 5.5</p><h2>Measured, not vibes. <span class="dim">Including the trade-offs.</span></h2></div>
+    <div class="stats reveal">
+      <div class="stat"><b>98%<span> / 75%</span></b><p>automated quality checks passed, with vs. without the skill</p></div>
+      <div class="stat"><b>+22.5<span> pts</span></b><p>tokens on :root, glows, hairlines, scroll motion, reduced-motion, no lorem</p></div>
+      <div class="stat"><b>~11<span> min</span></b><p>per page with the skill (vs ~2.3 min). It plans, builds, then reviews itself in a browser.</p></div>
+      <div class="stat"><b>~$2.70</b><p>API cost per page with the skill (vs ~$0.70). Richer pages cost more tokens.</p></div>
+    </div>
+    <p class="note">Method, scoring script and raw results: <a href="https://github.com/MiddleSugar7000/premium-saas-web-skill/tree/main/benchmark">github.com/MiddleSugar7000/premium-saas-web-skill/benchmark</a></p>
+  </div>
+</section>
+
+<section id="install">
+  <div class="wrap">
+    <div class="head reveal"><p class="kicker">Install</p><h2>One folder. <span class="dim">Every agent.</span></h2></div>
+    <pre class="reveal"><span style="color:#FF7300">$</span> npx skills add MiddleSugar7000/premium-saas-web-skill</pre>
+    <div class="agents reveal">
+      <a class="agent" href="https://github.com/MiddleSugar7000/premium-saas-web-skill/blob/main/guides/claude-code.md"><h3>Claude Code</h3><code>~/.claude/skills/</code><span>Guide →</span></a>
+      <a class="agent" href="https://github.com/MiddleSugar7000/premium-saas-web-skill/blob/main/guides/codex.md"><h3>OpenAI Codex</h3><code>~/.codex/skills/</code><span>Guide →</span></a>
+      <a class="agent" href="https://github.com/MiddleSugar7000/premium-saas-web-skill/blob/main/guides/cursor.md"><h3>Cursor</h3><code>~/.cursor/skills/</code><span>Guide →</span></a>
+      <a class="agent" href="https://github.com/MiddleSugar7000/premium-saas-web-skill/blob/main/guides/antigravity.md"><h3>Antigravity</h3><code>~/.gemini/antigravity/skills/</code><span>Guide →</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="hire">
+  <div class="wrap">
+    <div class="hire reveal">
+      <div>
+        <span class="eyebrow"><i></i> Booking new projects for October</span>
+        <h2 style="margin-top:22px">Need it built for real? <em>Hire me.</em></h2>
+        <p class="muted" style="margin-top:16px">I'm <b style="color:#fff">MiddleSugar7000</b>, a full-stack developer. I design, build and launch landing pages, SaaS products, APIs and AI integrations to order. Fixed quotes, weekly previews, you own the code.</p>
+        <div class="prices">
+          <div class="price"><div>Landing page<small>Custom design, SEO + GEO, 48–72 h</small></div><b>from $450</b></div>
+          <div class="price feat"><div>Web app or SaaS MVP<small>Auth, Postgres, dashboard, payments, 4–6 days</small></div><b>from $950</b></div>
+          <div class="price"><div>API, AI or automation<small>LLM routing, Workers, webhooks, 3–4 days</small></div><b>from $650</b></div>
+        </div>
+        <div class="cta" style="justify-content:flex-start">
+          <a class="btn btn-brand" href="https://middlesugar7000.xyz/?utm_source=demo&utm_medium=hire&utm_campaign=premium-saas-web#contact">Get a quote <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-ghost" href="https://middlesugar7000.xyz/?utm_source=demo&utm_medium=hire&utm_campaign=premium-saas-web#work">See my work</a>
+          <a class="btn btn-ghost" href="https://t.me/middlesugar7000">Telegram</a>
+        </div>
+      </div>
+      <a class="shot" href="https://middlesugar7000.xyz/?utm_source=demo&utm_medium=shot&utm_campaign=premium-saas-web"><img src="img/portfolio-middlesugar7000.jpg" alt="MiddleSugar7000 full-stack developer portfolio" width="1440" height="900" loading="lazy"></a>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="padding-top:40px">
+  <div class="wrap">
+    <div class="head reveal"><p class="kicker">FAQ</p><h2>Questions</h2></div>
+    <details><summary>What is premium-saas-web?</summary><p>An open-source Agent Skill: a folder with a SKILL.md file and three reference files. It teaches AI coding agents to build premium SaaS, AI-product, agency and portfolio websites using 4 design directions, 18 copy-ready CSS/HTML recipes and a GSAP + Lenis motion system, all measured from top-selling ThemeForest templates.</p></details>
+    <details><summary>Which AI agents does it work with?</summary><p>Claude Code, OpenAI Codex, Cursor and Google Antigravity, plus any agent that reads the SKILL.md standard. <code class="mono">npx skills add MiddleSugar7000/premium-saas-web-skill</code> installs it for all of them.</p></details>
+    <details><summary>How was it tested?</summary><p>With Claude Opus 5.5. The same four one-line prompts ran in separate claude -p processes in empty folders with no memory, once with the skill and once without. 97.5% of automated checks passed with the skill, 75% without. The pages above are the unedited output.</p></details>
+    <details><summary>Is it free for client work?</summary><p>Yes, it's MIT licensed.</p></details>
+    <details><summary>Can I hire someone to build my site instead?</summary><p>Yes. MiddleSugar7000 builds landing pages from $450, SaaS MVPs from $950 and API/AI integrations from $650. <a href="https://middlesugar7000.xyz/?utm_source=demo&utm_medium=faq&utm_campaign=premium-saas-web#contact" style="text-decoration:underline">Get a quote</a>.</p></details>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 <a href="https://middlesugar7000.xyz/?utm_source=demo&utm_medium=footer&utm_campaign=premium-saas-web">MiddleSugar7000</a> · MIT license</span>
+    <span><a href="https://github.com/MiddleSugar7000/premium-saas-web-skill">GitHub</a> · <a href="https://t.me/middlesugar7000">Telegram</a> · <a href="https://middlesugar7000.xyz/?utm_source=demo&utm_medium=footer&utm_campaign=premium-saas-web#contact">Hire me</a></span>
+  </div>
+  <div class="wordmark" aria-hidden="true">premium-saas-web</div>
+</footer>
+
+<script>
+const demos = [
+  { id: "flowpilot", title: "Flowpilot", kind: "AI automation SaaS", prompt: "Make a website for Flowpilot, software that automates teams' work in Slack, Notion and Gmail with AI agents." },
+  { id: "invoicing", title: "Számlakör", kind: "Invoicing SaaS", prompt: "Make a landing page for Számlakör, an online invoicing app for small businesses." },
+  { id: "northlane", title: "Northlane", kind: "AI consulting agency", prompt: "Need a website for Northlane, a company doing AI consulting for businesses." },
+  { id: "portfolio", title: "Bence Kovács", kind: "UX/UI designer portfolio", prompt: "Make me a portfolio site, I'm Bence Kovács, a UX/UI designer." },
+];
+const root = document.getElementById("cmps");
+for (const d of demos) {
+  const el = document.createElement("article");
+  el.className = "cmp reveal";
+  el.innerHTML = `
+    <div class="cmp-top">
+      <div><p class="kicker" style="margin:0 0 6px">${d.kind}</p><h3>${d.title}</h3><p class="prompt">Prompt: <em>"${d.prompt}"</em></p></div>
+      <div class="links">
+        <a href="demos/${d.id}-before/">Live: before</a><a class="hot" href="demos/${d.id}-after/">Live: after</a>
+        <a href="demos/${d.id}-before/full-desktop.jpg">Full page: before</a><a class="hot" href="demos/${d.id}-after/full-desktop.jpg">Full page: after</a>
+      </div>
+    </div>
+    <div class="slider">
+      <img src="img/${d.id}-before.jpg" alt="${d.title} built by Claude Opus 5.5 without the skill" width="1440" height="900" loading="lazy">
+      <img class="after" src="img/${d.id}-after.jpg" alt="${d.title} built by Claude Opus 5.5 with the premium-saas-web skill" width="1440" height="900" loading="lazy">
+      <span class="tag l">Without skill</span><span class="tag r">With premium-saas-web</span>
+      <div class="handle"></div>
+      <input type="range" min="0" max="100" value="50" aria-label="Before / after position for ${d.title}">
+    </div>`;
+  root.appendChild(el);
+  const s = el.querySelector(".slider"), r = el.querySelector("input");
+  r.addEventListener("input", () => s.style.setProperty("--pos", r.value + "%"));
+}
+const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
+document.querySelectorAll(".reveal").forEach(n => io.observe(n));
+document.getElementById("copy").addEventListener("click", async () => {
+  try { await navigator.clipboard.writeText("npx skills add MiddleSugar7000/premium-saas-web-skill"); document.getElementById("copied").textContent = "copied ✓"; } catch (e) {}
+});
+</script>
+</body>
+</html>

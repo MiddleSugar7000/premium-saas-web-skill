@@ -1,0 +1,1063 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta name="robots" content="noindex">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kovács Bence — UX/UI designer</title>
+<meta name="description" content="Kovács Bence UX/UI designer portfóliója. Digitális termékek tervezése fintech, egészségügyi és SaaS csapatoknak, a kutatástól a pixelpontos átadásig.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#000; --bg-2:#0A0A0A; --card:#111; --card-2:#191919; --card-3:#222;
+  --fg:#fff; --fg-80:rgb(255 255 255/.8); --fg-60:rgb(255 255 255/.62); --fg-40:rgb(255 255 255/.4);
+  --line:rgb(255 255 255/.1); --line-2:rgb(255 255 255/.18);
+  --accent:#D4FF3A; --accent-ink:#0B0F00;
+  --font:"Figtree",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,monospace;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  --r-sm:8px; --r-md:12px; --r-lg:20px; --r-xl:28px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{background:var(--bg);color:var(--fg);font:400 17px/1.6 var(--font);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:var(--accent);color:var(--accent-ink)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{width:min(1320px,100% - 48px);margin-inline:auto}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+.label{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-60);display:inline-flex;align-items:center;gap:10px}
+.label::before{content:"";width:6px;height:6px;background:var(--accent);border-radius:1px}
+.u{color:var(--accent)}
+section{position:relative}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ---------- preloader ---------- */
+.preloader{position:fixed;inset:0;z-index:100;display:flex;pointer-events:none}
+.preloader span{flex:1;background:var(--accent);transform-origin:top;animation:wipe .7s cubic-bezier(.7,0,.2,1) forwards}
+.preloader span:nth-child(1){animation-delay:.25s}.preloader span:nth-child(2){animation-delay:.33s}
+.preloader span:nth-child(3){animation-delay:.41s}.preloader span:nth-child(4){animation-delay:.49s}.preloader span:nth-child(5){animation-delay:.57s}
+.preloader span:nth-child(odd){background:#C4F02A}
+@keyframes wipe{to{transform:scaleY(0)}}
+
+/* ---------- cursor ---------- */
+.cursor{position:fixed;top:0;left:0;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:#fff;mix-blend-mode:exclusion;pointer-events:none;z-index:90;transition:width .3s var(--ease),height .3s var(--ease),margin .3s var(--ease);opacity:0}
+.cursor.big{width:56px;height:56px;margin:-28px 0 0 -28px}
+@media (pointer:coarse){.cursor{display:none}}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;top:16px;left:50%;translate:-50% 0;z-index:60;width:min(1320px,calc(100% - 32px));display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 8px 8px 20px;border-radius:999px;background:rgb(255 255 255/.04);backdrop-filter:blur(24px) saturate(140%);-webkit-backdrop-filter:blur(24px) saturate(140%);border:1px solid rgb(255 255 255/.08);transition:background .4s}
+.nav.scrolled{background:rgb(10 10 10/.72)}
+.logo{font-weight:600;font-size:16px;letter-spacing:-.02em;display:flex;align-items:center;gap:2px}
+.logo b{font-weight:600}
+.nav-links{display:flex;gap:28px}
+.nav-links a{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-60);transition:color .2s}
+.nav-links a:hover{color:#fff}
+.nav-right{display:flex;align-items:center;gap:14px}
+.status{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--fg-60)}
+.pulse{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgb(212 255 58/.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgb(212 255 58/0)}100%{box-shadow:0 0 0 0 rgb(212 255 58/0)}}
+.btn-sm{display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:999px;background:#fff;color:#000;font-size:14px;font-weight:600;transition:transform .3s var(--ease)}
+.btn-sm svg{transition:transform .3s var(--ease)}.btn-sm:hover svg{transform:translate(2px,-2px)}
+
+/* ---------- buttons ---------- */
+.btn-pill{position:relative;isolation:isolate;display:inline-flex;gap:10px;align-items:center;padding:16px 26px;border-radius:999px;background:linear-gradient(90deg,#E7E7E7 0%,#fff 70%);color:#000;font-weight:600;font-size:16px;box-shadow:inset 0 -2px 0 rgb(0 0 0/.12),inset 0 1px 0 #fff}
+.btn-pill .side-glow{position:absolute;z-index:-1;right:-4px;top:50%;translate:0 -50%;width:90px;height:54px;border-radius:999px;background:linear-gradient(270deg,var(--accent),rgb(212 255 58/.1));filter:blur(14px);opacity:.75;transition:transform .5s var(--ease),filter .5s,opacity .5s}
+.btn-pill:hover .side-glow{transform:translateX(8px) scale(1.1);filter:blur(10px);opacity:1}
+.btn-pill svg{transition:transform .3s var(--ease)}.btn-pill:hover svg{transform:translateY(3px)}
+.btn-ghost{display:inline-flex;gap:10px;align-items:center;padding:15px 24px;border-radius:999px;border:1px solid var(--line-2);color:var(--fg-80);font-weight:500;transition:border-color .3s,color .3s,background .3s}
+.btn-ghost:hover{border-color:rgb(255 255 255/.4);color:#fff;background:rgb(255 255 255/.04)}
+.btn-ghost svg{transition:transform .3s var(--ease)}.btn-ghost:hover svg{transform:translateX(3px)}
+
+/* ---------- hero ---------- */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:120px 0 40px;overflow:hidden;isolation:isolate}
+.hero-bg{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.hero-bg .dots{position:absolute;inset:0;background-image:radial-gradient(rgb(255 255 255/.13) 1px,transparent 1px);background-size:26px 26px;mask-image:radial-gradient(ellipse 70% 60% at 50% 45%,#000 20%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 45%,#000 20%,transparent 75%)}
+.hero-bg .g{position:absolute;display:block;border-radius:50%}
+.hero-bg .g1{left:50%;top:38%;width:720px;height:520px;translate:-50% -50%;background:var(--accent);opacity:.16;filter:blur(130px);animation:drift 16s ease-in-out infinite alternate}
+.hero-bg .e1{left:50%;top:60%;width:900px;height:420px;translate:-50% 0;background:var(--bg);filter:blur(100px)}
+.hero-bg .g2{right:-6%;top:-10%;width:340px;height:340px;background:#9DD400;opacity:.12;filter:blur(120px)}
+@keyframes drift{to{transform:translate(40px,-30px) scale(1.08)}}
+.noise::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.07;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:28px}
+.hero-top p{font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--fg-60);line-height:1.7}
+.hero-top p:last-child{text-align:right}
+.name-hero{--pw:25%;position:relative;display:grid;place-items:center}
+.name-hero>*{grid-area:1/1}
+.word{width:100%;text-align:center;font-size:clamp(84px,22.5vw,330px);font-weight:600;line-height:.8;letter-spacing:-.035em;text-transform:uppercase;color:#fff;white-space:nowrap;user-select:none}
+.word .caret{display:inline-block;width:.3em;height:.075em;margin-left:.04em;background:var(--accent);vertical-align:baseline;animation:blink 1.1s steps(1) infinite}
+.word.outline{color:transparent;-webkit-text-stroke:1.5px #fff;clip-path:inset(-10% calc((100% - var(--pw))/2));pointer-events:none}
+.word.outline .caret{background:transparent}
+@keyframes blink{50%{opacity:0}}
+.portrait{position:relative;width:var(--pw);aspect-ratio:3/4;overflow:hidden;border-radius:6px;background:#111}
+.portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;filter:grayscale(1) contrast(1.12) brightness(.92)}
+.portrait::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgb(0 0 0/.55))}
+.portrait .tag{position:absolute;left:12px;bottom:12px;z-index:2;font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--fg-80)}
+.hero-bottom{display:grid;grid-template-columns:1fr auto;align-items:end;gap:32px;margin-top:40px}
+.hero-bottom p{max-width:470px;font-size:19px;line-height:1.55;color:var(--fg-60)}
+.hero-bottom p strong{color:#fff;font-weight:500}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+
+/* ---------- marquee ---------- */
+.marquee{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.marquee-track{display:flex;align-items:center;gap:48px;width:max-content;animation:marquee 38s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+@keyframes marquee{to{transform:translateX(-50%)}}
+.big-marquee{padding:72px 0 56px;border-top:1px solid var(--line)}
+.big-marquee .marquee-track span{font-size:clamp(56px,9vw,132px);font-weight:500;letter-spacing:-.04em;line-height:1;white-space:nowrap}
+.big-marquee .marquee-track span.dim{color:transparent;-webkit-text-stroke:1px rgb(255 255 255/.35)}
+.globe{width:clamp(48px,7vw,96px);height:auto;flex:none;animation:spin 14s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- projects (stacking cards) ---------- */
+.work{padding:24px 0 140px}
+.work-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:48px}
+.work-head p{max-width:380px;color:var(--fg-60)}
+.stack{display:flex;flex-direction:column;gap:32px}
+.stack-card{position:sticky;top:96px;display:grid;grid-template-columns:5fr 7fr;gap:16px;min-height:min(78vh,700px);padding:16px;border-radius:var(--r-xl);border:1px solid var(--line);background:radial-gradient(62% 62% at 28% -10%,rgb(255 255 255/.07),transparent),var(--card);box-shadow:inset 0 1px 0 rgb(255 255 255/.06);transform-origin:50% 0;will-change:transform}
+.stack-card:nth-child(2){top:112px}.stack-card:nth-child(3){top:128px}.stack-card:nth-child(4){top:144px}
+.pc-info{display:flex;flex-direction:column;justify-content:space-between;padding:24px 20px 20px}
+.pc-meta{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--fg-40)}
+.pc-title{font-size:clamp(44px,5vw,76px);font-weight:600;letter-spacing:-.045em;line-height:1;margin:28px 0 14px}
+.pc-title span{color:var(--accent)}
+.pc-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.pc-tags span{font-size:13px;padding:5px 12px;border-radius:999px;border:1px solid var(--line);color:var(--fg-80)}
+.pc-desc{color:var(--fg-60);max-width:440px}
+.pc-stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);margin-top:32px}
+.pc-stats div{padding:18px 12px 4px 0}
+.pc-stats div+div{padding-left:16px;border-left:1px solid var(--line)}
+.pc-stats b{display:block;font-size:30px;font-weight:600;letter-spacing:-.04em;line-height:1.1}
+.pc-stats small{font-size:13px;color:var(--fg-40);line-height:1.3;display:block;margin-top:4px}
+.pc-link{display:inline-flex;align-items:center;gap:8px;margin-top:24px;font-weight:500;width:fit-content;background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;padding-bottom:3px;transition:background-size .4s var(--ease)}
+.pc-link:hover{background-size:100% 1px}
+.pc-link svg{transition:transform .3s var(--ease)}.pc-link:hover svg{transform:translate(2px,-2px)}
+.pc-visual{position:relative;overflow:hidden;border-radius:var(--r-lg);background:var(--bg-2);border:1px solid var(--line);display:grid;place-items:center;isolation:isolate;min-height:420px}
+.pc-visual::before{content:"";position:absolute;inset:0;z-index:-1;background-image:radial-gradient(rgb(255 255 255/.09) 1px,transparent 1px);background-size:20px 20px;mask-image:radial-gradient(ellipse at center,#000 30%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse at center,#000 30%,transparent 75%)}
+.pc-visual::after{content:"";position:absolute;z-index:-1;width:60%;height:60%;left:20%;top:20%;border-radius:50%;background:var(--accent);opacity:.08;filter:blur(90px)}
+.mk{transition:transform .8s var(--ease)}
+.stack-card:hover .mk{transform:translateY(-6px) scale(1.015)}
+
+/* mock: phone */
+.phone{width:262px;height:540px;border-radius:44px;padding:10px;background:linear-gradient(160deg,#2a2a2a,#0e0e0e);box-shadow:0 0 0 1px rgb(255 255 255/.12),0 40px 80px -20px rgb(0 0 0/.9),inset 0 1px 0 rgb(255 255 255/.15)}
+.screen{height:100%;border-radius:35px;background:#050505;overflow:hidden;padding:44px 18px 18px;position:relative;font-size:12px}
+.screen::before{content:"";position:absolute;top:12px;left:50%;translate:-50% 0;width:84px;height:24px;border-radius:999px;background:#000;box-shadow:0 0 0 1px rgb(255 255 255/.05)}
+.ph-row{display:flex;justify-content:space-between;align-items:center}
+.ph-av{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#333,#1a1a1a);display:grid;place-items:center;font-size:11px;font-weight:600}
+.ph-bal small{color:var(--fg-40);font-size:11px}
+.ph-bal b{display:block;font-size:30px;font-weight:600;letter-spacing:-.04em;line-height:1.1;margin-top:2px}
+.ph-bal b i{font-style:normal;font-size:16px;color:var(--fg-40)}
+.ph-chip{font-size:10px;padding:3px 8px;border-radius:999px;background:rgb(212 255 58/.12);color:var(--accent)}
+.ph-spark{margin:14px -18px 4px;height:70px}
+.ph-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 16px}
+.ph-actions span{padding:10px 0;text-align:center;border-radius:14px;background:var(--card-2);font-size:11px;color:var(--fg-80)}
+.ph-actions span:first-child{background:var(--accent);color:var(--accent-ink);font-weight:600}
+.ph-list div{display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid var(--line)}
+.ph-list i{width:28px;height:28px;border-radius:9px;background:var(--card-2);flex:none;display:grid;place-items:center;font-style:normal;font-size:12px}
+.ph-list p{flex:1;line-height:1.25}.ph-list p small{display:block;color:var(--fg-40);font-size:10px}
+.ph-list b{font-weight:500}
+.float-chip{position:absolute;display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:14px;background:rgb(25 25 25/.85);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--line-2);font-size:13px;box-shadow:0 20px 40px -10px rgb(0 0 0/.8);animation:bob 5s ease-in-out infinite}
+.float-chip b{font-size:18px;letter-spacing:-.03em}
+.float-chip small{display:block;color:var(--fg-40);font-size:11px;line-height:1.2}
+.float-chip .dot{width:28px;height:28px;border-radius:8px;background:rgb(212 255 58/.14);display:grid;place-items:center;color:var(--accent)}
+@keyframes bob{50%{transform:translateY(-10px)}}
+
+/* mock: window */
+.win{width:min(560px,92%);border-radius:16px;background:#0C0C0C;border:1px solid var(--line-2);overflow:hidden;box-shadow:0 40px 80px -20px rgb(0 0 0/.9)}
+.win-bar{display:flex;align-items:center;gap:6px;padding:11px 14px;border-bottom:1px solid var(--line)}
+.win-bar i{width:9px;height:9px;border-radius:50%;background:#333}
+.win-bar span{margin-left:auto;margin-right:auto;font-family:var(--mono);font-size:10px;color:var(--fg-40);padding:3px 40px;border-radius:6px;background:var(--card-2)}
+.win-body{padding:18px;font-size:12px}
+.doc{display:flex;gap:12px;align-items:center;padding:12px;border-radius:12px;background:var(--card);border:1px solid var(--line)}
+.doc .ph-av{width:40px;height:40px;font-size:13px}
+.doc p{flex:1;line-height:1.3}.doc p small{color:var(--fg-40);display:block}
+.stars{color:var(--accent);font-size:11px;letter-spacing:1px}
+.cal{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:14px}
+.cal .d{text-align:center;padding:4px 0 8px;color:var(--fg-40);font-size:11px;line-height:1.3}
+.cal .d b{display:block;color:#fff;font-size:15px;font-weight:600}
+.cal .s{padding:8px 0;text-align:center;border-radius:8px;border:1px solid var(--line);color:var(--fg-80);font-family:var(--mono);font-size:10.5px}
+.cal .s.off{color:rgb(255 255 255/.18);border-style:dashed}
+.cal .s.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:500;animation:sel 4s ease-in-out infinite}
+@keyframes sel{0%,100%{box-shadow:0 0 0 0 rgb(212 255 58/.5)}50%{box-shadow:0 0 0 5px rgb(212 255 58/0)}}
+.win-cta{margin-top:14px;display:flex;justify-content:space-between;align-items:center;padding:10px 10px 10px 14px;border-radius:12px;background:var(--card-2)}
+.win-cta span{padding:8px 14px;border-radius:999px;background:#fff;color:#000;font-weight:600;font-size:11px}
+
+/* mock: design system */
+.ds{width:min(560px,92%);display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.ds>div{border-radius:14px;background:#0F0F0F;border:1px solid var(--line);padding:14px;font-size:11px;color:var(--fg-60)}
+.ds .t{grid-column:span 3;display:flex;flex-direction:column;justify-content:space-between;min-height:132px}
+.ds .t b{font-size:58px;line-height:.9;color:#fff;font-weight:600;letter-spacing:-.05em}
+.ds .sw{grid-column:span 3;display:flex;flex-direction:column;gap:8px}
+.sws{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;flex:1}
+.sws i{border-radius:8px;min-height:56px}
+.ds .b{grid-column:span 4;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ds .b span{padding:8px 14px;border-radius:999px;font-size:11px;font-weight:600}
+.ds .tg{grid-column:span 2;display:flex;flex-direction:column;gap:10px;justify-content:center}
+.tgl{width:38px;height:22px;border-radius:999px;background:var(--card-3);position:relative;flex:none}
+.tgl::after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:transform .3s}
+.tgl.on{background:var(--accent)}.tgl.on::after{transform:translateX(16px);background:var(--accent-ink)}
+.tgl.anim{animation:tglbg 3s steps(1) infinite}.tgl.anim::after{animation:tglk 3s var(--ease) infinite}
+@keyframes tglbg{0%{background:var(--card-3)}50%{background:var(--accent)}}
+@keyframes tglk{0%,40%{transform:none;background:#fff}50%,90%{transform:translateX(16px);background:var(--accent-ink)}100%{transform:none;background:#fff}}
+.ds .in{grid-column:span 6;display:flex;gap:10px;align-items:center}
+.field{flex:1;padding:10px 12px;border-radius:10px;border:1px solid var(--line-2);color:var(--fg-80);font-size:12px;display:flex;justify-content:space-between}
+.field i{font-style:normal;width:1px;height:14px;background:var(--accent);animation:blink 1s steps(1) infinite;align-self:center}
+.badge{font-family:var(--mono);font-size:10px;padding:4px 8px;border-radius:6px;border:1px solid var(--line-2);color:var(--fg-60);white-space:nowrap}
+
+/* mock: dashboard */
+.dash{width:min(580px,92%);border-radius:16px;background:#0C0C0C;border:1px solid var(--line-2);padding:16px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;font-size:11px;box-shadow:0 40px 80px -20px rgb(0 0 0/.9)}
+.kpi{padding:12px;border-radius:12px;background:var(--card);border:1px solid var(--line);color:var(--fg-40)}
+.kpi b{display:block;font-size:22px;color:#fff;font-weight:600;letter-spacing:-.04em;margin-top:4px}
+.kpi em{font-style:normal;color:var(--accent);font-size:10px}
+.map{grid-column:span 2;min-height:190px;border-radius:12px;background:var(--card);border:1px solid var(--line);position:relative;overflow:hidden}
+.map svg{position:absolute;inset:0;width:100%;height:100%}
+.route{stroke-dasharray:6 6;animation:dash 12s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-240}}
+.truck{offset-path:path("M30 150 C 110 150, 120 60, 200 70 S 300 140, 340 40");animation:travel 7s ease-in-out infinite alternate}
+@keyframes travel{from{offset-distance:0}to{offset-distance:100%}}
+.bars{border-radius:12px;background:var(--card);border:1px solid var(--line);padding:12px;display:flex;flex-direction:column;color:var(--fg-40)}
+.bars div{flex:1;display:flex;align-items:flex-end;gap:5px;margin-top:10px}
+.bars i{flex:1;border-radius:3px 3px 0 0;background:var(--card-3)}
+.bars i.hi{background:var(--accent)}
+
+/* ---------- statement ---------- */
+.statement{padding:160px 0 140px;border-top:1px solid var(--line)}
+.statement .label{margin-bottom:40px}
+.fill-text{font-size:clamp(34px,5.4vw,84px);font-weight:500;line-height:1.02;letter-spacing:-.045em;max-width:1200px}
+.fill-text .line{background:linear-gradient(to right,#fff 50%,rgb(255 255 255/.18) 50%);background-size:200% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ---------- stats ---------- */
+.stats{padding:0 0 160px;overflow:hidden}
+.stats-ghost{position:absolute;right:-2%;top:-260px;font-size:clamp(200px,34vw,520px);font-weight:700;letter-spacing:-.08em;line-height:.8;color:transparent;-webkit-text-stroke:1px rgb(255 255 255/.06);pointer-events:none;z-index:-1;user-select:none}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);position:relative}
+.stat{padding:40px 28px 36px}
+.stat+.stat{border-left:1px solid var(--line)}
+.stat b{display:block;font-size:clamp(52px,6vw,88px);font-weight:500;letter-spacing:-.06em;line-height:1}
+.stat b sup{font-size:.4em;color:var(--accent);vertical-align:top;margin-left:4px;letter-spacing:0}
+.stat p{margin-top:14px;color:var(--fg-60);font-size:15px;max-width:220px;line-height:1.45}
+
+/* ---------- section head ---------- */
+.sec{padding:150px 0}
+.sec-alt{background:var(--bg-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.sec-head{display:grid;grid-template-columns:7fr 5fr;gap:40px;align-items:end;margin-bottom:64px}
+.h2{font-size:clamp(40px,5.2vw,76px);font-weight:500;letter-spacing:-.05em;line-height:1;margin-top:20px;text-wrap:balance}
+.h2 .dim{color:var(--fg-40)}
+.sec-head>p{color:var(--fg-60);max-width:440px;justify-self:end;font-size:18px}
+
+/* ---------- process bento ---------- */
+.bento{display:grid;gap:14px;grid-template-columns:repeat(6,1fr);grid-auto-rows:minmax(250px,auto)}
+.c1{grid-column:span 2;grid-row:span 2}.c2{grid-column:span 4}.c3,.c4{grid-column:span 2}.c5,.c6{grid-column:span 3}
+.cell{--x:50%;--y:50%;position:relative;overflow:hidden;border-radius:var(--r-lg);border:1px solid var(--line);padding:26px;display:flex;flex-direction:column;gap:22px;background:radial-gradient(420px circle at var(--x) var(--y),rgb(255 255 255/.055),transparent 45%),var(--card);transition:border-color .3s,transform .4s var(--ease)}
+.cell:hover{border-color:var(--line-2);transform:translateY(-4px)}
+.cell-ui{flex:1;display:flex;align-items:center;justify-content:center;border-radius:var(--r-md);background:rgb(255 255 255/.025);border:1px solid var(--line);padding:18px;min-height:130px;position:relative;overflow:hidden}
+.cell-txt .n{font-family:var(--mono);font-size:12px;color:var(--fg-40);letter-spacing:.05em}
+.cell h3{font-size:22px;font-weight:600;letter-spacing:-.03em;margin:6px 0 6px}
+.cell p{color:var(--fg-60);font-size:15px;line-height:1.5}
+/* c1 notes */
+.notes{display:flex;flex-direction:column;gap:10px;width:100%}
+.note{padding:12px 14px;border-radius:12px;background:var(--card-2);border:1px solid var(--line);font-size:13.5px;line-height:1.4;color:var(--fg-80)}
+.note small{display:block;margin-top:6px;font-family:var(--mono);font-size:10.5px;color:var(--fg-40);letter-spacing:.04em}
+.note:nth-child(2){margin-left:22px}
+.note.ins{background:rgb(212 255 58/.08);border-color:rgb(212 255 58/.3);color:#fff}
+.note.ins small{color:var(--accent)}
+/* c2 flow */
+.flow{width:100%;position:relative;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.flow::before{content:"";position:absolute;left:6%;right:6%;top:50%;border-top:1px dashed var(--line-2)}
+.flow .node{position:relative;z-index:1;padding:10px 14px;border-radius:10px;background:var(--card-2);border:1px solid var(--line-2);font-size:13px;white-space:nowrap}
+.flow .node small{display:block;font-family:var(--mono);font-size:10px;color:var(--fg-40)}
+.flow .node.end{border-color:rgb(212 255 58/.45);box-shadow:0 0 24px -6px rgb(212 255 58/.45)}
+.flow .runner{position:absolute;top:50%;left:6%;width:8px;height:8px;margin-top:-4px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);animation:run 4s cubic-bezier(.6,0,.4,1) infinite;z-index:0}
+@keyframes run{0%{left:6%;opacity:0}10%{opacity:1}90%{opacity:1}100%{left:94%;opacity:0}}
+/* c3 proto */
+.proto{width:100%;display:flex;flex-direction:column;gap:12px}
+.proto .r{display:flex;align-items:center;justify-content:space-between;font-size:13.5px;color:var(--fg-80);padding:4px 0}
+.proto .r+.r{border-top:1px solid var(--line);padding-top:12px}
+/* c4 ring */
+.ring{display:flex;align-items:center;gap:18px}
+.ring svg{width:108px;height:108px;rotate:-90deg}
+.ring .val{font-size:34px;font-weight:600;letter-spacing:-.05em;line-height:1}
+.ring .val small{display:block;font-size:12px;color:var(--fg-40);font-weight:400;letter-spacing:0;margin-top:6px}
+.ring-arc{stroke-dasharray:289;stroke-dashoffset:289}
+/* c5 code */
+.code{width:100%;font-family:var(--mono);font-size:12.5px;line-height:1.8;color:var(--fg-60);white-space:pre;overflow:hidden}
+.code .k{color:#fff}.code .v{color:var(--accent)}.code .c{color:var(--fg-40)}
+.code .cur{display:inline-block;width:7px;height:15px;background:var(--accent);vertical-align:-3px;animation:blink 1s steps(1) infinite}
+/* c6 chart */
+.chart{width:100%}
+.chart-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.chart-top b{font-size:30px;font-weight:600;letter-spacing:-.04em}
+.chart-top small{color:var(--fg-40);font-size:12px}
+.chart svg{width:100%;height:90px;overflow:visible}
+
+/* ---------- tools marquee ---------- */
+.tools{padding:64px 0;border-bottom:1px solid var(--line)}
+.tools .marquee-track{gap:64px}
+.tools .marquee-track span{font-size:clamp(22px,2.4vw,32px);font-weight:500;letter-spacing:-.03em;color:var(--fg-40);white-space:nowrap;transition:color .3s}
+.tools .marquee-track span:hover{color:#fff}
+.tools .marquee-track span.sep{color:var(--accent);font-size:18px}
+.tools .mono{color:var(--fg-40);text-align:center;margin-bottom:28px}
+
+/* ---------- about / experience ---------- */
+.about-grid{display:grid;grid-template-columns:5fr 7fr;gap:72px}
+.about-copy p{color:var(--fg-60);font-size:18px;margin-top:22px;max-width:480px}
+.about-copy p strong{color:#fff;font-weight:500}
+.skills{display:flex;flex-wrap:wrap;gap:8px;margin-top:32px}
+.skills span{font-size:14px;padding:7px 14px;border-radius:999px;border:1px solid var(--line);color:var(--fg-80)}
+.xp{border-top:1px solid var(--line)}
+.xp-row{display:grid;grid-template-columns:140px 1fr auto;gap:24px;align-items:center;padding:26px 0;border-bottom:1px solid var(--line);position:relative;transition:padding .4s var(--ease)}
+.xp-row::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgb(255 255 255/.04),transparent);opacity:0;transition:opacity .4s}
+.xp-row:hover{padding-left:12px}.xp-row:hover::before{opacity:1}
+.xp-row time{font-family:var(--mono);font-size:13px;color:var(--fg-40)}
+.xp-row h4{font-size:22px;font-weight:500;letter-spacing:-.03em;line-height:1.2}
+.xp-row h4 small{display:block;font-size:15px;font-weight:400;color:var(--fg-60);letter-spacing:0;margin-top:4px}
+.xp-row .badge{justify-self:end}
+.xp-row .badge.now{color:var(--accent);border-color:rgb(212 255 58/.35)}
+
+/* ---------- testimonials ---------- */
+.quotes{display:grid;grid-template-columns:7fr 5fr;gap:14px}
+.q{border-radius:var(--r-xl);border:1px solid var(--line);background:radial-gradient(62% 62% at 28% -10%,rgb(255 255 255/.06),transparent),var(--card);padding:34px;display:flex;flex-direction:column;justify-content:space-between;gap:32px}
+.q.big{grid-row:span 2}
+.q blockquote{font-size:20px;line-height:1.5;letter-spacing:-.01em;color:var(--fg-80)}
+.q.big blockquote{font-size:clamp(24px,2.5vw,34px);line-height:1.3;letter-spacing:-.03em;color:#fff}
+.q.big blockquote .dim{color:var(--fg-40)}
+.q .qm{width:38px;height:38px;color:var(--accent);margin-bottom:24px}
+.who{display:flex;align-items:center;gap:14px}
+.who img{width:46px;height:46px;border-radius:50%;object-fit:cover;filter:grayscale(1)}
+.who p{line-height:1.35;font-weight:500}.who p small{display:block;color:var(--fg-40);font-weight:400;font-size:14px}
+
+/* ---------- engagement ---------- */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:start}
+.plan{border-radius:24px;padding:32px;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column;gap:24px;position:relative}
+.plan.featured{background:linear-gradient(var(--card-2),var(--card-2)) padding-box,linear-gradient(160deg,var(--accent),rgb(212 255 58/0) 55%) border-box;border:1px solid transparent;box-shadow:0 30px 90px -30px rgb(212 255 58/.35);translate:0 -12px}
+.plan .pop{position:absolute;top:22px;right:22px;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;padding:5px 10px;border-radius:999px;background:var(--accent);color:var(--accent-ink);font-weight:500}
+.plan h3{font-size:22px;font-weight:600;letter-spacing:-.03em}
+.plan .sub{color:var(--fg-60);font-size:15px;margin-top:6px}
+.price{font-size:54px;font-weight:500;letter-spacing:-.05em;line-height:1}
+.price small{font-size:16px;color:var(--fg-40);letter-spacing:0;font-weight:400}
+.plan ul{list-style:none;display:flex;flex-direction:column;gap:12px;font-size:15px;color:var(--fg-80);padding-top:24px;border-top:1px solid var(--line)}
+.plan li{display:flex;gap:10px;align-items:flex-start}
+.plan li svg{flex:none;margin-top:4px;color:var(--fg-40)}
+.plan.featured li svg{color:var(--accent)}
+.plan .btn-ghost,.plan .btn-pill{justify-content:center}
+
+/* ---------- faq ---------- */
+.faq-grid{display:grid;grid-template-columns:5fr 7fr;gap:72px}
+.faq details{border-bottom:1px solid var(--line)}
+.faq details:first-child{border-top:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:24px;align-items:center;padding:26px 0;font-size:20px;font-weight:500;letter-spacing:-.02em}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary .pm{position:relative;width:28px;height:28px;border-radius:50%;border:1px solid var(--line-2);flex:none;transition:background .3s,border-color .3s}
+.faq summary .pm::before,.faq summary .pm::after{content:"";position:absolute;left:50%;top:50%;width:10px;height:1.5px;background:#fff;translate:-50% -50%;transition:transform .3s var(--ease)}
+.faq summary .pm::after{transform:rotate(90deg)}
+.faq details[open] summary .pm{background:var(--accent);border-color:var(--accent)}
+.faq details[open] summary .pm::before,.faq details[open] summary .pm::after{background:var(--accent-ink)}
+.faq details[open] summary .pm::after{transform:rotate(0)}
+.faq .ans{color:var(--fg-60);padding:0 56px 26px 0;max-width:640px}
+
+/* ---------- cta ---------- */
+.cta{padding:180px 0 140px;text-align:center;overflow:hidden;isolation:isolate}
+.cta .glow{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.cta .glow span{position:absolute;display:block;border-radius:50%}
+.cta .glow .a{left:50%;top:55%;width:900px;height:500px;translate:-50% -50%;background:var(--accent);opacity:.22;filter:blur(140px)}
+.cta .glow .e{left:50%;top:-10%;width:1300px;height:520px;translate:-50% 0;background:var(--bg);filter:blur(110px)}
+.cta .glow .core{left:50%;top:72%;width:220px;height:140px;translate:-50% -50%;background:var(--accent);opacity:.45;filter:blur(80px)}
+.cta h2{font-size:clamp(48px,8vw,128px);font-weight:500;letter-spacing:-.055em;line-height:.95;max-width:1100px;margin:28px auto 0;text-wrap:balance}
+.cta h2 .dim{color:var(--fg-40)}
+.cta p{color:var(--fg-60);font-size:19px;max-width:520px;margin:28px auto 0}
+.mail{margin-top:48px;display:inline-flex;align-items:center;gap:6px;padding:8px;border-radius:999px;background:rgb(255 255 255/.04);border:1px solid var(--line-2);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.mail a.addr{padding:10px 18px;font-size:clamp(16px,2vw,22px);font-weight:500;letter-spacing:-.02em}
+.copy{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:999px;background:var(--card-2);border:1px solid var(--line);font-size:14px;color:var(--fg-80);transition:background .3s,color .3s}
+.copy:hover{background:var(--card-3);color:#fff}
+.copy.ok{background:var(--accent);color:var(--accent-ink)}
+.cta-row{margin-top:20px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);padding-top:56px;overflow:hidden}
+.foot{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;padding-bottom:56px}
+.foot h5{font-family:var(--mono);font-size:12px;font-weight:400;letter-spacing:.06em;text-transform:uppercase;color:var(--fg-40);margin-bottom:16px}
+.foot ul{list-style:none;display:flex;flex-direction:column;gap:10px}
+.foot a{color:var(--fg-80);background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .4s var(--ease),color .3s}
+.foot a:hover{color:#fff;background-size:100% 1px}
+.foot .intro{color:var(--fg-60);max-width:340px}
+.foot .clock{font-family:var(--mono);font-size:13px;color:var(--fg-80)}
+.wordmark{font-size:23.5vw;font-weight:600;line-height:.76;letter-spacing:-.065em;text-align:center;white-space:nowrap;background:linear-gradient(180deg,#fff 0%,rgb(255 255 255/.25) 55%,transparent 92%);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:-3.5vw;user-select:none}
+.wordmark span{-webkit-text-fill-color:var(--accent);background:none}
+.legal{display:flex;justify-content:space-between;gap:16px;padding:22px 0;border-top:1px solid var(--line);font-size:13px;color:var(--fg-40);position:relative;background:var(--bg)}
+
+/* ---------- responsive ---------- */
+@media (max-width:1080px){
+  .stack-card{grid-template-columns:1fr;min-height:0}
+  .pc-visual{min-height:440px}
+  .about-grid,.faq-grid{grid-template-columns:1fr;gap:48px}
+  .quotes{grid-template-columns:1fr}.q.big{grid-row:auto}
+  .plans{grid-template-columns:1fr;max-width:560px;margin-inline:auto}.plan.featured{translate:0}
+  .stat-grid{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(3){border-left:0}.stat:nth-child(n+3){border-top:1px solid var(--line)}
+  .bento{grid-template-columns:repeat(2,1fr)}
+  .c1,.c2,.c3,.c4,.c5,.c6{grid-column:span 1;grid-row:auto}
+  .c2,.c5,.c6{grid-column:span 2}
+}
+@media (max-width:768px){
+  body{font-size:16px}
+  .wrap{width:calc(100% - 32px)}
+  .nav{padding-left:16px}
+  .nav-links,.status{display:none}
+  .hero{padding-top:110px}
+  .hero-top{margin-bottom:22px}
+  .hero-top p{font-size:10.5px}
+  .name-hero{--pw:42%}
+  .word.outline{-webkit-text-stroke:1px #fff}
+  .hero-bottom{grid-template-columns:1fr;margin-top:32px}
+  .hero-bottom p{font-size:17px}
+  .hero-bg .g{filter:blur(70px)!important;scale:.6}
+  .work-head,.sec-head{display:block}
+  .work-head p,.sec-head>p{margin-top:18px}
+  .stack-card{position:relative;top:auto!important;padding:10px;border-radius:22px}
+  .pc-info{padding:16px 10px 12px}
+  .pc-stats b{font-size:24px}
+  .pc-visual{min-height:380px}
+  .mk-scale{scale:.78}
+  .float-chip{display:none}
+  .statement{padding:110px 0 100px}
+  .stats{padding-bottom:110px}
+  .stat{padding:28px 16px}
+  .sec{padding:100px 0}
+  .bento{grid-template-columns:1fr}
+  .c1,.c2,.c3,.c4,.c5,.c6{grid-column:auto}
+  .flow .node{padding:8px 9px;font-size:11.5px}
+  .flow .node small{display:none}
+  .xp-row{grid-template-columns:1fr;gap:8px}
+  .xp-row .badge{justify-self:start}
+  .q{padding:24px}
+  .faq summary{font-size:17px}
+  .faq .ans{padding-right:0}
+  .cta{padding:120px 0 100px}
+  .cta .glow span{scale:.6}
+  .mail{flex-direction:column;border-radius:24px;width:100%}
+  .mail a.addr{font-size:17px}
+  .copy{width:100%;justify-content:center}
+  .foot{grid-template-columns:1fr 1fr}
+  .foot>div:first-child{grid-column:span 2}
+  .legal{flex-direction:column}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .marquee-track{animation:none!important}
+  .ring-arc{stroke-dashoffset:23}
+}
+</style>
+</head>
+<body>
+
+<div class="preloader" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+<div class="cursor" aria-hidden="true"></div>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <a href="#top" class="logo" aria-label="Kovács Bence, vissza az oldal tetejére">Kovács Bence<span class="u">_</span></a>
+  <nav class="nav-links" aria-label="Fő navigáció">
+    <a href="#munkak">Munkák</a>
+    <a href="#folyamat">Folyamat</a>
+    <a href="#rolam">Rólam</a>
+    <a href="#egyuttmukodes">Együttműködés</a>
+  </nav>
+  <div class="nav-right">
+    <span class="status"><span class="pulse"></span>Novembertől szabad kapacitás</span>
+    <a href="#kapcsolat" class="btn-sm" data-cursor>Írj nekem
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
+    </a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero noise">
+  <div class="hero-bg" aria-hidden="true"><div class="dots"></div><span class="g g1"></span><span class="g g2"></span><span class="g e1"></span></div>
+  <div class="wrap">
+    <div class="hero-top">
+      <p data-fade>(UX/UI designer)<br>Budapest, HU — 47.49° É</p>
+      <p data-fade>Független 2023 óta<br>9 év · 46 kiadott termék</p>
+    </div>
+    <div class="name-hero">
+      <h1 class="word w-solid"><span class="sr">Kovács Bence, UX/UI designer — </span><span class="nm">Bence</span><span class="caret" aria-hidden="true"></span></h1>
+      <figure class="portrait">
+        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80" alt="Kovács Bence fekete-fehér portréja" width="600" height="800" fetchpriority="high">
+        <figcaption class="tag">● Kovács Bence</figcaption>
+      </figure>
+      <div class="word outline w-outline" aria-hidden="true"><span class="nm">Bence</span><span class="caret"></span></div>
+    </div>
+    <div class="hero-bottom">
+      <p data-fade><strong>Digitális termékeket tervezek</strong> fintech-, egészségügyi és SaaS-csapatoknak. A felhasználói kutatástól a pixelpontos fejlesztői átadásig dolgozom, hogy a bonyolult dolgok egyszerűnek tűnjenek.</p>
+      <div class="hero-ctas" data-fade>
+        <a href="#munkak" class="btn-pill magnetic" data-cursor>Nézd meg a munkáimat
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+          <span class="side-glow"></span>
+        </a>
+        <a href="#rolam" class="btn-ghost" data-cursor>Rólam
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="big-marquee marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Kiválasztott munkák</span><svg class="globe" viewBox="0 0 100 100" fill="none" stroke="#D4FF3A" stroke-width="1.5"><circle cx="50" cy="50" r="46"/><ellipse cx="50" cy="50" rx="20" ry="46"/><ellipse cx="50" cy="50" rx="38" ry="46"/><path d="M4 50h92M10 28h80M10 72h80"/></svg>
+    <span class="dim">2023 — 2026</span><svg class="globe" viewBox="0 0 100 100" fill="none" stroke="#D4FF3A" stroke-width="1.5"><circle cx="50" cy="50" r="46"/><ellipse cx="50" cy="50" rx="20" ry="46"/><ellipse cx="50" cy="50" rx="38" ry="46"/><path d="M4 50h92M10 28h80M10 72h80"/></svg>
+    <span>Kiválasztott munkák</span><svg class="globe" viewBox="0 0 100 100" fill="none" stroke="#D4FF3A" stroke-width="1.5"><circle cx="50" cy="50" r="46"/><ellipse cx="50" cy="50" rx="20" ry="46"/><ellipse cx="50" cy="50" rx="38" ry="46"/><path d="M4 50h92M10 28h80M10 72h80"/></svg>
+    <span class="dim">2023 — 2026</span><svg class="globe" viewBox="0 0 100 100" fill="none" stroke="#D4FF3A" stroke-width="1.5"><circle cx="50" cy="50" r="46"/><ellipse cx="50" cy="50" rx="20" ry="46"/><ellipse cx="50" cy="50" rx="38" ry="46"/><path d="M4 50h92M10 28h80M10 72h80"/></svg>
+  </div>
+</div>
+
+<!-- WORK -->
+<section class="work" id="munkak">
+  <div class="wrap">
+    <div class="work-head">
+      <div><span class="label">Esettanulmányok · 04</span><h2 class="h2" data-split>Termékek, amelyek <span class="dim">mérhetően jobban működnek.</span></h2></div>
+      <p>Minden projekt egy üzleti problémával kezdődött, és egy számmal zárult. Íme négy a kedvenceim közül.</p>
+    </div>
+
+    <div class="stack">
+      <!-- 01 -->
+      <article class="stack-card">
+        <div class="pc-info">
+          <div>
+            <div class="pc-meta"><span>01 / 04</span><span>2025</span></div>
+            <h3 class="pc-title">Lumen<span>_</span></h3>
+            <div class="pc-tags"><span>Mobilapp</span><span>Fintech</span><span>Lead designer</span></div>
+            <p class="pc-desc">Egy neobank onboardingját és mindennapi pénzügyi nézetét terveztem újra. 14 nap helyett 6 perc alatt lehet számlát nyitni, és az egyenleg végre azt mutatja, amire az embereknek valóban szükségük van: hogy mennyit költhetnek még.</p>
+          </div>
+          <div>
+            <div class="pc-stats">
+              <div><b>+38%</b><small>aktiváció az első héten</small></div>
+              <div><b>6 perc</b><small>számlanyitás 14 nap helyett</small></div>
+              <div><b>4,8★</b><small>App Store, 12 ezer értékelés</small></div>
+            </div>
+            <a href="#kapcsolat" class="pc-link" data-cursor>Esettanulmány kérése <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          </div>
+        </div>
+        <div class="pc-visual">
+          <div class="mk mk-scale">
+            <div class="phone">
+              <div class="screen">
+                <div class="ph-row"><div class="ph-av">BK</div><span class="ph-chip">● Biztonságos</span></div>
+                <div class="ph-bal" style="margin-top:18px"><small>Elkölthető október végéig</small><b>284 560 <i>Ft</i></b></div>
+                <svg class="ph-spark" viewBox="0 0 260 70" preserveAspectRatio="none" aria-hidden="true">
+                  <defs><linearGradient id="sg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#D4FF3A" stop-opacity=".35"/><stop offset="1" stop-color="#D4FF3A" stop-opacity="0"/></linearGradient></defs>
+                  <path d="M0 52 C 30 48, 40 30, 70 34 S 120 56, 150 40 S 200 12, 230 18 S 255 10, 260 8 L260 70 L0 70Z" fill="url(#sg)"/>
+                  <path class="draw" d="M0 52 C 30 48, 40 30, 70 34 S 120 56, 150 40 S 200 12, 230 18 S 255 10, 260 8" fill="none" stroke="#D4FF3A" stroke-width="2"/>
+                </svg>
+                <div class="ph-actions"><span>Utalás</span><span>Kártyák</span><span>Célok</span></div>
+                <div class="ph-list">
+                  <div><i>☕</i><p>Kávézó, Gozsdu<small>Ma, 08:42</small></p><b>−1 290</b></div>
+                  <div><i>↗</i><p>Fizetés<small>Okt. 10.</small></p><b class="u">+612 000</b></div>
+                  <div><i>⌂</i><p>Albérlet<small>Okt. 05.</small></p><b>−245 000</b></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="float-chip" style="left:8%;top:22%"><span class="dot"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 6-6 4 4 8-8M15 7h6v6"/></svg></span><div><b>+38%</b><small>aktiváció</small></div></div>
+          <div class="float-chip" style="right:8%;bottom:20%;animation-delay:-2.5s"><span class="dot"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><b>6:02</b><small>átlagos onboarding</small></div></div>
+        </div>
+      </article>
+
+      <!-- 02 -->
+      <article class="stack-card">
+        <div class="pc-info">
+          <div>
+            <div class="pc-meta"><span>02 / 04</span><span>2024</span></div>
+            <h3 class="pc-title">Orvosom<span>_</span></h3>
+            <div class="pc-tags"><span>Webapp</span><span>Egészségügy</span><span>UX-kutatás</span></div>
+            <p class="pc-desc">Időpontfoglaló platform magánrendelőknek. 22 interjú után derült ki, hogy a betegek nem orvost keresnek, hanem a legkorábbi szabad időpontot. Ezért a teljes foglalási folyamatot e köré szerveztük át.</p>
+          </div>
+          <div>
+            <div class="pc-stats">
+              <div><b>−54%</b><small>lemorzsolódás foglalás közben</small></div>
+              <div><b>3 lépés</b><small>a korábbi 7 helyett</small></div>
+              <div><b>92</b><small>SUS-pontszám a teszteken</small></div>
+            </div>
+            <a href="#kapcsolat" class="pc-link" data-cursor>Esettanulmány kérése <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          </div>
+        </div>
+        <div class="pc-visual">
+          <div class="win mk mk-scale">
+            <div class="win-bar"><i></i><i></i><i></i><span>orvosom.hu/foglalas</span></div>
+            <div class="win-body">
+              <div class="doc"><div class="ph-av">NE</div><p><b>Dr. Nagy Eszter</b><small>Bőrgyógyász · Budapest XIII.</small></p><span class="stars">★★★★★</span></div>
+              <div class="cal">
+                <div class="d">H<b>14</b></div><div class="d">K<b>15</b></div><div class="d">Sze<b>16</b></div><div class="d">Cs<b>17</b></div><div class="d">P<b>18</b></div>
+                <div class="s off">—</div><div class="s">08:30</div><div class="s on">09:15</div><div class="s off">—</div><div class="s">10:00</div>
+                <div class="s">11:00</div><div class="s off">—</div><div class="s">13:45</div><div class="s">14:30</div><div class="s off">—</div>
+                <div class="s">15:15</div><div class="s">16:00</div><div class="s off">—</div><div class="s">17:30</div><div class="s">18:00</div>
+              </div>
+              <div class="win-cta"><span style="background:none;color:var(--fg-60);padding:0;font-weight:400">Szerda, okt. 16. · 09:15</span><span>Foglalás →</span></div>
+            </div>
+          </div>
+          <div class="float-chip" style="right:6%;top:14%"><span class="dot"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><div><b>3 lépés</b><small>foglalás</small></div></div>
+        </div>
+      </article>
+
+      <!-- 03 -->
+      <article class="stack-card">
+        <div class="pc-info">
+          <div>
+            <div class="pc-meta"><span>03 / 04</span><span>2023 — 2024</span></div>
+            <h3 class="pc-title">Atlas<span>_</span></h3>
+            <div class="pc-tags"><span>Design system</span><span>B2B SaaS</span><span>Tokenek</span></div>
+            <p class="pc-desc">Egy 9 termékből álló SaaS-csomag közös design rendszere: 140 komponens, Figma-változók és kódba szinkronizált tokenek. A rendszer ma 5 csapat 38 fejlesztőjének munkáját gyorsítja.</p>
+          </div>
+          <div>
+            <div class="pc-stats">
+              <div><b>140</b><small>dokumentált komponens</small></div>
+              <div><b>2,4×</b><small>gyorsabb szállítás új funkcióknál</small></div>
+              <div><b>AA</b><small>WCAG 2.2 megfelelés</small></div>
+            </div>
+            <a href="#kapcsolat" class="pc-link" data-cursor>Esettanulmány kérése <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          </div>
+        </div>
+        <div class="pc-visual">
+          <div class="ds mk mk-scale">
+            <div class="t"><span class="badge" style="width:fit-content">Display / 64</span><b>Aa</b><span>Figtree · 600 · −4.5%</span></div>
+            <div class="sw"><span>Színtokenek</span><div class="sws"><i style="background:#fff"></i><i style="background:#8a8a8a"></i><i style="background:#3a3a3a"></i><i style="background:#1b1b1b;border:1px solid var(--line)"></i><i style="background:var(--accent)"></i></div></div>
+            <div class="b"><span style="background:#fff;color:#000">Elsődleges</span><span style="border:1px solid var(--line-2);color:#fff">Másodlagos</span><span style="color:var(--fg-60)">Szöveges</span><span style="background:var(--accent);color:var(--accent-ink)">Siker</span></div>
+            <div class="tg"><div style="display:flex;justify-content:space-between;align-items:center">Értesítés <span class="tgl anim"></span></div><div style="display:flex;justify-content:space-between;align-items:center">Sötét mód <span class="tgl on"></span></div></div>
+            <div class="in"><div class="field">atlas@ceg.hu<i></i></div><span class="badge">input / md</span><span class="badge">v3.2.0</span></div>
+          </div>
+        </div>
+      </article>
+
+      <!-- 04 -->
+      <article class="stack-card">
+        <div class="pc-info">
+          <div>
+            <div class="pc-meta"><span>04 / 04</span><span>2023</span></div>
+            <h3 class="pc-title">Flotta<span>_</span></h3>
+            <div class="pc-tags"><span>Dashboard</span><span>Logisztika</span><span>Adatvizualizáció</span></div>
+            <p class="pc-desc">Valós idejű irányítópult egy 1 200 járműves fuvarozónak. A diszpécserek eddig 6 képernyőt figyeltek egyszerre, most egyet. A kivételek kerülnek előtérbe, nem a zaj.</p>
+          </div>
+          <div>
+            <div class="pc-stats">
+              <div><b>−27%</b><small>reakcióidő késéseknél</small></div>
+              <div><b>6 → 1</b><small>képernyő műszakonként</small></div>
+              <div><b>98%</b><small>napi aktív diszpécser</small></div>
+            </div>
+            <a href="#kapcsolat" class="pc-link" data-cursor>Esettanulmány kérése <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+          </div>
+        </div>
+        <div class="pc-visual">
+          <div class="dash mk mk-scale">
+            <div class="kpi">Úton<b>1 084</b><em>▲ 3,2%</em></div>
+            <div class="kpi">Késésben<b>17</b><em>▼ 41%</em></div>
+            <div class="kpi">Kiszállítva<b>9 312</b><em>▲ 12%</em></div>
+            <div class="map">
+              <svg viewBox="0 0 370 190" preserveAspectRatio="none" aria-hidden="true">
+                <g stroke="rgb(255 255 255/.06)"><path d="M0 40h370M0 95h370M0 150h370M90 0v190M185 0v190M280 0v190"/></g>
+                <path class="route" d="M30 150 C 110 150, 120 60, 200 70 S 300 140, 340 40" fill="none" stroke="rgb(255 255 255/.35)" stroke-width="1.5"/>
+                <circle cx="30" cy="150" r="5" fill="#fff"/><circle cx="340" cy="40" r="5" fill="none" stroke="#D4FF3A" stroke-width="2"/>
+                <circle cx="120" cy="40" r="3" fill="rgb(255 255 255/.35)"/><circle cx="260" cy="160" r="3" fill="rgb(255 255 255/.35)"/><circle cx="70" cy="80" r="3" fill="rgb(255 255 255/.35)"/>
+              </svg>
+              <svg viewBox="0 0 370 190" preserveAspectRatio="none" aria-hidden="true"><circle class="truck" r="6" fill="#D4FF3A"/></svg>
+            </div>
+            <div class="bars">Heti teljesítés<div><i style="height:40%"></i><i style="height:62%"></i><i style="height:48%"></i><i style="height:74%"></i><i class="hi" style="height:92%"></i><i style="height:66%"></i></div></div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- STATEMENT -->
+<section class="statement">
+  <div class="wrap">
+    <span class="label">Filozófia</span>
+    <p class="fill-text">A jó felületet nem észreveszik, hanem használják. Azon dolgozom, hogy a termékedben minden kattintásnak oka legyen, és egy se maradjon felesleges.</p>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats" aria-label="Számokban">
+  <div class="stats-ghost" aria-hidden="true" data-speed="1.2">09</div>
+  <div class="wrap">
+    <div class="stat-grid" data-reveal>
+      <div class="stat"><b><span data-count="9">9</span><sup>év</sup></b><p>tapasztalat termék- és interakciótervezésben</p></div>
+      <div class="stat"><b><span data-count="46">46</span><sup>+</sup></b><p>kiadott digitális termék, 11 iparágban</p></div>
+      <div class="stat"><b><span data-count="31">31</span><sup>%</sup></b><p>átlagos konverziónövekedés az újratervezések után</p></div>
+      <div class="stat"><b><span data-count="180">180</span><sup>+</sup></b><p>felhasználói interjú és usability-teszt</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="sec sec-alt" id="folyamat">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="label">Folyamat</span><h2 class="h2" data-split>Hat lépés a megérzéstől <span class="dim">a mérhető eredményig.</span></h2></div>
+      <p>Nem vízesés és nem káosz. Rövid ciklusokban haladunk, és minden szakasz végén van valami, amit kipróbálhatsz, vagy ami alapján dönthetsz.</p>
+    </div>
+    <div class="bento" data-reveal>
+      <div class="cell c1 spot">
+        <div class="cell-ui">
+          <div class="notes">
+            <div class="note">„Nem találom, hol látom, mennyit költhetek még ebben a hónapban.”<small>P04 · interjú</small></div>
+            <div class="note">„Három képernyő egy utalásért? Inkább felhívom a bankot.”<small>P11 · interjú</small></div>
+            <div class="note ins">Az emberek nem az egyenlegre kíváncsiak, hanem arra, mennyi marad.<small>INSIGHT #07</small></div>
+          </div>
+        </div>
+        <div class="cell-txt"><span class="n">01</span><h3>Feltárás</h3><p>Interjúk, adatelemzés és versenytárs-audit. Kiderítjük, mi a valódi probléma, mielőtt egyetlen képernyőt is rajzolnánk.</p></div>
+      </div>
+      <div class="cell c2 spot">
+        <div class="cell-ui">
+          <div class="flow">
+            <span class="runner"></span>
+            <div class="node">Belépés<small>01</small></div>
+            <div class="node">Áttekintés<small>02</small></div>
+            <div class="node">Utalás<small>03</small></div>
+            <div class="node end">Kész ✓<small>04</small></div>
+          </div>
+        </div>
+        <div class="cell-txt"><span class="n">02</span><h3>Struktúra és folyamatok</h3><p>Információs architektúra, user flow-k és wireframe-ek. A legrövidebb út a felhasználó céljáig.</p></div>
+      </div>
+      <div class="cell c3 spot">
+        <div class="cell-ui">
+          <div class="proto">
+            <div class="r">Push-értesítések <span class="tgl anim"></span></div>
+            <div class="r">Biometrikus belépés <span class="tgl on"></span></div>
+            <div class="r">Heti összesítő <span class="tgl"></span></div>
+          </div>
+        </div>
+        <div class="cell-txt"><span class="n">03</span><h3>Prototípus</h3><p>Kattintható, valósághű prototípusok Figmában és ProtoPie-ban.</p></div>
+      </div>
+      <div class="cell c4 spot">
+        <div class="cell-ui">
+          <div class="ring">
+            <svg viewBox="0 0 108 108" aria-hidden="true"><circle cx="54" cy="54" r="46" fill="none" stroke="rgb(255 255 255/.08)" stroke-width="8"/><circle class="ring-arc" cx="54" cy="54" r="46" fill="none" stroke="#D4FF3A" stroke-width="8" stroke-linecap="round"/></svg>
+            <div class="val">92%<small>feladat-sikeresség</small></div>
+          </div>
+        </div>
+        <div class="cell-txt"><span class="n">04</span><h3>Validálás</h3><p>Usability-tesztek valódi felhasználókkal, még a fejlesztés előtt.</p></div>
+      </div>
+      <div class="cell c5 spot">
+        <div class="cell-ui">
+<div class="code"><span class="c">// tokens/color.json</span>
+<span class="k">"accent"</span>: { <span class="k">"value"</span>: <span class="v">"#D4FF3A"</span> },
+<span class="k">"radius-lg"</span>: { <span class="k">"value"</span>: <span class="v">"20px"</span> },
+<span class="k">"space-6"</span>: { <span class="k">"value"</span>: <span class="v">"24px"</span> }<span class="cur"></span></div>
+        </div>
+        <div class="cell-txt"><span class="n">05</span><h3>Fejlesztői átadás</h3><p>Dokumentált komponensek, tokenek és állapotok. A fejlesztőknek nem kell találgatniuk.</p></div>
+      </div>
+      <div class="cell c6 spot">
+        <div class="cell-ui">
+          <div class="chart">
+            <div class="chart-top"><b>+31%</b><small>konverzió · 90 nap</small></div>
+            <svg viewBox="0 0 300 90" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M0 80 L300 80" stroke="rgb(255 255 255/.08)"/>
+              <path class="draw" d="M0 74 L40 70 L80 72 L120 60 L160 52 L200 40 L240 30 L300 12" fill="none" stroke="#D4FF3A" stroke-width="2" stroke-linejoin="round"/>
+              <circle cx="300" cy="12" r="4" fill="#D4FF3A"/>
+            </svg>
+          </div>
+        </div>
+        <div class="cell-txt"><span class="n">06</span><h3>Mérés és iteráció</h3><p>A bevezetés után is figyeljük a számokat, és ahol kell, finomítunk.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<div class="tools">
+  <p class="mono">Eszközök, amelyekkel nap mint nap dolgozom</p>
+  <div class="marquee" aria-label="Eszközök: Figma, FigJam, ProtoPie, Framer, Maze, Dovetail, Notion, Linear, Jira, Webflow">
+    <div class="marquee-track" aria-hidden="true">
+      <span>Figma</span><span class="sep">✦</span><span>FigJam</span><span class="sep">✦</span><span>ProtoPie</span><span class="sep">✦</span><span>Framer</span><span class="sep">✦</span><span>Maze</span><span class="sep">✦</span><span>Dovetail</span><span class="sep">✦</span><span>Notion</span><span class="sep">✦</span><span>Linear</span><span class="sep">✦</span><span>Jira</span><span class="sep">✦</span><span>Webflow</span><span class="sep">✦</span>
+      <span>Figma</span><span class="sep">✦</span><span>FigJam</span><span class="sep">✦</span><span>ProtoPie</span><span class="sep">✦</span><span>Framer</span><span class="sep">✦</span><span>Maze</span><span class="sep">✦</span><span>Dovetail</span><span class="sep">✦</span><span>Notion</span><span class="sep">✦</span><span>Linear</span><span class="sep">✦</span><span>Jira</span><span class="sep">✦</span><span>Webflow</span><span class="sep">✦</span>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="sec" id="rolam">
+  <div class="wrap about-grid">
+    <div class="about-copy">
+      <span class="label">Rólam</span>
+      <h2 class="h2" data-split>Szia, Bence vagyok. <span class="dim">Hidat építek az üzlet és az emberek között.</span></h2>
+      <p>Grafikusként kezdtem, de hamar rájöttem, hogy jobban érdekel, <strong>miért</strong> kattint valaki valahová, mint az, hogy milyen színű a gomb. Azóta startupokkal, ügynökségekkel és nagyvállalati csapatokkal dolgozom.</p>
+      <p>Hiszek a rövid visszacsatolási körökben, az őszinte usability-tesztekben és abban, hogy egy jó design rendszer a fejlesztők legjobb barátja.</p>
+      <div class="skills">
+        <span>Termékstratégia</span><span>UX-kutatás</span><span>Interakciótervezés</span><span>UI design</span><span>Design rendszerek</span><span>Prototipizálás</span><span>Akadálymentesség</span><span>Workshop-facilitálás</span>
+      </div>
+    </div>
+    <div>
+      <div class="xp" data-reveal>
+        <div class="xp-row"><time>2023 — most</time><h4>Független UX/UI designer<small>Fintech, egészségügyi és SaaS ügyfelek</small></h4><span class="badge now">Jelenleg</span></div>
+        <div class="xp-row"><time>2020 — 2023</time><h4>Lead Product Designer<small>Nordlight Studio · 8 fős designcsapat vezetése</small></h4><span class="badge">3 év</span></div>
+        <div class="xp-row"><time>2018 — 2020</time><h4>Senior UX Designer<small>Fintera Labs · mobilbanki termékek</small></h4><span class="badge">2 év</span></div>
+        <div class="xp-row"><time>2017 — 2018</time><h4>UX/UI Designer<small>Pixelkert Ügynökség · webes és e-kereskedelmi projektek</small></h4><span class="badge">1 év</span></div>
+        <div class="xp-row"><time>2013 — 2017</time><h4>MOME, Média design BA<small>Budapest</small></h4><span class="badge">Tanulmányok</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="sec sec-alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="label">Visszajelzések</span><h2 class="h2" data-split>Amit a csapatok <span class="dim">mondanak.</span></h2></div>
+      <p>Nem csak képernyőket adok át. A legtöbb ügyfelemmel a projekt után is együtt dolgozom tovább.</p>
+    </div>
+    <div class="quotes" data-reveal>
+      <figure class="q big">
+        <div>
+          <svg class="qm" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.5 6C6.5 7 4.5 9.6 4.5 13v5h5.5v-5.5H7.3c.2-2 1.3-3.4 3-4.1L9.5 6Zm9.5 0c-3 1-5 3.6-5 7v5h5.5v-5.5h-2.7c.2-2 1.3-3.4 3-4.1L19 6Z"/></svg>
+          <blockquote>Bence két hét alatt jobban megértette az ügyfeleinket, mint mi két év alatt. <span class="dim">Az új onboarding az első hónapban visszahozta a teljes projekt árát, és azóta is ő az első, akit felhívunk.</span></blockquote>
+        </div>
+        <figcaption class="who"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=70" alt="" width="46" height="46" loading="lazy"><p>Szabó Anna<small>Product Director, Lumen</small></p></figcaption>
+      </figure>
+      <figure class="q">
+        <blockquote>Végre egy designer, aki fejlesztői fejjel is gondolkodik. Az átadott tokenek és állapotleírások miatt alig volt kérdésünk a sprint alatt.</blockquote>
+        <figcaption class="who"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&w=120&q=70" alt="" width="46" height="46" loading="lazy"><p>Tóth Márk<small>CTO, Orvosom</small></p></figcaption>
+      </figure>
+      <figure class="q">
+        <blockquote>A design rendszerünk Bence nélkül ma is egy rendezetlen Figma-fájl lenne. Öt csapat használja, és mindenki szereti.</blockquote>
+        <figcaption class="who"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=120&q=70" alt="" width="46" height="46" loading="lazy"><p>Kiss Réka<small>Head of Design, Atlas</small></p></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ENGAGEMENT -->
+<section class="sec" id="egyuttmukodes">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="label">Együttműködés</span><h2 class="h2" data-split>Válaszd ki a <span class="dim">neked való formát.</span></h2></div>
+      <p>Átlátható keretek, rögzített árak, meglepetések nélkül. Az első 30 perces beszélgetés mindig ingyenes.</p>
+    </div>
+    <div class="plans" data-reveal>
+      <div class="plan">
+        <div><h3>UX-audit</h3><p class="sub">Gyors diagnózis egy meglévő termékről.</p></div>
+        <div class="price">€1 400<small> / egyszeri</small></div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Heurisztikus elemzés, 40+ szempont</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Prioritizált javítási lista</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Videós bemutató a csapatnak</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Átfutás: 5 munkanap</li>
+        </ul>
+        <a href="#kapcsolat" class="btn-ghost" data-cursor>Auditot kérek</a>
+      </div>
+      <div class="plan featured">
+        <span class="pop">Legnépszerűbb</span>
+        <div><h3>Design sprint</h3><p class="sub">Egy kritikus folyamat újratervezése, a végén tesztelt prototípussal.</p></div>
+        <div class="price">€4 800<small> / 3 hét</small></div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Kutatás: 6–8 felhasználói interjú</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>User flow, wireframe és hi-fi UI</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Kattintható prototípus és usability-teszt</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Fejlesztésre kész átadás</li>
+        </ul>
+        <a href="#kapcsolat" class="btn-pill magnetic" data-cursor>Sprint indítása<span class="side-glow"></span></a>
+      </div>
+      <div class="plan">
+        <div><h3>Termékpartner</h3><p class="sub">Beágyazott senior designer a csapatodban.</p></div>
+        <div class="price">€6 200<small> / hónap</small></div>
+        <ul>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Heti 3 nap dedikált kapacitás</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Részvétel a sprintekben és a tervezésben</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Design rendszer építése és karbantartása</li>
+          <li><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Havonta felmondható</li>
+        </ul>
+        <a href="#kapcsolat" class="btn-ghost" data-cursor>Beszéljünk róla</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec sec-alt">
+  <div class="wrap faq-grid">
+    <div><span class="label">GYIK</span><h2 class="h2" data-split>Gyakori <span class="dim">kérdések.</span></h2></div>
+    <div class="faq">
+      <details open><summary>Milyen típusú projekteket vállalsz?<span class="pm" aria-hidden="true"></span></summary><p class="ans">Leginkább összetett digitális termékeken dolgozom: mobil- és webalkalmazásokon, SaaS-felületeken, dashboardokon és design rendszereken. Egyszerű bemutatkozó weboldalakat ritkán vállalok, de szívesen ajánlok rá kollégát.</p></details>
+      <details><summary>Dolgozol külföldi ügyfelekkel is?<span class="pm" aria-hidden="true"></span></summary><p class="ans">Igen, az ügyfeleim nagyjából fele külföldi, főleg Németországból, Hollandiából és az Egyesült Királyságból. Magyarul és angolul is dolgozom, az együttműködés teljesen remote is lehet.</p></details>
+      <details><summary>Mennyi idő alatt tudsz kezdeni?<span class="pm" aria-hidden="true"></span></summary><p class="ans">Jelenleg novembertől van szabad kapacitásom. Auditot általában 1–2 héten belül el tudok kezdeni, a nagyobb projekteket érdemes 3–4 héttel előre egyeztetni.</p></details>
+      <details><summary>A fejlesztést is megoldod?<span class="pm" aria-hidden="true"></span></summary><p class="ans">A fejlesztést nem, de szorosan együttműködöm vele. Ismerem a frontend-korlátokat, a tokeneket kódba szinkronizálom, és a sprintek alatt elérhető vagyok a fejlesztőcsapat számára. Ha nincs saját csapatod, megbízható partnereket tudok ajánlani.</p></details>
+      <details><summary>Hogyan zajlik az első egyeztetés?<span class="pm" aria-hidden="true"></span></summary><p class="ans">Egy ingyenes, 30 perces videóhívással kezdünk, ahol átbeszéljük a célokat, a határidőt és a keretet. 48 órán belül küldök egy rövid ajánlatot a javasolt megközelítéssel és a pontos árral.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="kapcsolat">
+  <div class="glow" aria-hidden="true"><span class="a"></span><span class="e"></span><span class="core"></span></div>
+  <div class="wrap">
+    <span class="label">Kapcsolat</span>
+    <h2 data-split>Van egy terméked, <span class="dim">ami jobb is lehetne?</span></h2>
+    <p>Írj pár mondatot arról, min dolgozol. 24 órán belül válaszolok, és megbeszéljük, hogyan segíthetek.</p>
+    <div class="mail">
+      <a class="addr" href="mailto:hello@kovacsbence.hu" data-cursor>hello@kovacsbence.hu</a>
+      <button class="copy" id="copy" type="button" data-cursor>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+        <span>E-mail másolása</span>
+      </button>
+    </div>
+    <div class="cta-row">
+      <a href="mailto:hello@kovacsbence.hu?subject=Projekt%20egyeztet%C3%A9s" class="btn-pill magnetic" data-cursor>30 perces hívás foglalása
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(-90deg)"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+        <span class="side-glow"></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div><a href="#top" class="logo" style="background:none">Kovács Bence<span class="u">_</span></a><p class="intro" style="margin-top:14px">UX/UI designer Budapestről. Olyan digitális termékeket tervezek, amelyeket öröm használni, és amelyeket könnyű megépíteni.</p></div>
+      <div><h5>Oldal</h5><ul><li><a href="#munkak">Munkák</a></li><li><a href="#folyamat">Folyamat</a></li><li><a href="#rolam">Rólam</a></li><li><a href="#egyuttmukodes">Együttműködés</a></li></ul></div>
+      <div><h5>Közösségi</h5><ul><li><a href="#">LinkedIn</a></li><li><a href="#">Dribbble</a></li><li><a href="#">Behance</a></li><li><a href="#">Read.cv</a></li></ul></div>
+      <div><h5>Helyi idő</h5><p class="clock" id="clock">Budapest — --:--</p><p style="color:var(--fg-40);font-size:14px;margin-top:6px">Válasz: 24 órán belül</p></div>
+    </div>
+  </div>
+  <div class="wordmark" aria-hidden="true">BENCE<span>_</span></div>
+  <div class="wrap legal"><span>© 2026 Kovács Bence. Minden jog fenntartva.</span><span>Figmában tervezve, kézzel kódolva.</span></div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = matchMedia('(pointer: fine)').matches;
+
+  // Budapest local time
+  const clock = document.getElementById('clock');
+  const tick = () => clock.textContent = 'Budapest — ' + new Intl.DateTimeFormat('hu-HU',{hour:'2-digit',minute:'2-digit',timeZone:'Europe/Budapest'}).format(new Date());
+  tick(); setInterval(tick, 30000);
+
+  // Copy e-mail
+  const copy = document.getElementById('copy');
+  copy.addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText('hello@kovacsbence.hu'); } catch (e) {}
+    copy.classList.add('ok'); copy.querySelector('span').textContent = 'Másolva ✓';
+    setTimeout(() => { copy.classList.remove('ok'); copy.querySelector('span').textContent = 'E-mail másolása'; }, 2000);
+  });
+
+  // Nav state
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', scrollY > 40);
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // Card spotlight
+  document.querySelectorAll('.spot').forEach(c => c.addEventListener('pointermove', e => {
+    const r = c.getBoundingClientRect();
+    c.style.setProperty('--x', e.clientX - r.left + 'px'); c.style.setProperty('--y', e.clientY - r.top + 'px');
+  }));
+
+  if (!window.gsap) return;
+  gsap.registerPlugin(ScrollTrigger, SplitText);
+
+  if (reduce) { gsap.set('.ring-arc', { strokeDashoffset: 23 }); return; }
+
+  // Smooth scroll
+  if (window.Lenis) {
+    const lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+    document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+      const id = a.getAttribute('href'); if (id.length < 2) return;
+      const el = document.querySelector(id); if (!el) return;
+      e.preventDefault(); lenis.scrollTo(el, { offset: -20 });
+    }));
+  }
+
+  // Cursor + magnetic (desktop only)
+  if (fine) {
+    const cur = document.querySelector('.cursor');
+    const xTo = gsap.quickTo(cur, 'x', { duration: .35, ease: 'power3.out' });
+    const yTo = gsap.quickTo(cur, 'y', { duration: .35, ease: 'power3.out' });
+    addEventListener('pointermove', e => { cur.style.opacity = 1; xTo(e.clientX); yTo(e.clientY); });
+    document.querySelectorAll('a,button,[data-cursor]').forEach(el => {
+      el.addEventListener('pointerenter', () => cur.classList.add('big'));
+      el.addEventListener('pointerleave', () => cur.classList.remove('big'));
+    });
+    document.querySelectorAll('.magnetic').forEach(el => {
+      el.addEventListener('mousemove', e => { const r = el.getBoundingClientRect();
+        gsap.to(el, { x: (e.clientX - r.left - r.width / 2) * .25, y: (e.clientY - r.top - r.height / 2) * .35, duration: .4, ease: 'power3.out' }); });
+      el.addEventListener('mouseleave', () => gsap.to(el, { x: 0, y: 0, duration: .6, ease: 'power3.out' }));
+    });
+  }
+
+  document.fonts.ready.then(initMotion);
+
+  function initMotion() {
+    // Hero: both name layers animate identically so the outline stays registered over the photo
+    const tl = gsap.timeline({ delay: .75 });
+    const words = ['.w-solid .nm', '.w-outline .nm'].map(s => SplitText.create(s, { type: 'chars' }).chars);
+    tl.from(words[0], { yPercent: 70, opacity: 0, duration: 1.2, ease: 'expo.out', stagger: .055 }, 0)
+      .from(words[1], { yPercent: 70, opacity: 0, duration: 1.2, ease: 'expo.out', stagger: .055 }, 0)
+      .from('.portrait', { clipPath: 'inset(100% 0 0 0)', duration: 1.3, ease: 'expo.inOut' }, .05)
+      .from('.portrait img', { scale: 1.25, duration: 1.6, ease: 'expo.out' }, .2)
+      .from('.hero [data-fade]', { y: 24, opacity: 0, duration: .9, ease: 'power3.out', stagger: .08 }, .5)
+      .from('.nav', { y: -30, opacity: 0, duration: .9, ease: 'power3.out' }, .4);
+
+    // Section headings: mask line reveal
+    gsap.utils.toArray('[data-split]').forEach(el => {
+      SplitText.create(el, { type: 'lines', mask: 'lines', autoSplit: true,
+        onSplit: self => gsap.from(self.lines, { yPercent: 105, duration: 1, ease: 'expo.out', stagger: .1,
+          scrollTrigger: { trigger: el, start: 'top 85%' } }) });
+    });
+
+    // Fade-up groups
+    gsap.utils.toArray('[data-reveal]').forEach(g => gsap.from(g.children, { y: 40, opacity: 0, duration: .9, ease: 'power3.out', stagger: .08,
+      scrollTrigger: { trigger: g, start: 'top 82%' } }));
+
+    // Scroll-fill statement
+    let fills = [];
+    gsap.utils.toArray('.fill-text').forEach(el => SplitText.create(el, { type: 'lines', linesClass: 'line', autoSplit: true,
+      onSplit: self => { fills.forEach(t => t.kill()); fills = self.lines.map(l => gsap.to(l, { backgroundPosition: '0% 0', ease: 'none',
+        scrollTrigger: { trigger: l, start: 'top 85%', end: 'bottom 45%', scrub: true } })); } }));
+
+    // Counters
+    gsap.utils.toArray('[data-count]').forEach(el => { const o = { v: 0 }, end = +el.dataset.count;
+      gsap.to(o, { v: end, duration: 2, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 88%' },
+        onUpdate: () => el.textContent = Math.round(o.v) }); });
+
+    // Parallax ghost number
+    gsap.utils.toArray('[data-speed]').forEach(el => gsap.to(el, { yPercent: -25 * +el.dataset.speed, ease: 'none',
+      scrollTrigger: { trigger: el.closest('section'), start: 'top bottom', end: 'bottom top', scrub: true } }));
+
+    // Self-drawing lines + ring
+    document.querySelectorAll('path.draw').forEach(p => { const L = p.getTotalLength();
+      gsap.fromTo(p, { strokeDasharray: L, strokeDashoffset: L }, { strokeDashoffset: 0, duration: 1.8, ease: 'power2.inOut',
+        scrollTrigger: { trigger: p.closest('.pc-visual,.cell'), start: 'top 75%' } }); });
+    gsap.to('.ring-arc', { strokeDashoffset: 23, duration: 1.8, ease: 'power3.out', scrollTrigger: { trigger: '.ring', start: 'top 85%' } });
+
+    // Stacking project cards (desktop)
+    ScrollTrigger.matchMedia({
+      '(min-width: 769px)': () => {
+        const cards = gsap.utils.toArray('.stack-card');
+        cards.forEach((card, i) => { if (i === cards.length - 1) return;
+          gsap.to(card, { scale: .93, filter: 'brightness(0.45)', ease: 'none',
+            scrollTrigger: { trigger: cards[i + 1], start: 'top bottom', end: 'top 120px', scrub: true } }); });
+      },
+      '(max-width: 768px)': () => {
+        gsap.utils.toArray('.stack-card').forEach(c => gsap.from(c, { y: 50, opacity: 0, duration: .9, ease: 'power3.out', scrollTrigger: { trigger: c, start: 'top 85%' } }));
+      }
+    });
+
+    addEventListener('load', () => ScrollTrigger.refresh());
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta name="robots" content="noindex">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Northlane – AI tanácsadás vállalatoknak</title>
+<meta name="description" content="A Northlane segít a cégeknek a mesterséges intelligencia gyakorlati bevezetésében: stratégia, folyamatautomatizálás, képzés és megvalósítás.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f6f2;
+    --bg-alt: #efede6;
+    --surface: #ffffff;
+    --fg: #14181f;
+    --muted: #5b6270;
+    --line: #dcd9d0;
+    --accent: #1f4fd1;
+    --accent-soft: #e3e9fb;
+    --accent-fg: #ffffff;
+    --dark: #0f1622;
+    --dark-fg: #e8ebf1;
+    --radius: 14px;
+    --max: 1160px;
+    --serif: "Fraunces", Georgia, "Times New Roman", serif;
+    --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1219;
+      --bg-alt: #121925;
+      --surface: #161e2b;
+      --fg: #e9edf3;
+      --muted: #9aa3b2;
+      --line: #263042;
+      --accent: #6e93ff;
+      --accent-soft: #1b2744;
+      --accent-fg: #0b1020;
+      --dark: #080c12;
+      --dark-fg: #e8ebf1;
+      color-scheme: dark;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; }
+  a { color: inherit; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding-inline: 24px; }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.15; margin: 0; letter-spacing: -0.01em; }
+  h1 { font-size: clamp(2.4rem, 5.5vw, 4.2rem); }
+  h2 { font-size: clamp(1.9rem, 3.6vw, 2.8rem); }
+  h3 { font-size: 1.3rem; }
+  p { margin: 0; }
+  .eyebrow {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+  }
+  .lead { font-size: 1.15rem; color: var(--muted); max-width: 60ch; }
+  section { padding-block: clamp(64px, 10vw, 120px); }
+  .section-head { max-width: 720px; margin-bottom: 56px; }
+  .section-head p { margin-top: 16px; }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 14px 24px;
+    border-radius: 999px;
+    font-weight: 600; font-size: 0.98rem;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    font-family: inherit;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--accent); color: var(--accent-fg); }
+  .btn-ghost { border-color: var(--line); color: var(--fg); background: transparent; }
+  .btn-ghost:hover { border-color: var(--fg); }
+
+  /* Header */
+  header.site {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 70px; }
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; font-family: var(--serif); font-size: 1.4rem; font-weight: 600; }
+  .logo svg { width: 28px; height: 28px; color: var(--accent); }
+  .nav-links { display: flex; gap: 32px; align-items: center; }
+  .nav-links a { text-decoration: none; color: var(--muted); font-size: 0.95rem; font-weight: 500; }
+  .nav-links a:hover { color: var(--fg); }
+  .nav-links .btn { color: var(--accent-fg); padding: 10px 20px; }
+  .menu-toggle { display: none; background: none; border: 0; color: var(--fg); padding: 8px; cursor: pointer; }
+  .menu-toggle svg { width: 26px; height: 26px; }
+
+  /* Hero */
+  .hero { padding-block: clamp(64px, 11vw, 140px) clamp(56px, 8vw, 100px); position: relative; overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; align-items: center; }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero .lead { margin-top: 24px; }
+  .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 36px; }
+  .hero-visual {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    max-width: 100%;
+    border-radius: 24px;
+    background: var(--dark);
+    overflow: hidden;
+  }
+  .hero-visual svg { width: 100%; height: 100%; display: block; }
+  .hero-badge {
+    position: absolute; left: 20px; bottom: 20px; right: 20px;
+    background: color-mix(in srgb, var(--dark) 70%, transparent);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 12px;
+    padding: 14px 18px;
+    color: var(--dark-fg);
+    font-size: 0.9rem;
+    display: flex; gap: 12px; align-items: center;
+  }
+  .pulse { width: 10px; height: 10px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 0 0 rgba(74,222,128,.6); animation: pulse 2s infinite; flex-shrink: 0; }
+  @keyframes pulse { 70% { box-shadow: 0 0 0 10px rgba(74,222,128,0); } 100% { box-shadow: 0 0 0 0 rgba(74,222,128,0); } }
+
+  /* Stats */
+  .stats { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding-block: 40px; }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .stat strong { display: block; font-family: var(--serif); font-size: 2.4rem; font-weight: 600; line-height: 1.1; }
+  .stat span { color: var(--muted); font-size: 0.95rem; }
+
+  /* Services */
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 32px;
+    display: flex; flex-direction: column; gap: 14px;
+    transition: border-color .2s ease, transform .2s ease;
+    min-width: 0;
+  }
+  .card:hover { border-color: var(--accent); transform: translateY(-3px); }
+  .card .icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: var(--accent-soft); color: var(--accent);
+    display: grid; place-items: center;
+  }
+  .card .icon svg { width: 24px; height: 24px; }
+  .card p { color: var(--muted); }
+  .card ul { margin: 6px 0 0; padding: 0; list-style: none; display: grid; gap: 6px; font-size: 0.93rem; }
+  .card li { padding-left: 20px; position: relative; }
+  .card li::before { content: ""; position: absolute; left: 0; top: 0.65em; width: 10px; height: 2px; background: var(--accent); }
+
+  /* Process */
+  .process { background: var(--dark); color: var(--dark-fg); }
+  .process .eyebrow { color: #8fb0ff; }
+  .process .lead { color: #a8b1c2; }
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; counter-reset: step; }
+  .step { padding: 32px 28px 8px 0; border-top: 1px solid rgba(255,255,255,.15); position: relative; min-width: 0; }
+  .step + .step { padding-left: 28px; border-left: 1px solid rgba(255,255,255,.08); }
+  .step-num { font-family: var(--serif); font-size: 0.95rem; color: #8fb0ff; margin-bottom: 18px; display: block; }
+  .step h3 { margin-bottom: 10px; }
+  .step p { color: #a8b1c2; font-size: 0.97rem; }
+  .step .dur { display: inline-block; margin-top: 16px; font-size: 0.8rem; padding: 4px 10px; border-radius: 999px; border: 1px solid rgba(255,255,255,.18); color: #cfd6e3; }
+
+  /* Cases */
+  .cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .case { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 32px; display: flex; flex-direction: column; min-width: 0; }
+  .case .tag { font-size: 0.8rem; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: .08em; }
+  .case .big { font-family: var(--serif); font-size: 3rem; color: var(--accent); line-height: 1; margin: 22px 0 8px; }
+  .case h3 { font-size: 1.15rem; margin-bottom: 10px; }
+  .case p { color: var(--muted); font-size: 0.96rem; }
+
+  /* Quote */
+  .quote { background: var(--bg-alt); }
+  .quote blockquote { margin: 0 auto; max-width: 860px; text-align: center; }
+  .quote blockquote p { font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2.2rem); line-height: 1.35; }
+  .quote cite { display: block; margin-top: 28px; font-style: normal; color: var(--muted); font-size: 0.95rem; }
+
+  /* About */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .about-grid > * { min-width: 0; }
+  .about p + p { margin-top: 16px; }
+  .values { display: grid; gap: 16px; }
+  .value { display: flex; gap: 18px; padding: 22px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+  .value b { font-family: var(--serif); font-size: 1.1rem; font-weight: 600; display: block; margin-bottom: 4px; }
+  .value p { color: var(--muted); font-size: 0.95rem; }
+  .value .n { font-family: var(--serif); color: var(--accent); font-size: 1.2rem; flex-shrink: 0; }
+
+  /* FAQ */
+  .faq-list { max-width: 820px; }
+  details { border-bottom: 1px solid var(--line); }
+  summary {
+    list-style: none; cursor: pointer;
+    padding: 24px 40px 24px 0; position: relative;
+    font-weight: 600; font-size: 1.08rem;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: "+"; position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
+    font-size: 1.6rem; font-weight: 400; color: var(--accent); transition: transform .2s;
+  }
+  details[open] summary::after { transform: translateY(-50%) rotate(45deg); }
+  details p { padding: 0 0 24px; color: var(--muted); max-width: 70ch; }
+
+  /* Contact */
+  .contact { background: var(--dark); color: var(--dark-fg); }
+  .contact .eyebrow { color: #8fb0ff; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; }
+  .contact-grid > * { min-width: 0; }
+  .contact .lead { color: #a8b1c2; margin-top: 16px; }
+  .contact-info { margin-top: 40px; display: grid; gap: 18px; }
+  .contact-info div { display: flex; flex-direction: column; }
+  .contact-info small { color: #8a93a5; text-transform: uppercase; letter-spacing: .1em; font-size: 0.75rem; }
+  .contact-info span { font-size: 1.05rem; }
+  form { background: #161f2e; border: 1px solid rgba(255,255,255,.1); border-radius: 18px; padding: 32px; display: grid; gap: 18px; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  label { display: grid; gap: 8px; font-size: 0.88rem; color: #c3cad7; font-weight: 500; }
+  input, select, textarea {
+    font: inherit; font-size: 1rem;
+    background: #0f1622; color: #e8ebf1;
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 10px; padding: 12px 14px;
+    width: 100%;
+    color-scheme: dark;
+  }
+  input:focus, select:focus, textarea:focus { outline: 2px solid #6e93ff; outline-offset: 1px; border-color: transparent; }
+  textarea { min-height: 120px; resize: vertical; }
+  form .btn-primary { background: #6e93ff; color: #0b1020; justify-content: center; }
+  .form-note { font-size: 0.85rem; color: #8a93a5; }
+  .form-success { background: rgba(74,222,128,.1); border: 1px solid rgba(74,222,128,.35); color: #b8f5cc; padding: 14px 16px; border-radius: 10px; font-size: 0.95rem; }
+
+  /* Footer */
+  footer { background: var(--dark); color: #8a93a5; border-top: 1px solid rgba(255,255,255,.08); padding-block: 36px; font-size: 0.9rem; }
+  .foot { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; align-items: center; }
+  .foot .logo { color: var(--dark-fg); font-size: 1.15rem; }
+  .foot .logo svg { color: #6e93ff; width: 22px; height: 22px; }
+  .foot nav { display: flex; gap: 24px; flex-wrap: wrap; }
+  .foot a { text-decoration: none; }
+  .foot a:hover { color: var(--dark-fg); }
+
+  /* Reveal */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    html { scroll-behavior: auto; }
+  }
+
+  /* Responsive */
+  @media (max-width: 960px) {
+    .hero-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+    .hero-visual { max-width: 480px; }
+    .services-grid, .cases-grid { grid-template-columns: 1fr 1fr; }
+    .steps { grid-template-columns: 1fr 1fr; }
+    .step:nth-child(3) { padding-left: 0; border-left: 0; }
+    .stats-grid { grid-template-columns: 1fr 1fr; row-gap: 32px; }
+  }
+  @media (max-width: 760px) {
+    .menu-toggle { display: block; }
+    .nav-links {
+      position: absolute; top: 70px; left: 0; right: 0;
+      flex-direction: column; align-items: stretch; gap: 0;
+      background: var(--bg); border-bottom: 1px solid var(--line);
+      padding: 8px 24px 20px;
+      display: none;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a { padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .nav-links .btn { margin-top: 16px; justify-content: center; border-bottom: 0; }
+  }
+  @media (max-width: 640px) {
+    body { font-size: 16px; }
+    .wrap { padding-inline: 18px; }
+    .services-grid, .cases-grid, .steps { grid-template-columns: 1fr; }
+    .step, .step + .step { padding-left: 0; border-left: 0; padding-bottom: 24px; }
+    .row { grid-template-columns: 1fr; }
+    .card, .case, form { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a href="#top" class="logo" aria-label="Northlane főoldal">
+      <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <path d="M16 2 L28 30 L16 23 L4 30 Z" fill="currentColor"/>
+        <path d="M16 2 L16 23" stroke="var(--bg)" stroke-width="1.5"/>
+      </svg>
+      Northlane
+    </a>
+    <button class="menu-toggle" aria-label="Menü megnyitása" aria-expanded="false" aria-controls="nav-links">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <nav class="nav-links" id="nav-links">
+      <a href="#szolgaltatasok">Szolgáltatások</a>
+      <a href="#folyamat">Hogyan dolgozunk</a>
+      <a href="#eredmenyek">Eredmények</a>
+      <a href="#rolunk">Rólunk</a>
+      <a href="#gyik">GYIK</a>
+      <a href="#kapcsolat" class="btn btn-primary">Konzultáció kérése</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">AI tanácsadás vállalatoknak</span>
+        <h1>Mesterséges intelligencia, <em>ami tényleg dolgozik</em> a cégéért.</h1>
+        <p class="lead">A Northlane segít eljutni az AI-ról szóló beszélgetésektől a mérhető üzleti eredményekig. Stratégiát építünk, folyamatokat automatizálunk, és felkészítjük a csapatát, hogy magabiztosan használja az új eszközöket.</p>
+        <div class="hero-cta">
+          <a href="#kapcsolat" class="btn btn-primary">Ingyenes első egyeztetés
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#szolgaltatasok" class="btn btn-ghost">Szolgáltatásaink</a>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <radialGradient id="glow" cx="50%" cy="38%" r="60%">
+              <stop offset="0" stop-color="#3b6bff" stop-opacity=".55"/>
+              <stop offset="1" stop-color="#0f1622" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="lane" x1="0" y1="1" x2="0" y2="0">
+              <stop offset="0" stop-color="#6e93ff" stop-opacity="0"/>
+              <stop offset="1" stop-color="#9db6ff" stop-opacity="1"/>
+            </linearGradient>
+          </defs>
+          <rect width="400" height="400" fill="#0f1622"/>
+          <rect width="400" height="400" fill="url(#glow)"/>
+          <g stroke="rgba(255,255,255,.07)" stroke-width="1">
+            <path d="M0 260 H400 M0 300 H400 M0 340 H400 M0 380 H400"/>
+            <path d="M200 160 L-100 400 M200 160 L0 400 M200 160 L100 400 M200 160 L300 400 M200 160 L400 400 M200 160 L500 400"/>
+          </g>
+          <path d="M200 160 L170 400 L230 400 Z" fill="url(#lane)" opacity=".35"/>
+          <path d="M200 160 L200 400" stroke="url(#lane)" stroke-width="2" stroke-dasharray="10 10">
+            <animate attributeName="stroke-dashoffset" from="0" to="-40" dur="1.4s" repeatCount="indefinite"/>
+          </path>
+          <g fill="#e8ebf1">
+            <circle cx="200" cy="96" r="3"/>
+            <circle cx="88" cy="60" r="1.4" opacity=".7"/>
+            <circle cx="320" cy="48" r="1.6" opacity=".7"/>
+            <circle cx="300" cy="120" r="1.2" opacity=".5"/>
+            <circle cx="60" cy="140" r="1.2" opacity=".5"/>
+            <circle cx="140" cy="30" r="1" opacity=".6"/>
+            <circle cx="360" cy="170" r="1" opacity=".5"/>
+          </g>
+          <path d="M200 70 L206 90 L226 96 L206 102 L200 122 L194 102 L174 96 L194 90 Z" fill="#ffffff">
+            <animate attributeName="opacity" values="1;.6;1" dur="3s" repeatCount="indefinite"/>
+          </path>
+        </svg>
+        <div class="hero-badge">
+          <span class="pulse"></span>
+          <span>Átlagosan 6–10 hét az első éles AI-megoldásig</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="wrap stats-grid">
+      <div class="stat reveal"><strong>40+</strong><span>lezárt vállalati projekt</span></div>
+      <div class="stat reveal"><strong>30%</strong><span>átlagos időmegtakarítás az automatizált folyamatokban</span></div>
+      <div class="stat reveal"><strong>1 200+</strong><span>képzett munkatárs</span></div>
+      <div class="stat reveal"><strong>9/10</strong><span>ügyfelünk folytatja velünk a munkát</span></div>
+    </div>
+  </div>
+
+  <!-- Services -->
+  <section id="szolgaltatasok">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Szolgáltatások</span>
+        <h2>A stratégiától a működő rendszerig</h2>
+        <p class="lead">Nem eszközöket árulunk, hanem üzleti problémákat oldunk meg. Ott kapcsolódunk be, ahol épp tart az AI-útján.</p>
+      </div>
+
+      <div class="services-grid">
+        <article class="card reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg></div>
+          <h3>AI-stratégia és ütemterv</h3>
+          <p>Feltérképezzük, hol hoz valódi értéket az AI a cégében, és priorizált, megvalósítható tervet készítünk.</p>
+          <ul><li>Felkészültségi felmérés</li><li>Use case-ek priorizálása megtérülés alapján</li><li>12–18 hónapos ütemterv</li></ul>
+        </article>
+
+        <article class="card reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h6v6H4zM14 14h6v6h-6z"/><path d="M10 7h4a3 3 0 0 1 3 3v4M14 17h-4a3 3 0 0 1-3-3v-4"/></svg></div>
+          <h3>Folyamatautomatizálás</h3>
+          <p>Az ismétlődő, időrabló feladatokat intelligens munkafolyamatokra cseréljük – a meglévő rendszereibe integrálva.</p>
+          <ul><li>Dokumentumfeldolgozás</li><li>Ügyfélszolgálati asszisztensek</li><li>Belső tudásbázis-kereső</li></ul>
+        </article>
+
+        <article class="card reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 9l-4 3 4 3M16 9l4 3-4 3M13.5 6l-3 12"/></svg></div>
+          <h3>Egyedi AI-fejlesztés</h3>
+          <p>Ahol a dobozos megoldás kevés, ott saját, a cég adataira épülő megoldást tervezünk és építünk.</p>
+          <ul><li>Prototípus 2–4 hét alatt</li><li>Nyelvi modellek integrálása</li><li>Biztonságos, skálázható architektúra</li></ul>
+        </article>
+
+        <article class="card reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8l9-4 9 4-9 4z"/><path d="M7 10v5c0 1.5 2.5 3 5 3s5-1.5 5-3v-5"/></svg></div>
+          <h3>Képzés és változásmenedzsment</h3>
+          <p>A technológia csak akkor működik, ha az emberek használják. Gyakorlati képzésekkel visszük végig a csapatot.</p>
+          <ul><li>Vezetői workshopok</li><li>Szerepkör-specifikus tréningek</li><li>Belső AI-nagykövet program</li></ul>
+        </article>
+
+        <article class="card reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+          <h3>Adatvédelem és megfelelés</h3>
+          <p>Felelős AI-használat a GDPR és az EU AI Act keretein belül – kockázatkezelés, belső szabályzatok, governance.</p>
+          <ul><li>AI Act megfelelőségi felmérés</li><li>Belső AI-használati szabályzat</li><li>Adatkezelési folyamatok</li></ul>
+        </article>
+
+        <article class="card reveal">
+          <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></div>
+          <h3>Mérés és folyamatos fejlesztés</h3>
+          <p>Minden bevezetett megoldáshoz mérőszámokat rendelünk, és folyamatosan finomítjuk, hogy az eredmény tartós legyen.</p>
+          <ul><li>KPI-k és dashboardok</li><li>Negyedéves felülvizsgálat</li><li>Üzemeltetési támogatás</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section id="folyamat" class="process">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Hogyan dolgozunk</span>
+        <h2>Négy lépés, világos eredményekkel</h2>
+        <p class="lead">Kis lépésekben haladunk, hogy minden fázis végén legyen valami kézzelfogható – és Ön dönthessen a folytatásról.</p>
+      </div>
+      <div class="steps">
+        <div class="step reveal">
+          <span class="step-num">01</span>
+          <h3>Felfedezés</h3>
+          <p>Interjúk a vezetőkkel és a csapattal, a folyamatok és az adatok átvilágítása.</p>
+          <span class="dur">1–2 hét</span>
+        </div>
+        <div class="step reveal">
+          <span class="step-num">02</span>
+          <h3>Stratégia</h3>
+          <p>Priorizált lehetőségek, üzleti eset és megtérülési számítás minden javaslathoz.</p>
+          <span class="dur">2 hét</span>
+        </div>
+        <div class="step reveal">
+          <span class="step-num">03</span>
+          <h3>Pilot</h3>
+          <p>A legígéretesebb ötletet valós környezetben, valós felhasználókkal teszteljük.</p>
+          <span class="dur">3–6 hét</span>
+        </div>
+        <div class="step reveal">
+          <span class="step-num">04</span>
+          <h3>Skálázás</h3>
+          <p>Bevezetés a teljes szervezetben, képzéssel, méréssel és üzemeltetési támogatással.</p>
+          <span class="dur">folyamatos</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cases -->
+  <section id="eredmenyek">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Eredmények</span>
+        <h2>Amit ügyfeleinkkel együtt elértünk</h2>
+        <p class="lead">Néhány példa a közelmúlt projektjeiből. Az ügyfeleink kérésére a cégneveket nem tüntetjük fel.</p>
+      </div>
+      <div class="cases-grid">
+        <article class="case reveal">
+          <span class="tag">Gyártás · 600 fő</span>
+          <div class="big">−45%</div>
+          <h3>Gyorsabb ajánlatkészítés</h3>
+          <p>AI-alapú asszisztens, amely a műszaki dokumentációból és a korábbi ajánlatokból készít első tervezetet az értékesítőknek.</p>
+        </article>
+        <article class="case reveal">
+          <span class="tag">Pénzügyi szolgáltatás · 250 fő</span>
+          <div class="big">3×</div>
+          <h3>Több feldolgozott dokumentum</h3>
+          <p>Automatizált adatkinyerés szerződésekből és számlákból, emberi jóváhagyással a kritikus pontokon.</p>
+        </article>
+        <article class="case reveal">
+          <span class="tag">Kereskedelem · 1 100 fő</span>
+          <div class="big">68%</div>
+          <h3>Önállóan megoldott ügyfélkérés</h3>
+          <p>Ügyfélszolgálati asszisztens a belső tudásbázisra építve, zökkenőmentes átadással az ügyintézőknek.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote -->
+  <section class="quote">
+    <div class="wrap">
+      <blockquote class="reveal">
+        <p>„Nem egy újabb prezentációt kaptunk, hanem egy működő megoldást – és egy csapatot, amely érti, hogyan használja.”</p>
+        <cite>— Operatív igazgató, hazai gyártóvállalat</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="rolunk" class="about">
+    <div class="wrap about-grid">
+      <div class="reveal">
+        <span class="eyebrow">Rólunk</span>
+        <h2>Az irány, ami előre visz</h2>
+        <p class="lead" style="margin-top:20px">A Northlane tanácsadókból, adattudósokból és mérnökökből álló csapat. Abban hiszünk, hogy az AI nem cél, hanem eszköz – és csak akkor ér valamit, ha kézzelfogható üzleti eredményt hoz.</p>
+        <p style="margin-top:16px; color:var(--muted)">Közepes és nagyvállalatokkal dolgozunk a gyártás, a pénzügy, a kereskedelem és a szolgáltatások területén. A stratégiai tervezéstől a megvalósításig egy kézben tartjuk a projektet, így nincs elveszett információ a fázisok között.</p>
+      </div>
+      <div class="values">
+        <div class="value reveal"><span class="n">01</span><div><b>Üzleti eredmény előbb</b><p>Minden projekt egy mérhető céllal indul – nem egy technológiával.</p></div></div>
+        <div class="value reveal"><span class="n">02</span><div><b>Gyártófüggetlenség</b><p>Azt az eszközt javasoljuk, ami Önnek a legjobb, nem azt, amit éppen árulni kell.</p></div></div>
+        <div class="value reveal"><span class="n">03</span><div><b>Átadható tudás</b><p>Úgy dolgozunk, hogy a projekt végére a csapata önállóan is tovább tudja vinni.</p></div></div>
+        <div class="value reveal"><span class="n">04</span><div><b>Felelős AI</b><p>Adatbiztonság, átláthatóság és emberi kontroll minden megoldásban.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="gyik" style="padding-top:0">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <span class="eyebrow">Gyakori kérdések</span>
+        <h2>Mielőtt felveszi velünk a kapcsolatot</h2>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>Mekkora cégeknek érdemes AI-tanácsadást igénybe venni?</summary>
+          <p>Jellemzően 50 és 5 000 fő közötti vállalatokkal dolgozunk, de a méretnél fontosabb, hogy legyenek ismétlődő, jól körülhatárolható folyamatok, amelyekben az automatizálás érezhető megtakarítást hoz.</p>
+        </details>
+        <details>
+          <summary>Mennyi idő alatt látunk eredményt?</summary>
+          <p>Az első működő pilot általában 6–10 héten belül elkészül. A felfedezési és stratégiai fázis végén már konkrét, megtérülési számítással alátámasztott javaslatokat kap.</p>
+        </details>
+        <details>
+          <summary>Mi történik az adatainkkal?</summary>
+          <p>Az adatai az Ön kontrollja alatt maradnak. Olyan megoldásokat választunk, amelyek megfelelnek a GDPR-nak és a vállalati biztonsági előírásoknak, és szükség esetén EU-s adatközpontban vagy saját infrastruktúrán futnak.</p>
+        </details>
+        <details>
+          <summary>Kell, hogy legyen saját IT- vagy adatcsapatunk?</summary>
+          <p>Nem feltétlenül. A megvalósítást teljes egészében vállaljuk, de ha van belső csapat, szorosan együttműködünk velük, és átadjuk a szükséges tudást az üzemeltetéshez.</p>
+        </details>
+        <details>
+          <summary>Hogyan áraznak?</summary>
+          <p>A felfedezési és stratégiai fázist fix díjjal végezzük, a megvalósítást projektalapon vagy havi keretszerződésben. Az első egyeztetés díjmentes, és utána írásos ajánlatot küldünk.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="kapcsolat" class="contact">
+    <div class="wrap contact-grid">
+      <div class="reveal">
+        <span class="eyebrow">Kapcsolat</span>
+        <h2>Beszéljünk arról, hol tart most.</h2>
+        <p class="lead">Egy 30 perces, díjmentes egyeztetésen átbeszéljük a céljait, és megmutatjuk, hol látjuk a leggyorsabb megtérülést. Kötelezettség nélkül.</p>
+        <div class="contact-info">
+          <div><small>E-mail</small><span>hello@northlane.hu</span></div>
+          <div><small>Telefon</small><span>+36 1 234 5678</span></div>
+          <div><small>Iroda</small><span>Budapest</span></div>
+        </div>
+      </div>
+
+      <form id="contact-form" class="reveal" novalidate>
+        <div class="row">
+          <label>Név<input type="text" name="nev" required autocomplete="name"></label>
+          <label>Cég<input type="text" name="ceg" required autocomplete="organization"></label>
+        </div>
+        <div class="row">
+          <label>E-mail<input type="email" name="email" required autocomplete="email"></label>
+          <label>Cégméret
+            <select name="meret">
+              <option>1–49 fő</option>
+              <option selected>50–249 fő</option>
+              <option>250–999 fő</option>
+              <option>1000+ fő</option>
+            </select>
+          </label>
+        </div>
+        <label>Miben segíthetünk?<textarea name="uzenet" placeholder="Pl. szeretnénk automatizálni az ügyfélszolgálati megkeresések egy részét…"></textarea></label>
+        <button type="submit" class="btn btn-primary">Konzultáció kérése</button>
+        <p class="form-note">Egy munkanapon belül válaszolunk. Adatait kizárólag a kapcsolatfelvételhez használjuk.</p>
+        <div class="form-success" hidden>Köszönjük! Megkaptuk az üzenetét, hamarosan jelentkezünk.</div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <a href="#top" class="logo">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 L28 30 L16 23 L4 30 Z" fill="currentColor"/></svg>
+      Northlane
+    </a>
+    <nav>
+      <a href="#szolgaltatasok">Szolgáltatások</a>
+      <a href="#folyamat">Folyamat</a>
+      <a href="#rolunk">Rólunk</a>
+      <a href="#kapcsolat">Kapcsolat</a>
+    </nav>
+    <span>© <span id="year">2026</span> Northlane. Minden jog fenntartva.</span>
+  </div>
+</footer>
+
+<script>
+  // Mobil menü
+  const toggle = document.querySelector('.menu-toggle');
+  const links = document.getElementById('nav-links');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    links.classList.remove('open');
+    toggle.setAttribute('aria-expanded', false);
+  }));
+
+  // Megjelenési animáció görgetéskor
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // Kapcsolati űrlap
+  const form = document.getElementById('contact-form');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    form.querySelector('.form-success').hidden = false;
+    form.reset();
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

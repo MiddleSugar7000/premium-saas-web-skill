@@ -1,0 +1,1087 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta name="robots" content="noindex">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Flowpilot — AI ügynökök Slackhez, Notionhöz és Gmailhez</title>
+<meta name="description" content="A Flowpilot AI ügynökei automatizálják a csapatod rutinmunkáját Slackben, Notionben és Gmailben. Beállítás 4 perc alatt, magyarul.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-0:#0D1017; --bg-1:#11141D; --bg-2:#191D2A; --bg-3:#252A32;
+  --light-0:#F8F9FA; --light-1:#F1F4F6; --light-2:#E4EAEE;
+  --line:rgb(148 163 184 / .14); --line-strong:rgb(148 163 184 / .3);
+  --fg:#fff; --fg-90:rgb(255 255 255/.9); --fg-80:rgb(255 255 255/.8); --fg-60:rgb(255 255 255/.62); --fg-50:rgb(255 255 255/.5); --fg-30:rgb(255 255 255/.3);
+  --ink:#0D1017; --ink-60:rgb(13 16 23/.66); --ink-line:rgb(16 24 40/.08);
+  --accent:#FF7A1A; --accent-soft:rgb(255 122 26/.14); --accent-deep:#5E1818; --glow:#FF3D00;
+  --font-display:"Sora",system-ui,sans-serif; --font-body:"Inter Tight",system-ui,sans-serif; --font-mono:"IBM Plex Mono",ui-monospace,monospace;
+  --r-btn:8px; --r-chip:12px; --r-card:20px; --r-panel:28px;
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{margin:0;background:var(--bg-0);color:var(--fg);font:400 16px/1.6 var(--font-body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:var(--accent);color:#120800}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.wrap{width:min(1200px,calc(100% - 32px));margin-inline:auto}
+section{position:relative}
+.sec{padding:clamp(88px,11vw,160px) 0}
+.mono{font-family:var(--font-mono)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- type ---------- */
+.display{font-family:var(--font-display);font-weight:400;font-size:clamp(42px,6.6vw,88px);line-height:1.04;letter-spacing:-.055em;margin:0;text-wrap:balance}
+.h2{font-family:var(--font-display);font-weight:400;font-size:clamp(34px,4.6vw,60px);line-height:1.08;letter-spacing:-.05em;margin:0;text-wrap:balance}
+.dim{color:var(--fg-50)}
+.lead{font-size:clamp(16px,1.4vw,19px);color:var(--fg-60);line-height:1.6;max-width:600px;margin:0}
+.tag{display:inline-flex;align-items:center;gap:8px;font:500 12px/1 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--fg-50)}
+.tag::before{content:"";width:6px;height:6px;border-radius:2px;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+.sec-head{display:grid;gap:20px;margin-bottom:clamp(48px,6vw,80px)}
+.sec-head.center{justify-items:center;text-align:center}
+.sec-head.center .lead{margin-inline:auto}
+
+/* ---------- buttons ---------- */
+.btn{position:relative;isolation:isolate;display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:var(--r-btn);font:500 15px/1.4 var(--font-mono);white-space:nowrap;transition:background .3s var(--ease),border-color .3s var(--ease),color .3s}
+.btn svg{width:16px;height:16px;transition:transform .35s var(--ease)}
+.btn:hover svg{transform:translateX(3px)}
+.btn-rainbow{--fill:var(--bg-2);color:#fff;border:1.5px solid transparent;
+  background:linear-gradient(var(--fill),var(--fill)) padding-box,
+    linear-gradient(#121213 0%,rgb(18 18 19/.6) 70%,rgb(18 18 19/0)) border-box,
+    linear-gradient(90deg,var(--fill),#8765FF,#FFF181,#FF4C52,#734CFF,#8765FF,#FFF181,#FF4C52,#734CFF,var(--fill)) border-box;
+  background-size:400% 100%;animation:rainbow 15s linear infinite}
+.btn-rainbow::before{content:"";position:absolute;z-index:-1;left:50%;bottom:-28%;width:80%;height:42%;translate:-50% 0;
+  background:linear-gradient(90deg,#30E3FF,#8765FF,#FFF181,#FF4C52,#734CFF,#30E3FF,#8765FF,#FFF181,#FF4C52,#734CFF,#30E3FF);
+  background-size:400% 100%;animation:rainbow 15s linear infinite;filter:blur(14px);opacity:.85;transition:filter .5s var(--ease),opacity .5s}
+.btn-rainbow:hover::before{filter:blur(9px);opacity:1}
+@keyframes rainbow{to{background-position:400% 0}}
+.btn-ghost{color:var(--fg-80);border:1px solid var(--line-strong);background:rgb(255 255 255/.02)}
+.btn-ghost:hover{color:#fff;border-color:rgb(148 163 184/.5);background:rgb(255 255 255/.05)}
+.btn-white{color:var(--ink);background:linear-gradient(90deg,#DCE2E6 0%,#fff 72%);box-shadow:inset 0 -2px 0 rgb(0 0 0/.12),inset 0 1px 0 #fff}
+.btn-white .side-glow{position:absolute;z-index:-1;right:-4px;top:50%;translate:0 -50%;width:80px;height:50px;border-radius:999px;background:linear-gradient(270deg,var(--accent),rgb(255 210 120/.2));filter:blur(14px);opacity:.75;transition:transform .5s var(--ease)}
+.btn-white:hover .side-glow{transform:translateX(6px) scale(1.12)}
+.btn-dark{color:#fff;background:var(--ink);box-shadow:inset 0 1px 0 rgb(255 255 255/.12)}
+.btn-dark:hover{background:#1c2130}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;top:16px;left:50%;translate:-50% 0;z-index:60;width:min(1200px,calc(100% - 32px));display:flex;align-items:center;justify-content:space-between;gap:16px;padding:9px 9px 9px 18px;border-radius:16px;background:rgb(255 255 255/.04);border:1px solid rgb(255 255 255/.07);backdrop-filter:blur(24px) saturate(140%);-webkit-backdrop-filter:blur(24px) saturate(140%);transition:background .4s var(--ease),border-color .4s}
+.nav.scrolled{background:rgb(13 16 23/.72);border-color:rgb(255 255 255/.09)}
+.brand{display:flex;align-items:center;gap:10px;font:600 17px/1 var(--font-display);letter-spacing:-.03em}
+.brand-mark{width:28px;height:28px}
+.nav-links{display:flex;gap:4px}
+.nav-links a{padding:8px 14px;border-radius:8px;font-size:14px;color:var(--fg-60);transition:color .2s,background .2s}
+.nav-links a:hover{color:#fff;background:rgb(255 255 255/.05)}
+.nav-cta{display:flex;align-items:center;gap:8px}
+.nav-cta .login{font-size:14px;color:var(--fg-60);padding:8px 12px;transition:color .2s}
+.nav-cta .login:hover{color:#fff}
+.nav .btn{padding:9px 16px;font-size:13.5px}
+.menu-btn{display:none;width:40px;height:40px;border-radius:10px;border:1px solid var(--line);place-items:center}
+.menu-btn span{display:block;width:16px;height:1.5px;background:#fff;position:relative;transition:transform .3s var(--ease)}
+.menu-btn span::before,.menu-btn span::after{content:"";position:absolute;left:0;width:16px;height:1.5px;background:#fff;transition:transform .3s var(--ease)}
+.menu-btn span::before{top:-5px}.menu-btn span::after{top:5px}
+.nav.open .menu-btn span{background:transparent}
+.nav.open .menu-btn span::before{transform:translateY(5px) rotate(45deg)}
+.nav.open .menu-btn span::after{transform:translateY(-5px) rotate(-45deg)}
+.mobile-menu{display:none}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;isolation:isolate;padding:clamp(140px,16vw,190px) 0 0;background:var(--bg-0)}
+.glow{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.g{position:absolute;display:block}
+.g1{top:-18%;left:50%;width:880px;height:500px;translate:-62% 0;background:var(--glow);filter:blur(110px);opacity:.9;animation:drift 18s ease-in-out infinite alternate}
+.g2{top:-8%;right:-6%;width:260px;height:300px;background:var(--accent);filter:blur(130px);opacity:.55}
+.e1{top:-26%;left:50%;width:720px;height:500px;translate:-60% 0;border-radius:200px;background:var(--bg-0);filter:blur(100px)}
+.e2{top:30%;left:50%;width:min(1900px,160vw);height:1100px;translate:-50% 0;border-radius:300px;background:var(--bg-0);filter:blur(140px)}
+.core{top:52%;left:50%;width:520px;height:220px;translate:-50% 0;border-radius:999px;background:linear-gradient(var(--accent-deep),var(--accent));filter:blur(110px);opacity:.55}
+@keyframes drift{to{transform:translate(60px,30px)}}
+.guides{position:absolute;inset:0;z-index:-1;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0 calc(16.666% - 1px),rgb(255 255 255/.035) calc(16.666% - 1px) 16.666%);mask-image:linear-gradient(to bottom,#000 10%,transparent 70%);-webkit-mask-image:linear-gradient(to bottom,#000 10%,transparent 70%)}
+.noise::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.07;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.hero-inner{display:grid;justify-items:center;text-align:center;gap:26px}
+.pill-eyebrow{display:inline-flex;align-items:center;gap:10px;padding:5px 12px 5px 5px;border-radius:999px;font-size:13px;color:var(--fg-80);background:rgb(255 255 255/.05);border:1px solid var(--line);backdrop-filter:blur(10px);transition:border-color .3s}
+.pill-eyebrow:hover{border-color:var(--line-strong)}
+.pill-eyebrow b{font:500 11px/1 var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:#1a0b00;background:var(--accent);padding:5px 8px;border-radius:999px}
+.pill-eyebrow svg{width:14px;height:14px;opacity:.6;transition:transform .3s var(--ease)}
+.pill-eyebrow:hover svg{transform:translateX(2px)}
+.hero h1{max-width:980px}
+.hero .lead{max-width:640px}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:6px}
+.proof{display:inline-flex;align-items:center;gap:12px;font-size:13px;line-height:1.35;text-align:left;color:var(--fg-60)}
+.proof strong{color:#fff;font-weight:500}
+.avatars{display:flex}
+.avatars img{width:32px;height:32px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 2px var(--bg-0);margin-left:-9px;background:var(--bg-3)}
+.avatars img:first-child{margin-left:0}
+.stars{display:flex;gap:2px;color:var(--accent);margin-bottom:2px}
+.stars svg{width:12px;height:12px}
+
+/* ---------- mockup ---------- */
+.mock-wrap{position:relative;max-width:1180px;margin:72px auto 0;perspective:1400px}
+.mock{position:relative;border-radius:16px;overflow:hidden;background:#0A0D13;border:1px solid rgb(255 122 26/.38);box-shadow:0 0 0 1px rgb(255 122 26/.08),0 0 50px rgb(255 61 0/.28),0 0 140px rgb(255 61 0/.14);transform-origin:50% 0}
+.mock::before{content:"";position:absolute;inset:0 0 auto;height:1px;background:linear-gradient(90deg,transparent,rgb(255 180 120/.8),transparent);z-index:3}
+.mock-bar{display:flex;align-items:center;gap:7px;padding:12px 16px;border-bottom:1px solid var(--line);background:#0E1219}
+.mock-bar i{width:10px;height:10px;border-radius:50%;background:#3a3f4b}
+.mock-url{margin-inline:auto;display:flex;align-items:center;gap:6px;padding:5px 60px;border-radius:7px;background:var(--bg-2);font:400 12px/1.2 var(--font-mono);color:var(--fg-50)}
+.mock-url svg{width:11px;height:11px}
+.mock-body{display:grid;grid-template-columns:220px 1fr 260px;min-height:540px;text-align:left}
+.m-side{border-right:1px solid var(--line);padding:18px 12px;display:flex;flex-direction:column;gap:4px;background:#0C0F16}
+.m-ws{display:flex;align-items:center;gap:10px;padding:6px 8px 16px;font-size:13px;font-weight:500}
+.m-ws i{width:22px;height:22px;border-radius:6px;background:linear-gradient(135deg,#FF9A3D,#C2410C);display:grid;place-items:center;font:600 11px var(--font-display);font-style:normal;color:#1a0b00}
+.m-label{font:500 10.5px/1 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--fg-30);padding:14px 8px 8px}
+.m-item{display:flex;align-items:center;gap:10px;padding:8px;border-radius:8px;font-size:13px;color:var(--fg-60)}
+.m-item svg{width:15px;height:15px;opacity:.7}
+.m-item.active{background:rgb(255 255 255/.05);color:#fff;box-shadow:inset 0 1px 0 rgb(255 255 255/.04)}
+.m-item .dot{width:7px;height:7px;border-radius:50%;background:#3DDC84;box-shadow:0 0 8px #3DDC84;margin-left:auto}
+.m-item .dot.idle{background:#4b5160;box-shadow:none}
+.m-item .dot.run{background:var(--accent);box-shadow:0 0 8px var(--accent);animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.35}}
+.m-main{padding:22px 26px;display:flex;flex-direction:column;gap:18px;min-width:0}
+.m-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.m-title{font:500 17px/1.3 var(--font-display);letter-spacing:-.02em}
+.m-sub{font-size:12.5px;color:var(--fg-50);margin-top:3px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;font:500 11.5px/1 var(--font-mono);border:1px solid var(--line);color:var(--fg-60);background:rgb(255 255 255/.03);white-space:nowrap}
+.chip.live{color:#ffd2b0;border-color:rgb(255 122 26/.35);background:var(--accent-soft)}
+.chip.live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse 1.6s infinite}
+.chip.ok{color:#a6f0c6;border-color:rgb(61 220 132/.25);background:rgb(61 220 132/.08)}
+.run{display:flex;flex-direction:column;gap:0;position:relative}
+.step{display:grid;grid-template-columns:34px 1fr auto;gap:14px;align-items:start;padding:12px 0;position:relative}
+.step:not(:last-child)::after{content:"";position:absolute;left:16.5px;top:46px;bottom:-12px;width:1px;background:linear-gradient(var(--line-strong),var(--line))}
+.ico{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--bg-2);border:1px solid var(--line);box-shadow:inset 0 1px 0 rgb(255 255 255/.05)}
+.ico svg{width:17px;height:17px}
+.ico.ai{background:linear-gradient(160deg,#3a1d0b,#1a120d);border-color:rgb(255 122 26/.4);color:var(--accent)}
+.step-t{font-size:13.5px;font-weight:500;color:var(--fg-90)}
+.step-d{font-size:12.5px;color:var(--fg-50);margin-top:2px}
+.step-time{font:400 11px/1 var(--font-mono);color:var(--fg-30);padding-top:4px}
+.bubble{margin-top:10px;padding:12px 14px;border-radius:12px;background:var(--bg-2);border:1px solid var(--line);font-size:12.5px;color:var(--fg-80);line-height:1.55}
+.bubble .who{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:600;color:#fff;margin-bottom:6px}
+.bubble .who em{font-style:normal;font:500 10px/1 var(--font-mono);color:var(--accent);background:var(--accent-soft);padding:3px 6px;border-radius:4px}
+.bubble .mention{color:#ffc79c;background:rgb(255 122 26/.12);padding:0 3px;border-radius:3px}
+.b-actions{display:flex;gap:8px;margin-top:10px}
+.b-actions span{padding:6px 11px;border-radius:7px;font-size:11.5px;border:1px solid var(--line-strong);color:var(--fg-80)}
+.b-actions span:first-child{background:#fff;color:var(--ink);border-color:#fff;font-weight:500}
+.kv{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.m-aside{border-left:1px solid var(--line);padding:22px 18px;display:flex;flex-direction:column;gap:14px;background:#0C0F16}
+.stat-box{padding:14px;border-radius:12px;background:rgb(255 255 255/.025);border:1px solid var(--line)}
+.stat-box small{display:block;font:500 10.5px/1 var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--fg-30);margin-bottom:10px}
+.stat-box strong{font:400 26px/1 var(--font-display);letter-spacing:-.04em}
+.stat-box strong span{font-size:13px;color:var(--fg-50);letter-spacing:0;margin-left:4px}
+.bars{display:flex;align-items:flex-end;gap:5px;height:56px;margin-top:12px}
+.bars i{flex:1;border-radius:3px 3px 1px 1px;background:rgb(255 255 255/.1);height:var(--h)}
+.bars i:nth-last-child(-n+2){background:linear-gradient(var(--accent),rgb(255 122 26/.35))}
+.mini-list{display:flex;flex-direction:column;gap:8px;font-size:12px;color:var(--fg-60)}
+.mini-list div{display:flex;justify-content:space-between}
+.mini-list b{font-weight:500;color:var(--fg-90)}
+.mock-fade{position:absolute;left:-2px;right:-2px;bottom:-2px;height:min(380px,48%);background:linear-gradient(180deg,transparent,var(--bg-0) 92%);pointer-events:none;z-index:4}
+
+/* app glyph colors kept monochrome-ish, one accent */
+.app-g{color:var(--fg-80)}
+
+/* ---------- logos ---------- */
+.logos{padding:24px 0 clamp(80px,9vw,120px);text-align:center}
+.logos p{font-size:13px;color:var(--fg-50);margin:0 0 30px}
+.marquee{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 14%,#000 86%,transparent)}
+.marquee-track{display:flex;gap:72px;width:max-content;animation:marquee 42s linear infinite;padding-right:72px}
+.marquee:hover .marquee-track{animation-play-state:paused}
+@keyframes marquee{to{transform:translateX(-50%)}}
+.logo{display:flex;align-items:center;gap:9px;font-size:21px;color:var(--fg-50);opacity:.8;transition:color .3s,opacity .3s;white-space:nowrap}
+.logo:hover{color:#fff;opacity:1}
+.logo svg{width:22px;height:22px}
+
+/* ---------- bento ---------- */
+.bento{display:grid;gap:16px;grid-template-columns:repeat(6,1fr);grid-auto-rows:minmax(240px,auto)}
+.cell{position:relative;overflow:hidden;border-radius:var(--r-card);border:1px solid var(--line);padding:26px;display:flex;flex-direction:column;gap:22px;
+  --x:50%;--y:50%;background:radial-gradient(420px circle at var(--x) var(--y),rgb(255 255 255/.05),transparent 45%),var(--bg-2);
+  box-shadow:inset 0 1px 0 rgb(255 255 255/.05);transition:border-color .4s var(--ease),transform .4s var(--ease)}
+.cell:hover{border-color:var(--line-strong)}
+.cell.leak::before{content:"";position:absolute;top:-35%;right:-20%;width:65%;height:70%;border-radius:50%;background:radial-gradient(circle,rgb(255 92 0/.5),transparent 70%);filter:blur(50px);pointer-events:none}
+.cell h3{font:500 19px/1.3 var(--font-display);letter-spacing:-.025em;margin:0}
+.cell p{margin:6px 0 0;color:var(--fg-60);font-size:14.5px;line-height:1.55;max-width:420px}
+.cell .ui{position:relative;flex:1;min-height:150px;border-radius:14px;background:rgb(255 255 255/.025);border:1px solid var(--line);overflow:hidden}
+.c-flow{grid-column:span 4}
+.c-slack{grid-column:span 2;grid-row:span 2}
+.c-mail{grid-column:span 2}
+.c-notion{grid-column:span 2}
+.c-human{grid-column:span 3}
+.c-time{grid-column:span 3}
+.flow-svg{width:100%;height:100%;min-height:200px}
+.flow-svg text{font-family:var(--font-body)}
+.dotgrid{position:absolute;inset:0;background-image:radial-gradient(rgb(255 255 255/.09) 1px,transparent 1px);background-size:18px 18px;mask-image:radial-gradient(ellipse at center,#000 30%,transparent 80%);-webkit-mask-image:radial-gradient(ellipse at center,#000 30%,transparent 80%)}
+.slack-ui{padding:16px;display:flex;flex-direction:column;justify-content:flex-end;gap:14px}
+.slack-ui .s-chan{margin-bottom:auto}
+.s-chan{display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:600;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.s-chan span{font:400 11px var(--font-mono);color:var(--fg-30)}
+.msg{display:grid;grid-template-columns:30px 1fr;gap:10px;font-size:12.5px;line-height:1.5;color:var(--fg-80)}
+.msg img,.msg .av{width:30px;height:30px;border-radius:8px;object-fit:cover}
+.msg .av{display:grid;place-items:center;background:linear-gradient(160deg,#3a1d0b,#1a120d);border:1px solid rgb(255 122 26/.4);color:var(--accent)}
+.msg .av svg{width:15px;height:15px}
+.msg b{display:block;font-size:12.5px;color:#fff;font-weight:600}
+.msg b em{font-style:normal;font:500 9.5px var(--font-mono);color:var(--accent);background:var(--accent-soft);padding:2px 5px;border-radius:3px;margin-left:5px}
+.msg b small{font-weight:400;color:var(--fg-30);font-size:11px;margin-left:6px}
+.msg .card{margin-top:8px;padding:10px 12px;border-left:2px solid var(--accent);background:rgb(255 255 255/.03);border-radius:0 8px 8px 0;font-size:12px;color:var(--fg-60)}
+.msg .card strong{color:var(--fg-90);font-weight:500}
+.typing{display:inline-flex;gap:4px;padding:10px 12px;border-radius:10px;background:rgb(255 255 255/.04);width:max-content}
+.typing i{width:5px;height:5px;border-radius:50%;background:var(--fg-50);animation:typing 1.2s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes typing{0%,60%,100%{transform:none;opacity:.4}30%{transform:translateY(-3px);opacity:1}}
+.mail-ui{padding:8px}
+.mail-row{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:10px;border-radius:10px;font-size:12.5px}
+.mail-row+.mail-row{border-top:1px solid var(--line);border-radius:0}
+.mail-row b{font-weight:500;color:var(--fg-90)}
+.mail-row span{color:var(--fg-50);grid-column:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mail-row .chip{grid-row:1/3;grid-column:2;align-self:center}
+.notion-ui{font-size:12px}
+.n-row{display:grid;grid-template-columns:1.4fr 1fr .9fr;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);align-items:center;color:var(--fg-80)}
+.n-row.h{font:500 10.5px var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--fg-30)}
+.n-row:last-child{border-bottom:0}
+.n-row .chip{font-size:10.5px;padding:4px 8px;justify-self:start}
+.n-row.new{background:linear-gradient(90deg,rgb(255 122 26/.1),transparent);animation:rowIn 4s var(--ease) infinite}
+@keyframes rowIn{0%,10%{opacity:0;transform:translateY(-6px)}22%,90%{opacity:1;transform:none}100%{opacity:1}}
+.toggles{padding:16px;display:flex;flex-direction:column;gap:10px}
+.tg{display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:13px;color:var(--fg-80);padding:10px 12px;border-radius:10px;background:rgb(255 255 255/.02);border:1px solid var(--line)}
+.tg small{display:block;color:var(--fg-50);font-size:11.5px}
+.sw{flex:none;width:36px;height:20px;border-radius:999px;background:var(--bg-3);position:relative;box-shadow:inset 0 1px 2px rgb(0 0 0/.4);transition:background .4s var(--ease)}
+.sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#cfd4dc;box-shadow:0 1px 2px rgb(0 0 0/.4);transition:transform .4s var(--ease),background .4s}
+.sw.on{background:var(--accent)}
+.sw.on::after{transform:translateX(16px);background:#fff}
+.spark-ui{padding:16px 16px 10px;display:flex;flex-direction:column}
+.spark-top{display:flex;justify-content:space-between;align-items:flex-end}
+.spark-top strong{font:400 34px/1 var(--font-display);letter-spacing:-.05em}
+.spark-top strong span{font-size:14px;color:var(--fg-50);letter-spacing:0}
+.spark-svg{width:100%;height:110px;margin-top:8px}
+.spark-line{stroke-dasharray:700;stroke-dashoffset:700}
+.spark-line.drawn{animation:draw 2.4s var(--ease) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* ---------- scroll fill ---------- */
+.statement{background:var(--bg-1);overflow:hidden}
+.fill-text{font-family:var(--font-display);font-weight:400;font-size:clamp(30px,4.6vw,64px);line-height:1.12;letter-spacing:-.045em;margin:0;max-width:1080px}
+.fill-text .line{background:linear-gradient(to right,#fff 50%,rgb(255 255 255/.18) 50%);background-size:200% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent}
+.statement .glow-soft{position:absolute;right:-10%;bottom:-30%;width:600px;height:500px;border-radius:50%;background:var(--glow);filter:blur(160px);opacity:.18;pointer-events:none}
+.statement-meta{display:flex;align-items:center;gap:14px;margin-top:48px;font-size:14px;color:var(--fg-60)}
+.statement-meta img{width:44px;height:44px;border-radius:50%;object-fit:cover}
+.statement-meta strong{display:block;color:#fff;font-weight:500}
+
+/* ---------- numbers ---------- */
+.numbers{overflow:hidden}
+.giant{position:absolute;right:-2vw;top:50%;translate:0 -50%;font:300 clamp(200px,34vw,520px)/.8 var(--font-display);letter-spacing:-.08em;background:linear-gradient(180deg,rgb(255 255 255/.07),rgb(255 255 255/0) 80%);-webkit-background-clip:text;background-clip:text;color:transparent;pointer-events:none;user-select:none}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);position:relative}
+.stat{padding:40px 28px 36px;position:relative}
+.stat+.stat{border-left:1px solid var(--line)}
+.stat .n{font:400 clamp(44px,5vw,68px)/1 var(--font-display);letter-spacing:-.055em;white-space:nowrap}
+.stat .n span{color:var(--accent)}
+.stat p{margin:16px 0 0;color:var(--fg-60);font-size:14.5px;max-width:220px}
+
+/* ---------- steps (stacking) ---------- */
+.steps{background:var(--bg-1)}
+.stack{display:flex;flex-direction:column;gap:32px}
+.stack-card{position:sticky;top:110px;display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(24px,4vw,64px);align-items:center;padding:clamp(28px,4vw,52px);border-radius:var(--r-panel);border:1px solid var(--line);background:radial-gradient(70% 70% at 15% -10%,rgb(255 255 255/.06),transparent),var(--bg-2);box-shadow:inset 0 1px 0 rgb(255 255 255/.06),0 -20px 60px -20px rgb(0 0 0/.6);transform-origin:50% 0;min-height:420px}
+.stack-card:nth-child(2){top:126px}.stack-card:nth-child(3){top:142px}
+.step-no{font:500 13px/1 var(--font-mono);color:var(--accent);letter-spacing:.06em}
+.stack-card h3{font:400 clamp(28px,3.2vw,42px)/1.1 var(--font-display);letter-spacing:-.045em;margin:18px 0 16px}
+.stack-card p{color:var(--fg-60);margin:0;max-width:440px}
+.stack-card ul{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:10px;font-size:14.5px;color:var(--fg-80)}
+.stack-card li{display:flex;gap:10px;align-items:center}
+.stack-card li svg{width:16px;height:16px;color:var(--accent);flex:none}
+.panel{border-radius:18px;border:1px solid var(--line);background:#0C0F16;padding:20px;box-shadow:inset 0 1px 0 rgb(255 255 255/.04)}
+.connect{display:flex;flex-direction:column;gap:10px}
+.conn{display:flex;align-items:center;gap:14px;padding:14px;border-radius:12px;border:1px solid var(--line);background:rgb(255 255 255/.02)}
+.conn .ico{width:40px;height:40px}
+.conn div{flex:1;font-size:14px;font-weight:500}
+.conn div small{display:block;color:var(--fg-50);font-weight:400;font-size:12px}
+.prompt{border-radius:16px;padding:16px;border:1.5px solid transparent;background:linear-gradient(#11141D,#11141D) padding-box,linear-gradient(140deg,rgb(255 122 26/.7),rgb(255 255 255/.06) 40%,rgb(255 255 255/.06) 70%,rgb(255 122 26/.4)) border-box}
+.prompt-text{font-size:15px;line-height:1.6;color:var(--fg-90);min-height:96px}
+.caret{display:inline-block;width:2px;height:1.1em;background:var(--accent);vertical-align:-3px;margin-left:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.prompt-foot{display:flex;justify-content:space-between;align-items:center;margin-top:14px;gap:10px}
+.prompt-foot .chips{display:flex;gap:6px;flex-wrap:wrap}
+.send{width:34px;height:34px;border-radius:50%;background:#fff;color:var(--ink);display:grid;place-items:center;flex:none}
+.send svg{width:16px;height:16px}
+.plan{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.plan div{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--fg-80);padding:10px 12px;border-radius:10px;background:rgb(255 255 255/.02);border:1px dashed var(--line-strong)}
+.plan div b{font:500 11px var(--font-mono);color:var(--fg-30);width:18px}
+.log{display:flex;flex-direction:column;gap:2px;font:400 12.5px/1.5 var(--font-mono)}
+.log div{display:grid;grid-template-columns:62px 1fr auto;gap:10px;padding:9px 6px;border-bottom:1px solid var(--line);color:var(--fg-60)}
+.log div:last-child{border-bottom:0}
+.log time{color:var(--fg-30)}
+.log .okk{color:#7ee2a8}.log .wait{color:var(--accent)}
+
+/* ---------- testimonials (light) ---------- */
+.light{background:var(--light-0);color:var(--ink)}
+.light .h2 .dim{color:rgb(13 16 23/.42)}
+.light .lead{color:var(--ink-60)}
+.light .tag{color:rgb(13 16 23/.55)}
+.t-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;height:720px;overflow:hidden;mask-image:linear-gradient(transparent,#000 14%,#000 86%,transparent);-webkit-mask-image:linear-gradient(transparent,#000 14%,#000 86%,transparent)}
+.t-col{display:flex;flex-direction:column;gap:16px;animation:vmarq 46s linear infinite}
+.t-col:nth-child(2){animation-duration:56s;animation-direction:reverse}
+.t-col:nth-child(3){animation-duration:50s}
+.t-cols:hover .t-col{animation-play-state:paused}
+@keyframes vmarq{to{transform:translateY(calc(-50% - 8px))}}
+.t-card{background:#fff;border:1px solid var(--ink-line);border-radius:var(--r-card);padding:24px;box-shadow:0 1px 4px rgb(16 24 40/.06),inset 0 -2px 0 rgb(16 24 40/.03)}
+.t-card blockquote{margin:0;font-size:15.5px;line-height:1.6;color:rgb(13 16 23/.82)}
+.t-card blockquote mark{background:linear-gradient(transparent 60%,rgb(255 122 26/.25) 60%);color:inherit}
+.t-who{display:flex;align-items:center;gap:12px;margin-top:20px;font-size:13.5px}
+.t-who img{width:40px;height:40px;border-radius:50%;object-fit:cover}
+.t-who strong{display:block;font-weight:600}
+.t-who span{color:var(--ink-60)}
+.t-metric{display:inline-block;margin-bottom:14px;font:500 12px var(--font-mono);color:#B4470A;background:rgb(255 122 26/.1);padding:5px 9px;border-radius:6px}
+
+/* ---------- pricing ---------- */
+.pricing{overflow:hidden}
+.pricing .glow-soft{position:absolute;left:50%;top:45%;translate:-50% 0;width:700px;height:420px;border-radius:50%;background:var(--glow);filter:blur(160px);opacity:.16;pointer-events:none}
+.billing{display:inline-flex;padding:4px;border-radius:999px;border:1px solid var(--line);background:rgb(255 255 255/.03);position:relative}
+.billing button{position:relative;z-index:1;padding:8px 18px;border-radius:999px;font:500 13px var(--font-mono);color:var(--fg-60);transition:color .3s}
+.billing button[aria-pressed="true"]{color:var(--ink)}
+.billing .knob{position:absolute;top:4px;bottom:4px;left:4px;border-radius:999px;background:#fff;transition:transform .45s var(--ease),width .45s var(--ease)}
+.billing .save{font-size:11px;color:var(--accent);margin-left:6px}
+.billing button[aria-pressed="true"] .save{color:#B4470A}
+.prices{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;align-items:start}
+.price-card{position:relative;border-radius:24px;padding:32px;background:var(--bg-2);border:1px solid var(--line);box-shadow:inset 0 1px 0 rgb(255 255 255/.05);display:flex;flex-direction:column;gap:24px}
+.price-card.featured{background:radial-gradient(80% 60% at 30% -10%,rgb(255 122 26/.14),transparent),var(--bg-2);border-color:rgb(255 122 26/.45);box-shadow:0 30px 90px -30px rgb(255 61 0/.5),inset 0 1px 0 rgb(255 200 160/.2);translate:0 -14px}
+.price-card .badge{position:absolute;top:24px;right:24px}
+.price-card h3{font:500 18px var(--font-display);letter-spacing:-.02em;margin:0}
+.price-card .desc{color:var(--fg-60);font-size:14px;margin:8px 0 0;min-height:44px}
+.price{font:400 52px/1 var(--font-display);letter-spacing:-.055em;display:flex;align-items:baseline;gap:8px;white-space:nowrap}
+.price small{font:400 14px var(--font-body);letter-spacing:0;color:var(--fg-50)}
+.price-note{font-size:12.5px;color:var(--fg-50);margin-top:8px;min-height:20px}
+.price-card .btn{justify-content:center}
+.feat{list-style:none;padding:24px 0 0;margin:0;border-top:1px solid var(--line);display:grid;gap:12px;font-size:14px;color:var(--fg-80)}
+.feat li{display:flex;gap:10px;align-items:flex-start}
+.feat svg{width:16px;height:16px;flex:none;margin-top:3px;color:var(--fg-50)}
+.featured .feat svg{color:var(--accent)}
+
+/* ---------- faq ---------- */
+.faq{background:var(--bg-1)}
+.faq-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:clamp(32px,6vw,96px)}
+.faq-grid .sec-head{position:sticky;top:120px;align-self:start}
+.qa{border-bottom:1px solid var(--line)}
+.qa:first-child{border-top:1px solid var(--line)}
+.qa button{width:100%;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:24px 0;text-align:left;font:400 18px/1.4 var(--font-display);letter-spacing:-.02em;color:var(--fg-90);transition:color .2s}
+.qa button:hover{color:#fff}
+.plus{flex:none;width:28px;height:28px;border-radius:8px;border:1px solid var(--line-strong);position:relative;transition:background .3s,border-color .3s}
+.plus::before,.plus::after{content:"";position:absolute;left:50%;top:50%;width:11px;height:1.5px;background:currentColor;translate:-50% -50%;transition:transform .4s var(--ease)}
+.plus::after{transform:rotate(90deg)}
+.qa.open .plus{background:var(--accent);border-color:var(--accent);color:#1a0b00}
+.qa.open .plus::after{transform:rotate(0)}
+.ans{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--ease)}
+.ans>div{overflow:hidden}
+.ans p{margin:0;padding:0 48px 26px 0;color:var(--fg-60);font-size:15.5px}
+.qa.open .ans{grid-template-rows:1fr}
+
+/* ---------- final cta ---------- */
+.cta{overflow:hidden;isolation:isolate;text-align:center;padding:clamp(120px,14vw,200px) 0}
+.cta .glow .c1{left:50%;bottom:-30%;width:900px;height:520px;translate:-50% 0;border-radius:50%;background:var(--glow);filter:blur(120px);opacity:.85}
+.cta .glow .c2{left:50%;bottom:-48%;width:1300px;height:620px;translate:-50% 0;border-radius:50%;background:var(--bg-0);filter:blur(90px)}
+.cta .glow .c3{left:50%;bottom:4%;width:300px;height:160px;translate:-50% 0;border-radius:50%;background:linear-gradient(var(--accent),#FFC58A);filter:blur(80px);opacity:.6}
+.arc{position:absolute;left:50%;bottom:-90%;width:min(1400px,170vw);aspect-ratio:1;translate:-50% 0;border-radius:50%;border-top:1px solid rgb(255 160 100/.55);box-shadow:0 -1px 40px rgb(255 100 30/.25);z-index:-1;pointer-events:none}
+.cta .display{max-width:880px;margin-inline:auto}
+.cta .lead{margin:24px auto 40px}
+.cta-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.cta-meta{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:28px;font-size:13px;color:var(--fg-50)}
+.cta-meta span{display:flex;gap:7px;align-items:center}
+.cta-meta svg{width:14px;height:14px;color:var(--accent)}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);padding-top:72px;overflow:hidden;background:var(--bg-0)}
+.f-grid{display:grid;grid-template-columns:1.6fr repeat(3,1fr);gap:40px}
+.f-grid p{color:var(--fg-50);font-size:14px;max-width:300px;margin:16px 0 0}
+.f-grid h4{font:500 12px/1 var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--fg-30);margin:6px 0 18px}
+.f-grid ul{list-style:none;margin:0;padding:0;display:grid;gap:10px;font-size:14px}
+.f-grid ul a{color:var(--fg-60);transition:color .2s}
+.f-grid ul a:hover{color:#fff}
+.status{display:inline-flex;align-items:center;gap:8px;margin-top:22px;font-size:12.5px;color:var(--fg-60);padding:6px 12px;border:1px solid var(--line);border-radius:999px}
+.status i{width:7px;height:7px;border-radius:50%;background:#3DDC84;box-shadow:0 0 8px #3DDC84}
+.f-bottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:64px;padding-top:24px;border-top:1px solid var(--line);font-size:13px;color:var(--fg-30)}
+.wordmark{font:500 clamp(90px,21vw,320px)/.78 var(--font-display);letter-spacing:-.075em;text-align:center;margin:40px 0 -0.06em;background:linear-gradient(180deg,rgb(255 255 255/.16) 0%,rgb(255 255 255/0) 85%);-webkit-background-clip:text;background-clip:text;color:transparent;user-select:none;white-space:nowrap}
+
+/* ---------- responsive ---------- */
+@media (max-width:1080px){
+  .mock-body{grid-template-columns:200px 1fr}
+  .m-aside{display:none}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(3){border-left:0}
+  .stat:nth-child(n+3){border-top:1px solid var(--line)}
+}
+@media (max-width:900px){
+  .nav-links,.nav-cta .login{display:none}
+  .menu-btn{display:grid}
+  .nav-cta .btn{display:none}
+  .mobile-menu{position:absolute;top:calc(100% + 8px);left:0;right:0;display:grid;gap:4px;padding:10px;border-radius:16px;background:rgb(17 20 29/.96);border:1px solid var(--line);backdrop-filter:blur(24px);opacity:0;pointer-events:none;translate:0 -8px;transition:opacity .3s,translate .3s var(--ease)}
+  .mobile-menu a{padding:12px 14px;border-radius:10px;color:var(--fg-80)}
+  .mobile-menu .btn{justify-content:center;margin-top:6px;color:var(--ink)}
+  .nav.open .mobile-menu{opacity:1;pointer-events:auto;translate:0 0}
+  .bento{grid-template-columns:1fr 1fr}
+  .c-flow{grid-column:span 2}.c-slack{grid-column:span 1;grid-row:span 2}.c-mail,.c-notion{grid-column:span 1}.c-human,.c-time{grid-column:span 1}
+  .stack-card{grid-template-columns:1fr;position:relative;top:auto!important;min-height:0}
+  .t-cols{grid-template-columns:1fr 1fr}
+  .t-col:nth-child(3){display:none}
+  .prices{grid-template-columns:1fr;max-width:520px;margin-inline:auto}
+  .price-card.featured{translate:0}
+  .faq-grid{grid-template-columns:1fr}
+  .faq-grid .sec-head{position:static}
+  .f-grid{grid-template-columns:1fr 1fr}
+  .f-grid>div:first-child{grid-column:span 2}
+}
+@media (max-width:768px){
+  .g,.core{scale:.6}
+  .g1,.e1,.e2,.core{filter:blur(70px)}
+  .mock-body{grid-template-columns:1fr;min-height:0}
+  .m-side{display:none}
+  .m-main{padding:18px 16px}
+  .mock-url{padding:5px 18px}
+  .bento{grid-template-columns:1fr}
+  .bento>*{grid-column:auto!important;grid-row:auto!important}
+  .t-cols{grid-template-columns:1fr;height:620px}
+  .t-col:nth-child(2){display:none}
+  .stat{padding:28px 18px}
+  .ans p{padding-right:0}
+  .giant{opacity:.7}
+}
+@media (max-width:520px){
+  .stats{grid-template-columns:1fr}
+  .stat+.stat{border-left:0;border-top:1px solid var(--line)}
+  .hero-ctas .btn{flex:1;justify-content:center}
+  .step{grid-template-columns:30px 1fr}
+  .step-time{display:none}
+  .ico{width:30px;height:30px}
+  .step:not(:last-child)::after{left:14.5px;top:42px}
+  .n-row{grid-template-columns:1.3fr 1fr}
+  .n-row>*:nth-child(3){display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  .marquee-track,.t-col{animation:none!important}
+  .spark-line{stroke-dashoffset:0}
+  .fill-text .line{background-position:0 0}
+}
+</style>
+</head>
+<body>
+
+<!-- SVG sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2 2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 21l1.6-7L2 9.2l7.1-.6z"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/></symbol>
+    <symbol id="i-hash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 4 7 20M17 4l-2 16M4 9h16M3 15h16"/></symbol>
+    <symbol id="i-notion" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><rect x="4" y="3.5" width="16" height="17" rx="2.5"/><path d="M9 16V8l6 8V8" stroke-linecap="round"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 3c.6 4.4 2.6 6.4 7 7-4.4.6-6.4 2.6-7 7-.6-4.4-2.6-6.4-7-7 4.4-.6 6.4-2.6 7-7Z"/><path d="M19 16c.2 1.4.8 2 2 2.2-1.2.2-1.8.8-2 2.2-.2-1.4-.8-2-2-2.2 1.2-.2 1.8-.8 2-2.2Z"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m10 8.5 5 3.5-5 3.5z"/></symbol>
+    <symbol id="i-plug" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M9 3v5M15 3v5M6 8h12v3a6 6 0 0 1-12 0zM12 17v4"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6z"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-card" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></symbol>
+    <symbol id="logo" viewBox="0 0 32 32"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFB46B"/><stop offset="1" stop-color="#FF4D00"/></linearGradient></defs><rect width="32" height="32" rx="9" fill="#191D2A"/><rect x=".5" y=".5" width="31" height="31" rx="8.5" fill="none" stroke="rgb(255 255 255/.12)"/><path d="M8 21.5c4.5 0 6.5-11 11-11h5" stroke="url(#lg)" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M20.5 6.8 24.4 10.5 20.5 14.2" stroke="url(#lg)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="21.5" r="2.6" fill="#fff"/></symbol>
+  </defs>
+</svg>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <a href="#" class="brand" aria-label="Flowpilot kezdőlap"><svg class="brand-mark"><use href="#logo"/></svg>Flowpilot</a>
+  <nav class="nav-links" aria-label="Fő navigáció">
+    <a href="#funkciok">Funkciók</a>
+    <a href="#hogyan">Hogyan működik</a>
+    <a href="#velemenyek">Vélemények</a>
+    <a href="#arak">Árak</a>
+    <a href="#gyik">GYIK</a>
+  </nav>
+  <div class="nav-cta">
+    <a href="#" class="login">Belépés</a>
+    <a href="#arak" class="btn btn-white">Kipróbálom <svg><use href="#i-arrow"/></svg><span class="side-glow"></span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Menü megnyitása" aria-expanded="false" aria-controls="mobileMenu"><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#funkciok">Funkciók</a><a href="#hogyan">Hogyan működik</a><a href="#velemenyek">Vélemények</a><a href="#arak">Árak</a><a href="#gyik">GYIK</a>
+    <a href="#arak" class="btn btn-white">Kipróbálom ingyen</a>
+  </div>
+</header>
+
+<main>
+<!-- HERO -->
+<section class="hero noise">
+  <div class="glow" aria-hidden="true"><span class="g g1"></span><span class="g g2"></span><span class="g e1"></span><span class="g e2"></span><span class="g core"></span></div>
+  <div class="guides" aria-hidden="true"></div>
+  <div class="wrap hero-inner">
+    <a href="#hogyan" class="pill-eyebrow" data-fade><b>Új</b> Gmail-ügynök 2.0 — válaszvázlat a te hangodon <svg><use href="#i-arrow"/></svg></a>
+    <h1 class="display" id="heroTitle">Rutin az ügynököknek, <span class="dim">fókusz a&nbsp;csapatnak.</span></h1>
+    <p class="lead" data-fade>A Flowpilot AI ügynökei összekötik a Slacket, a Notiont és a Gmailt: osztályozzák a leveleket, frissítik az adatbázisokat, és jelentenek a csatornán. A háttérben dolgoznak, de csak a te jóváhagyásoddal.</p>
+    <div class="hero-ctas" data-fade>
+      <a href="#arak" class="btn btn-rainbow magnetic">Ingyenes próba indítása <svg><use href="#i-arrow"/></svg></a>
+      <a href="#hogyan" class="btn btn-ghost"><svg style="width:17px;height:17px"><use href="#i-play"/></svg> 2 perces demó</a>
+    </div>
+    <div class="proof" data-fade>
+      <div class="avatars">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=96&h=96&fit=crop&q=80" alt="" width="32" height="32">
+        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=96&h=96&fit=crop&q=80" alt="" width="32" height="32">
+        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=96&h=96&fit=crop&q=80" alt="" width="32" height="32">
+        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=96&h=96&fit=crop&q=80" alt="" width="32" height="32">
+      </div>
+      <div><div class="stars" aria-label="5-ből 4,9 csillag"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div><strong>4,9/5</strong> · 2 400+ csapat használja naponta</div>
+    </div>
+  </div>
+
+  <!-- Product mockup -->
+  <div class="wrap">
+    <div class="mock-wrap">
+      <div class="mock" id="mock" role="img" aria-label="A Flowpilot alkalmazás: egy ügynök futása, amely Gmailből Notionbe és Slackbe dolgozik">
+        <div class="mock-bar"><i></i><i></i><i></i><span class="mock-url"><svg><use href="#i-lock"/></svg>app.flowpilot.hu/agents/ajanlatkeresek</span></div>
+        <div class="mock-body">
+          <aside class="m-side">
+            <div class="m-ws"><i>B</i>Brightline Kft.</div>
+            <div class="m-item"><svg><use href="#i-grid"/></svg>Áttekintés</div>
+            <div class="m-item active"><svg><use href="#i-spark"/></svg>Ügynökök</div>
+            <div class="m-item"><svg><use href="#i-clock"/></svg>Futások</div>
+            <div class="m-item"><svg><use href="#i-plug"/></svg>Integrációk</div>
+            <div class="m-item"><svg><use href="#i-gear"/></svg>Beállítások</div>
+            <div class="m-label">Aktív ügynökök</div>
+            <div class="m-item active">Ajánlatkérések <span class="dot run"></span></div>
+            <div class="m-item">Heti riport <span class="dot"></span></div>
+            <div class="m-item">Onboarding <span class="dot"></span></div>
+            <div class="m-item">Számlák <span class="dot idle"></span></div>
+            <div class="m-item">Hibajegyek <span class="dot"></span></div>
+          </aside>
+          <div class="m-main">
+            <div class="m-head">
+              <div><div class="m-title">Ajánlatkérés-feldolgozó</div><div class="m-sub">Gmail → Notion CRM → #sales · 128. futás ma</div></div>
+              <span class="chip live">Fut most</span>
+            </div>
+            <div class="run" id="run">
+              <div class="step">
+                <span class="ico app-g"><svg><use href="#i-mail"/></svg></span>
+                <div><div class="step-t">Új e-mail érkezett: „Ajánlatkérés – 40 licenc”</div><div class="step-d">Kovács Anna · anna.kovacs@nordhaus.hu</div></div>
+                <span class="step-time">09:41:02</span>
+              </div>
+              <div class="step">
+                <span class="ico ai"><svg><use href="#i-spark"/></svg></span>
+                <div><div class="step-t">Az ügynök elemezte a levelet</div>
+                  <div class="kv"><span class="chip">szándék: árajánlat</span><span class="chip">prioritás: magas</span><span class="chip">érték: ~2,4 M Ft</span></div></div>
+                <span class="step-time">09:41:04</span>
+              </div>
+              <div class="step">
+                <span class="ico app-g"><svg><use href="#i-notion"/></svg></span>
+                <div><div class="step-t">Új sor a Notion CRM-ben: Nordhaus Zrt.</div><div class="step-d">Státusz: Új lead · Felelős: Szabó Péter · Határidő: holnap</div></div>
+                <span class="step-time">09:41:05</span>
+              </div>
+              <div class="step">
+                <span class="ico app-g"><svg><use href="#i-hash"/></svg></span>
+                <div><div class="step-t">Üzenet a #sales csatornán</div>
+                  <div class="bubble"><div class="who">Flowpilot <em>ÜGYNÖK</em></div><span class="mention">@Szabó Péter</span>, meleg lead érkezett a Nordhaustól (40 licenc, Q4 indulás). Elkészítettem a válaszvázlatot. Küldhetem?
+                    <div class="b-actions"><span>Jóváhagyom</span><span>Szerkesztem</span></div></div>
+                </div>
+                <span class="step-time">09:41:06</span>
+              </div>
+            </div>
+          </div>
+          <aside class="m-aside">
+            <div class="stat-box"><small>Megspórolt idő ma</small><strong>14,2<span>óra</span></strong>
+              <div class="bars"><i style="--h:30%"></i><i style="--h:45%"></i><i style="--h:38%"></i><i style="--h:60%"></i><i style="--h:52%"></i><i style="--h:74%"></i><i style="--h:92%"></i></div></div>
+            <div class="stat-box"><small>Sikeres futások</small><strong>99,3<span>%</span></strong></div>
+            <div class="stat-box"><small>Várakozik rád</small>
+              <div class="mini-list"><div>Válaszvázlat · Nordhaus <b>1</b></div><div>Számla-egyeztetés <b>2</b></div><div>Új jelölt · Notion <b>1</b></div></div></div>
+          </aside>
+        </div>
+      </div>
+      <div class="mock-fade"></div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS -->
+<section class="logos" aria-label="Ügyfeleink">
+  <p>Magyar és nemzetközi csapatok, akik már átadták a rutint</p>
+  <div class="marquee">
+    <div class="marquee-track">
+      <span class="logo" style="font-family:Sora;font-weight:600;letter-spacing:-.04em"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9"/></svg>Brightline</span>
+      <span class="logo" style="font-family:'Inter Tight';font-weight:600;letter-spacing:.12em;font-size:17px">NORDHAUS</span>
+      <span class="logo" style="font-family:Sora;font-weight:300;letter-spacing:-.03em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16"/></svg>kvadrát</span>
+      <span class="logo" style="font-family:'IBM Plex Mono';font-size:18px">lumen&amp;co</span>
+      <span class="logo" style="font-family:'Inter Tight';font-weight:500;letter-spacing:-.03em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4v16M12 4v16M18 4v16"/></svg>Parallel</span>
+      <span class="logo" style="font-family:Sora;font-weight:500;font-style:italic;letter-spacing:-.04em">Halcyon</span>
+      <span class="logo" style="font-family:'Inter Tight';font-weight:600;letter-spacing:-.02em"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 21 20H3z"/></svg>Vertex Labs</span>
+      <span class="logo" style="font-family:Sora;font-weight:400;letter-spacing:-.03em">orbit<span style="color:var(--accent)">.</span></span>
+      <!-- duplicate -->
+      <span class="logo" aria-hidden="true" style="font-family:Sora;font-weight:600;letter-spacing:-.04em"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="9"/></svg>Brightline</span>
+      <span class="logo" aria-hidden="true" style="font-family:'Inter Tight';font-weight:600;letter-spacing:.12em;font-size:17px">NORDHAUS</span>
+      <span class="logo" aria-hidden="true" style="font-family:Sora;font-weight:300;letter-spacing:-.03em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16"/></svg>kvadrát</span>
+      <span class="logo" aria-hidden="true" style="font-family:'IBM Plex Mono';font-size:18px">lumen&amp;co</span>
+      <span class="logo" aria-hidden="true" style="font-family:'Inter Tight';font-weight:500;letter-spacing:-.03em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 4v16M12 4v16M18 4v16"/></svg>Parallel</span>
+      <span class="logo" aria-hidden="true" style="font-family:Sora;font-weight:500;font-style:italic;letter-spacing:-.04em">Halcyon</span>
+      <span class="logo" aria-hidden="true" style="font-family:'Inter Tight';font-weight:600;letter-spacing:-.02em"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3 21 20H3z"/></svg>Vertex Labs</span>
+      <span class="logo" aria-hidden="true" style="font-family:Sora;font-weight:400;letter-spacing:-.03em">orbit<span style="color:var(--accent)">.</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES / BENTO -->
+<section class="sec" id="funkciok" style="padding-top:clamp(40px,5vw,80px)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">Funkciók</span>
+      <h2 class="h2" data-split>Egy ügynök, három eszköz. <span class="dim">Nulla copy-paste.</span></h2>
+      <p class="lead">A Flowpilot ott dolgozik, ahol a csapatod már most is: a beérkező levelekben, a Notion-adatbázisokban és a Slack-csatornákban.</p>
+    </div>
+
+    <div class="bento" data-reveal>
+      <!-- flow -->
+      <article class="cell c-flow spot leak">
+        <div class="ui">
+          <div class="dotgrid"></div>
+          <svg class="flow-svg" viewBox="0 0 640 220" aria-hidden="true">
+            <defs>
+              <linearGradient id="wire" x1="0" x2="1"><stop offset="0" stop-color="rgb(255 255 255/.15)"/><stop offset="1" stop-color="rgb(255 122 26/.6)"/></linearGradient>
+              <radialGradient id="agentGlow"><stop offset="0" stop-color="#FF7A1A" stop-opacity=".45"/><stop offset="1" stop-color="#FF7A1A" stop-opacity="0"/></radialGradient>
+            </defs>
+            <path id="p1" d="M150 110 C 200 110, 210 110, 262 110" stroke="url(#wire)" stroke-width="1.5" fill="none" stroke-dasharray="4 5"/>
+            <path id="p2" d="M378 110 C 430 110, 430 56, 490 56" stroke="url(#wire)" stroke-width="1.5" fill="none" stroke-dasharray="4 5"/>
+            <path id="p3" d="M378 110 C 430 110, 430 164, 490 164" stroke="url(#wire)" stroke-width="1.5" fill="none" stroke-dasharray="4 5"/>
+            <circle r="3.5" fill="#FFB27A"><animateMotion dur="2.4s" repeatCount="indefinite"><mpath href="#p1"/></animateMotion></circle>
+            <circle r="3.5" fill="#FFB27A"><animateMotion dur="2.4s" begin="1.2s" repeatCount="indefinite"><mpath href="#p2"/></animateMotion></circle>
+            <circle r="3.5" fill="#FFB27A"><animateMotion dur="2.4s" begin="1.6s" repeatCount="indefinite"><mpath href="#p3"/></animateMotion></circle>
+            <!-- gmail node -->
+            <g transform="translate(30 86)"><rect width="120" height="48" rx="12" fill="#1F2433" stroke="rgb(148 163 184/.25)"/>
+              <g transform="translate(14 14)" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width="1.4"><rect x="0" y="2" width="20" height="16" rx="3"/><path d="m1 4 9 7 9-7"/></g>
+              <text x="44" y="22" fill="#fff" font-size="12.5" font-weight="500">Gmail</text><text x="44" y="37" fill="rgb(255 255 255/.45)" font-size="10.5">Új levél</text></g>
+            <!-- agent node -->
+            <circle cx="320" cy="110" r="80" fill="url(#agentGlow)"/>
+            <g transform="translate(262 78)"><rect width="116" height="64" rx="16" fill="#2A1A10" stroke="rgb(255 122 26/.6)"/>
+              <g transform="translate(14 20)" fill="none" stroke="#FF7A1A" stroke-width="1.5" stroke-linejoin="round"><path d="M12 1c.6 4.4 2.6 6.4 7 7-4.4.6-6.4 2.6-7 7-.6-4.4-2.6-6.4-7-7 4.4-.6 6.4-2.6 7-7Z"/></g>
+              <text x="42" y="29" fill="#fff" font-size="12.5" font-weight="500">AI ügynök</text><text x="42" y="45" fill="rgb(255 200 160/.7)" font-size="10.5">elemez · dönt</text></g>
+            <!-- notion -->
+            <g transform="translate(490 32)"><rect width="120" height="48" rx="12" fill="#1F2433" stroke="rgb(148 163 184/.25)"/>
+              <g transform="translate(14 13)" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width="1.4" stroke-linejoin="round"><rect x="1" y="1" width="18" height="20" rx="3"/><path d="M6 16V7l7 9V7" stroke-linecap="round"/></g>
+              <text x="44" y="22" fill="#fff" font-size="12.5" font-weight="500">Notion</text><text x="44" y="37" fill="rgb(255 255 255/.45)" font-size="10.5">CRM frissítés</text></g>
+            <!-- slack -->
+            <g transform="translate(490 140)"><rect width="120" height="48" rx="12" fill="#1F2433" stroke="rgb(148 163 184/.25)"/>
+              <g transform="translate(14 14)" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width="1.4" stroke-linecap="round"><path d="M7 1 5 19M15 1l-2 18M1 6h18M0 13h18"/></g>
+              <text x="44" y="22" fill="#fff" font-size="12.5" font-weight="500">Slack</text><text x="44" y="37" fill="rgb(255 255 255/.45)" font-size="10.5">#sales értesítés</text></g>
+          </svg>
+        </div>
+        <div><h3>Munkafolyamatok, amiket mondatban írsz le</h3><p>Nincs drag-and-drop labirintus. Leírod, mi történjen, az ügynök pedig felrajzolja a lépéseket, és már futtatja is.</p></div>
+      </article>
+
+      <!-- slack -->
+      <article class="cell c-slack spot">
+        <div class="ui slack-ui">
+          <div class="s-chan"># ügyfélsiker <span>12 tag</span></div>
+          <div class="msg"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&h=80&fit=crop&q=80" alt=""><div><b>Tóth Réka <small>10:12</small></b>@flowpilot mi a helyzet a Halcyon-szerződéssel?</div></div>
+          <div class="msg"><span class="av"><svg><use href="#i-spark"/></svg></span><div><b>Flowpilot<em>ÜGYNÖK</em><small>10:12</small></b>Megnéztem a Notiont és a levelezést:
+            <div class="card"><strong>Halcyon · Megújítás</strong><br>Aláírásra vár, utolsó levél 3 napja. A jogi csapat két módosítást kért.</div></div></div>
+          <div class="msg"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&h=80&fit=crop&q=80" alt=""><div><b>Tóth Réka <small>10:13</small></b>Írj nekik egy emlékeztetőt, kérlek.</div></div>
+          <div class="msg"><span class="av"><svg><use href="#i-spark"/></svg></span><div><b>Flowpilot<em>ÜGYNÖK</em></b><span class="typing" aria-label="gépel"><i></i><i></i><i></i></span></div></div>
+        </div>
+        <div><h3>Kérdezd Slackben, mint egy kollégát</h3><p>Az ügynök a csatornán válaszol, előkeresi a kontextust Notionből és Gmailből, és el is végzi a következő lépést.</p></div>
+      </article>
+
+      <!-- gmail -->
+      <article class="cell c-mail spot">
+        <div class="ui mail-ui">
+          <div class="mail-row"><b>Kovács Anna</b><span>Ajánlatkérés – 40 licenc</span><span class="chip live" style="color:#ffd2b0">Lead</span></div>
+          <div class="mail-row"><b>Számlázás · Parallel</b><span>2025/10-es számla mellékelve</span><span class="chip">Pénzügy</span></div>
+          <div class="mail-row"><b>Nagy Bence</b><span>Nem tudok belépni a fiókba</span><span class="chip ok">Support</span></div>
+        </div>
+        <div><h3>Gmail-triázs</h3><p>Címkéz, továbbít, és válaszvázlatot ír a te hangodon.</p></div>
+      </article>
+
+      <!-- notion -->
+      <article class="cell c-notion spot">
+        <div class="ui notion-ui">
+          <div class="n-row h"><span>Ügyfél</span><span>Státusz</span><span>Felelős</span></div>
+          <div class="n-row new"><span>Nordhaus Zrt.</span><span class="chip live" style="color:#ffd2b0">Új lead</span><span>Péter</span></div>
+          <div class="n-row"><span>Halcyon</span><span class="chip">Aláírás</span><span>Réka</span></div>
+          <div class="n-row"><span>Vertex Labs</span><span class="chip ok">Megnyerve</span><span>Dóra</span></div>
+        </div>
+        <div><h3>Mindig naprakész Notion</h3><p>Az adatbázisok maguktól frissülnek, a kézi adatbevitel megszűnik.</p></div>
+      </article>
+
+      <!-- human in the loop -->
+      <article class="cell c-human spot">
+        <div class="ui toggles">
+          <div class="tg"><div>Kimenő e-mail küldése<small>Mindig kérjen jóváhagyást</small></div><span class="sw on" data-sw></span></div>
+          <div class="tg"><div>Notion-sor létrehozása<small>Automatikusan, napló mellett</small></div><span class="sw on" data-sw></span></div>
+          <div class="tg"><div>Ügyféladat törlése<small>Tiltva ennél az ügynöknél</small></div><span class="sw" data-sw></span></div>
+        </div>
+        <div><h3>Te döntesz, meddig mehet el</h3><p>Lépésenként állítod be, mit csinálhat önállóan az ügynök, és mihez kell a jóváhagyásod. Minden művelet naplózva és visszakövethető.</p></div>
+      </article>
+
+      <!-- time saved -->
+      <article class="cell c-time spot leak">
+        <div class="ui spark-ui">
+          <div class="spark-top"><div><span class="tag" style="font-size:10.5px">Megspórolt órák / hét</span><br><strong>312<span> óra</span></strong></div><span class="chip ok">+38% hó/hó</span></div>
+          <svg class="spark-svg" viewBox="0 0 400 110" preserveAspectRatio="none" aria-hidden="true">
+            <defs><linearGradient id="sf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF7A1A" stop-opacity=".35"/><stop offset="1" stop-color="#FF7A1A" stop-opacity="0"/></linearGradient></defs>
+            <path d="M0 95 L40 88 L80 90 L120 76 L160 80 L200 62 L240 66 L280 44 L320 48 L360 26 L400 14 L400 110 L0 110Z" fill="url(#sf)"/>
+            <path class="spark-line" d="M0 95 L40 88 L80 90 L120 76 L160 80 L200 62 L240 66 L280 44 L320 48 L360 26 L400 14" fill="none" stroke="#FF7A1A" stroke-width="2" vector-effect="non-scaling-stroke"/>
+          </svg>
+        </div>
+        <div><h3>Mérhető megtérülés</h3><p>Ügynökönként látod, hány órát és hány kontextusváltást spórolt meg a csapatnak.</p></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- STATEMENT -->
+<section class="sec statement">
+  <div class="glow-soft" aria-hidden="true"></div>
+  <div class="wrap">
+    <span class="tag" style="margin-bottom:32px">Miért csináljuk</span>
+    <p class="fill-text" style="margin-top:28px">A csapatod nem azért van, hogy leveleket másoljon Notionbe, és tizedszer is rákérdezzen Slackben, hol tart egy ügy. Ezt a rutint vigyék az ügynökök. Ti foglalkozzatok azzal, amiért felvettek benneteket.</p>
+    <div class="statement-meta">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=96&h=96&fit=crop&q=80" alt="">
+      <div><strong>Fekete Márton</strong>a Flowpilot alapítója</div>
+    </div>
+  </div>
+</section>
+
+<!-- NUMBERS -->
+<section class="sec numbers">
+  <div class="giant" aria-hidden="true" data-speed="1">11h</div>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="tag">Számokban</span>
+      <h2 class="h2" data-split>Fejenként heti 11 óra. <span class="dim">Ennyit ad vissza az átlagos csapatnak.</span></h2>
+    </div>
+    <div class="stats" data-reveal>
+      <div class="stat"><div class="n"><span data-count="3.2" data-decimals="1">3,2</span>M+</div><p>automatizált feladat az elmúlt 12 hónapban</p></div>
+      <div class="stat"><div class="n"><span data-count="11">11</span> óra</div><p>megspórolt idő fejenként, hetente</p></div>
+      <div class="stat"><div class="n"><span data-count="2400">2 400</span>+</div><p>csapat 19 országban használja naponta</p></div>
+      <div class="stat"><div class="n"><span data-count="4">4</span> perc</div><p>az első ügynök átlagos beállítási ideje</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="sec steps" id="hogyan">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="tag">Hogyan működik</span>
+      <h2 class="h2" data-split>Három lépés, <span class="dim">és kész az első ügynököd.</span></h2>
+      <p class="lead">Nem kell fejlesztő vagy automatizálási szakértő. Ha el tudod magyarázni egy új kollégának, a Flowpilot is megérti.</p>
+    </div>
+
+    <div class="stack">
+      <article class="stack-card">
+        <div>
+          <span class="step-no">01 / KAPCSOLÓDÁS</span>
+          <h3>Kösd össze az eszközeidet</h3>
+          <p>Egy kattintásos, biztonságos OAuth-kapcsolat a Slackhez, a Notionhöz és a Gmailhez. Az ügynök csak oda lát be, ahová engeded.</p>
+          <ul><li><svg><use href="#i-check"/></svg>Csatornánkénti és oldalankénti jogosultság</li><li><svg><use href="#i-check"/></svg>Csak olvasási mód tesztelés közben</li></ul>
+        </div>
+        <div class="panel connect">
+          <div class="conn"><span class="ico"><svg><use href="#i-hash"/></svg></span><div>Slack<small>Brightline · 4 csatorna engedélyezve</small></div><span class="chip ok">Kapcsolódva</span></div>
+          <div class="conn"><span class="ico"><svg><use href="#i-notion"/></svg></span><div>Notion<small>CRM, Projektek, Wiki</small></div><span class="chip ok">Kapcsolódva</span></div>
+          <div class="conn"><span class="ico"><svg><use href="#i-mail"/></svg></span><div>Gmail<small>sales@brightline.hu</small></div><span class="chip ok">Kapcsolódva</span></div>
+        </div>
+      </article>
+
+      <article class="stack-card">
+        <div>
+          <span class="step-no">02 / LEÍRÁS</span>
+          <h3>Mondd el magyarul, mit szeretnél</h3>
+          <p>Hétköznapi nyelven írod le a folyamatot. A Flowpilot lépésekre bontja, és megmutatja, mit fog csinálni, mielőtt bármihez hozzányúlna.</p>
+          <ul><li><svg><use href="#i-check"/></svg>Magyar és angol nyelvű utasítások</li><li><svg><use href="#i-check"/></svg>40+ kész sablon sales, HR és support csapatoknak</li></ul>
+        </div>
+        <div class="panel">
+          <div class="prompt">
+            <div class="prompt-text"><span id="typed">Ha ajánlatkérés jön Gmailben, vedd fel a Notion CRM-be, és szólj Péternek a #sales csatornán egy válaszvázlattal.</span><span class="caret"></span></div>
+            <div class="prompt-foot"><div class="chips"><span class="chip">Gmail</span><span class="chip">Notion</span><span class="chip">Slack</span></div><span class="send"><svg><use href="#i-arrow"/></svg></span></div>
+          </div>
+          <div class="plan">
+            <div><b>1</b>Figyelem a sales@ fiókot: árajánlat-szándék</div>
+            <div><b>2</b>Új sor: Notion › CRM › Leadek</div>
+            <div><b>3</b>Válaszvázlat + üzenet: #sales, @Péter</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="stack-card">
+        <div>
+          <span class="step-no">03 / FUTTATÁS</span>
+          <h3>Az ügynök dolgozik, te jóváhagysz</h3>
+          <p>Éjjel-nappal fut. A kritikus lépéseknél Slackben kéri a jóváhagyásodat, minden mást önállóan elvégez, és naplózza.</p>
+          <ul><li><svg><use href="#i-check"/></svg>Teljes, kereshető műveleti napló</li><li><svg><use href="#i-check"/></svg>Egy kattintással visszavonható lépések</li></ul>
+        </div>
+        <div class="panel log">
+          <div><time>09:41:02</time><span>gmail.read → ajánlatkérés</span><span class="okk">ok</span></div>
+          <div><time>09:41:04</time><span>agent.classify → magas</span><span class="okk">ok</span></div>
+          <div><time>09:41:05</time><span>notion.create → CRM/Leadek</span><span class="okk">ok</span></div>
+          <div><time>09:41:06</time><span>slack.post → #sales</span><span class="okk">ok</span></div>
+          <div><time>09:41:06</time><span>gmail.draft → jóváhagyásra vár</span><span class="wait">vár</span></div>
+          <div><time>09:43:51</time><span>approval ← Szabó Péter</span><span class="okk">ok</span></div>
+          <div><time>09:43:52</time><span>gmail.send → anna.kovacs@…</span><span class="okk">ok</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="sec light" id="velemenyek">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="tag">Vélemények</span>
+      <h2 class="h2" data-split>Csapatok, akik <span class="dim">már nem másolgatnak.</span></h2>
+    </div>
+    <div class="t-cols" id="tcols">
+      <div class="t-col">
+        <figure class="t-card" style="margin:0"><span class="t-metric">−9 óra / hét / fő</span><blockquote>A sales csapat eddig a reggelek felét leveleztetéssel és CRM-frissítéssel töltötte. Most <mark>a lead már a Notionben van</mark>, mire kinyitom a Slacket.</blockquote><figcaption class="t-who"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=96&h=96&fit=crop&q=80" alt=""><div><strong>Varga Dóra</strong><span>Sales vezető, Vertex Labs</span></div></figcaption></figure>
+        <figure class="t-card" style="margin:0"><blockquote>Az első ügynököt egy kávé alatt raktam össze, magyarul. Nem kellett hozzá se Zapier-szakértő, se fejlesztő.</blockquote><figcaption class="t-who"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=96&h=96&fit=crop&q=80" alt=""><div><strong>Horváth Gergő</strong><span>Operations, Kvadrát</span></div></figcaption></figure>
+        <figure class="t-card" style="margin:0"><span class="t-metric">4 perc → 20 mp válaszidő</span><blockquote>A support-jegyeket az ügynök osztályozza és előkészíti. A kollégáknak <mark>csak a jóváhagyás marad</mark>.</blockquote><figcaption class="t-who"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=96&h=96&fit=crop&q=80" alt=""><div><strong>Kiss Lilla</strong><span>Customer Success, Parallel</span></div></figcaption></figure>
+      </div>
+      <div class="t-col">
+        <figure class="t-card" style="margin:0"><blockquote>A jóváhagyási lépések miatt mertük bevezetni. Az ügynök <mark>semmit nem küld ki a tudtunk nélkül</mark>, és minden lépése visszakövethető.</blockquote><figcaption class="t-who"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=96&h=96&fit=crop&q=80" alt=""><div><strong>Molnár Ádám</strong><span>CTO, Brightline</span></div></figcaption></figure>
+        <figure class="t-card" style="margin:0"><span class="t-metric">120+ onboarding / hó</span><blockquote>Az új munkatársak beléptetése Notion-checklistből, Slack-meghívóból és üdvözlő levélből állt. Ma ezt egyetlen ügynök intézi.</blockquote><figcaption class="t-who"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=96&h=96&fit=crop&q=80" alt=""><div><strong>Balogh Eszter</strong><span>HR Business Partner, Halcyon</span></div></figcaption></figure>
+        <figure class="t-card" style="margin:0"><blockquote>A heti riportot péntekenként magától összeállítja Notionből, és kiteszi a #vezetőség csatornára. Én csak elolvasom.</blockquote><figcaption class="t-who"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=96&h=96&fit=crop&q=80" alt=""><div><strong>Szűcs Bálint</strong><span>COO, Lumen&amp;Co</span></div></figcaption></figure>
+      </div>
+      <div class="t-col">
+        <figure class="t-card" style="margin:0"><blockquote>A számla-egyeztetés volt a legutáltabb feladatunk. Az ügynök <mark>párosítja a leveleket a Notion-táblával</mark>, és csak az eltéréseket jelzi.</blockquote><figcaption class="t-who"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=96&h=96&fit=crop&q=80" alt=""><div><strong>Németh Zsófia</strong><span>Pénzügy, Orbit</span></div></figcaption></figure>
+        <figure class="t-card" style="margin:0"><span class="t-metric">3× több ügyféltalálkozó</span><blockquote>A felszabadult idő ügyfelekre megy. Ez a legjobb befektetés, amit idén eszközre költöttünk.</blockquote><figcaption class="t-who"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=96&h=96&fit=crop&q=80" alt=""><div><strong>Fazekas Tamás</strong><span>Ügyvezető, Nordhaus</span></div></figcaption></figure>
+        <figure class="t-card" style="margin:0"><blockquote>Végre egy AI-eszköz, ami nem egy újabb fül a böngészőben. Ott dolgozik, ahol mi is: Slackben.</blockquote><figcaption class="t-who"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=96&h=96&fit=crop&q=80" alt=""><div><strong>Lakatos Benedek</strong><span>Product Lead, Vertex Labs</span></div></figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="sec pricing" id="arak">
+  <div class="glow-soft" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="tag">Árak</span>
+      <h2 class="h2" data-split>Egyszerű árazás, <span class="dim">ami a csapattal nő.</span></h2>
+      <div class="billing" role="group" aria-label="Számlázási időszak">
+        <span class="knob" id="knob"></span>
+        <button type="button" aria-pressed="false" data-bill="m">Havi</button>
+        <button type="button" aria-pressed="true" data-bill="y">Éves <span class="save">−20%</span></button>
+      </div>
+    </div>
+
+    <div class="prices" data-reveal>
+      <article class="price-card">
+        <div><h3>Starter</h3><p class="desc">Kis csapatoknak, akik most ismerkednek az ügynökökkel.</p></div>
+        <div><div class="price"><span>0</span> Ft<small>/ fő / hó</small></div><div class="price-note">Örökre ingyenes, max. 3 fő</div></div>
+        <a href="#" class="btn btn-ghost">Kezdés ingyen</a>
+        <ul class="feat">
+          <li><svg><use href="#i-check"/></svg>2 aktív ügynök</li>
+          <li><svg><use href="#i-check"/></svg>500 futás / hó</li>
+          <li><svg><use href="#i-check"/></svg>Slack, Notion és Gmail integráció</li>
+          <li><svg><use href="#i-check"/></svg>7 napos műveleti napló</li>
+        </ul>
+      </article>
+      <article class="price-card featured">
+        <span class="chip live badge">Legnépszerűbb</span>
+        <div><h3>Csapat</h3><p class="desc">Növekvő csapatoknak, akik komolyan automatizálnak.</p></div>
+        <div><div class="price"><span data-m="12900" data-y="10300">10 300</span> Ft<small>/ fő / hó</small></div><div class="price-note" data-note-m="Havonta számlázva" data-note-y="Évente számlázva · 2 hónap ajándék">Évente számlázva · 2 hónap ajándék</div></div>
+        <a href="#" class="btn btn-rainbow">14 napig ingyen <svg><use href="#i-arrow"/></svg></a>
+        <ul class="feat">
+          <li><svg><use href="#i-check"/></svg>Korlátlan ügynök</li>
+          <li><svg><use href="#i-check"/></svg>20 000 futás / hó</li>
+          <li><svg><use href="#i-check"/></svg>Jóváhagyási folyamatok Slackben</li>
+          <li><svg><use href="#i-check"/></svg>Gmail-válaszvázlat a saját hangodon</li>
+          <li><svg><use href="#i-check"/></svg>90 napos napló és analitika</li>
+        </ul>
+      </article>
+      <article class="price-card">
+        <div><h3>Vállalati</h3><p class="desc">Szigorú megfelelőségi igényekkel és egyedi integrációkkal.</p></div>
+        <div><div class="price">Egyedi</div><div class="price-note">Éves szerződés, dedikált kapcsolattartó</div></div>
+        <a href="#" class="btn btn-ghost">Beszéljünk</a>
+        <ul class="feat">
+          <li><svg><use href="#i-check"/></svg>SSO / SAML, SCIM</li>
+          <li><svg><use href="#i-check"/></svg>EU-s adattárolás, DPA</li>
+          <li><svg><use href="#i-check"/></svg>Egyedi API- és webhook-integrációk</li>
+          <li><svg><use href="#i-check"/></svg>99,9% SLA, prioritásos support</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec faq" id="gyik">
+  <div class="wrap faq-grid">
+    <div class="sec-head">
+      <span class="tag">GYIK</span>
+      <h2 class="h2" data-split>Gyakori <span class="dim">kérdések.</span></h2>
+      <p class="lead">Nem találod a választ? Írj nekünk a <a href="mailto:hello@flowpilot.hu" style="color:#fff;border-bottom:1px solid var(--line-strong)">hello@flowpilot.hu</a> címre, egy órán belül válaszolunk.</p>
+    </div>
+    <div class="qas">
+      <div class="qa open"><button type="button" aria-expanded="true">Hozzáfér az ügynök az összes levelemhez és Notion-oldalamhoz?<span class="plus" aria-hidden="true"></span></button><div class="ans"><div><p>Nem. A kapcsolódáskor te választod ki, mely Gmail-címkéket, Notion-adatbázisokat és Slack-csatornákat láthatja. Minden más rejtve marad előtte, és a jogosultságokat bármikor szűkítheted.</p></div></div></div>
+      <div class="qa"><button type="button" aria-expanded="false">Mi történik, ha az ügynök hibázik?<span class="plus" aria-hidden="true"></span></button><div class="ans"><div><p>A kifelé irányuló lépésekhez (e-mail küldése, törlés) alapból jóváhagyás kell. Minden művelet naplózva van, a Notion- és Slack-módosítások pedig egy kattintással visszavonhatók.</p></div></div></div>
+      <div class="qa"><button type="button" aria-expanded="false">Hol tárolják az adataimat? GDPR-kompatibilis?<span class="plus" aria-hidden="true"></span></button><div class="ans"><div><p>Igen. Az adatokat az EU-ban (Frankfurt) tároljuk és dolgozzuk fel, titkosítva. A tartalmaidat nem használjuk modellek tanítására. Adatfeldolgozási megállapodást (DPA) minden csomaghoz biztosítunk.</p></div></div></div>
+      <div class="qa"><button type="button" aria-expanded="false">Tényleg nem kell hozzá programozni?<span class="plus" aria-hidden="true"></span></button><div class="ans"><div><p>Tényleg nem. Magyarul leírod, mit szeretnél, és a Flowpilot lépésekre bontja. Ha mégis finomhangolnál, minden lépés szerkeszthető egy vizuális felületen.</p></div></div></div>
+      <div class="qa"><button type="button" aria-expanded="false">Milyen eszközöket támogattok a Slacken, a Notionön és a Gmailen kívül?<span class="plus" aria-hidden="true"></span></button><div class="ans"><div><p>A három fő integráció mellett a Google Naptár, a Google Drive, a HubSpot és a Linear már béta állapotban elérhető. Webhookkal szinte bármi más is beköthető.</p></div></div></div>
+      <div class="qa"><button type="button" aria-expanded="false">Le tudom mondani bármikor?<span class="plus" aria-hidden="true"></span></button><div class="ans"><div><p>Igen, havi csomagnál bármikor, egy kattintással. Éves csomagnál az időszak végéig használhatod, utána nem újul meg.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta noise">
+  <div class="glow" aria-hidden="true"><span class="g c1"></span><span class="g c2"></span><span class="g c3"></span></div>
+  <div class="arc" aria-hidden="true"></div>
+  <div class="wrap">
+    <h2 class="display" data-split>Az első ügynököd <span class="dim">már ma délután dolgozhat.</span></h2>
+    <p class="lead">Kösd be a Slacket, a Notiont és a Gmailt, írd le, mit szeretnél, és nézd, ahogy a rutin eltűnik a napodból.</p>
+    <div class="cta-row">
+      <a href="#" class="btn btn-rainbow magnetic">Ingyenes próba indítása <svg><use href="#i-arrow"/></svg></a>
+      <a href="#" class="btn btn-ghost">Demó egyeztetése</a>
+    </div>
+    <div class="cta-meta"><span><svg><use href="#i-card"/></svg>Nem kell bankkártya</span><span><svg><use href="#i-clock"/></svg>4 perces beállítás</span><span><svg><use href="#i-shield"/></svg>GDPR, EU-s adattárolás</span></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-grid">
+      <div>
+        <a href="#" class="brand"><svg class="brand-mark"><use href="#logo"/></svg>Flowpilot</a>
+        <p>AI ügynökök, amelyek elvégzik a csapatod rutinmunkáját Slackben, Notionben és Gmailben.</p>
+        <span class="status"><i></i>Minden rendszer működik</span>
+      </div>
+      <div><h4>Termék</h4><ul><li><a href="#funkciok">Funkciók</a></li><li><a href="#hogyan">Hogyan működik</a></li><li><a href="#arak">Árak</a></li><li><a href="#">Sablonok</a></li><li><a href="#">Változásnapló</a></li></ul></div>
+      <div><h4>Cég</h4><ul><li><a href="#">Rólunk</a></li><li><a href="#">Karrier</a></li><li><a href="#">Blog</a></li><li><a href="#">Kapcsolat</a></li></ul></div>
+      <div><h4>Jogi</h4><ul><li><a href="#">Adatvédelem</a></li><li><a href="#">ÁSZF</a></li><li><a href="#">DPA</a></li><li><a href="#">Biztonság</a></li></ul></div>
+    </div>
+    <div class="f-bottom"><span>© 2026 Flowpilot Kft. · Budapest</span><span>Készült Budapesten, sok kávéval ☕︎</span></div>
+  </div>
+  <div class="wordmark" aria-hidden="true">Flowpilot</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = matchMedia('(pointer: fine)').matches;
+  const hasGsap = typeof gsap !== 'undefined';
+  const fmt = (v, d = 0) => v.toLocaleString('hu-HU', { minimumFractionDigits: d, maximumFractionDigits: d }).replace(/ /g, ' ');
+
+  /* nav */
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', scrollY > 40);
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  const menuBtn = document.getElementById('menuBtn');
+  menuBtn.addEventListener('click', () => { const o = nav.classList.toggle('open'); menuBtn.setAttribute('aria-expanded', o); });
+  document.querySelectorAll('#mobileMenu a').forEach(a => a.addEventListener('click', () => { nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', false); }));
+
+  /* FAQ */
+  document.querySelectorAll('.qa button').forEach(b => b.addEventListener('click', () => {
+    const qa = b.parentElement, open = !qa.classList.contains('open');
+    qa.classList.toggle('open', open); b.setAttribute('aria-expanded', open);
+  }));
+
+  /* pricing toggle */
+  const knob = document.getElementById('knob');
+  const billBtns = [...document.querySelectorAll('[data-bill]')];
+  const placeKnob = () => { const a = billBtns.find(b => b.getAttribute('aria-pressed') === 'true'); knob.style.width = a.offsetWidth + 'px'; knob.style.transform = `translateX(${a.offsetLeft - 4}px)`; };
+  billBtns.forEach(btn => btn.addEventListener('click', () => {
+    const mode = btn.dataset.bill;
+    billBtns.forEach(b => b.setAttribute('aria-pressed', b === btn)); placeKnob();
+    document.querySelectorAll('[data-m]').forEach(el => {
+      const to = +el.dataset[mode], from = +el.textContent.replace(/\s/g, '');
+      if (hasGsap && !reduce) { const o = { v: from }; gsap.to(o, { v: to, duration: .8, ease: 'power3.out', onUpdate: () => el.textContent = fmt(Math.round(o.v / 100) * 100) }); }
+      else el.textContent = fmt(to);
+    });
+    document.querySelectorAll('[data-note-m]').forEach(el => el.textContent = el.dataset['note' + (mode === 'm' ? 'M' : 'Y')]);
+  }));
+  addEventListener('resize', placeKnob); document.fonts.ready.then(placeKnob); placeKnob();
+
+  /* cursor spotlight on cards */
+  if (fine) document.querySelectorAll('.spot').forEach(c => c.addEventListener('pointermove', e => { const r = c.getBoundingClientRect(); c.style.setProperty('--x', e.clientX - r.left + 'px'); c.style.setProperty('--y', e.clientY - r.top + 'px'); }));
+
+  /* duplicate testimonial columns for a seamless vertical marquee */
+  document.querySelectorAll('.t-col').forEach(col => [...col.children].forEach(c => { const k = c.cloneNode(true); k.setAttribute('aria-hidden', 'true'); col.appendChild(k); }));
+
+  /* toggles loop (bento) */
+  const sws = document.querySelectorAll('[data-sw]');
+  if (!reduce) { let i = 0; setInterval(() => { const s = sws[i % 2]; s.classList.toggle('on'); setTimeout(() => s.classList.toggle('on'), 1400); i++; }, 3200); }
+
+  /* spark line draw on view */
+  const spark = document.querySelector('.spark-line');
+  new IntersectionObserver((en, o) => en.forEach(e => { if (e.isIntersecting) { spark.classList.add('drawn'); o.disconnect(); } }), { threshold: .4 }).observe(spark);
+
+  if (reduce) { document.querySelectorAll('svg').forEach(s => s.pauseAnimations && s.pauseAnimations()); }
+  if (!hasGsap || reduce) return;
+
+  gsap.registerPlugin(ScrollTrigger, SplitText);
+
+  /* smooth scroll */
+  if (typeof Lenis !== 'undefined') {
+    const lenis = new Lenis({ lerp: .1, smoothWheel: true });
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+    document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+      const id = a.getAttribute('href'); if (id.length < 2) return;
+      const t = document.querySelector(id); if (!t) return;
+      e.preventDefault(); lenis.scrollTo(t, { offset: -80, duration: 1.4 });
+    }));
+  }
+
+  /* magnetic CTA */
+  if (fine) document.querySelectorAll('.magnetic').forEach(el => {
+    el.addEventListener('mousemove', e => { const r = el.getBoundingClientRect(); gsap.to(el, { x: (e.clientX - r.left - r.width / 2) * .2, y: (e.clientY - r.top - r.height / 2) * .3, duration: .4, ease: 'power3.out' }); });
+    el.addEventListener('mouseleave', () => gsap.to(el, { x: 0, y: 0, duration: .7, ease: 'power3.out' }));
+  });
+
+  document.fonts.ready.then(() => {
+    /* hero */
+    SplitText.create('#heroTitle', { type: 'words,lines', mask: 'lines', autoSplit: true,
+      onSplit: s => gsap.from(s.words, { yPercent: 110, opacity: 0, rotateX: -35, transformOrigin: '50% 100%', duration: 1.1, ease: 'expo.out', stagger: .06, delay: .1 }) });
+    gsap.from('.hero [data-fade]', { y: 24, opacity: 0, duration: .9, ease: 'power3.out', stagger: .08, delay: .35 });
+    gsap.from('#mock', { y: 80, rotateX: 16, opacity: 0, transformPerspective: 1400, duration: 1.4, ease: 'power3.out', delay: .6 });
+    gsap.from('#run .step', { y: 14, opacity: 0, duration: .7, ease: 'power3.out', stagger: .35, delay: 1.4 });
+    gsap.to('#mock', { y: -40, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+
+    /* reveals */
+    gsap.utils.toArray('[data-reveal]').forEach(g => gsap.from(g.children, { y: 40, opacity: 0, duration: .9, ease: 'power3.out', stagger: .08, scrollTrigger: { trigger: g, start: 'top 82%' } }));
+    gsap.utils.toArray('.sec-head').forEach(h => gsap.from(h.querySelectorAll('.tag,.lead,.billing'), { y: 20, opacity: 0, duration: .8, ease: 'power3.out', stagger: .08, scrollTrigger: { trigger: h, start: 'top 85%' } }));
+    gsap.utils.toArray('[data-split]').forEach(el => SplitText.create(el, { type: 'lines', mask: 'lines', autoSplit: true,
+      onSplit: s => gsap.from(s.lines, { yPercent: 100, duration: 1, ease: 'expo.out', stagger: .1, scrollTrigger: { trigger: el, start: 'top 88%' } }) }));
+
+    /* scroll-fill */
+    gsap.utils.toArray('.fill-text').forEach(el => SplitText.create(el, { type: 'lines', linesClass: 'line', autoSplit: true,
+      onSplit: s => { const tl = gsap.timeline(); s.lines.forEach(l => tl.add(gsap.to(l, { backgroundPosition: '0% 0', ease: 'none', scrollTrigger: { trigger: l, start: 'top 85%', end: 'bottom 50%', scrub: true } }))); return tl; } }));
+
+    /* counters */
+    gsap.utils.toArray('[data-count]').forEach(el => {
+      const end = +el.dataset.count, d = +(el.dataset.decimals || 0), o = { v: 0 };
+      el.textContent = fmt(0, d);
+      gsap.to(o, { v: end, duration: 2, ease: 'power2.out', scrollTrigger: { trigger: el, start: 'top 88%' }, onUpdate: () => el.textContent = fmt(o.v, d) });
+    });
+
+    /* parallax */
+    gsap.utils.toArray('[data-speed]').forEach(el => gsap.to(el, { yPercent: -25 * +el.dataset.speed, ease: 'none', scrollTrigger: { trigger: el.closest('section'), start: 'top bottom', end: 'bottom top', scrub: true } }));
+
+    /* stacking cards (desktop) */
+    ScrollTrigger.matchMedia({ '(min-width: 901px)': () => {
+      const cards = gsap.utils.toArray('.stack-card');
+      cards.forEach((c, i) => { if (i === cards.length - 1) return;
+        gsap.to(c, { scale: .93, filter: 'brightness(.5)', ease: 'none', scrollTrigger: { trigger: cards[i + 1], start: 'top bottom', end: 'top 140px', scrub: true } }); });
+    } });
+
+    /* typed prompt */
+    const typed = document.getElementById('typed'), full = typed.textContent;
+    ScrollTrigger.create({ trigger: typed, start: 'top 80%', once: true, onEnter: () => {
+      const o = { n: 0 }; typed.textContent = '';
+      gsap.to(o, { n: full.length, duration: 3.2, ease: 'none', onUpdate: () => typed.textContent = full.slice(0, Math.round(o.n)) });
+      gsap.from('.plan div', { x: -12, opacity: 0, duration: .6, ease: 'power3.out', stagger: .15, delay: 3.3 });
+    } });
+
+    addEventListener('load', () => ScrollTrigger.refresh());
+  });
+})();
+</script>
+</body>
+</html>

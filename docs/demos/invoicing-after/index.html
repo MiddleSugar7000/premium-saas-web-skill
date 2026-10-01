@@ -1,0 +1,1238 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta name="robots" content="noindex">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Számlakör – Online számlázó kisvállalkozásoknak</title>
+<meta name="description" content="Számlakör: NAV-kompatibilis online számlázó kisvállalkozásoknak. Számla 30 másodperc alatt, automatikus NAV-beküldés, bankszinkron és könyvelői hozzáférés.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%2309090B'/%3E%3Cpath d='M22.5 10.2A9 9 0 1 0 25 16' fill='none' stroke='%2319B864' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M11.5 16.2l3.2 3.2 6-6.4' fill='none' stroke='%23fff' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<style>
+:root{
+  --page:#EDECEC;
+  --surface:#F4F4F5;
+  --surface-2:#FAFAFA;
+  --white:#FFFFFF;
+  --ink:#09090B;
+  --ink-2:#3F3F46;
+  --ink-3:#52525B;
+  --ink-4:#A1A1AA;
+  --line:#D4D4D8;
+  --hair:rgb(9 9 11 / .08);
+  --hair-2:rgb(9 9 11 / .14);
+  --dark-card:#272727;
+  --dark-card-2:#18181B;
+  --dark-line:rgb(255 255 255 / .1);
+  --accent:#0A7D3E;
+  --accent-bright:#19B864;
+  --accent-soft:#E3F5EA;
+  --accent-grad:linear-gradient(#139852,#0A7D3E);
+  --glow:#12C463;
+  --font:"Urbanist",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+  --r-sm:8px;--r-md:12px;--r-lg:16px;--r-xl:24px;--r-2xl:40px;--r-pill:999px;
+  --ease:cubic-bezier(.2,.8,.2,1);
+  --sheen:radial-gradient(62.56% 62.56% at 28.14% -10.42%,rgb(255 255 255/.7),rgb(255 255 255/0) 100%);
+  --sheen-dark:radial-gradient(62.56% 62.56% at 28.14% -10.42%,rgb(255 255 255/.12),rgb(255 255 255/0) 100%);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{margin:0;background:var(--page);color:var(--ink);font:400 17px/1.55 var(--font);-webkit-font-smoothing:antialiased;overflow-x:clip}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+h1,h2,h3,h4,p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{width:min(1200px,100% - 48px);margin-inline:auto}
+.mono{font-family:var(--mono)}
+
+/* ---------- Buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 26px;border-radius:var(--r-pill);font-weight:600;font-size:16px;line-height:1.2;white-space:nowrap;transition:transform .2s var(--ease),box-shadow .25s var(--ease),background-position .4s var(--ease)}
+.btn svg{width:17px;height:17px;transition:transform .3s var(--ease)}
+.btn:hover svg{transform:translateX(3px)}
+.btn:active{transform:translateY(1px)}
+.btn-accent{color:#fff;background:var(--sheen-dark),var(--accent-grad);
+  box-shadow:inset 0 -3px 0 rgb(0 0 0/.2),inset 0 1px 0 rgb(255 255 255/.35),0 2.77px 2.21px rgb(10 125 62/.14),0 6.65px 5.32px rgb(10 125 62/.15),0 12.52px 10.02px rgb(10 125 62/.15),0 22.34px 17.87px rgb(10 125 62/.12)}
+.btn-accent:hover{box-shadow:inset 0 -3px 0 rgb(0 0 0/.2),inset 0 1px 0 rgb(255 255 255/.45),0 2px 2px rgb(10 125 62/.2),0 8px 18px -4px rgb(18 196 99/.55),0 18px 40px -10px rgb(18 196 99/.45)}
+.btn-accent:active{box-shadow:inset 0 -1px 0 rgb(0 0 0/.2),inset 0 1px 0 rgb(255 255 255/.35),0 2px 3px rgb(10 125 62/.25)}
+.btn-dark{color:#fff;background:var(--sheen-dark),var(--dark-card);
+  box-shadow:inset 0 -3px 0 #080808,inset 0 1px 0 rgb(255 255 255/.3),0 2.77px 2.21px rgb(0 0 0/.12),0 6.65px 5.32px rgb(0 0 0/.13),0 12.52px 10.02px rgb(0 0 0/.133),0 22.34px 17.87px rgb(0 0 0/.14)}
+.btn-dark:active{box-shadow:inset 0 -1px 0 #080808,inset 0 1px 0 rgb(255 255 255/.3),0 2px 3px rgb(0 0 0/.2)}
+.btn-light{color:var(--ink);background:var(--sheen),#F5F5F5;
+  box-shadow:inset 0 -3px 0 #E4E4E7,inset 0 1px 0 rgb(255 255 255/.9),0 2.77px 2.21px rgb(0 0 0/.08),0 3px 3px rgb(0 0 0/.1),0 12px 20px -8px rgb(0 0 0/.12)}
+.btn-light:hover{box-shadow:inset 0 -3px 0 #E4E4E7,inset 0 1px 0 #fff,0 2.77px 2.21px rgb(0 0 0/.08),0 3px 3px rgb(0 0 0/.1),0 18px 30px -10px rgb(0 0 0/.2)}
+.btn-light:active{box-shadow:inset 0 -1px 0 #E4E4E7,inset 0 1px 0 #fff,0 1px 2px rgb(0 0 0/.12)}
+.play{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:var(--ink);color:#fff}
+.play svg{width:9px;height:9px;margin-left:1px}
+.btn:hover .play svg{transform:none}
+
+/* ---------- Nav ---------- */
+.nav{position:fixed;top:20px;left:50%;translate:-50% 0;z-index:60;width:min(1120px,calc(100% - 32px));display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 8px 8px 20px;border-radius:var(--r-pill);
+  background:rgb(255 255 255/.55);backdrop-filter:blur(44px) saturate(1.4);-webkit-backdrop-filter:blur(44px) saturate(1.4);box-shadow:inset 0 1px 0 rgb(255 255 255/.8),0 1px 2px rgb(0 0 0/.04),0 10px 30px -12px rgb(0 0 0/.12);transition:background .3s,box-shadow .3s}
+.nav.scrolled{background:rgb(255 255 255/.78);box-shadow:inset 0 1px 0 #fff,0 1px 2px rgb(0 0 0/.06),0 16px 40px -16px rgb(0 0 0/.22)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:20px;letter-spacing:-.03em}
+.brand-mark{width:30px;height:30px}
+.nav-links{display:flex;gap:4px}
+.nav-links a{padding:8px 14px;border-radius:var(--r-pill);font-size:15px;font-weight:500;color:var(--ink-3);transition:color .2s,background .2s}
+.nav-links a:hover{color:var(--ink);background:rgb(9 9 11/.04)}
+.nav-cta{display:flex;align-items:center;gap:6px}
+.nav-cta .login{padding:10px 14px;font-size:15px;font-weight:500;color:var(--ink-3)}
+.nav-cta .login:hover{color:var(--ink)}
+.nav .btn{padding:11px 20px;font-size:15px}
+.menu-btn{display:none;width:44px;height:44px;border-radius:50%;place-items:center}
+.menu-btn svg{width:22px;height:22px}
+.mobile-menu{position:fixed;inset:84px 16px auto;z-index:59;padding:12px;border-radius:var(--r-xl);background:rgb(255 255 255/.92);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);box-shadow:0 30px 60px -20px rgb(0 0 0/.3);display:none;flex-direction:column}
+.mobile-menu a{padding:14px 16px;border-radius:var(--r-md);font-weight:500}
+.mobile-menu a:hover{background:var(--surface)}
+.mobile-menu .btn{margin-top:8px}
+.mobile-menu.open{display:flex}
+
+/* ---------- Hero ---------- */
+.hero-frame{position:relative;margin:12px;border-radius:var(--r-2xl);overflow:hidden;isolation:isolate;padding:164px 24px 0;
+  background:radial-gradient(120% 80% at 50% 0%,#FFFFFF 0%,#F1F1F2 45%,#E2E2E5 100%)}
+.hero-bg{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.hero-bg .dots{position:absolute;inset:0;background-image:radial-gradient(rgb(9 9 11/.13) 1px,transparent 1px);background-size:22px 22px;mask-image:radial-gradient(ellipse 70% 55% at 50% 30%,#000 10%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse 70% 55% at 50% 30%,#000 10%,transparent 75%)}
+.hero-bg .gl{position:absolute;border-radius:50%;filter:blur(110px)}
+.hero-bg .gl1{left:50%;bottom:-6%;width:900px;height:420px;translate:-50% 0;background:var(--glow);opacity:.32;animation:drift 16s ease-in-out infinite alternate}
+.hero-bg .gl2{left:50%;bottom:-18%;width:1300px;height:440px;translate:-50% 0;background:#E2E2E5;filter:blur(90px)}
+.hero-bg .gl3{right:-8%;top:8%;width:360px;height:360px;background:#fff;filter:blur(80px)}
+@keyframes drift{from{transform:translateX(-50px)}to{transform:translateX(50px)}}
+.hero-copy{position:relative;text-align:center;max-width:1120px;margin-inline:auto}
+.pill-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 14px 7px 8px;border-radius:var(--r-pill);font-size:14px;font-weight:600;color:var(--ink-2);
+  background:var(--sheen),#fff;box-shadow:inset 0 -2px 0 #ECECEC,0 1px 2px rgb(0 0 0/.08),0 6px 16px -8px rgb(0 0 0/.12)}
+.pill-eyebrow .tag{white-space:nowrap;flex:none;display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:var(--r-pill);background:var(--accent-soft);color:var(--accent);font:500 12px/1.4 var(--mono);letter-spacing:.02em}
+.pill-eyebrow .tag i{width:6px;height:6px;border-radius:50%;background:var(--accent-bright);box-shadow:0 0 0 3px rgb(25 184 100/.2);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 6px rgb(25 184 100/0)}}
+.nw{white-space:nowrap}
+.hero h1{margin-top:28px;font-weight:600;font-size:clamp(40px,6.1vw,88px);line-height:1;letter-spacing:-.045em;text-wrap:balance}
+.hero h1 .dim{color:#A6A6AE}
+.hero-sub{max-width:600px;margin:28px auto 0;font-size:clamp(17px,1.6vw,20px);line-height:1.5;color:var(--ink-3)}
+.hero-ctas{display:flex;justify-content:center;flex-wrap:wrap;gap:12px;margin-top:36px}
+.proof{display:inline-flex;align-items:center;gap:12px;margin-top:32px;font-size:14px;line-height:1.35;text-align:left;color:var(--ink-3)}
+.proof strong{color:var(--ink);font-weight:600}
+.avatars{display:flex}
+.av{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:11px;letter-spacing:-.02em;font-weight:700;color:#fff;box-shadow:0 0 0 2px #F6F6F7;margin-left:-9px;background:var(--sheen-dark),var(--c,#3F3F46)}
+.av:first-child{margin-left:0}
+.stars{display:flex;gap:1px;color:var(--ink)}
+.stars svg{width:13px;height:13px}
+
+/* Mockup */
+.mock-wrap{position:relative;max-width:1100px;margin:72px auto 0}
+.mock{position:relative;border-radius:18px 18px 0 0;overflow:hidden;background:#fff;
+  box-shadow:0 0 0 1px rgb(9 9 11/.08),0 2px 4px rgb(0 0 0/.04),0 24px 60px -12px rgb(0 0 0/.18),0 60px 120px -40px rgb(10 125 62/.35)}
+.mock-bar{display:flex;align-items:center;gap:7px;padding:12px 16px;background:#F7F7F8;border-bottom:1px solid var(--hair)}
+.mock-bar i{width:11px;height:11px;border-radius:50%;background:#E4E4E7}
+.mock-url{margin-inline:auto;display:flex;align-items:center;gap:6px;padding:5px 18px;border-radius:var(--r-sm);background:#fff;box-shadow:0 0 0 1px var(--hair);font:400 12px var(--mono);color:var(--ink-3)}
+.mock-url svg{width:11px;height:11px}
+.mock-body{display:grid;grid-template-columns:208px 1fr;min-height:470px;font-size:14px}
+.side{padding:18px 12px;border-right:1px solid var(--hair);background:#FBFBFB}
+.side .brand{font-size:16px;padding:0 8px 18px}
+.side .brand-mark{width:24px;height:24px}
+.side li{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:var(--r-sm);color:var(--ink-3);font-weight:500}
+.side li svg{width:16px;height:16px;opacity:.75}
+.side li.on{background:#fff;color:var(--ink);box-shadow:0 0 0 1px var(--hair),0 1px 2px rgb(0 0 0/.05)}
+.side li .cnt{margin-left:auto;font:500 11px var(--mono);color:var(--ink-4)}
+.side .sep{height:1px;background:var(--hair);margin:12px 8px}
+.main{padding:20px 24px;min-width:0}
+.main-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.main-top h4{font-size:20px;font-weight:600;letter-spacing:-.02em}
+.main-top h4 span{font:400 13px var(--mono);color:var(--ink-4);margin-left:8px;letter-spacing:0}
+.mini-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:var(--r-pill);font-size:13px;font-weight:600}
+.mini-btn.ghost{box-shadow:0 0 0 1px var(--hair-2);color:var(--ink-2)}
+.mini-btn.go{color:#fff;background:var(--accent-grad);box-shadow:inset 0 -2px 0 rgb(0 0 0/.18),inset 0 1px 0 rgb(255 255 255/.3)}
+.mini-btn svg{width:14px;height:14px}
+.main-grid{display:grid;grid-template-columns:1.35fr 1fr;gap:18px;margin-top:18px}
+.panel{border-radius:var(--r-md);box-shadow:0 0 0 1px var(--hair);background:#fff}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:16px}
+.field label{display:block;font-size:12px;font-weight:600;color:var(--ink-4);margin-bottom:5px;letter-spacing:.01em}
+.field .in{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 12px;border-radius:var(--r-sm);background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--hair);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.field .in small{font:400 11px var(--mono);color:var(--ink-4)}
+.field.wide{grid-column:span 2}
+.field .in.focus{box-shadow:inset 0 0 0 1.5px var(--accent-bright),0 0 0 4px rgb(25 184 100/.12);background:#fff}
+.items{border-top:1px solid var(--hair)}
+.items table{width:100%;border-collapse:collapse;font-size:13px}
+.items th{text-align:left;font-size:11px;font-weight:600;color:var(--ink-4);padding:10px 16px 6px;text-transform:uppercase;letter-spacing:.06em}
+.items td{padding:9px 16px;border-top:1px solid var(--hair);font-weight:500}
+.items td.n,.items th.n{text-align:right;font-family:var(--mono);font-weight:400}
+.items .add{padding:10px 16px;border-top:1px dashed var(--hair-2);color:var(--accent);font-weight:600;font-size:13px}
+.sum{padding:16px}
+.sum-row{display:flex;justify-content:space-between;padding:5px 0;color:var(--ink-3)}
+.sum-row b{font:500 13px var(--mono);color:var(--ink-2)}
+.sum-total{display:flex;justify-content:space-between;align-items:baseline;margin-top:8px;padding-top:12px;border-top:1px solid var(--hair)}
+.sum-total span{font-weight:600}
+.sum-total b{font-size:26px;font-weight:600;letter-spacing:-.03em}
+.nav-status{margin-top:14px;padding:14px;border-radius:var(--r-md);background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--hair)}
+.nav-status .lbl{display:flex;justify-content:space-between;font-size:12px;font-weight:600;color:var(--ink-4)}
+.steps-mini{display:flex;align-items:center;gap:6px;margin-top:10px}
+.steps-mini .s{flex:1;height:5px;border-radius:5px;background:#E4E4E7;overflow:hidden;position:relative}
+.steps-mini .s::after{content:"";position:absolute;inset:0;background:var(--accent-bright);transform:scaleX(0);transform-origin:left;transition:transform .7s var(--ease)}
+.steps-mini .s.done::after{transform:scaleX(1)}
+.status-line{display:flex;align-items:center;gap:8px;margin-top:10px;font-weight:600;font-size:13px}
+.status-line .dot{width:8px;height:8px;border-radius:50%;background:#F59E0B;box-shadow:0 0 0 3px rgb(245 158 11/.18)}
+.status-line.ok .dot{background:var(--accent-bright);box-shadow:0 0 0 3px rgb(25 184 100/.2)}
+.status-line small{margin-left:auto;font:400 11px var(--mono);color:var(--ink-4)}
+.mock-fade{position:absolute;left:0;right:0;bottom:0;height:42%;background:linear-gradient(180deg,rgb(226 226 229/0),#E2E2E5 92%);pointer-events:none;z-index:3}
+.float{position:absolute;z-index:4;display:flex;align-items:center;gap:12px;padding:12px 16px 12px 12px;border-radius:var(--r-lg);background:var(--sheen),rgb(255 255 255/.86);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:inset 0 1px 0 #fff,0 0 0 1px rgb(9 9 11/.06),0 3px 3px rgb(0 0 0/.06),0 20px 40px -14px rgb(0 0 0/.25);font-size:13px;line-height:1.3;animation:bob 6s ease-in-out infinite}
+.float .ic{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;flex:none}
+.float .ic svg{width:19px;height:19px}
+.float b{display:block;font-size:15px;letter-spacing:-.01em}
+.float small{color:var(--ink-3)}
+.float-1{left:-56px;top:340px}
+.float-1 .ic{background:var(--accent-soft);color:var(--accent)}
+.float-2{right:-48px;top:410px;animation-delay:-3s}
+.float-2 .ic{background:var(--dark-card);color:#fff}
+@keyframes bob{50%{transform:translateY(-10px)}}
+.notch{position:absolute;bottom:0;left:50%;translate:-50% 0;z-index:5;display:flex;align-items:center;gap:8px;padding:14px 40px 12px;background:var(--page);border-radius:24px 24px 0 0;font-size:14px;font-weight:500;color:var(--ink-3)}
+.notch::before,.notch::after{content:"";position:absolute;bottom:0;width:24px;height:24px;background:radial-gradient(circle at 0 0,transparent 23.5px,var(--page) 24px)}
+.notch::before{left:-24px;transform:scaleX(-1)}
+.notch::after{right:-24px}
+.notch svg{width:15px;height:15px;animation:nudge 1.8s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateY(3px)}}
+
+/* ---------- Logos ---------- */
+.logos{padding:72px 0 24px;text-align:center}
+.logos p{font-size:15px;color:var(--ink-3)}
+.marquee{overflow:hidden;margin-top:28px;mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.marquee-track{display:flex;align-items:center;gap:64px;width:max-content;animation:marquee 42s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+@keyframes marquee{to{transform:translateX(-50%)}}
+.logo{display:flex;align-items:center;gap:9px;font-size:21px;font-weight:700;letter-spacing:-.03em;color:var(--ink);opacity:.42;white-space:nowrap;transition:opacity .3s}
+.logo:hover{opacity:.85}
+.logo svg{width:24px;height:24px}
+.logo.serif{font-family:Georgia,serif;font-weight:400;font-style:italic;letter-spacing:-.01em}
+.logo.mono{font-family:var(--mono);font-weight:500;font-size:17px;letter-spacing:.04em;text-transform:uppercase}
+
+/* ---------- Section shared ---------- */
+section{position:relative}
+.sec{padding:clamp(96px,12vw,160px) 0}
+.sec-head{max-width:760px}
+.sec-head.center{margin-inline:auto;text-align:center}
+.kicker{display:inline-flex;align-items:center;gap:8px;font:500 13px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.kicker::before{content:"";width:6px;height:6px;border-radius:2px;background:var(--accent-bright)}
+.h2{margin-top:20px;font-weight:600;font-size:clamp(36px,5vw,64px);line-height:1.04;letter-spacing:-.04em;text-wrap:balance}
+.h2 .dim{color:#A6A6AE}
+.lead{margin-top:20px;font-size:clamp(17px,1.5vw,19px);color:var(--ink-3);max-width:560px}
+.sec-head.center .lead{margin-inline:auto}
+
+/* ---------- Bento ---------- */
+.bento{display:grid;gap:16px;grid-template-columns:repeat(6,1fr);grid-auto-flow:dense;margin-top:64px}
+.cell{position:relative;overflow:hidden;border-radius:var(--r-xl);padding:28px;display:flex;flex-direction:column;gap:24px;
+  background:var(--sheen),var(--surface-2);
+  box-shadow:0 7.77px 16px rgb(0 0 0/.05),0 3px 3px rgb(0 0 0/.06),inset 0 -6px 0 rgb(0 0 0/.035),inset 0 2px 0 rgb(255 255 255/.9),0 0 0 1px rgb(9 9 11/.04);
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.cell:hover{transform:translateY(-4px);box-shadow:0 18px 36px -10px rgb(0 0 0/.14),0 3px 3px rgb(0 0 0/.06),inset 0 -6px 0 rgb(0 0 0/.035),inset 0 2px 0 rgb(255 255 255/.9),0 0 0 1px rgb(9 9 11/.06)}
+.cell .txt{margin-top:auto}
+.cell h3{font-size:22px;font-weight:600;letter-spacing:-.025em;line-height:1.2}
+.cell p{margin-top:8px;font-size:15.5px;color:var(--ink-3);max-width:440px}
+.cell.dark{background:var(--sheen-dark),var(--dark-card-2);color:#fff;box-shadow:0 7.77px 16px rgb(0 0 0/.12),0 3px 3px rgb(0 0 0/.1),inset 0 -6px 0 #0E0E10,inset 0 1px 0 rgb(255 255 255/.12)}
+.cell.dark p{color:rgb(255 255 255/.62)}
+.cell.dark::before{content:"";position:absolute;top:-40%;right:-30%;width:80%;height:80%;border-radius:50%;background:radial-gradient(circle,rgb(18 196 99/.55),transparent 70%);filter:blur(40px);opacity:.55;pointer-events:none}
+.c-nav{grid-column:span 4}
+.c-bank{grid-column:span 2;grid-row:span 2}
+.c-rec{grid-column:span 2}
+.c-due{grid-column:span 2}
+.c-acc{grid-column:span 3}
+.c-shop{grid-column:span 3}
+.ui{position:relative;border-radius:var(--r-lg);background:#fff;box-shadow:0 0 0 1px var(--hair),0 1px 2px rgb(0 0 0/.04);padding:16px;font-size:13px}
+.cell.dark .ui{background:rgb(255 255 255/.04);box-shadow:0 0 0 1px var(--dark-line)}
+/* NAV flow */
+.flow{display:grid;grid-template-columns:auto 1fr auto 1fr auto;align-items:center;gap:0;padding:18px 8px 10px}
+.node{display:flex;flex-direction:column;align-items:center;gap:8px;font-weight:600;font-size:13px}
+.node .nd{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:var(--sheen),#F4F4F5;box-shadow:inset 0 -2px 0 #E4E4E7,inset 0 1px 0 #fff,0 0 0 1px var(--hair),0 4px 10px -4px rgb(0 0 0/.15)}
+.node .nd svg{width:20px;height:20px}
+.node.ok .nd{background:var(--sheen-dark),var(--accent-grad);color:#fff;box-shadow:inset 0 -2px 0 rgb(0 0 0/.2),inset 0 1px 0 rgb(255 255 255/.3),0 8px 18px -6px rgb(18 196 99/.6)}
+.node small{font:400 11px var(--mono);color:var(--ink-4)}
+.wire{position:relative;height:2px;margin:0 6px 36px;background:repeating-linear-gradient(90deg,var(--line) 0 6px,transparent 6px 11px)}
+.wire::after{content:"";position:absolute;top:50%;left:0;width:8px;height:8px;margin-top:-4px;border-radius:50%;background:var(--accent-bright);box-shadow:0 0 0 4px rgb(25 184 100/.18),0 0 12px var(--glow);animation:travel 2.4s cubic-bezier(.6,0,.4,1) infinite}
+.wire.w2::after{animation-delay:1.2s}
+@keyframes travel{0%{left:0;opacity:0}12%{opacity:1}88%{opacity:1}100%{left:calc(100% - 8px);opacity:0}}
+.log{margin-top:6px;border-top:1px solid var(--hair);padding-top:10px;font:400 12px/1.9 var(--mono);color:var(--ink-3)}
+.log div{display:flex;gap:14px;white-space:nowrap;overflow:hidden}
+.log span:first-child{color:var(--ink-4)}
+.log .okk{margin-left:auto;color:var(--accent);font-weight:500}
+/* Bank */
+.tx{display:flex;align-items:center;gap:12px;padding:11px 0;border-top:1px solid var(--hair)}
+.tx:first-of-type{border-top:0}
+.tx .who{flex:1;min-width:0}
+.tx .who b{display:block;font-weight:600;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tx .who small{font:400 11px var(--mono);color:var(--ink-4)}
+.tx .amt{font:500 13px var(--mono);color:var(--accent);white-space:nowrap}
+.tx .bi{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:var(--surface);flex:none;font-weight:700;font-size:12px;color:var(--ink-3)}
+.match{display:inline-flex;align-items:center;gap:5px;margin-top:4px;padding:2px 8px;border-radius:var(--r-pill);background:var(--accent-soft);color:var(--accent);font:500 11px var(--mono)}
+.match svg{width:11px;height:11px}
+.match.wait{background:#FEF3C7;color:#92400E}
+.match.wait i{width:6px;height:6px;border-radius:50%;background:#F59E0B;animation:pulse2 1.2s ease-in-out infinite}
+@keyframes pulse2{50%{opacity:.3}}
+.bank-sum{display:flex;justify-content:space-between;align-items:baseline;margin-top:6px;padding:12px;border-radius:var(--r-md);background:var(--accent-soft);color:var(--accent);font-weight:600}
+.bank-sum b{font:500 14px var(--mono)}
+.next{margin-top:12px;padding-top:12px;border-top:1px solid var(--hair);color:var(--ink-3);font-size:12.5px}
+.next b{color:var(--ink)}
+.bank-head{display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;margin-bottom:4px;border-bottom:1px solid var(--hair);font-weight:600}
+.bank-head small{font:400 11px var(--mono);color:var(--ink-4);display:flex;align-items:center;gap:6px}
+.bank-head small i{width:6px;height:6px;border-radius:50%;background:var(--accent-bright)}
+/* Recurring */
+.months{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.months span{padding:8px 0;text-align:center;border-radius:var(--r-sm);background:var(--surface);font:500 11px var(--mono);color:var(--ink-4)}
+.months span.on{background:var(--accent-soft);color:var(--accent)}
+.months span.now{background:var(--accent-grad);color:#fff;box-shadow:0 6px 14px -6px rgb(18 196 99/.7)}
+.toggle-row{display:flex;align-items:center;justify-content:space-between;margin-top:14px;font-weight:600}
+.tg{width:40px;height:23px;border-radius:99px;background:var(--accent-bright);position:relative;box-shadow:inset 0 1px 2px rgb(0 0 0/.15)}
+.tg::after{content:"";position:absolute;top:2.5px;left:19.5px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgb(0 0 0/.25)}
+.tg.anim{animation:tgbg 4s ease-in-out infinite}
+.tg.anim::after{animation:tgk 4s ease-in-out infinite}
+@keyframes tgbg{0%,40%{background:#D4D4D8}50%,100%{background:var(--accent-bright)}}
+@keyframes tgk{0%,40%{left:2.5px}50%,100%{left:19.5px}}
+/* Due */
+.due-top{display:flex;justify-content:space-between;align-items:flex-end}
+.due-top b{font-size:28px;font-weight:600;letter-spacing:-.03em;display:block;line-height:1.1}
+.due-top small{font:400 11px var(--mono);color:rgb(255 255 255/.5)}
+.due-top .chip{padding:4px 9px;border-radius:99px;background:rgb(25 184 100/.16);color:#6EE7A8;font:500 11px var(--mono)}
+.spark{margin-top:12px;width:100%;height:64px}
+.spark path.ln{fill:none;stroke:var(--accent-bright);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.spark path.ar{fill:url(#sg)}
+.remind{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:12.5px;color:rgb(255 255 255/.7)}
+.remind svg{width:14px;height:14px;color:#6EE7A8}
+/* Accountant */
+.acc-row{display:flex;align-items:center;gap:12px}
+.acc-row .av{margin:0;width:40px;height:40px;font-size:13px;box-shadow:none}
+.acc-row b{display:block;font-size:14px}
+.acc-row small{color:var(--ink-4);font-size:12.5px}
+.perm{margin-left:auto;padding:5px 10px;border-radius:99px;box-shadow:0 0 0 1px var(--hair-2);font:500 11px var(--mono);color:var(--ink-3)}
+.files{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--hair)}
+.file{display:inline-flex;align-items:center;gap:7px;padding:7px 11px;border-radius:var(--r-sm);background:var(--surface);font:500 12px var(--mono);color:var(--ink-2)}
+.file svg{width:14px;height:14px;color:var(--accent)}
+/* Shop flow */
+.pflow{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.pf{display:inline-flex;align-items:center;gap:8px;padding:9px 14px;border-radius:99px;background:var(--surface);font-weight:600;font-size:13px;white-space:nowrap}
+.pf svg{width:15px;height:15px}
+.pf.hl{background:var(--dark-card);color:#fff;box-shadow:inset 0 -2px 0 #080808,inset 0 1px 0 rgb(255 255 255/.25)}
+.pf.hl .brand-mark{width:16px;height:16px}
+.arrow{color:var(--ink-4)}
+.arrow svg{width:16px;height:16px}
+.code{margin-top:14px;padding:12px 14px;border-radius:var(--r-md);background:var(--dark-card-2);color:rgb(255 255 255/.75);font:400 12px/1.7 var(--mono);white-space:pre;overflow:hidden}
+.code .k{color:#6EE7A8}.code .s{color:#FDE68A}
+.caret{display:inline-block;width:7px;height:14px;background:#6EE7A8;vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* ---------- Statement (dark) ---------- */
+.dark-band{margin:0 12px;border-radius:var(--r-2xl);background:#0B0B0D;color:#fff;overflow:hidden;isolation:isolate}
+.dark-band .glow{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.dark-band .g{position:absolute;border-radius:50%}
+.dark-band .g1{left:50%;top:-28%;width:860px;height:460px;translate:-50% 0;background:var(--glow);filter:blur(120px);opacity:.55}
+.dark-band .e1{left:50%;top:-36%;width:760px;height:420px;translate:-50% 0;background:#0B0B0D;filter:blur(90px)}
+.dark-band .core{left:50%;top:-4%;width:220px;height:90px;translate:-50% 0;background:linear-gradient(#0A5A2E,var(--accent-bright));filter:blur(60px);opacity:.8}
+.noise::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.08;mix-blend-mode:overlay;z-index:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.guides{position:absolute;inset:0;z-index:-1;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0 calc(25% - 1px),rgb(255 255 255/.045) calc(25% - 1px) 25%);mask-image:linear-gradient(to bottom,#000 20%,transparent 90%);-webkit-mask-image:linear-gradient(to bottom,#000 20%,transparent 90%)}
+.dark-band .kicker{color:rgb(255 255 255/.55)}
+.fill-text{margin-top:28px;font-weight:500;font-size:clamp(32px,4.8vw,64px);line-height:1.1;letter-spacing:-.04em;max-width:1080px}
+.fill-text .line{background:linear-gradient(to right,#fff 50%,rgb(255 255 255/.22) 50%);background-size:200% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent}
+.no-motion .fill-text .line,.fill-text:not(.split){color:#fff}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:clamp(72px,9vw,120px);border-top:1px solid var(--dark-line);position:relative}
+.stat{padding:32px 28px 0 0}
+.stat+.stat{padding-left:28px;border-left:1px solid var(--dark-line)}
+.stat b{display:block;font-weight:500;font-size:clamp(40px,4.6vw,64px);letter-spacing:-.045em;line-height:1;font-variant-numeric:tabular-nums}
+.stat b em{font-style:normal;color:var(--accent-bright)}
+.stat p{margin-top:12px;font-size:15px;color:rgb(255 255 255/.6);max-width:220px}
+.giant{position:absolute;right:-2%;bottom:-14%;z-index:-1;font-weight:700;font-size:clamp(160px,26vw,380px);line-height:.8;letter-spacing:-.07em;color:transparent;-webkit-text-stroke:1px rgb(255 255 255/.07);pointer-events:none;user-select:none}
+
+/* ---------- Steps (stacking) ---------- */
+.stack{margin-top:64px;display:flex;flex-direction:column;gap:24px}
+.stack-card{position:sticky;top:110px;display:grid;grid-template-columns:1fr 1.05fr;gap:40px;align-items:center;min-height:400px;padding:44px;border-radius:32px;
+  background:var(--sheen),var(--surface-2);box-shadow:0 7.77px 16px rgb(0 0 0/.06),0 3px 3px rgb(0 0 0/.06),inset 0 -8px 0 rgb(0 0 0/.04),inset 0 3px 0 rgb(255 255 255/.9),0 0 0 1px rgb(9 9 11/.05);transform-origin:50% 0}
+.stack-card:nth-child(2){top:126px}
+.stack-card:nth-child(3){top:142px}
+.stack-card.dark{background:var(--sheen-dark),var(--dark-card-2);color:#fff;box-shadow:0 20px 40px -20px rgb(0 0 0/.4),inset 0 -8px 0 #0E0E10,inset 0 1px 0 rgb(255 255 255/.12)}
+.step-n{font:500 13px var(--mono);letter-spacing:.06em;color:var(--ink-4)}
+.stack-card.dark .step-n{color:rgb(255 255 255/.45)}
+.stack-card h3{margin-top:16px;font-size:clamp(28px,3.2vw,42px);font-weight:600;letter-spacing:-.035em;line-height:1.08}
+.stack-card p{margin-top:16px;color:var(--ink-3);max-width:440px}
+.stack-card.dark p{color:rgb(255 255 255/.62)}
+.checks{margin-top:24px;display:grid;gap:10px}
+.checks li{display:flex;gap:10px;align-items:center;font-weight:500;font-size:15.5px}
+.checks svg{width:18px;height:18px;color:var(--accent);flex:none}
+.stack-card.dark .checks svg{color:var(--accent-bright)}
+.step-vis{position:relative;border-radius:var(--r-xl);padding:24px;background:linear-gradient(160deg,#EDEDEF,#E4E4E7);box-shadow:inset 0 1px 0 #fff,inset 0 0 0 1px var(--hair);min-height:300px;display:grid;place-items:center;overflow:hidden}
+.stack-card.dark .step-vis{background:rgb(255 255 255/.03);box-shadow:inset 0 0 0 1px var(--dark-line)}
+.stack-card.dark .step-vis::before{content:"";position:absolute;width:300px;height:300px;border-radius:50%;background:var(--glow);filter:blur(90px);opacity:.35;bottom:-50%;right:-10%}
+.sv-card{position:relative;width:min(100%,380px);border-radius:var(--r-lg);background:#fff;padding:18px;box-shadow:0 0 0 1px var(--hair),0 20px 40px -18px rgb(0 0 0/.25);font-size:13.5px}
+.sv-card h5{margin:0 0 12px;font-size:14px;font-weight:600}
+.sv-card .field+.field{margin-top:10px}
+.sv-ok{display:flex;align-items:center;gap:10px;margin-top:14px;padding:10px 12px;border-radius:var(--r-sm);background:var(--accent-soft);color:var(--accent);font-weight:600;font-size:13px}
+.sv-ok svg{width:16px;height:16px}
+.paper{width:min(100%,340px);background:#fff;border-radius:6px;padding:22px;box-shadow:0 0 0 1px var(--hair),0 30px 50px -20px rgb(0 0 0/.3);font-size:12px;rotate:-2deg;color:var(--ink)}
+.paper .ph{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:12px;border-bottom:2px solid var(--ink)}
+.paper .ph b{font-size:18px;letter-spacing:.08em}
+.paper .ph small{font-family:var(--mono);color:var(--ink-3);text-align:right;line-height:1.5}
+.paper .pp{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:12px 0;color:var(--ink-3);line-height:1.5}
+.paper .pp b{color:var(--ink);display:block}
+.paper .pl{display:flex;justify-content:space-between;padding:6px 0;border-top:1px solid var(--hair)}
+.paper .pl span:last-child{font-family:var(--mono)}
+.paper .pt{display:flex;justify-content:space-between;margin-top:6px;padding-top:10px;border-top:2px solid var(--ink);font-weight:700;font-size:14px}
+.stamp{position:absolute;right:9%;top:13%;padding:6px 14px;border:2px solid var(--accent);border-radius:8px;color:var(--accent);font:600 13px var(--mono);letter-spacing:.08em;rotate:-12deg;background:rgb(255 255 255/.7)}
+.notif-stack{position:relative;width:min(100%,360px);display:grid;gap:10px;z-index:1}
+.notif{display:flex;gap:12px;align-items:center;padding:14px;border-radius:var(--r-lg);background:rgb(255 255 255/.06);box-shadow:inset 0 0 0 1px var(--dark-line),inset 0 1px 0 rgb(255 255 255/.06);backdrop-filter:blur(8px);font-size:13px;color:rgb(255 255 255/.7)}
+.notif b{display:block;color:#fff;font-size:14px}
+.notif .ic{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:rgb(25 184 100/.15);color:#6EE7A8;flex:none}
+.notif .ic svg{width:18px;height:18px}
+.notif time{margin-left:auto;font:400 11px var(--mono);color:rgb(255 255 255/.4);align-self:flex-start}
+.notif:nth-child(2){opacity:.8;scale:.97}
+.notif:nth-child(3){opacity:.55;scale:.94}
+
+/* ---------- Testimonials ---------- */
+.tm-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;height:640px;margin-top:64px;overflow:hidden;mask-image:linear-gradient(transparent,#000 14%,#000 86%,transparent);-webkit-mask-image:linear-gradient(transparent,#000 14%,#000 86%,transparent)}
+.tm-col{display:flex;flex-direction:column;gap:16px;animation:up 46s linear infinite}
+.tm-col.rev{animation-name:down;animation-duration:54s}
+.tm-col.c3{animation-duration:40s}
+.tm-grid:hover .tm-col{animation-play-state:paused}
+@keyframes up{to{transform:translateY(-50%)}}
+@keyframes down{from{transform:translateY(-50%)}to{transform:translateY(0)}}
+.tm{padding:24px;border-radius:var(--r-xl);background:var(--sheen),var(--surface-2);box-shadow:0 3px 3px rgb(0 0 0/.05),0 10px 20px -10px rgb(0 0 0/.1),inset 0 -4px 0 rgb(0 0 0/.03),inset 0 2px 0 #fff,0 0 0 1px rgb(9 9 11/.04)}
+.tm blockquote{margin:0;font-size:16.5px;line-height:1.5;color:var(--ink-2)}
+.tm blockquote strong{color:var(--ink);font-weight:600}
+.tm figcaption{display:flex;align-items:center;gap:12px;margin-top:20px}
+.tm figcaption .av{margin:0;width:40px;height:40px;font-size:13px;box-shadow:none}
+.tm figcaption b{display:block;font-size:14.5px;font-weight:600}
+.tm figcaption small{font-size:13px;color:var(--ink-3)}
+.tm.dark{background:var(--sheen-dark),var(--dark-card-2);box-shadow:inset 0 -4px 0 #0E0E10,inset 0 1px 0 rgb(255 255 255/.12),0 10px 20px -10px rgb(0 0 0/.3)}
+.tm.dark blockquote{color:rgb(255 255 255/.75)}
+.tm.dark blockquote strong{color:#fff}
+.tm.dark small{color:rgb(255 255 255/.55)}
+.tm.dark b{color:#fff}
+
+/* ---------- Pricing ---------- */
+.price-toggle{display:inline-flex;align-items:center;gap:4px;margin-top:36px;padding:5px;border-radius:99px;background:#E4E4E7;box-shadow:inset 0 1px 2px rgb(0 0 0/.08)}
+.price-toggle button{position:relative;padding:10px 20px;border-radius:99px;font-weight:600;font-size:15px;color:var(--ink-3);transition:color .25s}
+.price-toggle button[aria-pressed="true"]{color:var(--ink);background:var(--sheen),#fff;box-shadow:inset 0 -2px 0 #ECECEC,0 1px 2px rgb(0 0 0/.1),0 4px 10px -4px rgb(0 0 0/.15)}
+.price-toggle .save{margin-left:6px;padding:2px 7px;border-radius:99px;background:var(--accent-soft);color:var(--accent);font:500 11px var(--mono)}
+.prices{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:56px;align-items:start}
+.price-card{position:relative;padding:32px;border-radius:28px;background:var(--sheen),var(--surface-2);box-shadow:0 7.77px 16px rgb(0 0 0/.05),0 3px 3px rgb(0 0 0/.06),inset 0 -6px 0 rgb(0 0 0/.035),inset 0 2px 0 #fff,0 0 0 1px rgb(9 9 11/.04)}
+.price-card h3{font-size:20px;font-weight:600;letter-spacing:-.02em;display:flex;align-items:center;justify-content:space-between}
+.price-card .desc{margin-top:6px;font-size:15px;color:var(--ink-3);min-height:46px}
+.price{margin-top:24px;display:flex;align-items:baseline;gap:6px;font-weight:600;font-size:52px;letter-spacing:-.045em;line-height:1;font-variant-numeric:tabular-nums}
+.price small{font-size:15px;font-weight:500;letter-spacing:0;color:var(--ink-3)}
+.price-note{margin-top:8px;font:400 12px var(--mono);color:var(--ink-4);min-height:18px}
+.price-card .btn{width:100%;margin-top:28px}
+.price-card ul{margin-top:28px;padding-top:24px;border-top:1px solid var(--hair);display:grid;gap:12px}
+.price-card li{display:flex;gap:10px;font-size:15px;color:var(--ink-2)}
+.price-card li svg{width:18px;height:18px;flex:none;margin-top:2px;color:var(--accent)}
+.price-card.featured{background:var(--sheen-dark),var(--dark-card-2);color:#fff;translate:0 -12px;overflow:hidden;isolation:isolate;
+  box-shadow:inset 0 -6px 0 #0E0E10,inset 0 1px 0 rgb(255 255 255/.14),0 0 0 1px rgb(25 184 100/.35),0 40px 80px -24px rgb(18 196 99/.45),0 20px 30px -20px rgb(0 0 0/.4)}
+.price-card.featured::before{content:"";position:absolute;z-index:-1;top:-30%;left:50%;translate:-50% 0;width:120%;height:60%;border-radius:50%;background:radial-gradient(closest-side,rgb(18 196 99/.45),transparent);filter:blur(30px)}
+.price-card.featured .desc,.price-card.featured .price small{color:rgb(255 255 255/.6)}
+.price-card.featured .price-note{color:rgb(255 255 255/.45)}
+.price-card.featured ul{border-color:var(--dark-line)}
+.price-card.featured li{color:rgb(255 255 255/.82)}
+.price-card.featured li svg{color:var(--accent-bright)}
+.badge{padding:4px 10px;border-radius:99px;background:rgb(25 184 100/.16);color:#6EE7A8;font:500 11px var(--mono);letter-spacing:.04em;text-transform:uppercase}
+.price-foot{margin-top:32px;text-align:center;font-size:14.5px;color:var(--ink-3)}
+
+/* ---------- FAQ ---------- */
+.faq-wrap{display:grid;grid-template-columns:1fr 1.4fr;gap:64px;align-items:start}
+.faq-wrap .sec-head{position:sticky;top:120px}
+.faq{border-top:1px solid var(--line)}
+.q{border-bottom:1px solid var(--line)}
+.q button{display:flex;align-items:center;justify-content:space-between;gap:24px;width:100%;padding:24px 0;text-align:left;font-size:19px;font-weight:600;letter-spacing:-.015em}
+.q .pm{position:relative;flex:none;width:32px;height:32px;border-radius:50%;background:var(--sheen),#fff;box-shadow:inset 0 -2px 0 #ECECEC,0 1px 2px rgb(0 0 0/.1);transition:background .3s}
+.q .pm::before,.q .pm::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:1.75px;border-radius:2px;background:var(--ink);translate:-50% -50%;transition:rotate .35s var(--ease),background .3s}
+.q .pm::after{rotate:90deg}
+.q button[aria-expanded="true"] .pm{background:var(--sheen-dark),var(--accent-grad);box-shadow:inset 0 -2px 0 rgb(0 0 0/.2)}
+.q button[aria-expanded="true"] .pm::before,.q button[aria-expanded="true"] .pm::after{background:#fff}
+.q button[aria-expanded="true"] .pm::after{rotate:0deg}
+.a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--ease)}
+.a>div{overflow:hidden}
+.a p{padding:0 56px 24px 0;color:var(--ink-3);font-size:16.5px}
+.q.open .a{grid-template-rows:1fr}
+
+/* ---------- Final CTA ---------- */
+.cta{margin:0 12px;padding:clamp(96px,12vw,150px) 24px;border-radius:var(--r-2xl);background:#0B0B0D;color:#fff;text-align:center;overflow:hidden;isolation:isolate}
+.cta .glow{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.cta .g{position:absolute;border-radius:50%}
+.cta .g1{left:50%;bottom:-40%;width:1100px;height:600px;translate:-50% 0;background:var(--glow);filter:blur(130px);opacity:.75;animation:drift 18s ease-in-out infinite alternate}
+.cta .e1{left:50%;bottom:-20%;width:980px;height:520px;translate:-50% 0;background:#0B0B0D;filter:blur(100px)}
+.cta .core{left:50%;bottom:-6%;width:320px;height:120px;translate:-50% 0;background:linear-gradient(#0A5A2E,#7CF0B0);filter:blur(60px)}
+.cta .dots{position:absolute;inset:0;z-index:-1;background-image:radial-gradient(rgb(255 255 255/.1) 1px,transparent 1px);background-size:22px 22px;mask-image:radial-gradient(ellipse 60% 60% at 50% 40%,#000,transparent 70%);-webkit-mask-image:radial-gradient(ellipse 60% 60% at 50% 40%,#000,transparent 70%)}
+.cta h2{max-width:900px;margin:20px auto 0;font-weight:600;font-size:clamp(40px,6vw,84px);line-height:1;letter-spacing:-.045em;text-wrap:balance}
+.cta h2 .dim{color:rgb(255 255 255/.45)}
+.cta p{max-width:520px;margin:24px auto 0;font-size:18px;color:rgb(255 255 255/.62)}
+.cta .hero-ctas{margin-top:40px}
+.cta .kicker{color:rgb(255 255 255/.55)}
+.cta .btn-light{background:var(--sheen),#fff}
+.cta .cta-small{margin-top:20px;font:400 12.5px var(--mono);color:rgb(255 255 255/.45)}
+
+/* ---------- Footer ---------- */
+footer{padding:96px 0 0;overflow:hidden}
+.foot{display:grid;grid-template-columns:1.6fr repeat(3,1fr);gap:40px}
+.foot p{margin-top:16px;max-width:300px;font-size:15px;color:var(--ink-3)}
+.foot h4{font:500 12px var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-4)}
+.foot ul{margin-top:16px;display:grid;gap:10px}
+.foot a{font-size:15px;color:var(--ink-2);background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .35s var(--ease)}
+.foot a:hover{background-size:100% 1px}
+.foot-bar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:72px;padding-top:24px;border-top:1px solid var(--line);font-size:13.5px;color:var(--ink-3)}
+.foot-bar .nav-ok{display:inline-flex;align-items:center;gap:8px}
+.foot-bar .nav-ok i{width:7px;height:7px;border-radius:50%;background:var(--accent-bright);box-shadow:0 0 0 3px rgb(25 184 100/.2)}
+.wordmark{margin-top:40px;font-weight:700;font-size:clamp(80px,19.5vw,300px);line-height:.78;letter-spacing:-.065em;text-align:center;white-space:nowrap;
+  background:linear-gradient(180deg,#C9C9CF 0%,rgb(212 212 216/0) 88%);-webkit-background-clip:text;background-clip:text;color:transparent;user-select:none;margin-bottom:-.12em}
+
+/* ---------- Responsive ---------- */
+@media (max-width:1100px){
+  .float-1{left:-16px}.float-2{right:-16px}
+  .c-nav{grid-column:span 6}.c-bank{grid-column:span 3;grid-row:span 2}.c-rec,.c-due{grid-column:span 3}.c-acc,.c-shop{grid-column:span 3}
+}
+@media (max-width:900px){
+  .nav-links,.nav-cta .login{display:none}
+  .nav-cta .btn{display:none}
+  .menu-btn{display:grid}
+  .mock-body{grid-template-columns:1fr}
+  .side{display:none}
+  .main-grid{grid-template-columns:1fr}
+  .bento{grid-template-columns:1fr}
+  .bento>*{grid-column:auto!important;grid-row:auto!important}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat:nth-child(3){border-left:0;padding-left:0}
+  .stat:nth-child(n+3){margin-top:32px;border-top:1px solid var(--dark-line)}
+  .stack-card{grid-template-columns:1fr;padding:28px;gap:28px;min-height:0}
+  .tm-grid{grid-template-columns:1fr 1fr}
+  .tm-col.c3{display:none}
+  .prices{grid-template-columns:1fr;max-width:480px;margin-inline:auto}
+  .price-card.featured{translate:0}
+  .faq-wrap{grid-template-columns:1fr;gap:40px}
+  .faq-wrap .sec-head{position:static}
+  .foot{grid-template-columns:1fr 1fr}
+  .foot>div:first-child{grid-column:span 2}
+}
+@media (max-width:768px){
+  .br-lg{display:none}
+  .pill-eyebrow{font-size:12.5px;white-space:normal;text-align:left}
+  .wrap{width:calc(100% - 32px)}
+  .hero-frame{margin:8px;border-radius:28px;padding:128px 16px 0}
+  .dark-band,.cta{margin:0 8px;border-radius:28px}
+  .hero-bg .gl,.dark-band .g,.cta .g{filter:blur(60px)!important;scale:.6}
+  .float{display:none}
+  .mock-wrap{margin-top:56px}
+  .mock-body{min-height:0}
+  .main{padding:16px}
+  .fields{grid-template-columns:1fr}
+  .field.wide{grid-column:auto}
+  .items .hide-sm{display:none}
+  .mock-url{padding:5px 10px}
+  .proof{flex-direction:column;text-align:center}
+  .tm-grid{grid-template-columns:1fr;height:560px}
+  .tm-col.rev{display:none}
+  .stack-card{position:relative;top:auto!important}
+  .flow{grid-template-columns:auto 1fr auto 1fr auto;padding:12px 0 6px}
+  .node .nd{width:40px;height:40px}
+  .log .hide-sm{display:none}
+  .q button{font-size:17px}
+  .a p{padding-right:0}
+  .cell{padding:22px}
+}
+@media (max-width:480px){
+  .stats{grid-template-columns:1fr}
+  .stat,.stat+.stat{padding-left:0;border-left:0}
+  .stat:nth-child(n+2){margin-top:28px;border-top:1px solid var(--dark-line)}
+  .foot{grid-template-columns:1fr}
+  .foot>div:first-child{grid-column:auto}
+  .hero-ctas .btn{width:100%}
+  .notch{padding:12px 28px 10px;font-size:13px}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .fill-text .line{color:#fff}
+}
+</style>
+</head>
+<body>
+
+<!-- SVG sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-check-c" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9.25" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="m8 12.3 2.7 2.7L16 9.6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3L2.9 9.5l6.3-.9z" fill="currentColor"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2.5H6.5a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V8z"/><path d="M14 2.5V8h5.5M8.5 13h7M8.5 17h5"/></g></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2.5 11 13"/><path d="m21.5 2.5-7 19-3.5-8.5-8.5-3.5z"/></g></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.5s8-3.6 8-9.6V5l-8-2.5L4 5v6.9c0 6 8 9.6 8 9.6z"/><path d="m8.8 12 2.2 2.2 4.2-4.4"/></g></symbol>
+    <symbol id="i-bank" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 4l9 5.5M4.5 10v8M9.5 10v8M14.5 10v8M19.5 10v8M3 20.5h18"/></g></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10.5 12 3.5l8.5 7V20a1 1 0 0 1-1 1h-4.5v-6h-6v6H4.5a1 1 0 0 1-1-1z"/></g></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5M16 4.8a3.5 3.5 0 0 1 0 6.4M18.5 14.8c1.6.7 2.7 2.4 3 5.2"/></g></symbol>
+    <symbol id="i-box" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 7.5 12 3 3 7.5v9L12 21l9-4.5z"/><path d="M3 7.5 12 12l9-4.5M12 12v9"/></g></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></g></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8.5a6 6 0 1 0-12 0c0 6.5-2.5 8.5-2.5 8.5h17S18 15 18 8.5M10.3 20.5a2 2 0 0 0 3.4 0"/></g></symbol>
+    <symbol id="i-cart" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.3"/><circle cx="18" cy="20" r="1.3"/><path d="M2.5 3.5h3l2.4 11.2a1.5 1.5 0 0 0 1.5 1.2h8.4a1.5 1.5 0 0 0 1.5-1.1L21 7.5H6.4"/></g></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m3.5 7 8.5 6 8.5-6"/></g></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10.5" rx="2.5"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></g></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 5v14M6 13l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-repeat" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m17 2.5 3.5 3.5L17 9.5"/><path d="M3.5 11.5V10a4 4 0 0 1 4-4h13M7 21.5 3.5 18 7 14.5"/><path d="M20.5 12.5V14a4 4 0 0 1-4 4h-13"/></g></symbol>
+    <symbol id="logo" viewBox="0 0 32 32"><rect width="32" height="32" rx="9" fill="#09090B"/><path d="M22.5 10.2A9 9 0 1 0 25 16" fill="none" stroke="#19B864" stroke-width="3" stroke-linecap="round"/><path d="m11.5 16.2 3.2 3.2 6-6.4" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<!-- Nav -->
+<header class="nav" id="nav">
+  <a href="#top" class="brand" aria-label="Számlakör – kezdőlap"><svg class="brand-mark"><use href="#logo"/></svg>Számlakör</a>
+  <nav class="nav-links" aria-label="Fő navigáció">
+    <a href="#funkciok">Funkciók</a>
+    <a href="#hogyan">Hogyan működik</a>
+    <a href="#velemenyek">Vélemények</a>
+    <a href="#arak">Árak</a>
+    <a href="#gyik">GYIK</a>
+  </nav>
+  <div class="nav-cta">
+    <a href="#" class="login">Belépés</a>
+    <a href="#arak" class="btn btn-dark">Ingyenes fiók <svg><use href="#i-arrow"/></svg></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Menü megnyitása" aria-expanded="false" aria-controls="mobileMenu"><svg viewBox="0 0 24 24"><path d="M4 8h16M4 16h16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+  </div>
+</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#funkciok">Funkciók</a>
+  <a href="#hogyan">Hogyan működik</a>
+  <a href="#velemenyek">Vélemények</a>
+  <a href="#arak">Árak</a>
+  <a href="#gyik">GYIK</a>
+  <a href="#">Belépés</a>
+  <a href="#arak" class="btn btn-accent">Ingyenes fiók <svg><use href="#i-arrow"/></svg></a>
+</div>
+
+<main id="top">
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-frame">
+    <div class="hero-bg" aria-hidden="true"><div class="dots"></div><span class="gl gl1"></span><span class="gl gl2"></span><span class="gl gl3"></span></div>
+
+    <div class="hero-copy">
+      <span class="pill-eyebrow" data-fade><span class="tag"><i></i>NAV 3.0</span>Valós idejű adatszolgáltatás, automatikusan</span>
+      <h1>Számla 30 másodperc alatt. <br class="br-lg"><span class="dim">A <span class="nw">NAV-ot</span> mi intézzük.</span></h1>
+      <p class="hero-sub" data-fade>A Számlakör online számlázó egyéni vállalkozóknak, Kft.-knek és Bt.-knek. Kiállítod a számlát, mi beküldjük a NAV-nak, a befizetést pedig párosítjuk a bankszámláddal.</p>
+      <div class="hero-ctas" data-fade>
+        <a href="#arak" class="btn btn-accent">Kipróbálom ingyen <svg><use href="#i-arrow"/></svg></a>
+        <a href="#hogyan" class="btn btn-light"><span class="play"><svg viewBox="0 0 10 10"><path d="M1 0.5v9l8-4.5z" fill="currentColor"/></svg></span>2 perces bemutató</a>
+      </div>
+      <div class="proof" data-fade>
+        <div class="avatars" aria-hidden="true">
+          <span class="av" style="--c:#0A7D3E">KA</span><span class="av" style="--c:#3F3F46">NB</span><span class="av" style="--c:#7C5A3A">SE</span><span class="av" style="--c:#27272A">HL</span><span class="av" style="--c:#52525B">+</span>
+        </div>
+        <div>
+          <div class="stars" aria-label="4,9 az 5-ből"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div>
+          <strong>4,9/5</strong> · 12 000+ magyar vállalkozó számláz velünk
+        </div>
+      </div>
+    </div>
+
+    <div class="mock-wrap">
+      <div class="float float-1" aria-hidden="true">
+        <span class="ic"><svg><use href="#i-bank"/></svg></span>
+        <div><small>Jóváírás érkezett · Kovács és Társa Bt.</small><b>+184 150 Ft</b><small>SZK-2026-0148 automatikusan párosítva</small></div>
+      </div>
+      <div class="float float-2" aria-hidden="true">
+        <span class="ic"><svg><use href="#i-shield"/></svg></span>
+        <div><b>NAV: befogadva</b><small class="mono">2,1 mp · 14:02:13</small></div>
+      </div>
+
+      <div class="mock" role="img" aria-label="A Számlakör számlakiállító felülete: vevő, tételek, végösszeg és NAV-beküldési állapot">
+        <div class="mock-bar"><i></i><i></i><i></i><span class="mock-url"><svg><use href="#i-lock"/></svg>app.szamlakor.hu/szamlak/uj</span></div>
+        <div class="mock-body">
+          <aside class="side">
+            <div class="brand"><svg class="brand-mark"><use href="#logo"/></svg>Számlakör</div>
+            <ul>
+              <li><svg><use href="#i-home"/></svg>Áttekintés</li>
+              <li class="on"><svg><use href="#i-file"/></svg>Számlák<span class="cnt">148</span></li>
+              <li><svg><use href="#i-users"/></svg>Partnerek</li>
+              <li><svg><use href="#i-box"/></svg>Termékek</li>
+              <li><svg><use href="#i-bank"/></svg>Bank<span class="cnt">3</span></li>
+            </ul>
+            <div class="sep"></div>
+            <ul><li><svg><use href="#i-repeat"/></svg>Ismétlődő</li><li><svg><use href="#i-gear"/></svg>Beállítások</li></ul>
+          </aside>
+          <div class="main">
+            <div class="main-top">
+              <h4>Új számla<span>SZK-2026-0148</span></h4>
+              <div style="display:flex;gap:8px">
+                <span class="mini-btn ghost">Előnézet</span>
+                <span class="mini-btn go"><svg><use href="#i-send"/></svg>Kiállítás és beküldés</span>
+              </div>
+            </div>
+            <div class="main-grid">
+              <div class="panel">
+                <div class="fields">
+                  <div class="field wide"><label>Vevő</label><div class="in focus">Kovács és Társa Bt. <small>12345678-2-13</small></div></div>
+                  <div class="field"><label>Teljesítés</label><div class="in">2026. 10. 01.</div></div>
+                  <div class="field"><label>Fizetési határidő</label><div class="in">2026. 10. 09. <small>8 nap</small></div></div>
+                  <div class="field"><label>Fizetési mód</label><div class="in">Átutalás</div></div>
+                  <div class="field"><label>Pénznem</label><div class="in">HUF</div></div>
+                </div>
+                <div class="items">
+                  <table>
+                    <thead><tr><th>Tétel</th><th class="n hide-sm">Menny.</th><th class="n hide-sm">ÁFA</th><th class="n">Nettó</th></tr></thead>
+                    <tbody>
+                      <tr><td>Weboldal-karbantartás (okt.)</td><td class="n hide-sm">1 hó</td><td class="n hide-sm">27%</td><td class="n">120 000</td></tr>
+                      <tr><td>Tárhely, éves díj</td><td class="n hide-sm">1 db</td><td class="n hide-sm">27%</td><td class="n">25 000</td></tr>
+                    </tbody>
+                  </table>
+                  <div class="add">+ Tétel hozzáadása</div>
+                </div>
+              </div>
+              <div>
+                <div class="panel sum">
+                  <div class="sum-row"><span>Nettó</span><b>145 000 Ft</b></div>
+                  <div class="sum-row"><span>ÁFA 27%</span><b>39 150 Ft</b></div>
+                  <div class="sum-total"><span>Bruttó</span><b>184 150 Ft</b></div>
+                </div>
+                <div class="nav-status" aria-live="off">
+                  <div class="lbl"><span>NAV ONLINE SZÁMLA</span><span class="mono">éles</span></div>
+                  <div class="steps-mini"><span class="s done"></span><span class="s" id="st2"></span><span class="s" id="st3"></span></div>
+                  <div class="status-line" id="statusLine"><span class="dot"></span><span id="statusTxt">Kiállítva</span><small id="statusTime">14:02:11</small></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mock-fade"></div>
+    </div>
+
+    <a href="#funkciok" class="notch">Görgess tovább <svg><use href="#i-down"/></svg></a>
+  </div>
+</section>
+
+<!-- Logos -->
+<section class="logos" aria-label="Ügyfeleink">
+  <p>Pékségektől szoftvercégekig: ők már a Számlakörrel számláznak</p>
+  <div class="marquee">
+    <div class="marquee-track">
+      <span class="logo"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>Kovács Pékség</span>
+      <span class="logo serif">Tisza Borház</span>
+      <span class="logo mono">Hídvég//Studio</span>
+      <span class="logo"><svg viewBox="0 0 24 24"><path d="M3 20 12 4l9 16z" fill="currentColor"/></svg>Csúcs Építő</span>
+      <span class="logo">nyitva.</span>
+      <span class="logo serif">Mandula Kozmetika</span>
+      <span class="logo"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2" fill="currentColor"/><rect x="13" y="13" width="8" height="8" rx="4" fill="currentColor"/></svg>Kockakő Dev</span>
+      <span class="logo mono">Fény&amp;Árnyék</span>
+      <span class="logo">Balaton Bérautó</span>
+      <!-- duplicate for loop -->
+      <span class="logo" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>Kovács Pékség</span>
+      <span class="logo serif" aria-hidden="true">Tisza Borház</span>
+      <span class="logo mono" aria-hidden="true">Hídvég//Studio</span>
+      <span class="logo" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 20 12 4l9 16z" fill="currentColor"/></svg>Csúcs Építő</span>
+      <span class="logo" aria-hidden="true">nyitva.</span>
+      <span class="logo serif" aria-hidden="true">Mandula Kozmetika</span>
+      <span class="logo" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2" fill="currentColor"/><rect x="13" y="13" width="8" height="8" rx="4" fill="currentColor"/></svg>Kockakő Dev</span>
+      <span class="logo mono" aria-hidden="true">Fény&amp;Árnyék</span>
+      <span class="logo" aria-hidden="true">Balaton Bérautó</span>
+    </div>
+  </div>
+</section>
+
+<!-- Features bento -->
+<section class="sec" id="funkciok" style="padding-top:clamp(72px,9vw,112px)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="kicker">Funkciók</span>
+      <h2 class="h2" data-split>Minden, ami a számlázáshoz kell. <span class="dim">És semmi, ami nem.</span></h2>
+      <p class="lead">A Számlakört kisvállalkozásoknak építettük: annyit tud, amennyi kell, és nem kell hozzá könyvelői végzettség.</p>
+    </div>
+
+    <div class="bento" data-reveal>
+      <article class="cell c-nav">
+        <div class="ui">
+          <div class="flow">
+            <div class="node ok"><span class="nd"><svg><use href="#i-file"/></svg></span>Kiállítva<small>14:02:11</small></div>
+            <div class="wire"></div>
+            <div class="node ok"><span class="nd"><svg><use href="#i-send"/></svg></span>Beküldve<small>14:02:12</small></div>
+            <div class="wire w2"></div>
+            <div class="node ok"><span class="nd"><svg><use href="#i-shield"/></svg></span>Befogadva<small>14:02:13</small></div>
+          </div>
+          <div class="log">
+            <div><span>14:02:13</span><span>SZK-2026-0148</span><span class="hide-sm">CREATE · 184 150 Ft</span><span class="okk">DONE</span></div>
+            <div><span>11:47:30</span><span>SZK-2026-0147</span><span class="hide-sm">CREATE · 63 500 Ft</span><span class="okk">DONE</span></div>
+            <div><span>09:15:02</span><span>SZK-2026-0146</span><span class="hide-sm">STORNO · −12 700 Ft</span><span class="okk">DONE</span></div>
+          </div>
+        </div>
+        <div class="txt">
+          <h3>Automatikus NAV-adatszolgáltatás</h3>
+          <p>Minden számla másodperceken belül eljut a NAV Online Számla rendszerébe. Ha a NAV elutasít egy számlát, azonnal szólunk, és megmutatjuk, mit kell javítani.</p>
+        </div>
+      </article>
+
+      <article class="cell c-bank">
+        <div class="ui">
+          <div class="bank-head">Üzleti számla <small><i></i>Szinkron · 2 perce</small></div>
+          <div class="tx"><span class="bi">KT</span><div class="who"><b>Kovács és Társa Bt.</b><span class="match"><svg><use href="#i-check"/></svg>SZK-0148 párosítva</span></div><span class="amt">+184 150</span></div>
+          <div class="tx"><span class="bi">MK</span><div class="who"><b>Mandula Kozmetika Kft.</b><span class="match"><svg><use href="#i-check"/></svg>SZK-0145 párosítva</span></div><span class="amt">+48 260</span></div>
+          <div class="tx"><span class="bi">TB</span><div class="who"><b>Tisza Borház Kft.</b><span class="match wait"><i></i>Párosítás…</span></div><span class="amt">+215 900</span></div>
+          <div class="tx"><span class="bi">CS</span><div class="who"><b>Csúcs Építő Zrt.</b><span class="match"><svg><use href="#i-check"/></svg>SZK-0139 párosítva</span></div><span class="amt">+1 016 000</span></div>
+          <div class="tx"><span class="bi">HS</span><div class="who"><b>Hídvég Studio</b><span class="match"><svg><use href="#i-check"/></svg>SZK-0137 párosítva</span></div><span class="amt">+76 200</span></div>
+          <div class="bank-sum"><span>Ezen a héten beérkezett</span><b>1 540 510 Ft</b></div>
+        </div>
+        <div class="txt">
+          <h3>Bankszinkron, kézi könyvelés nélkül</h3>
+          <p>Kösd össze a bankszámládat, a beérkező utalásokat pedig a közlemény és az összeg alapján automatikusan a számlákhoz rendeljük. Látod, ki fizetett, és ki nem.</p>
+        </div>
+      </article>
+
+      <article class="cell c-rec">
+        <div class="ui">
+          <div class="months"><span class="on">JÚL</span><span class="on">AUG</span><span class="on">SZE</span><span class="now">OKT</span><span>NOV</span><span>DEC</span></div>
+          <div class="toggle-row">Minden hónap 1-jén<span class="tg anim" aria-hidden="true"></span></div>
+          <div class="next">Következő: <b>nov. 1.</b> · 4 számla · 96 000 Ft</div>
+        </div>
+        <div class="txt">
+          <h3>Ismétlődő számlák</h3>
+          <p>Havidíjas ügyfeleidnek magától megy a számla, e-mailben, a díjbekérővel együtt.</p>
+        </div>
+      </article>
+
+      <article class="cell c-due dark">
+        <div class="ui">
+          <div class="due-top"><div><small>Kintlévőség · 30 nap</small><b>412 600 Ft</b></div><span class="chip">−38%</span></div>
+          <svg class="spark" viewBox="0 0 240 64" preserveAspectRatio="none" aria-hidden="true">
+            <defs><linearGradient id="sg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#19B864" stop-opacity=".35"/><stop offset="1" stop-color="#19B864" stop-opacity="0"/></linearGradient></defs>
+            <path class="ar" d="M0 10 L30 16 L60 12 L90 26 L120 22 L150 36 L180 34 L210 48 L240 52 L240 64 L0 64Z"/>
+            <path class="ln" id="sparkLine" d="M0 10 L30 16 L60 12 L90 26 L120 22 L150 36 L180 34 L210 48 L240 52"/>
+          </svg>
+          <div class="remind"><svg><use href="#i-bell"/></svg>3 emlékeztető kiküldve ezen a héten</div>
+        </div>
+        <div class="txt">
+          <h3>Kintlévőség-figyelő</h3>
+          <p>Udvarias, automatikus fizetési emlékeztetők, hogy ne neked kelljen kellemetlen e-maileket írnod.</p>
+        </div>
+      </article>
+
+      <article class="cell c-acc">
+        <div class="ui">
+          <div class="acc-row"><span class="av" style="--c:#7C5A3A">TE</span><div><b>Tóth Eszter</b><small>Könyvelő · meghívás elfogadva</small></div><span class="perm">csak olvasás</span></div>
+          <div class="files">
+            <span class="file"><svg><use href="#i-file"/></svg>afa-analitika_2026Q3.xlsx</span>
+            <span class="file"><svg><use href="#i-file"/></svg>szamlak_szept.zip</span>
+            <span class="file"><svg><use href="#i-file"/></svg>nav-export.xml</span>
+          </div>
+        </div>
+        <div class="txt">
+          <h3>Könyvelői hozzáférés</h3>
+          <p>Hívd meg a könyvelődet egy kattintással. Ő maga tölti le, amire szüksége van, neked pedig nem kell a hónap végén PDF-eket küldözgetned.</p>
+        </div>
+      </article>
+
+      <article class="cell c-shop">
+        <div class="ui">
+          <div class="pflow">
+            <span class="pf"><svg><use href="#i-cart"/></svg>Webshop-rendelés</span>
+            <span class="arrow"><svg><use href="#i-arrow"/></svg></span>
+            <span class="pf hl"><svg class="brand-mark"><use href="#logo"/></svg>Számlakör</span>
+            <span class="arrow"><svg><use href="#i-arrow"/></svg></span>
+            <span class="pf"><svg><use href="#i-mail"/></svg>Számla a vevőnek</span>
+          </div>
+<div class="code"><span class="k">POST</span> /v1/szamlak  <span class="s">"vevo"</span>: <span class="s">"Nagy Bence"</span><span class="caret"></span></div>
+        </div>
+        <div class="txt">
+          <h3>Webshop-bővítmények és API</h3>
+          <p>Kész bővítmények a népszerű webshopmotorokhoz, nyílt REST API mindenhez. Fizetett rendelés után a számla magától elkészül.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Statement + numbers (dark) -->
+<section class="dark-band noise" aria-labelledby="stmt">
+  <div class="glow" aria-hidden="true"><span class="g g1"></span><span class="g e1"></span><span class="g core"></span></div>
+  <div class="guides" aria-hidden="true"></div>
+  <div class="sec wrap" style="position:relative;z-index:1">
+    <span class="kicker" id="stmt">Miért építettük</span>
+    <p class="fill-text">Nem azért lettél vállalkozó, hogy számlázz. Ezért a Számlakör havonta legfeljebb tíz percet kér tőled, a többi időt pedig visszaadja a munkádra.</p>
+
+    <div class="stats" data-reveal>
+      <div class="stat"><b><span data-count="12000" data-suffix="">12 000</span><em>+</em></b><p>aktív vállalkozás számláz velünk naponta</p></div>
+      <div class="stat"><b><span data-count="4.2" data-decimals="1">4,2</span><em> M</em></b><p>számlát küldtünk be a NAV-nak tavaly</p></div>
+      <div class="stat"><b><span data-count="99.98" data-decimals="2">99,98</span><em>%</em></b><p>elsőre befogadott NAV-adatszolgáltatás</p></div>
+      <div class="stat"><b><span data-count="6">6</span><em> nap</em></b><p>átlagosan ennyivel hamarabb fizetnek az ügyfelek</p></div>
+    </div>
+  </div>
+  <div class="giant" aria-hidden="true" data-speed="1">4,2M</div>
+</section>
+
+<!-- How it works: stacking cards -->
+<section class="sec" id="hogyan">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="kicker">Hogyan működik</span>
+      <h2 class="h2" data-split>Három lépés, <span class="dim">és már számlázol is.</span></h2>
+      <p class="lead">Nem kell telepíteni semmit, és nem kell tanfolyamra járni. Ha van adószámod, öt perc múlva kiállíthatod az első számládat.</p>
+    </div>
+
+    <div class="stack">
+      <article class="stack-card">
+        <div>
+          <span class="step-n">01 / REGISZTRÁCIÓ</span>
+          <h3>Add meg az adószámod, a többit kitöltjük.</h3>
+          <p>A cégadataidat a NAV-tól kérjük le. A technikai felhasználó beállításában lépésről lépésre végigvezetünk.</p>
+          <ul class="checks">
+            <li><svg><use href="#i-check-c"/></svg>Egyéni vállalkozó, Kft., Bt., alanyi adómentes</li>
+            <li><svg><use href="#i-check-c"/></svg>Korábbi számlázóból 1 kattintással átköltözhetsz</li>
+          </ul>
+        </div>
+        <div class="step-vis">
+          <div class="sv-card">
+            <h5>Cégadatok</h5>
+            <div class="field"><label>Adószám</label><div class="in focus">28471936-2-41</div></div>
+            <div class="field"><label>Cégnév</label><div class="in">Hídvég Studio Kft. <small>NAV-ból</small></div></div>
+            <div class="field"><label>Székhely</label><div class="in">1036 Budapest, Lajos u. 48. <small>NAV-ból</small></div></div>
+            <div class="sv-ok"><svg><use href="#i-check-c"/></svg>NAV technikai felhasználó összekötve</div>
+          </div>
+        </div>
+      </article>
+
+      <article class="stack-card">
+        <div>
+          <span class="step-n">02 / KIÁLLÍTÁS</span>
+          <h3>Állítsd ki a számlát, akár a telefonodról is.</h3>
+          <p>A partnereket és a termékeket megjegyezzük, az ÁFA-t kiszámoljuk, a számlaszámot pedig sorszámozzuk. Egy gombnyomás, és a számla úton van.</p>
+          <ul class="checks">
+            <li><svg><use href="#i-check-c"/></svg>Magyar és angol nyelvű számla, HUF, EUR, USD</li>
+            <li><svg><use href="#i-check-c"/></svg>Díjbekérő, előleg- és helyesbítő számla</li>
+          </ul>
+        </div>
+        <div class="step-vis">
+          <div class="paper" aria-hidden="true">
+            <div class="ph"><b>SZÁMLA</b><small>SZK-2026-0148<br>2026. 10. 01.</small></div>
+            <div class="pp"><div><b>Hídvég Studio Kft.</b>1036 Budapest<br>28471936-2-41</div><div><b>Kovács és Társa Bt.</b>6720 Szeged<br>12345678-2-13</div></div>
+            <div class="pl"><span>Weboldal-karbantartás</span><span>120 000</span></div>
+            <div class="pl"><span>Tárhely, éves díj</span><span>25 000</span></div>
+            <div class="pl"><span>ÁFA 27%</span><span>39 150</span></div>
+            <div class="pt"><span>Fizetendő</span><span>184 150 Ft</span></div>
+          </div>
+          <span class="stamp">NAV ✓</span>
+        </div>
+      </article>
+
+      <article class="stack-card dark">
+        <div>
+          <span class="step-n">03 / FIGYELÉS</span>
+          <h3>A pénz beérkezését mi figyeljük.</h3>
+          <p>A Számlakör párosítja az utalásokat, emlékeztetőt küld a késlekedőknek, és szól, amikor minden rendben van. Te közben a következő munkán dolgozhatsz.</p>
+          <ul class="checks">
+            <li><svg><use href="#i-check-c"/></svg>Push értesítés minden befizetésről</li>
+            <li><svg><use href="#i-check-c"/></svg>Havi összesítő a könyvelődnek, automatikusan</li>
+          </ul>
+        </div>
+        <div class="step-vis">
+          <div class="notif-stack" aria-hidden="true">
+            <div class="notif"><span class="ic"><svg><use href="#i-bank"/></svg></span><div><b>+184 150 Ft beérkezett</b>Kovács és Társa Bt. · SZK-0148</div><time>most</time></div>
+            <div class="notif"><span class="ic"><svg><use href="#i-bell"/></svg></span><div><b>Emlékeztető kiküldve</b>Tisza Borház Kft. · 3 napja lejárt</div><time>9:00</time></div>
+            <div class="notif"><span class="ic"><svg><use href="#i-mail"/></svg></span><div><b>Szeptemberi csomag elküldve</b>Tóth Eszter könyvelőnek</div><time>okt. 1.</time></div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="sec" id="velemenyek" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="kicker">Vélemények</span>
+      <h2 class="h2" data-split>Vállalkozók írták, <span class="dim">nem a marketingosztály.</span></h2>
+    </div>
+    <div class="tm-grid">
+      <div class="tm-col">
+        <figure class="tm"><blockquote>„Régen a hónap utolsó vasárnapja ment rá a számlázásra. <strong>Most a kávé lefőzése alatt megvan.</strong>”</blockquote><figcaption><span class="av" style="--c:#0A7D3E">KA</span><div><b>Kovács Anna</b><small>Kovács Pékség, Kecskemét</small></div></figcaption></figure>
+        <figure class="tm"><blockquote>„A bankszinkron miatt váltottam. <strong>Végre látom, ki fizetett, és nem Excelben kell vadásznom.</strong>”</blockquote><figcaption><span class="av" style="--c:#3F3F46">NB</span><div><b>Nagy Bence</b><small>Webfejlesztő, egyéni vállalkozó</small></div></figcaption></figure>
+        <figure class="tm dark"><blockquote>„Huszonnégy ügyfelem van a Számlakörben. <strong>Ennyire tiszta exportot még egy számlázóból sem kaptam.</strong>”</blockquote><figcaption><span class="av" style="--c:#7C5A3A">TE</span><div><b>Tóth Eszter</b><small>Mérlegképes könyvelő</small></div></figcaption></figure>
+        <figure class="tm"><blockquote>„Az ismétlődő számlák miatt <strong>a havidíjas ügyfeleimre már gondolnom sem kell.</strong>”</blockquote><figcaption><span class="av" style="--c:#27272A">HL</span><div><b>Horváth Lilla</b><small>Hídvég Studio, Budapest</small></div></figcaption></figure>
+        <figure class="tm" aria-hidden="true"><blockquote>„Régen a hónap utolsó vasárnapja ment rá a számlázásra. <strong>Most a kávé lefőzése alatt megvan.</strong>”</blockquote><figcaption><span class="av" style="--c:#0A7D3E">KA</span><div><b>Kovács Anna</b><small>Kovács Pékség, Kecskemét</small></div></figcaption></figure>
+        <figure class="tm" aria-hidden="true"><blockquote>„A bankszinkron miatt váltottam. <strong>Végre látom, ki fizetett, és nem Excelben kell vadásznom.</strong>”</blockquote><figcaption><span class="av" style="--c:#3F3F46">NB</span><div><b>Nagy Bence</b><small>Webfejlesztő, egyéni vállalkozó</small></div></figcaption></figure>
+        <figure class="tm dark" aria-hidden="true"><blockquote>„Huszonnégy ügyfelem van a Számlakörben. <strong>Ennyire tiszta exportot még egy számlázóból sem kaptam.</strong>”</blockquote><figcaption><span class="av" style="--c:#7C5A3A">TE</span><div><b>Tóth Eszter</b><small>Mérlegképes könyvelő</small></div></figcaption></figure>
+        <figure class="tm" aria-hidden="true"><blockquote>„Az ismétlődő számlák miatt <strong>a havidíjas ügyfeleimre már gondolnom sem kell.</strong>”</blockquote><figcaption><span class="av" style="--c:#27272A">HL</span><div><b>Horváth Lilla</b><small>Hídvég Studio, Budapest</small></div></figcaption></figure>
+      </div>
+      <div class="tm-col rev">
+        <figure class="tm"><blockquote>„A NAV egyszer elutasított egy számlát, mert elírtam az adószámot. <strong>A Számlakör 10 másodpercen belül szólt, és megmutatta a hibát.</strong>”</blockquote><figcaption><span class="av" style="--c:#52525B">SZG</span><div><b>Szabó Gergely</b><small>Csúcs Építő Zrt.</small></div></figcaption></figure>
+        <figure class="tm dark"><blockquote>„A webshopunk napi 80–120 rendelést kap. <strong>Egyetlen számlát sem kell kézzel kiállítanunk.</strong>”</blockquote><figcaption><span class="av" style="--c:#0A7D3E">MR</span><div><b>Molnár Réka</b><small>Mandula Kozmetika, webshop</small></div></figcaption></figure>
+        <figure class="tm"><blockquote>„Telefonról számlázok a terepen, mire visszaérek a kocsihoz, <strong>az ügyfélnél már ott a PDF.</strong>”</blockquote><figcaption><span class="av" style="--c:#7C5A3A">FD</span><div><b>Farkas Dániel</b><small>Villanyszerelő, egyéni vállalkozó</small></div></figcaption></figure>
+        <figure class="tm"><blockquote>„Az átköltözés a régi számlázóból tényleg egy délután volt, <strong>a partnerlistával együtt.</strong>”</blockquote><figcaption><span class="av" style="--c:#3F3F46">VK</span><div><b>Varga Kata</b><small>Tisza Borház Kft.</small></div></figcaption></figure>
+        <figure class="tm" aria-hidden="true"><blockquote>„A NAV egyszer elutasított egy számlát, mert elírtam az adószámot. <strong>A Számlakör 10 másodpercen belül szólt, és megmutatta a hibát.</strong>”</blockquote><figcaption><span class="av" style="--c:#52525B">SZG</span><div><b>Szabó Gergely</b><small>Csúcs Építő Zrt.</small></div></figcaption></figure>
+        <figure class="tm dark" aria-hidden="true"><blockquote>„A webshopunk napi 80–120 rendelést kap. <strong>Egyetlen számlát sem kell kézzel kiállítanunk.</strong>”</blockquote><figcaption><span class="av" style="--c:#0A7D3E">MR</span><div><b>Molnár Réka</b><small>Mandula Kozmetika, webshop</small></div></figcaption></figure>
+        <figure class="tm" aria-hidden="true"><blockquote>„Telefonról számlázok a terepen, mire visszaérek a kocsihoz, <strong>az ügyfélnél már ott a PDF.</strong>”</blockquote><figcaption><span class="av" style="--c:#7C5A3A">FD</span><div><b>Farkas Dániel</b><small>Villanyszerelő, egyéni vállalkozó</small></div></figcaption></figure>
+        <figure class="tm" aria-hidden="true"><blockquote>„Az átköltözés a régi számlázóból tényleg egy délután volt, <strong>a partnerlistával együtt.</strong>”</blockquote><figcaption><span class="av" style="--c:#3F3F46">VK</span><div><b>Varga Kata</b><small>Tisza Borház Kft.</small></div></figcaption></figure>
+      </div>
+      <div class="tm-col c3">
+        <figure class="tm"><blockquote>„Alanyi adómentes vagyok, és <strong>végre nem kell minden számlára kézzel beírnom a szöveget.</strong>”</blockquote><figcaption><span class="av" style="--c:#27272A">BÉ</span><div><b>Balogh Éva</b><small>Jógaoktató</small></div></figcaption></figure>
+        <figure class="tm"><blockquote>„Az emlékeztetők miatt <strong>a kintlévőségünk a felére csökkent</strong> három hónap alatt.”</blockquote><figcaption><span class="av" style="--c:#0A7D3E">PZ</span><div><b>Papp Zoltán</b><small>Balaton Bérautó</small></div></figcaption></figure>
+        <figure class="tm dark"><blockquote>„Ügyfélszolgálat, ahol <strong>valódi ember válaszol magyarul,</strong> 15 percen belül.”</blockquote><figcaption><span class="av" style="--c:#52525B">LM</span><div><b>Lakatos Márk</b><small>Kockakő Dev</small></div></figcaption></figure>
+        <figure class="tm"><blockquote>„Egyszerű, gyors, és <strong>soha nem kellett a NAV-ot hívnom</strong> miatta.”</blockquote><figcaption><span class="av" style="--c:#7C5A3A">OI</span><div><b>Oláh Ildikó</b><small>Fény&amp;Árnyék fotóstúdió</small></div></figcaption></figure>
+        <figure class="tm" aria-hidden="true"><blockquote>„Alanyi adómentes vagyok, és <strong>végre nem kell minden számlára kézzel beírnom a szöveget.</strong>”</blockquote><figcaption><span class="av" style="--c:#27272A">BÉ</span><div><b>Balogh Éva</b><small>Jógaoktató</small></div></figcaption></figure>
+        <figure class="tm" aria-hidden="true"><blockquote>„Az emlékeztetők miatt <strong>a kintlévőségünk a felére csökkent</strong> három hónap alatt.”</blockquote><figcaption><span class="av" style="--c:#0A7D3E">PZ</span><div><b>Papp Zoltán</b><small>Balaton Bérautó</small></div></figcaption></figure>
+        <figure class="tm dark" aria-hidden="true"><blockquote>„Ügyfélszolgálat, ahol <strong>valódi ember válaszol magyarul,</strong> 15 percen belül.”</blockquote><figcaption><span class="av" style="--c:#52525B">LM</span><div><b>Lakatos Márk</b><small>Kockakő Dev</small></div></figcaption></figure>
+        <figure class="tm" aria-hidden="true"><blockquote>„Egyszerű, gyors, és <strong>soha nem kellett a NAV-ot hívnom</strong> miatta.”</blockquote><figcaption><span class="av" style="--c:#7C5A3A">OI</span><div><b>Oláh Ildikó</b><small>Fény&amp;Árnyék fotóstúdió</small></div></figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="sec" id="arak" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="kicker">Árak</span>
+      <h2 class="h2" data-split>Átlátható árak, <span class="dim">rejtett díjak nélkül.</span></h2>
+      <p class="lead">Minden csomagban benne van a NAV-adatszolgáltatás és a 8 éves archiválás. Bármikor lemondhatod.</p>
+      <div class="price-toggle" role="group" aria-label="Számlázási időszak">
+        <button type="button" aria-pressed="false" data-period="m">Havi</button>
+        <button type="button" aria-pressed="true" data-period="y">Éves<span class="save">−2 hónap</span></button>
+      </div>
+    </div>
+
+    <div class="prices" data-reveal>
+      <article class="price-card">
+        <h3>Kezdő</h3>
+        <p class="desc">Induló vállalkozásoknak, akik havonta néhány számlát állítanak ki.</p>
+        <div class="price"><span data-m="0" data-y="0">0</span> Ft<small>/hó</small></div>
+        <div class="price-note">örökre ingyenes</div>
+        <a href="#" class="btn btn-light">Ingyenes fiók <svg><use href="#i-arrow"/></svg></a>
+        <ul>
+          <li><svg><use href="#i-check"/></svg>Havi 10 számla</li>
+          <li><svg><use href="#i-check"/></svg>Automatikus NAV-beküldés</li>
+          <li><svg><use href="#i-check"/></svg>PDF-számla e-mailben</li>
+          <li><svg><use href="#i-check"/></svg>1 felhasználó</li>
+        </ul>
+      </article>
+
+      <article class="price-card featured">
+        <h3>Vállalkozó <span class="badge">Legnépszerűbb</span></h3>
+        <p class="desc">Mindennapos számlázáshoz, bankszinkronnal és könyvelői hozzáféréssel.</p>
+        <div class="price"><span data-m="2990" data-y="2490">2 490</span> Ft<small>/hó</small></div>
+        <div class="price-note" data-note-m="havi számlázással" data-note-y="29 880 Ft évente számlázva">29 880 Ft évente számlázva</div>
+        <a href="#" class="btn btn-accent">30 napig ingyen <svg><use href="#i-arrow"/></svg></a>
+        <ul>
+          <li><svg><use href="#i-check"/></svg>Korlátlan számla és díjbekérő</li>
+          <li><svg><use href="#i-check"/></svg>Bankszinkron és automatikus párosítás</li>
+          <li><svg><use href="#i-check"/></svg>Ismétlődő számlák, fizetési emlékeztetők</li>
+          <li><svg><use href="#i-check"/></svg>Ingyenes könyvelői hozzáférés</li>
+          <li><svg><use href="#i-check"/></svg>Mobilalkalmazás</li>
+        </ul>
+      </article>
+
+      <article class="price-card">
+        <h3>Csapat</h3>
+        <p class="desc">Több telephellyel, webshoppal vagy több munkatárssal dolgozó cégeknek.</p>
+        <div class="price"><span data-m="6990" data-y="5790">5 790</span> Ft<small>/hó</small></div>
+        <div class="price-note" data-note-m="havi számlázással" data-note-y="69 480 Ft évente számlázva">69 480 Ft évente számlázva</div>
+        <a href="#" class="btn btn-dark">30 napig ingyen <svg><use href="#i-arrow"/></svg></a>
+        <ul>
+          <li><svg><use href="#i-check"/></svg>Minden, ami a Vállalkozó csomagban</li>
+          <li><svg><use href="#i-check"/></svg>Legfeljebb 10 felhasználó, jogosultságkezeléssel</li>
+          <li><svg><use href="#i-check"/></svg>Webshop-bővítmények és REST API</li>
+          <li><svg><use href="#i-check"/></svg>Több számlatömb és bankszámla</li>
+          <li><svg><use href="#i-check"/></svg>Kiemelt ügyfélszolgálat telefonon</li>
+        </ul>
+      </article>
+    </div>
+    <p class="price-foot">Az árak az ÁFA-t nem tartalmazzák. Bankkártya nélkül is kipróbálhatod.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="gyik" style="padding-top:0">
+  <div class="wrap faq-wrap">
+    <div class="sec-head">
+      <span class="kicker">GYIK</span>
+      <h2 class="h2" data-split>Kérdésed van? <span class="dim">Itt a válasz.</span></h2>
+      <p class="lead">Ha nem találod, amit keresel, írj nekünk a <a href="mailto:hello@szamlakor.hu" style="color:var(--accent);font-weight:600">hello@szamlakor.hu</a> címre. Munkanapokon 15 percen belül válaszolunk.</p>
+    </div>
+    <div class="faq">
+      <div class="q open"><button type="button" aria-expanded="true">Megfelel a Számlakör a NAV előírásainak?<span class="pm" aria-hidden="true"></span></button><div class="a"><div><p>Igen. A Számlakör a NAV Online Számla 3.0 rendszerével kommunikál, és a számlákat a kiállítás pillanatában automatikusan beküldi. A számlázóprogramunk szerepel a NAV-nak bejelentett számlázóprogramok között, és minden jogszabályi változást díjmentesen követünk.</p></div></div></div>
+      <div class="q"><button type="button" aria-expanded="false">Mi az a technikai felhasználó, és hogyan állítom be?<span class="pm" aria-hidden="true"></span></button><div class="a"><div><p>A technikai felhasználóval a Számlakör a nevedben küldheti be a számlákat a NAV-nak. Az Online Számla felületén kell létrehozni. Regisztráció után képernyőképekkel végigvezetünk rajta, általában 3–4 percig tart.</p></div></div></div>
+      <div class="q"><button type="button" aria-expanded="false">Alanyi adómentes egyéni vállalkozó vagyok. Nekem is jó?<span class="pm" aria-hidden="true"></span></button><div class="a"><div><p>Igen. Beállíthatod az alanyi adómentességet, és a kötelező szöveg automatikusan rákerül minden számlára. Ha átlépsz az értékhatáron, a Számlakör figyelmeztet, és segít átállni az ÁFA-s számlázásra.</p></div></div></div>
+      <div class="q"><button type="button" aria-expanded="false">Át tudok költözni egy másik számlázóprogramból?<span class="pm" aria-hidden="true"></span></button><div class="a"><div><p>Igen. A partnereidet, a termékeidet és a korábbi számláidat CSV-ből vagy a NAV-ból importálhatod. A számlaszámozást ott folytatjuk, ahol abbahagytad.</p></div></div></div>
+      <div class="q"><button type="button" aria-expanded="false">Hol tárolják az adataimat, és meddig?<span class="pm" aria-hidden="true"></span></button><div class="a"><div><p>Az adatokat az Európai Unióban, titkosítva tároljuk, napi biztonsági mentéssel. A számlákat a számviteli törvénynek megfelelően legalább 8 évig archiváljuk, akkor is, ha közben lemondod az előfizetést.</p></div></div></div>
+      <div class="q"><button type="button" aria-expanded="false">Lemondhatom bármikor?<span class="pm" aria-hidden="true"></span></button><div class="a"><div><p>Igen, hűségidő nélkül. Havi csomagnál a hónap végéig, éves csomagnál a megkezdett év végéig használhatod a fizetős funkciókat, utána fiókod automatikusan a Kezdő csomagra vált.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="cta noise">
+  <div class="glow" aria-hidden="true"><span class="g g1"></span><span class="g e1"></span><span class="g core"></span></div>
+  <div class="dots" aria-hidden="true"></div>
+  <div style="position:relative;z-index:1">
+    <span class="kicker">Kezdd el ma</span>
+    <h2 data-split>Az első számlád <span class="dim">öt perc múlva kész lehet.</span></h2>
+    <p>Hozd létre az ingyenes fiókodat, kösd össze a NAV-val, és állítsd ki az első számlát még a kávéd kihűlése előtt.</p>
+    <div class="hero-ctas">
+      <a href="#arak" class="btn btn-accent">Ingyenes fiók létrehozása <svg><use href="#i-arrow"/></svg></a>
+      <a href="mailto:hello@szamlakor.hu" class="btn btn-light">Beszélnék valakivel</a>
+    </div>
+    <p class="cta-small">Bankkártya nem kell · 30 napig minden funkció · magyar ügyfélszolgálat</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a href="#top" class="brand"><svg class="brand-mark"><use href="#logo"/></svg>Számlakör</a>
+        <p>Online számlázó magyar kisvállalkozásoknak. Budapesten fejlesztjük, 2019 óta.</p>
+      </div>
+      <div><h4>Termék</h4><ul><li><a href="#funkciok">Funkciók</a></li><li><a href="#arak">Árak</a></li><li><a href="#">Mobilalkalmazás</a></li><li><a href="#">API-dokumentáció</a></li></ul></div>
+      <div><h4>Segítség</h4><ul><li><a href="#gyik">GYIK</a></li><li><a href="#">NAV-beállítási útmutató</a></li><li><a href="#">Átköltözés</a></li><li><a href="mailto:hello@szamlakor.hu">Kapcsolat</a></li></ul></div>
+      <div><h4>Jogi</h4><ul><li><a href="#">ÁSZF</a></li><li><a href="#">Adatvédelem</a></li><li><a href="#">Impresszum</a></li><li><a href="#">Süti-beállítások</a></li></ul></div>
+    </div>
+    <div class="foot-bar">
+      <span>© 2026 Számlakör. Minden jog fenntartva.</span>
+      <span class="nav-ok"><i></i>NAV-kapcsolat: minden rendszer működik</span>
+    </div>
+  </div>
+  <div class="wordmark" aria-hidden="true">Számlakör</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script>
+(function(){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const hasGsap = !!(window.gsap && window.ScrollTrigger && window.SplitText);
+  const fmt = (v, d=0) => v.toLocaleString('hu-HU', {minimumFractionDigits:d, maximumFractionDigits:d});
+
+  /* Nav state */
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', scrollY > 40);
+  addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  /* Mobile menu */
+  const menuBtn = document.getElementById('menuBtn'), menu = document.getElementById('mobileMenu');
+  menuBtn.addEventListener('click', () => {
+    const open = menu.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', open);
+  });
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { menu.classList.remove('open'); menuBtn.setAttribute('aria-expanded', false); }));
+
+  /* FAQ */
+  document.querySelectorAll('.q button').forEach(b => b.addEventListener('click', () => {
+    const q = b.parentElement, open = !q.classList.contains('open');
+    q.classList.toggle('open', open); b.setAttribute('aria-expanded', open);
+  }));
+
+  /* Pricing toggle */
+  const toggles = document.querySelectorAll('.price-toggle button');
+  toggles.forEach(btn => btn.addEventListener('click', () => {
+    const p = btn.dataset.period;
+    toggles.forEach(t => t.setAttribute('aria-pressed', t === btn));
+    document.querySelectorAll('.price span[data-m]').forEach(el => {
+      const to = +el.dataset[p], from = +(el.textContent.replace(/\D/g,'')) || 0;
+      if (hasGsap && !reduce) {
+        const o = {v:from};
+        gsap.to(o, {v:to, duration:.6, ease:'power2.out', onUpdate:() => el.textContent = fmt(Math.round(o.v))});
+      } else el.textContent = fmt(to);
+    });
+    document.querySelectorAll('.price-note[data-note-m]').forEach(n => n.textContent = n.dataset['note' + p.toUpperCase()]);
+  }));
+
+  /* Hero NAV status loop */
+  const st2 = document.getElementById('st2'), st3 = document.getElementById('st3');
+  const line = document.getElementById('statusLine'), txt = document.getElementById('statusTxt'), tm = document.getElementById('statusTime');
+  const states = [
+    () => { st2.classList.remove('done'); st3.classList.remove('done'); line.classList.remove('ok'); txt.textContent = 'Kiállítva'; tm.textContent = '14:02:11'; },
+    () => { st2.classList.add('done'); txt.textContent = 'Beküldés a NAV-nak…'; tm.textContent = '14:02:12'; },
+    () => { st3.classList.add('done'); line.classList.add('ok'); txt.textContent = 'Befogadva · INV-7Q2K'; tm.textContent = '14:02:13'; }
+  ];
+  if (reduce) states[2]();
+  else { let i = 0; states[0](); setInterval(() => { i = (i + 1) % 4; if (i < 3) states[i](); }, 1500); }
+
+  if (!hasGsap || reduce) {
+    document.querySelectorAll('.fill-text').forEach(el => el.style.color = '#fff');
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger, SplitText);
+
+  /* Smooth scroll */
+  let lenis = null;
+  if (window.Lenis) {
+    lenis = new Lenis({lerp:.1, smoothWheel:true});
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => {
+    const id = a.getAttribute('href'); if (id.length < 2) return;
+    const t = document.querySelector(id); if (!t) return;
+    e.preventDefault();
+    lenis ? lenis.scrollTo(t, {offset:-90, duration:1.2}) : t.scrollIntoView({behavior:'smooth'});
+  }));
+
+  document.fonts.ready.then(initMotion);
+
+  function initMotion(){
+    /* Hero */
+    SplitText.create('.hero h1', {type:'words,lines', mask:'lines', autoSplit:true, onSplit(self){
+      return gsap.from(self.words, {yPercent:110, rotateX:-40, opacity:0, transformOrigin:'50% 100%', duration:1.1, ease:'expo.out', stagger:.06, delay:.15});
+    }});
+    gsap.from('.hero [data-fade]', {y:24, opacity:0, duration:.9, ease:'power3.out', stagger:.08, delay:.45});
+    gsap.from('.mock', {y:90, rotateX:16, opacity:0, transformPerspective:1400, transformOrigin:'50% 0', duration:1.4, ease:'power3.out', delay:.7});
+    gsap.from('.float', {y:30, opacity:0, duration:1, ease:'power3.out', stagger:.15, delay:1.3});
+
+    /* Reveal groups */
+    gsap.utils.toArray('[data-reveal]').forEach(g => gsap.from(g.children, {y:40, opacity:0, duration:.9, ease:'power3.out', stagger:.08,
+      scrollTrigger:{trigger:g, start:'top 82%'}}));
+
+    /* Headings */
+    gsap.utils.toArray('[data-split]').forEach(el => SplitText.create(el, {type:'lines', mask:'lines', autoSplit:true, onSplit(self){
+      return gsap.from(self.lines, {yPercent:100, duration:1, ease:'expo.out', stagger:.1, scrollTrigger:{trigger:el, start:'top 85%'}});
+    }}));
+    gsap.utils.toArray('.sec-head .lead, .sec-head .price-toggle').forEach(el => gsap.from(el, {y:24, opacity:0, duration:.9, ease:'power3.out', delay:.15,
+      scrollTrigger:{trigger:el, start:'top 88%'}}));
+
+    /* Scroll-fill */
+    gsap.utils.toArray('.fill-text').forEach(el => {
+      el.classList.add('split');
+      SplitText.create(el, {type:'lines', linesClass:'line', autoSplit:true, onSplit(self){
+        return gsap.timeline().add(self.lines.map(l => gsap.to(l, {backgroundPosition:'0% 0', ease:'none',
+          scrollTrigger:{trigger:l, start:'top 85%', end:'bottom 50%', scrub:true}})));
+      }});
+    });
+
+    /* Counters */
+    gsap.utils.toArray('[data-count]').forEach(el => {
+      const end = +el.dataset.count, d = +(el.dataset.decimals || 0), o = {v:0};
+      el.textContent = fmt(0, d);
+      gsap.to(o, {v:end, duration:2.2, ease:'power2.out', scrollTrigger:{trigger:el, start:'top 88%'},
+        onUpdate:() => el.textContent = fmt(d ? o.v : Math.round(o.v), d)});
+    });
+
+    /* Sparkline draws itself */
+    const sp = document.getElementById('sparkLine');
+    if (sp) { const L = sp.getTotalLength(); gsap.fromTo(sp, {strokeDasharray:L, strokeDashoffset:L}, {strokeDashoffset:0, duration:1.8, ease:'power2.out', scrollTrigger:{trigger:sp, start:'top 85%'}}); }
+
+    /* Parallax */
+    gsap.utils.toArray('[data-speed]').forEach(el => gsap.to(el, {yPercent:-20 * +el.dataset.speed, ease:'none',
+      scrollTrigger:{trigger:el.closest('section'), start:'top bottom', end:'bottom top', scrub:true}}));
+
+    /* Stacking cards (desktop only) */
+    ScrollTrigger.matchMedia({'(min-width: 769px)': () => {
+      const cards = gsap.utils.toArray('.stack-card');
+      cards.forEach((c, i) => { if (i === cards.length - 1) return;
+        gsap.to(c, {scale:.94, filter:'brightness(.82)', ease:'none',
+          scrollTrigger:{trigger:cards[i + 1], start:'top bottom', end:'top 140px', scrub:true}});
+      });
+    }});
+
+    addEventListener('load', () => ScrollTrigger.refresh());
+  }
+})();
+</script>
+</body>
+</html>

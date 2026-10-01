@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="t d">
+  <title id="t">premium-saas-web: an Agent Skill that makes AI build premium SaaS websites</title>
+  <desc id="d">Dark SaaS-style banner. Works with Claude Code, OpenAI Codex, Cursor and Google Antigravity. Install with npx skills add MiddleSugar7000/premium-saas-web-skill.</desc>
+  <defs>
+    <style>
+      .sans{font-family:'Inter','Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif}
+      .mono{font-family:'JetBrains Mono','Cascadia Code','SF Mono',Consolas,'Liberation Mono',monospace}
+      .drift{animation:drift 14s ease-in-out infinite alternate}
+      .drift2{animation:drift2 18s ease-in-out infinite alternate}
+      .rb{animation:rb 6s linear infinite}
+      .blink{animation:blink 1.1s steps(1) infinite}
+      .pulse{animation:pulse 2.4s ease-in-out infinite}
+      @keyframes drift{to{transform:translate(60px,18px)}}
+      @keyframes drift2{to{transform:translate(-50px,-14px)}}
+      @keyframes rb{to{transform:translateX(-50%)}}
+      @keyframes blink{50%{opacity:0}}
+      @keyframes pulse{50%{opacity:.35}}
+    </style>
+    <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1" fill="#fff" fill-opacity=".07"/></pattern>
+    <radialGradient id="dotmask" cx="50%" cy="35%" r="65%"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
+    <mask id="m"><rect width="1280" height="640" fill="url(#dotmask)"/></mask>
+    <filter id="b120" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="70"/></filter>
+    <filter id="b60" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="38"/></filter>
+    <filter id="b12" x="-40%" y="-200%" width="180%" height="500%"><feGaussianBlur stdDeviation="11"/></filter>
+    <filter id="noise"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/><feColorMatrix values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .05 0"/></filter>
+    <linearGradient id="rainbow" x1="0" x2="1">
+      <stop offset="0" stop-color="#30E3FF"/><stop offset=".1" stop-color="#8765FF"/><stop offset=".2" stop-color="#FFF181"/><stop offset=".3" stop-color="#FF4C52"/><stop offset=".4" stop-color="#734CFF"/>
+      <stop offset=".5" stop-color="#30E3FF"/><stop offset=".6" stop-color="#8765FF"/><stop offset=".7" stop-color="#FFF181"/><stop offset=".8" stop-color="#FF4C52"/><stop offset=".9" stop-color="#734CFF"/><stop offset="1" stop-color="#30E3FF"/>
+    </linearGradient>
+    <linearGradient id="dim" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity=".28"/></linearGradient>
+    <linearGradient id="pill" x1="0" x2="1"><stop offset="0" stop-color="#DBE2E6"/><stop offset=".72" stop-color="#fff"/></linearGradient>
+    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0D1017" stop-opacity="0"/><stop offset="1" stop-color="#0D1017"/></linearGradient>
+    <clipPath id="frame"><rect width="1280" height="640" rx="28"/></clipPath>
+    <clipPath id="btnclip"><rect x="0" y="0" width="604" height="58" rx="10"/></clipPath>
+  </defs>
+
+  <g clip-path="url(#frame)">
+    <rect width="1280" height="640" fill="#0D1017"/>
+    <rect width="1280" height="640" fill="url(#dots)" mask="url(#m)"/>
+    <!-- column guides -->
+    <g stroke="#fff" stroke-opacity=".045"><path d="M320 0V640M640 0V640M960 0V640"/></g>
+
+    <!-- sculpted glow: hue blobs, then bg-colored erasers -->
+    <g class="drift"><ellipse cx="470" cy="-30" rx="420" ry="190" fill="#FF2A00" filter="url(#b120)" opacity=".85"/></g>
+    <g class="drift2"><ellipse cx="1090" cy="40" rx="230" ry="170" fill="#8B6CFF" filter="url(#b120)" opacity=".9"/></g>
+    <ellipse cx="420" cy="-95" rx="380" ry="170" fill="#0D1017" filter="url(#b120)"/>
+    <ellipse cx="640" cy="760" rx="900" ry="330" fill="#0D1017" filter="url(#b120)"/>
+    <ellipse cx="640" cy="560" rx="90" ry="70" fill="#FF7300" filter="url(#b60)" opacity=".75" class="pulse"/>
+
+    <!-- glass nav pill -->
+    <g transform="translate(330 38)">
+      <rect width="620" height="52" rx="14" fill="#fff" fill-opacity=".05" stroke="#fff" stroke-opacity=".09"/>
+      <g transform="translate(18 13)">
+        <rect width="26" height="26" rx="7" fill="#12141d" stroke="#fff" stroke-opacity=".16"/>
+        <path d="M13 5 21 9 13 13 5 9z" fill="#FF7300"/><path d="M5 12.5 13 16.5 21 12.5" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 16.5 13 20.5 21 16.5" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <text x="56" y="32" class="sans" font-size="16" font-weight="600" fill="#fff">premium-saas-web</text>
+      <g class="mono" font-size="12.5" fill="#fff" fill-opacity=".62">
+        <text x="232" y="31">Claude Code</text><text x="338" y="31">Codex</text><text x="400" y="31">Cursor</text><text x="466" y="31">Antigravity</text>
+      </g>
+      <rect x="565" y="12" width="40" height="28" rx="8" fill="#fff" fill-opacity=".07" stroke="#fff" stroke-opacity=".1"/>
+      <text x="585" y="31" text-anchor="middle" class="mono" font-size="12" fill="#fff" fill-opacity=".8">MIT</text>
+    </g>
+
+    <!-- eyebrow -->
+    <g transform="translate(640 150)">
+      <rect x="-205" y="-17" width="410" height="34" rx="17" fill="#fff" fill-opacity=".05" stroke="#fff" stroke-opacity=".1"/>
+      <circle cx="-185" cy="0" r="4" fill="#3BE38B" class="pulse"/>
+      <text x="8" y="5" text-anchor="middle" class="sans" font-size="14" fill="#fff" fill-opacity=".8">Open-source Agent Skill · tested with Claude Opus 5.5</text>
+    </g>
+
+    <!-- headline -->
+    <text x="640" y="246" text-anchor="middle" class="sans" font-size="66" font-weight="600" letter-spacing="-2.8" fill="#fff">Premium SaaS websites</text>
+    <text x="640" y="320" text-anchor="middle" class="sans" font-size="66" font-weight="600" letter-spacing="-2.8" fill="url(#dim)">from a one-line prompt.</text>
+    <text x="640" y="372" text-anchor="middle" class="sans" font-size="19" fill="#fff" fill-opacity=".6">Sculpted glows, glass, bento grids and GSAP motion, distilled from five top-selling templates.</text>
+
+    <!-- install button: rainbow border + under-glow -->
+    <g transform="translate(250 414)">
+      <g clip-path="url(#btnclip)" opacity=".9" filter="url(#b12)" transform="translate(40 34) scale(.86 .5)">
+        <g class="rb"><rect width="1120" height="58" fill="url(#rainbow)"/></g>
+      </g>
+      <g clip-path="url(#btnclip)"><g class="rb"><rect width="1120" height="58" fill="url(#rainbow)"/></g></g>
+      <rect x="2" y="2" width="600" height="54" rx="8.5" fill="#191D2A"/>
+      <rect x="2" y="2" width="600" height="27" rx="8.5" fill="#121213" fill-opacity=".35"/>
+      <text x="26" y="36" class="mono" font-size="16" font-weight="500" fill="#fff"><tspan fill="#FF7300">$</tspan> npx skills add MiddleSugar7000/premium-saas-web-skill<tspan class="blink" fill="#fff">▍</tspan></text>
+    </g>
+    <!-- demo button: white pill with side glow -->
+    <g transform="translate(872 414)">
+      <rect x="110" y="6" width="86" height="50" rx="25" fill="#5A9FFF" filter="url(#b12)" opacity=".85"/>
+      <rect width="158" height="58" rx="29" fill="url(#pill)"/>
+      <text x="74" y="36" text-anchor="middle" class="mono" font-size="16" font-weight="600" fill="#0D1017">Live demo</text>
+      <path d="M128 23l6 6-6 6" fill="none" stroke="#0D1017" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+
+    <!-- stat chips -->
+    <g class="sans" transform="translate(0 532)">
+      <g transform="translate(176 0)"><rect width="214" height="64" rx="14" fill="#191D2A" stroke="#fff" stroke-opacity=".08"/><text x="20" y="30" font-size="22" font-weight="600" fill="#fff" letter-spacing="-.6">98% <tspan fill="#fff" fill-opacity=".4" font-size="16">vs 75%</tspan></text><text x="20" y="50" font-size="12.5" fill="#fff" fill-opacity=".5">quality checks passed</text></g>
+      <g transform="translate(406 0)"><rect width="214" height="64" rx="14" fill="#191D2A" stroke="#fff" stroke-opacity=".08"/><text x="20" y="30" font-size="22" font-weight="600" fill="#fff" letter-spacing="-.6">4</text><text x="20" y="50" font-size="12.5" fill="#fff" fill-opacity=".5">design directions</text></g>
+      <g transform="translate(636 0)"><rect width="214" height="64" rx="14" fill="#191D2A" stroke="#fff" stroke-opacity=".08"/><text x="20" y="30" font-size="22" font-weight="600" fill="#fff" letter-spacing="-.6">18</text><text x="20" y="50" font-size="12.5" fill="#fff" fill-opacity=".5">copy-ready CSS recipes</text></g>
+      <g transform="translate(866 0)"><rect width="238" height="64" rx="14" fill="#191D2A" stroke="#fff" stroke-opacity=".08"/><text x="20" y="30" font-size="22" font-weight="600" fill="#fff" letter-spacing="-.6">1 file</text><text x="20" y="50" font-size="12.5" fill="#fff" fill-opacity=".5">SKILL.md, any agent</text></g>
+    </g>
+    <rect width="1280" height="640" filter="url(#noise)" opacity=".7"/>
+  </g>
+  <rect x=".5" y=".5" width="1279" height="639" rx="27.5" fill="none" stroke="#fff" stroke-opacity=".08"/>
+</svg>

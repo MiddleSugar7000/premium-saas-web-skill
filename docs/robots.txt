@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /demos/
+Sitemap: https://middlesugar7000.github.io/premium-saas-web-skill/sitemap.xml

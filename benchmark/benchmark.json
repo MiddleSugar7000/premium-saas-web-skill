@@ -1,0 +1,610 @@
+{
+  "metadata": {
+    "skill_name": "premium-saas-web",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-10-01T16:34:44Z",
+    "evals_run": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 10,
+        "failed": 0,
+        "total": 10,
+        "time_seconds": 557.8,
+        "tokens": 1531045,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Design tokens defined as CSS custom properties on :root",
+          "passed": true,
+          "evidence": "index.html 88594 chars; check matched"
+        },
+        {
+          "text": "Display type uses negative letter-spacing",
+          "passed": true,
+          "evidence": "index.html 88594 chars; check matched"
+        },
+        {
+          "text": "Has large-blur light/glow elements (blur >= 60px)",
+          "passed": true,
+          "evidence": "index.html 88594 chars; check matched"
+        },
+        {
+          "text": "Uses hairline borders with transparency (1px + alpha color)",
+          "passed": true,
+          "evidence": "index.html 88594 chars; check matched"
+        },
+        {
+          "text": "Uses scroll-driven motion (GSAP ScrollTrigger or IntersectionObserver)",
+          "passed": true,
+          "evidence": "index.html 88594 chars; check matched"
+        },
+        {
+          "text": "Respects prefers-reduced-motion",
+          "passed": true,
+          "evidence": "index.html 88594 chars; check matched"
+        },
+        {
+          "text": "Has an infinite marquee/ticker animation",
+          "passed": true,
+          "evidence": "index.html 88594 chars; check matched"
+        },
+        {
+          "text": "Has responsive breakpoints (media queries or Tailwind md:/lg:)",
+          "passed": true,
+          "evidence": "index.html 88594 chars; check matched"
+        },
+        {
+          "text": "No lorem ipsum placeholder copy",
+          "passed": true,
+          "evidence": "index.html 88594 chars; check matched"
+        },
+        {
+          "text": "No emoji used as icons (<= 2 emoji characters)",
+          "passed": true,
+          "evidence": "index.html 88594 chars; check matched"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 10,
+        "failed": 0,
+        "total": 10,
+        "time_seconds": 713.1,
+        "tokens": 2331100,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Design tokens defined as CSS custom properties on :root",
+          "passed": true,
+          "evidence": "index.html 96400 chars; check matched"
+        },
+        {
+          "text": "Display type uses negative letter-spacing",
+          "passed": true,
+          "evidence": "index.html 96400 chars; check matched"
+        },
+        {
+          "text": "Has large-blur light/glow elements (blur >= 60px)",
+          "passed": true,
+          "evidence": "index.html 96400 chars; check matched"
+        },
+        {
+          "text": "Uses hairline borders with transparency (1px + alpha color)",
+          "passed": true,
+          "evidence": "index.html 96400 chars; check matched"
+        },
+        {
+          "text": "Uses scroll-driven motion (GSAP ScrollTrigger or IntersectionObserver)",
+          "passed": true,
+          "evidence": "index.html 96400 chars; check matched"
+        },
+        {
+          "text": "Respects prefers-reduced-motion",
+          "passed": true,
+          "evidence": "index.html 96400 chars; check matched"
+        },
+        {
+          "text": "Has an infinite marquee/ticker animation",
+          "passed": true,
+          "evidence": "index.html 96400 chars; check matched"
+        },
+        {
+          "text": "Has responsive breakpoints (media queries or Tailwind md:/lg:)",
+          "passed": true,
+          "evidence": "index.html 96400 chars; check matched"
+        },
+        {
+          "text": "No lorem ipsum placeholder copy",
+          "passed": true,
+          "evidence": "index.html 96400 chars; check matched"
+        },
+        {
+          "text": "No emoji used as icons (<= 2 emoji characters)",
+          "passed": true,
+          "evidence": "index.html 96400 chars; check matched"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.9,
+        "passed": 9,
+        "failed": 1,
+        "total": 10,
+        "time_seconds": 573.9,
+        "tokens": 2181941,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Design tokens defined as CSS custom properties on :root",
+          "passed": true,
+          "evidence": "index.html 79588 chars; check matched"
+        },
+        {
+          "text": "Display type uses negative letter-spacing",
+          "passed": true,
+          "evidence": "index.html 79588 chars; check matched"
+        },
+        {
+          "text": "Has large-blur light/glow elements (blur >= 60px)",
+          "passed": true,
+          "evidence": "index.html 79588 chars; check matched"
+        },
+        {
+          "text": "Uses hairline borders with transparency (1px + alpha color)",
+          "passed": true,
+          "evidence": "index.html 79588 chars; check matched"
+        },
+        {
+          "text": "Uses scroll-driven motion (GSAP ScrollTrigger or IntersectionObserver)",
+          "passed": true,
+          "evidence": "index.html 79588 chars; check matched"
+        },
+        {
+          "text": "Respects prefers-reduced-motion",
+          "passed": true,
+          "evidence": "index.html 79588 chars; check matched"
+        },
+        {
+          "text": "Has an infinite marquee/ticker animation",
+          "passed": true,
+          "evidence": "index.html 79588 chars; check matched"
+        },
+        {
+          "text": "Has responsive breakpoints (media queries or Tailwind md:/lg:)",
+          "passed": true,
+          "evidence": "index.html 79588 chars; check matched"
+        },
+        {
+          "text": "No lorem ipsum placeholder copy",
+          "passed": true,
+          "evidence": "index.html 79588 chars; check matched"
+        },
+        {
+          "text": "No emoji used as icons (<= 2 emoji characters)",
+          "passed": false,
+          "evidence": "index.html 79588 chars; check not matched"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 10,
+        "failed": 0,
+        "total": 10,
+        "time_seconds": 731.0,
+        "tokens": 2056427,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Design tokens defined as CSS custom properties on :root",
+          "passed": true,
+          "evidence": "index.html 95893 chars; check matched"
+        },
+        {
+          "text": "Display type uses negative letter-spacing",
+          "passed": true,
+          "evidence": "index.html 95893 chars; check matched"
+        },
+        {
+          "text": "Has large-blur light/glow elements (blur >= 60px)",
+          "passed": true,
+          "evidence": "index.html 95893 chars; check matched"
+        },
+        {
+          "text": "Uses hairline borders with transparency (1px + alpha color)",
+          "passed": true,
+          "evidence": "index.html 95893 chars; check matched"
+        },
+        {
+          "text": "Uses scroll-driven motion (GSAP ScrollTrigger or IntersectionObserver)",
+          "passed": true,
+          "evidence": "index.html 95893 chars; check matched"
+        },
+        {
+          "text": "Respects prefers-reduced-motion",
+          "passed": true,
+          "evidence": "index.html 95893 chars; check matched"
+        },
+        {
+          "text": "Has an infinite marquee/ticker animation",
+          "passed": true,
+          "evidence": "index.html 95893 chars; check matched"
+        },
+        {
+          "text": "Has responsive breakpoints (media queries or Tailwind md:/lg:)",
+          "passed": true,
+          "evidence": "index.html 95893 chars; check matched"
+        },
+        {
+          "text": "No lorem ipsum placeholder copy",
+          "passed": true,
+          "evidence": "index.html 95893 chars; check matched"
+        },
+        {
+          "text": "No emoji used as icons (<= 2 emoji characters)",
+          "passed": true,
+          "evidence": "index.html 95893 chars; check matched"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.7,
+        "passed": 7,
+        "failed": 3,
+        "total": 10,
+        "time_seconds": 157.9,
+        "tokens": 101518,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Design tokens defined as CSS custom properties on :root",
+          "passed": true,
+          "evidence": "index.html 37675 chars; check matched"
+        },
+        {
+          "text": "Display type uses negative letter-spacing",
+          "passed": true,
+          "evidence": "index.html 37675 chars; check matched"
+        },
+        {
+          "text": "Has large-blur light/glow elements (blur >= 60px)",
+          "passed": false,
+          "evidence": "index.html 37675 chars; check not matched"
+        },
+        {
+          "text": "Uses hairline borders with transparency (1px + alpha color)",
+          "passed": true,
+          "evidence": "index.html 37675 chars; check matched"
+        },
+        {
+          "text": "Uses scroll-driven motion (GSAP ScrollTrigger or IntersectionObserver)",
+          "passed": true,
+          "evidence": "index.html 37675 chars; check matched"
+        },
+        {
+          "text": "Respects prefers-reduced-motion",
+          "passed": true,
+          "evidence": "index.html 37675 chars; check matched"
+        },
+        {
+          "text": "Has an infinite marquee/ticker animation",
+          "passed": false,
+          "evidence": "index.html 37675 chars; check not matched"
+        },
+        {
+          "text": "Has responsive breakpoints (media queries or Tailwind md:/lg:)",
+          "passed": true,
+          "evidence": "index.html 37675 chars; check matched"
+        },
+        {
+          "text": "No lorem ipsum placeholder copy",
+          "passed": true,
+          "evidence": "index.html 37675 chars; check matched"
+        },
+        {
+          "text": "No emoji used as icons (<= 2 emoji characters)",
+          "passed": false,
+          "evidence": "index.html 37675 chars; check not matched"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 8,
+        "failed": 2,
+        "total": 10,
+        "time_seconds": 137.7,
+        "tokens": 96441,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Design tokens defined as CSS custom properties on :root",
+          "passed": true,
+          "evidence": "index.html 32357 chars; check matched"
+        },
+        {
+          "text": "Display type uses negative letter-spacing",
+          "passed": true,
+          "evidence": "index.html 32357 chars; check matched"
+        },
+        {
+          "text": "Has large-blur light/glow elements (blur >= 60px)",
+          "passed": false,
+          "evidence": "index.html 32357 chars; check not matched"
+        },
+        {
+          "text": "Uses hairline borders with transparency (1px + alpha color)",
+          "passed": true,
+          "evidence": "index.html 32357 chars; check matched"
+        },
+        {
+          "text": "Uses scroll-driven motion (GSAP ScrollTrigger or IntersectionObserver)",
+          "passed": true,
+          "evidence": "index.html 32357 chars; check matched"
+        },
+        {
+          "text": "Respects prefers-reduced-motion",
+          "passed": true,
+          "evidence": "index.html 32357 chars; check matched"
+        },
+        {
+          "text": "Has an infinite marquee/ticker animation",
+          "passed": false,
+          "evidence": "index.html 32357 chars; check not matched"
+        },
+        {
+          "text": "Has responsive breakpoints (media queries or Tailwind md:/lg:)",
+          "passed": true,
+          "evidence": "index.html 32357 chars; check matched"
+        },
+        {
+          "text": "No lorem ipsum placeholder copy",
+          "passed": true,
+          "evidence": "index.html 32357 chars; check matched"
+        },
+        {
+          "text": "No emoji used as icons (<= 2 emoji characters)",
+          "passed": true,
+          "evidence": "index.html 32357 chars; check matched"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 3,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.8,
+        "passed": 8,
+        "failed": 2,
+        "total": 10,
+        "time_seconds": 105.4,
+        "tokens": 121934,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Design tokens defined as CSS custom properties on :root",
+          "passed": true,
+          "evidence": "index.html 23073 chars; check matched"
+        },
+        {
+          "text": "Display type uses negative letter-spacing",
+          "passed": true,
+          "evidence": "index.html 23073 chars; check matched"
+        },
+        {
+          "text": "Has large-blur light/glow elements (blur >= 60px)",
+          "passed": false,
+          "evidence": "index.html 23073 chars; check not matched"
+        },
+        {
+          "text": "Uses hairline borders with transparency (1px + alpha color)",
+          "passed": true,
+          "evidence": "index.html 23073 chars; check matched"
+        },
+        {
+          "text": "Uses scroll-driven motion (GSAP ScrollTrigger or IntersectionObserver)",
+          "passed": true,
+          "evidence": "index.html 23073 chars; check matched"
+        },
+        {
+          "text": "Respects prefers-reduced-motion",
+          "passed": true,
+          "evidence": "index.html 23073 chars; check matched"
+        },
+        {
+          "text": "Has an infinite marquee/ticker animation",
+          "passed": false,
+          "evidence": "index.html 23073 chars; check not matched"
+        },
+        {
+          "text": "Has responsive breakpoints (media queries or Tailwind md:/lg:)",
+          "passed": true,
+          "evidence": "index.html 23073 chars; check matched"
+        },
+        {
+          "text": "No lorem ipsum placeholder copy",
+          "passed": true,
+          "evidence": "index.html 23073 chars; check matched"
+        },
+        {
+          "text": "No emoji used as icons (<= 2 emoji characters)",
+          "passed": true,
+          "evidence": "index.html 23073 chars; check matched"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 4,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.7,
+        "passed": 7,
+        "failed": 3,
+        "total": 10,
+        "time_seconds": 146.7,
+        "tokens": 99774,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "Design tokens defined as CSS custom properties on :root",
+          "passed": true,
+          "evidence": "index.html 36174 chars; check matched"
+        },
+        {
+          "text": "Display type uses negative letter-spacing",
+          "passed": true,
+          "evidence": "index.html 36174 chars; check matched"
+        },
+        {
+          "text": "Has large-blur light/glow elements (blur >= 60px)",
+          "passed": false,
+          "evidence": "index.html 36174 chars; check not matched"
+        },
+        {
+          "text": "Uses hairline borders with transparency (1px + alpha color)",
+          "passed": true,
+          "evidence": "index.html 36174 chars; check matched"
+        },
+        {
+          "text": "Uses scroll-driven motion (GSAP ScrollTrigger or IntersectionObserver)",
+          "passed": false,
+          "evidence": "index.html 36174 chars; check not matched"
+        },
+        {
+          "text": "Respects prefers-reduced-motion",
+          "passed": true,
+          "evidence": "index.html 36174 chars; check matched"
+        },
+        {
+          "text": "Has an infinite marquee/ticker animation",
+          "passed": false,
+          "evidence": "index.html 36174 chars; check not matched"
+        },
+        {
+          "text": "Has responsive breakpoints (media queries or Tailwind md:/lg:)",
+          "passed": true,
+          "evidence": "index.html 36174 chars; check matched"
+        },
+        {
+          "text": "No lorem ipsum placeholder copy",
+          "passed": true,
+          "evidence": "index.html 36174 chars; check matched"
+        },
+        {
+          "text": "No emoji used as icons (<= 2 emoji characters)",
+          "passed": true,
+          "evidence": "index.html 36174 chars; check matched"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 0.975,
+        "stddev": 0.05,
+        "min": 0.9,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 643.95,
+        "stddev": 90.7161,
+        "min": 557.8,
+        "max": 731.0
+      },
+      "tokens": {
+        "mean": 2025128.25,
+        "stddev": 347997.5192,
+        "min": 1531045,
+        "max": 2331100
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.75,
+        "stddev": 0.0577,
+        "min": 0.7,
+        "max": 0.8
+      },
+      "time_seconds": {
+        "mean": 136.925,
+        "stddev": 22.5826,
+        "min": 105.4,
+        "max": 157.9
+      },
+      "tokens": {
+        "mean": 104916.75,
+        "stddev": 11538.696,
+        "min": 96441,
+        "max": 121934
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.22",
+      "time_seconds": "+507.0",
+      "tokens": "+1920212"
+    }
+  },
+  "notes": []
+}

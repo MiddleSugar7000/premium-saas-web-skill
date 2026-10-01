@@ -1,0 +1,60 @@
+{
+  "expectations": [
+    {
+      "text": "Design tokens defined as CSS custom properties on :root",
+      "passed": true,
+      "evidence": "index.html 36174 chars; check matched"
+    },
+    {
+      "text": "Display type uses negative letter-spacing",
+      "passed": true,
+      "evidence": "index.html 36174 chars; check matched"
+    },
+    {
+      "text": "Has large-blur light/glow elements (blur >= 60px)",
+      "passed": false,
+      "evidence": "index.html 36174 chars; check not matched"
+    },
+    {
+      "text": "Uses hairline borders with transparency (1px + alpha color)",
+      "passed": true,
+      "evidence": "index.html 36174 chars; check matched"
+    },
+    {
+      "text": "Uses scroll-driven motion (GSAP ScrollTrigger or IntersectionObserver)",
+      "passed": false,
+      "evidence": "index.html 36174 chars; check not matched"
+    },
+    {
+      "text": "Respects prefers-reduced-motion",
+      "passed": true,
+      "evidence": "index.html 36174 chars; check matched"
+    },
+    {
+      "text": "Has an infinite marquee/ticker animation",
+      "passed": false,
+      "evidence": "index.html 36174 chars; check not matched"
+    },
+    {
+      "text": "Has responsive breakpoints (media queries or Tailwind md:/lg:)",
+      "passed": true,
+      "evidence": "index.html 36174 chars; check matched"
+    },
+    {
+      "text": "No lorem ipsum placeholder copy",
+      "passed": true,
+      "evidence": "index.html 36174 chars; check matched"
+    },
+    {
+      "text": "No emoji used as icons (<= 2 emoji characters)",
+      "passed": true,
+      "evidence": "index.html 36174 chars; check matched"
+    }
+  ],
+  "summary": {
+    "passed": 7,
+    "failed": 3,
+    "total": 10,
+    "pass_rate": 0.7
+  }
+}
