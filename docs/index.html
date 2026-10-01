@@ -112,6 +112,18 @@ section{padding:110px 0}
 .links a{padding:8px 14px;border-radius:999px;border:1px solid var(--line);font:500 13px var(--mono);color:rgb(255 255 255/.75);transition:border-color .2s,color .2s}
 .links a:hover{border-color:var(--line-2);color:#fff}
 .links a.hot{border-color:rgb(255 115 0/.5);color:#FFB27A}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.tabs button{padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:rgb(255 255 255/.03);font:500 13px var(--mono);color:rgb(255 255 255/.72);cursor:pointer;transition:border-color .2s,color .2s,background .2s}
+.tabs button:hover{border-color:var(--line-2);color:#fff}
+.tabs button[aria-selected="true"]{background:#fff;border-color:#fff;color:#0D1017}
+.tabs .open{margin-left:auto;font:500 13px var(--mono);color:#FFB27A;padding:9px 4px}
+.tabs .open[hidden]{display:none}
+.tabs .open:hover{color:#fff}
+.live{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/10;background:var(--bg-1);box-shadow:0 0 0 1px rgb(90 159 255/.08),0 40px 120px -40px rgb(255 115 0/.35)}
+.live[hidden]{display:none}
+.live iframe{position:absolute;top:0;left:0;width:1440px;height:900px;border:0;transform-origin:0 0;background:#fff}
+.live .tag{top:auto;bottom:14px;z-index:2}
+@media(max-width:640px){.tabs .open{margin-left:0;width:100%}}
 
 /* stats */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
@@ -192,7 +204,7 @@ footer{padding:80px 0 0;border-top:1px solid var(--line);overflow:hidden}
 <section id="demo" style="padding-top:40px">
   <div class="wrap">
     <div class="head reveal"><p class="kicker">Before / after</p><h2>Four one-line prompts. <span class="dim">No style instructions.</span></h2>
-      <p class="muted" style="margin-top:16px">Left of the handle: plain Claude Opus 5.5. Right: the same model with the skill. The prompts were written in Hungarian, so the pages were generated in Hungarian and then translated to English for this demo (text only, nothing re-generated). Open the live pages to see the motion.</p></div>
+      <p class="muted" style="margin-top:16px">Left of the handle: plain Claude Opus 5.5. Right: the same model with the skill. The prompts were written in Hungarian, so the pages were generated in Hungarian and then translated to English for this demo (text only, nothing re-generated). Use the tabs under each prompt to open the live pages and see the motion.</p></div>
     <div id="cmps"></div>
   </div>
 </section>
@@ -281,20 +293,57 @@ for (const d of demos) {
     <div class="cmp-top">
       <div><p class="kicker" style="margin:0 0 6px">${d.kind}</p><h3>${d.title}</h3><p class="prompt">Prompt: <em>"${d.prompt}"</em></p></div>
       <div class="links">
-        <a href="demos/${d.id}-before/">Live: before</a><a class="hot" href="demos/${d.id}-after/">Live: after</a>
-        <a href="demos/${d.id}-before/full-desktop.jpg">Full page: before</a><a class="hot" href="demos/${d.id}-after/full-desktop.jpg">Full page: after</a>
+        <a href="demos/${d.id}-before/full-desktop.jpg">Full-page screenshot: before</a><a class="hot" href="demos/${d.id}-after/full-desktop.jpg">Full-page screenshot: after</a>
       </div>
     </div>
-    <div class="slider">
+    <div class="tabs" role="tablist" aria-label="${d.title} view">
+      <button type="button" role="tab" aria-selected="true" data-view="compare">Compare</button>
+      <button type="button" role="tab" aria-selected="false" data-view="before">Without skill: live page</button>
+      <button type="button" role="tab" aria-selected="false" data-view="after">With skill: live page</button>
+      <a class="open" href="#" target="_blank" rel="noopener" hidden>Open in a new tab ↗</a>
+    </div>
+    <div class="slider" data-panel="compare" role="tabpanel">
       <img src="img/${d.id}-before.jpg" alt="${d.title} built by Claude Opus 5.5 without the skill" width="1440" height="900" loading="lazy">
       <img class="after" src="img/${d.id}-after.jpg" alt="${d.title} built by Claude Opus 5.5 with the premium-saas-web skill" width="1440" height="900" loading="lazy">
       <span class="tag l">Without skill</span><span class="tag r">With premium-saas-web</span>
       <div class="handle"></div>
       <input type="range" min="0" max="100" value="50" aria-label="Before / after position for ${d.title}">
-    </div>`;
+    </div>
+    ${["before", "after"].map(k => `<div class="live" data-panel="${k}" role="tabpanel" hidden>
+      <span class="tag ${k === "before" ? "l" : "r"}">${k === "before" ? "Without skill" : "With premium-saas-web"} · live, scroll inside</span>
+    </div>`).join("")}`;
   root.appendChild(el);
   const s = el.querySelector(".slider"), r = el.querySelector("input");
   r.addEventListener("input", () => s.style.setProperty("--pos", r.value + "%"));
+
+  // Live page tabs: the page is loaded on first open and scaled from a 1440px desktop viewport to fit the card.
+  const tabs = [...el.querySelectorAll(".tabs button")], open = el.querySelector(".open");
+  const panels = Object.fromEntries([...el.querySelectorAll("[data-panel]")].map(p => [p.dataset.panel, p]));
+  const fit = p => {
+    const f = p.querySelector("iframe"); if (!f) return;
+    const k = p.clientWidth / 1440;
+    f.style.transform = `scale(${k})`;
+    f.style.height = Math.ceil(p.clientHeight / k) + "px";
+  };
+  const show = view => {
+    tabs.forEach(t => t.setAttribute("aria-selected", String(t.dataset.view === view)));
+    Object.entries(panels).forEach(([k, p]) => { p.hidden = k !== view; });
+    const live = view !== "compare";
+    open.hidden = !live;
+    if (!live) return;
+    open.href = `demos/${d.id}-${view}/`;
+    const p = panels[view];
+    if (!p.querySelector("iframe")) {
+      const f = document.createElement("iframe");
+      f.src = `demos/${d.id}-${view}/`;
+      f.title = `${d.title} page built ${view === "before" ? "without" : "with"} the skill`;
+      f.loading = "lazy";
+      p.prepend(f);
+      new ResizeObserver(() => fit(p)).observe(p);
+    }
+    fit(p);
+  };
+  tabs.forEach(t => t.addEventListener("click", () => show(t.dataset.view)));
 }
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
 document.querySelectorAll(".reveal").forEach(n => io.observe(n));
