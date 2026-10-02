@@ -1,11 +1,6 @@
 ---
 name: premium-saas-web
 description: Build premium, ThemeForest-top-seller-grade websites for SaaS, AI products, agencies, startups and tech portfolios — sculpted color glows, animated gradient borders, tactile glossy buttons, glass navs, bento grids with mini product UIs, giant tight-tracked headlines, scroll-scrubbed text reveals, smooth scroll and GSAP motion. Use this skill whenever the user asks for a landing page, homepage, marketing site, pricing page, waitlist page, product page or portfolio for a SaaS / AI / tech / agency / startup brand, or says things like "make it look premium / expensive / modern / like a top template", "Vercel/Linear/Framer style", "dark glowing hero", "glassmorphism" — in any language, and even if they don't name a style. Also use it when redesigning an existing tech/SaaS page to look higher-end.
-license: MIT
-metadata:
-  author: MiddleSugar7000
-  homepage: https://github.com/MiddleSugar7000/premium-saas-web-skill
-  version: "1.1.0"
 ---
 
 # Premium SaaS Web
@@ -39,12 +34,20 @@ Choose a direction from this table, then read its `directions/<folder>/style.md`
 | **Tactile Light** (`tactile-light`) | Zinc/off-white, glossy skeuomorphic buttons, sheen cards, one hot accent (red), framed hero with 3D render | AI agencies, B2B SaaS, consultancies | Aigocy |
 | **Editorial Mono** (`editorial-mono`) | Pure #111 on #F0F0F0, 140px grotesk at −7% tracking, hairline grid, scroll-fill text, no shadows | Agencies, studios, premium services | Adon |
 | **Noir Spotlight** (`noir-spotlight`) | Black, one neon accent, giant word interacting with a photo, shader/WebGL bg, stacking project cards | Personal brands, portfolios, creative tech | Davies |
+| **Cinematic Glass** (`cinematic-glass`) | Black, drifting CSS aurora (or a supplied video), near-invisible glass chips with a lit edge, tight italic serif headline | Design/dev studios, agencies, creative AI | Dark studio sites |
 
 If the user didn't specify and it's SaaS/AI, default to **Ember Dark**. Mixing directions is how pages get muddy. Borrowing one *technique* from another direction is fine, as long as the palette and type stay coherent.
 
 Tell the user in one line which direction you picked and why, so they can redirect early. If the brand needs a different accent hue, see "Swapping the accent" in `directions/README.md`.
 
 ### 2. Plan the page as a rhythm, not a list
+
+**Match the brief's size.** If the user asks for a single hero, a one-screen page or "only X", build exactly that and do not add logo strips, stats, cards or footers. Adding sections nobody asked for is the most common way to ruin a tight brief.
+
+**Hero visual, in this order of preference** (the page must look finished at every level, because most users supply no media):
+1. **Product UI in HTML/CSS** (mockup, prompt box, dashboard tiles). Default for SaaS and AI products.
+2. **CSS/SVG visual**: sculpted glow or aurora, mini UIs, grain, dot globe, a large typographic composition (`shared/light.md`, `shared/product-proof.md`, `shared/typography.md`).
+3. **User-supplied image or video**, only if the user provided one: layer it over the CSS visual, never in place of it (`shared/video.md`). Never invent URLs, hotlink third-party assets you were not given, or leave a broken placeholder.
 
 Premium pages alternate density and tone. A typical SaaS home that works:
 
@@ -72,7 +75,11 @@ The recipes are copy-ready CSS/HTML/JS. Your direction's `style.md` already hold
 | Product mockup in the hero, bento grid with mini-UIs | `shared/product-proof.md` |
 | Glass nav, eyebrow badge & avatar stack, card spotlight, marquees, pricing, footer wordmark | `shared/components.md` |
 | Any named brand with an icon (integrations, logo strip, orbit, "works with") | `shared/logos.md` |
-| GSAP + Lenis boilerplate, reveals, counters, stacking cards, pinned scroll, hover, gotchas | `shared/motion.md` |
+| GSAP + Lenis boilerplate, reveals, counters, stacking cards, pinned scroll, hover, blur-in words, safe entrance, gotchas | `shared/motion.md` |
+| Glass surfaces (gradient-stroke border), stacked drop-title, serif italic display | `shared/components.md`, `shared/typography.md` |
+| Breakpoint strategy, mobile layouts, one-screen fluid hero | `shared/responsive.md` |
+| A video the **user supplied** (backdrop, click clips, scrub, cut-out) | `shared/video.md` (skip entirely if there is no video) |
+| Before handing over: browser-only traps, accessibility, acceptance pass | `shared/pitfalls.md` |
 
 A full landing page usually needs all of them; a single section or a small edit needs only its row. All GSAP plugins incl. SplitText are free since 3.13, load them from jsDelivr.
 
@@ -100,6 +107,8 @@ Open the page in a browser and screenshot at 1440px and 390px, if you can. Check
 - [ ] Every real brand named on the page has its real logo (or no icon). No initial-letter squares.
 - [ ] No lorem ipsum. Copy is specific to the product: concrete numbers, real-sounding features.
 - [ ] Nothing overflows horizontally at 390px.
+- [ ] Looks finished with zero images or videos: no broken media, no empty frames, no invented URLs.
+- [ ] Ran the acceptance pass in `shared/pitfalls.md` (double-click, keyboard focus, reduced motion, no-JS, 320px).
 
 ## What to avoid (the "cheap template" tells)
 

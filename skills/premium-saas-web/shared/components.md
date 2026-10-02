@@ -64,3 +64,21 @@ Use NumberFlow or a GSAP tween for the monthly/yearly switch so digits roll inst
 ## Footer wordmark
 
 A huge brand name spanning the full width at the very bottom (`font-size:20vw; line-height:.8; letter-spacing:-.06em`), partially cropped by `overflow:hidden`, filled with a vertical fade (`linear-gradient(#fff 0%, transparent 90%)` clipped to text, or `--line` color on light themes). It ends the page with a signature instead of a list of links.
+
+
+## Liquid glass (gradient-stroke border)
+
+*Why:* A glass surface reads as expensive when its edge catches light: a 1px stroke that is bright at the top and bottom and invisible at the sides, with a near-transparent fill. The stroke is drawn with a masked pseudo-element so it can be a gradient, which `border` cannot do. Needs something colorful or moving behind it to blur.
+
+```css
+.glass{position:relative;overflow:hidden;background:rgb(255 255 255/.01);background-blend-mode:luminosity;
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);box-shadow:inset 0 1px 1px rgb(255 255 255/.1)}
+.glass::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.4px;pointer-events:none;
+  background:linear-gradient(180deg,rgb(255 255 255/.45) 0%,rgb(255 255 255/.15) 20%,transparent 40%,transparent 60%,rgb(255 255 255/.15) 80%,rgb(255 255 255/.45) 100%);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;
+  mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude}
+.glass-strong{backdrop-filter:blur(50px);-webkit-backdrop-filter:blur(50px);box-shadow:4px 4px 4px rgb(0 0 0/.05),inset 0 1px 1px rgb(255 255 255/.15)}
+```
+Use `.glass` for chips, nav pills and cards, `.glass-strong` for the one primary CTA. Nest a smaller `.glass` square for icon wells inside cards.
+
+Variant with a moving highlight (controllers, toggles): add a radial layer to `::after` whose origin follows the pointer through `--glass-x/--glass-y`, set from a `pointermove` listener (no re-render, no layout work), and a conic-gradient edge accent at 25-30% opacity (`#7fe3ff, white, #ffd7e6`) for a hint of dispersion. Keep it an accent, never a rainbow fill, and keep `backdrop-filter` local to small elements.

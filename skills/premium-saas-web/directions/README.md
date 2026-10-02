@@ -8,6 +8,7 @@ Each folder is one visual direction measured from a real top-selling template. L
 | `tactile-light/` | Aigocy |
 | `editorial-mono/` | Adon |
 | `noir-spotlight/` | Davies |
+| `cinematic-glass/` | Dark studio sites (CSS aurora, optional supplied video) |
 
 ## Swapping the accent
 

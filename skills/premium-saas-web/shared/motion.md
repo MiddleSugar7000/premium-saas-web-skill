@@ -131,3 +131,42 @@ Direction-specific motion lives with its direction: logo arc in `directions/embe
 - Big `filter: blur()` blobs are expensive. Keep them static or drift them slowly; add `will-change: transform` only to things that actually move.
 - On mobile (`max-width: 768px`): halve blur radii, disable magnetic/cursor effects, keep reveals.
 - Call `ScrollTrigger.refresh()` after images load if layout shifts.
+
+
+## Blur-in words
+
+*Why:* Words that sharpen out of a blur as they rise read as focus pulling, softer and more cinematic than a plain fade-up.
+```js
+const s = SplitText.create('[data-blurin]', { type: 'words' });
+gsap.from(s.words, { filter: 'blur(10px)', opacity: 0, y: 50, duration: 0.7, ease: 'power3.out',
+  stagger: 0.1, scrollTrigger: { trigger: '[data-blurin]', start: 'top 85%' } });
+```
+Add `display:inline-block` to the words (SplitText does this) and use it on one headline per section, not on body copy.
+
+## Sticky stage with scroll-progress
+
+*Why:* A section taller than the viewport with a sticky inner stage lets scroll drive a small choreography (words sliding in, opacity rising) without any pinning plugin.
+```html
+<section class="stage-wrap" style="height:120vh"><div class="stage" style="position:sticky;top:0;height:100vh">…</div></section>
+```
+```js
+const wrap = document.querySelector('.stage-wrap'), words = [...document.querySelectorAll('[data-slide]')];
+const k = innerWidth < 768 ? .5 : 1;
+function tick(){ const r = wrap.getBoundingClientRect();
+  const p = Math.min(1, Math.max(0, -r.top / (wrap.offsetHeight - innerHeight)));
+  words.forEach((w, i) => { const dir = w.dataset.slide === 'l' ? -1 : 1;
+    w.style.transform = `translateX(${dir * (60 + i * 40) * k * (1 - p)}px)`; w.style.opacity = .35 + p * .65; }); }
+addEventListener('scroll', tick, { passive: true }); addEventListener('resize', tick); tick();
+```
+
+## Entrance with a safety net
+
+*Why:* A hidden-until-animated page is a blank page if the script fails. Gate the hidden state behind an attribute that an inline script sets, and remove it on a timer if the animation never completes.
+```html
+<script>(function(){var d=document.documentElement;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  d.setAttribute('data-anim','pending');window.__guard=setTimeout(function(){d.removeAttribute('data-anim')},4000);})();</script>
+```
+```css
+html[data-anim="pending"] .hero [data-in]{opacity:0;translate:0 12px}
+```
+Start the timeline after `document.fonts.ready` (and after any media you wait for), then `clearTimeout(window.__guard)` and remove the attribute when it finishes. Skip elements whose computed `display` is `none`. No script means no attribute means nothing hidden. See `shared/pitfalls.md`.
