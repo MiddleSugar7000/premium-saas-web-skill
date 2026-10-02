@@ -54,8 +54,11 @@ function initMotion() {
   // 4. Scroll-fill text (see recipes §9)
   gsap.utils.toArray('.fill-text').forEach(el => {
     const s = SplitText.create(el, { type: 'lines', linesClass: 'line' });
-    s.lines.forEach(l => gsap.to(l, { backgroundPosition: '0% 0', ease: 'none',
-      scrollTrigger: { trigger: l, start: 'top 85%', end: 'bottom 45%', scrub: true } }));
+    // ONE trigger + sequential timeline: lines fill strictly one after another.
+    // (A ScrollTrigger per line overlaps and fills several lines at once - don't.)
+    const tl = gsap.timeline({ defaults: { ease: 'none' },
+      scrollTrigger: { trigger: el, start: 'top 80%', end: 'bottom 40%', scrub: 0.5 } });
+    s.lines.forEach(l => tl.to(l, { backgroundPosition: '0% 0', duration: 1 }));
   });
 
   // 5. Counters

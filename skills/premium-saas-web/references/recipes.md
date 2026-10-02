@@ -216,10 +216,18 @@ Letter-spacing guide: 48px → −0.04em, 64px → −0.05em, 96px → −0.03 t
   -webkit-background-clip:text;background-clip:text;color:transparent;display:inline}
 ```
 ```js
-// split into lines first (SplitText type:"lines", linesClass:"line"), then:
-gsap.utils.toArray('.fill-text .line').forEach(l=>gsap.to(l,{backgroundPosition:'0% 0',ease:'none',
-  scrollTrigger:{trigger:l,start:'top 85%',end:'bottom 45%',scrub:true}}));
+// split into lines first (SplitText type:"lines", linesClass:"line"), then ONE sequential timeline per block:
+gsap.utils.toArray('.fill-text').forEach(el=>{
+  const lines = el.querySelectorAll('.line');
+  const tl = gsap.timeline({ defaults:{ ease:'none' },
+    scrollTrigger:{ trigger:el, start:'top 80%', end:'bottom 40%', scrub:0.5 }});
+  lines.forEach(l => tl.to(l, { backgroundPosition:'0% 0', duration: 1 }));  // each line gets an equal slice, one after another
+});
 ```
+**Strictly line by line, never several at once.** Do NOT give each line its own ScrollTrigger: neighbouring lines are only one line-height apart, so their start/end ranges overlap and two or three lines fill simultaneously, which reads as a muddy wave instead of reading. One trigger on the whole block + a timeline of back-to-back tweens (`duration:1`, no overlap, no position offsets) guarantees line N is fully inked before line N+1 begins. `scrub:0.5` adds a little inertia so the fill glides instead of tracking the scrollbar 1:1. For a longer block, give the trigger more scroll distance (`end:'bottom 30%'` or `+=` a multiple of the block height) so each line has room to breathe. Weight each line's `duration` by its character count if line lengths vary a lot, so the fill speed stays constant.
+
+Optional soft leading edge (still one line at a time): `background:linear-gradient(to right,var(--ink) 45%,var(--dim) 55%)`, so the ink edge feathers instead of cutting hard.
+
 On dark: `--ink:#fff; --dim:rgb(255 255 255/.2)`.
 
 ## 10. Product proof
@@ -291,6 +299,30 @@ Highlighted card among equals (e.g. 1 of 4 services): `background:linear-gradien
 ```
 Vertical testimonial columns: same idea with `flex-direction:column` and `translateY(-50%)`, two or three columns at different speeds (30s/40s/35s), the middle one reversed.
 Big-type marquee (Noir): "Selected Work ◎ Selected Work ◎" at 120px, 500 weight, with an inline SVG wireframe globe as separator.
+
+## Brand logos (integration chips, logo arcs, "works with", marquees)
+
+*Why:* A chip that says "Figma" next to a purple square with an "F" is an obvious placeholder; it makes the whole page look like a mock. Real logos are what make integration sections believable.
+
+Rules:
+- If an existing brand is named and gets an icon, that icon is the brand's real logo. Never an initial in a colored box, a generic glyph, or an emoji.
+- Prefer full-color official marks on chips; use monochrome (white/ink) only when the section is deliberately grayscale (logo strips).
+- If no real logo is available, drop the icon and show only the name. Don't invent one.
+- On a small square slot (chips, arcs) use the symbol-only mark, not the wordmark. Full wordmarks (e.g. Iconify `logos:hubspot`, `logos:zendesk`) get squeezed into ~22px and become unreadable specks; use the `-icon` variant (`logos:zendesk-icon`) or Simple Icons (`hubspot`) instead. Look at the rendered result, since some sets only ship the wordmark.
+- Download the SVGs into the project (e.g. `public/logos/figma.svg`) instead of hotlinking in production; inline them or use `<img>` with explicit width/height so layout doesn't shift.
+
+Sources, in order of preference (verify the file actually loads, since brands come and go from these sets):
+1. Iconify full-color logos: `https://api.iconify.design/logos:figma.svg` (also `logos:slack-icon`, `logos:github-icon`, `logos:notion-icon`, `logos:google-gmail`, `logos:hubspot`, ...). Search names at icon-sets.iconify.design/logos.
+2. Simple Icons (single color, any hex): `https://cdn.simpleicons.org/figma/F24E1E` or `https://cdn.jsdelivr.net/npm/simple-icons/icons/figma.svg`. Some brands were removed at the owner's request, so a 404 means try source 1.
+3. The brand's own press/brand kit page, when the two above lack it.
+
+```html
+<span class="chip"><img src="/logos/figma.svg" alt="" width="20" height="20"> Figma</span>
+```
+```css
+.chip{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:#fff;color:#111;font-weight:500}
+.chip img{display:block;object-fit:contain}
+```
 
 ## 14. Backgrounds
 

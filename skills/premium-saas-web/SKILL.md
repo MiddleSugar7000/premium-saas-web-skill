@@ -47,7 +47,7 @@ Premium pages alternate density and tone. A typical SaaS home that works:
 1. **Hero**: eyebrow badge (avatar stack + "Rated 4.9 by 7,000+ users" or a pill like "✦ AI-Driven Agency"), 2-line headline with a dimmed half, 1–2 line subcopy at 60% opacity, primary + secondary CTA, then **the product itself** (browser-framed mockup or an interactive prompt box) bleeding into the next section via a gradient fade.
 2. **Logo strip**: grayscale logos, infinite marquee, masked edges.
 3. **Bento feature grid**: 5–7 cells of unequal size, each with a *mini UI illustration* built in HTML/CSS (workflow nodes, chat bubbles, toggles, charts, color chips), not stock icons.
-4. **Scroll-fill statement**: one big sentence that fills from 30% → 100% as you scroll.
+4. **Scroll-fill statement**: one big sentence that fills from 30% → 100% as you scroll. The fill runs strictly line by line (one scrubbed timeline per block, lines back-to-back), never several lines at once. See recipes §9.
 5. **Numbers**: 3–4 stats with rolling counters; one giant faded number as decoration.
 6. **How it works / tabs** or **stacking cards**.
 7. **Testimonials**: real-feeling quotes, avatar + name + role, maybe a vertical marquee of cards.
@@ -79,6 +79,7 @@ Read `references/motion.md` for the GSAP + Lenis setup (all GSAP plugins incl. S
 - Fonts from Google Fonts. Proven pairings from the references: **Sora + Inter Tight + IBM Plex Mono** (Ember), **Urbanist** (Tactile), **a grotesk like "Inter Tight"/"Schibsted Grotesk"/"Familjen Grotesk" + DM Sans** (Editorial), **Figtree/"Outfit"** (Noir).
 - Icons: inline SVG (Lucide-style 1.5px stroke). Never emoji as icons.
 - Images: if image generation is available, generate on-brand 3D renders / abstract objects; otherwise build visuals with CSS/SVG (glows, mini UIs, dot globes). Use `https://images.unsplash.com/...` photos only for people/portraits. A page with no visual anchor in the hero looks unfinished.
+- **Real brand logos, never letter placeholders.** Whenever the page names an existing company, product or SaaS (integration chips, logo arcs/strips, "works with" bands, testimonials, comparison tables) and you show an icon next to it, use that brand's actual logo. A colored square with the initial ("F" for Figma, "S" for Slack) reads as a cheap template and breaks trust. Details and sources in `references/recipes.md` §"Brand logos". If no real logo can be sourced, show the name as plain text with no icon at all; a fake icon is worse than none.
 - Mobile: everything collapses to one column at <768px; display type scales with `clamp()`; glows shrink (big blurs are expensive on phones); disable cursor effects on touch.
 
 ### 5. Self-review before handing over
@@ -93,6 +94,7 @@ Open the page in a browser and screenshot at 1440px and 390px, if you can. Check
 - [ ] Borders are hairlines (1px, 6–20% alpha), radii are consistent (pick a scale: 8/12/20/28/999).
 - [ ] Buttons have hover states that change *light* (glow tightens, sheen shifts, arrow nudges 2–4px), not just color.
 - [ ] Motion: hero text reveal, scroll-triggered fades with stagger, at least one scrubbed effect, marquee. All disabled under `prefers-reduced-motion`.
+- [ ] Every real brand named on the page has its real logo (or no icon). No initial-letter squares.
 - [ ] No lorem ipsum. Copy is specific to the product: concrete numbers, real-sounding features.
 - [ ] Nothing overflows horizontally at 390px.
 
@@ -102,6 +104,7 @@ Open the page in a browser and screenshot at 1440px and 390px, if you can. Check
 - Drop shadows like `0 4px 6px rgba(0,0,0,.3)` on dark backgrounds (shadows don't read on dark; use glows and borders instead).
 - Centered everything with identical card grids of 3 icons + title + text.
 - Glassmorphism without anything behind the glass to blur.
+- Fake brand icons: a colored rounded square with a letter standing in for Figma, Slack, GitHub, etc.
 - Bouncy/elastic easing, fade-ins that take >1s, animations on every element at once.
 - Gradient text on body copy; more than one gradient-text phrase per viewport.
 - Stock "AI brain" imagery. Show the product or an abstract render instead.
