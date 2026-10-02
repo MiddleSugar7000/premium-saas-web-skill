@@ -55,3 +55,24 @@ python check_robust.py path/to/index.html --hero-only
 ```
 
 Baseline on the demo pages (generated with the first version of the skill, 2026-10-01): with skill 9/10, 10/10, 10/10, 10/10; without skill 5/10, 8/10, 8/10, 8/10 (see [`robust-baseline.json`](robust-baseline.json)).
+
+## Iteration 2: skill with media-optional heroes, pitfalls and responsive rules (2026-10-02)
+
+Five pages generated with the updated skill, one run each: the four original prompts plus a new single-hero prompt (`5-halden`: a small web design studio, no images or videos, hero only), and a no-skill baseline for the hero-only prompt. Pages are in [`results-v2/`](results-v2/).
+
+**Not comparable to iteration 1 in rigor.** These runs were made by sub-agents inside a Claude Code session (model alias `opus`), not by isolated `claude -p` processes, so memory and the surrounding environment were not fully excluded; there is one run per cell, and no timing or cost was recorded. Three of the five agents could not open the page in a browser while building.
+
+| Page | `grade.py` (10 checks) | `check_robust.py` (10-12 checks) |
+|---|---|---|
+| Flowpilot, with skill | 9/10 | 10/10 |
+| Northlane, with skill | 9/10 | 8/10 (sideways overflow at 390 and 320 px) |
+| Portfolio, with skill | 10/10 | 10/10 |
+| Számlakör, with skill | 9/10 | 10/10 |
+| Halden hero-only, with skill | 7/10 | 12/12 |
+| Halden hero-only, no skill | 9/10 | 12/12 |
+
+What this shows, and what it does not:
+- The three 9/10 scores come from one check, "no emoji used as icons": the pages use `★` (U+2605) rating glyphs and one `✓`, which the grader's character range counts as emoji. Iteration 1 pages did not use them. The grader was left unchanged.
+- The Halden hero-only page loses three `grade.py` checks (hairline borders, scroll-driven motion, marquee) simply because a one-screen hero does not need them; they are not failures of the brief.
+- The robustness checks found one real bug: Northlane's `.statement-glow` (a 420 px blurred circle) widened the page on phones. That led to a new rule in `shared/pitfalls.md` (clip sections that contain wide glows).
+- On the single-hero prompt the skill and the baseline were indistinguishable on these checks. The checks do not measure visual quality, so this says nothing about which page looks better.

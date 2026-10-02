@@ -118,7 +118,8 @@ def run(files, hero_only_names=("halden",), save=None):
                 print("ERR", f, e)
             results[str(f)] = res
             ok = sum(res.values())
-            print(f"{ok}/{len(res)}  {f.parent.name}/{f.name}")
+            label = "/".join(f.parts[-5:-2]) if f.parent.name == "outputs" else f.parent.name + "/" + f.name
+            print(f"{ok}/{len(res)}  {label}")
             for k, v in res.items():
                 if not v:
                     print("      FAIL:", k)

@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Halden — Webdesign stúdió</title>
+<meta name="description" content="A Halden egy kis webdesign stúdió: egyedi, gyors weboldalak tervezése és fejlesztése, sablonok nélkül.">
+<script>(function(){var d=document.documentElement;if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+d.setAttribute('data-anim','pending');window.__guard=setTimeout(function(){d.removeAttribute('data-anim')},4000);})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#000; --fg:#fff; --fg-2:rgb(255 255 255/.8); --fg-3:rgb(255 255 255/.62); --fg-4:rgb(255 255 255/.5);
+  --line:rgb(255 255 255/.07);
+  --accent:#ffc9a3;
+  --glow-a:#4a2a1c; --glow-b:#16384a; --glow-c:#5b2a3c;
+  --font-display:"Instrument Serif",Georgia,serif; --font-body:"Barlow",system-ui,sans-serif;
+  --r-pill:999px; --r-card:20px; --r-icon:12px;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--fg)}
+body{font-family:var(--font-body);font-weight:300;font-size:16px;line-height:1.25;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+
+/* ---------- Hero shell ---------- */
+.hero{position:relative;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;isolation:isolate;overflow:hidden}
+
+/* CSS aurora backdrop */
+.bg-css{position:absolute;inset:0;overflow:hidden;background:#000;z-index:-3;pointer-events:none}
+.bg-css::before,.bg-css::after{content:"";position:absolute;width:70vmax;height:70vmax;border-radius:50%;filter:blur(90px);opacity:.75;will-change:transform}
+.bg-css::before{left:-18vmax;top:-24vmax;background:radial-gradient(circle,var(--glow-a),transparent 65%);animation:drift 28s ease-in-out infinite alternate}
+.bg-css::after{right:-22vmax;bottom:-28vmax;background:radial-gradient(circle,var(--glow-b),transparent 65%);animation:drift 34s ease-in-out infinite alternate-reverse}
+.bg-css i{position:absolute;left:34%;top:38%;width:50vmax;height:50vmax;border-radius:50%;filter:blur(110px);opacity:.45;background:radial-gradient(circle,var(--glow-c),transparent 65%);animation:drift2 40s ease-in-out infinite alternate}
+.bg-css b{position:absolute;left:50%;top:58%;width:46vmax;height:14vmax;translate:-50% -50%;border-radius:50%;filter:blur(70px);opacity:.28;background:radial-gradient(closest-side,var(--accent),transparent);animation:breathe 9s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate3d(8vmax,6vmax,0) scale(1.08)}}
+@keyframes drift2{to{transform:translate3d(-10vmax,-4vmax,0) scale(1.12)}}
+@keyframes breathe{from{opacity:.16;scale:.92}to{opacity:.3;scale:1.05}}
+
+/* hairline column guides + grain + bottom fade */
+.guides{position:absolute;inset:0;z-index:-2;pointer-events:none;
+  background-image:linear-gradient(90deg,var(--line) 1px,transparent 1px);background-size:calc(100% / 6) 100%;background-position:calc(100% / 12) 0;
+  -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 45%,#000,transparent 85%);mask-image:radial-gradient(ellipse 70% 60% at 50% 45%,#000,transparent 85%)}
+.grain{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.09;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.fade{position:absolute;left:0;right:0;bottom:0;height:22vh;z-index:-1;pointer-events:none;background:linear-gradient(transparent,#000)}
+
+/* orbit ring: a code-drawn "lens" behind the headline */
+.orbit{position:absolute;left:50%;top:50%;width:min(980px,120vw);aspect-ratio:1;translate:-50% -46%;z-index:-2;pointer-events:none;opacity:.55}
+.orbit svg{width:100%;height:100%;animation:spin 140s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---------- Glass ---------- */
+.glass{position:relative;overflow:hidden;background:rgb(255 255 255/.015);background-blend-mode:luminosity;
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);box-shadow:inset 0 1px 1px rgb(255 255 255/.1)}
+.glass::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.4px;pointer-events:none;
+  background:linear-gradient(180deg,rgb(255 255 255/.45) 0%,rgb(255 255 255/.15) 20%,transparent 40%,transparent 60%,rgb(255 255 255/.15) 80%,rgb(255 255 255/.45) 100%);
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;
+  mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude}
+.glass-strong{backdrop-filter:blur(50px);-webkit-backdrop-filter:blur(50px);box-shadow:4px 4px 4px rgb(0 0 0/.05),inset 0 1px 1px rgb(255 255 255/.15)}
+.glass::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .4s var(--ease);
+  background:radial-gradient(160px circle at var(--gx,50%) var(--gy,50%),rgb(255 255 255/.12),transparent 70%)}
+@media (hover:hover) and (pointer:fine){.glass:hover::after{opacity:1}}
+
+/* ---------- Nav ---------- */
+.nav{position:relative;z-index:5;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;
+  padding:calc(24px + env(safe-area-inset-top)) clamp(16px,4vw,48px) 0}
+.mono{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font-family:var(--font-display);font-style:italic;font-size:26px;line-height:1;padding-bottom:2px}
+.pill{display:flex;align-items:center;gap:4px;padding:6px;border-radius:var(--r-pill)}
+.pill a.lnk{padding:10px 16px;font-size:14px;font-weight:400;color:var(--fg-2);border-radius:var(--r-pill);transition:color .3s,background .3s}
+.pill a.lnk:hover{color:#fff;background:rgb(255 255 255/.06)}
+.btn-white{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:var(--r-pill);background:#fff;color:#000;font-size:14px;font-weight:500;
+  box-shadow:0 0 0 0 rgb(255 255 255/0);transition:box-shadow .4s var(--ease),transform .4s var(--ease)}
+.btn-white:hover{box-shadow:0 0 28px 2px rgb(255 255 255/.22)}
+.btn-white svg,.cta svg,.ghost svg{transition:transform .4s var(--ease)}
+.btn-white:hover svg,.cta:hover svg,.ghost:hover svg{transform:translateX(3px)}
+.nav .spacer{justify-self:end;font-size:13px;color:var(--fg-3);display:flex;align-items:center;gap:8px;letter-spacing:.02em}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.4}}
+
+/* ---------- Hero content ---------- */
+.content{position:relative;z-index:2;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  padding:clamp(40px,7vh,88px) 16px clamp(40px,6vh,72px);max-width:1100px;margin:0 auto;width:100%}
+.badge{display:inline-flex;align-items:center;gap:10px;padding:5px 14px 5px 5px;border-radius:var(--r-pill);font-size:13px;color:var(--fg-2);font-weight:400}
+.badge .new{background:#fff;color:#000;border-radius:var(--r-pill);padding:4px 10px;font-size:12px;font-weight:500}
+h1{font-family:var(--font-display);font-style:italic;font-weight:400;font-size:clamp(52px,8.4vw,112px);line-height:.86;letter-spacing:-.045em;
+  margin:28px 0 0;padding-bottom:.08em;text-wrap:balance;max-width:15ch}
+h1 .dim{color:rgb(255 255 255/.5)}
+h1 .acc{color:var(--accent)}
+.lead{margin:26px auto 0;max-width:42rem;font-size:clamp(15px,1.25vw,17px);line-height:1.45;color:var(--fg-3)}
+.lead strong{color:var(--fg-2);font-weight:400}
+.actions{margin-top:34px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px 22px}
+.cta{display:inline-flex;align-items:center;gap:12px;padding:15px 18px 15px 24px;border-radius:var(--r-pill);font-size:15px;font-weight:500;color:#fff;
+  transition:background .4s var(--ease),box-shadow .4s var(--ease)}
+.cta .arr{width:30px;height:30px;border-radius:50%;background:#fff;color:#000;display:grid;place-items:center}
+.cta:hover{background:rgb(255 255 255/.06);box-shadow:4px 4px 4px rgb(0 0 0/.05),inset 0 1px 1px rgb(255 255 255/.25),0 0 40px -6px rgb(255 201 163/.35)}
+.ghost{display:inline-flex;align-items:center;gap:8px;font-size:15px;font-weight:400;color:var(--fg-2);padding:12px 4px;border-radius:8px}
+.ghost:hover{color:#fff}
+
+.stats{margin-top:clamp(36px,6vh,60px);display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.stat{display:flex;align-items:center;gap:14px;padding:12px 22px 12px 12px;border-radius:var(--r-card);text-align:left;min-width:232px}
+.well{width:44px;height:44px;border-radius:var(--r-icon);display:grid;place-items:center;flex:none;color:var(--fg-2)}
+.stat .num{font-family:var(--font-display);font-style:italic;font-size:36px;line-height:.9;letter-spacing:-.03em}
+.stat .lbl{font-size:13px;color:var(--fg-3);margin-top:4px}
+
+.trust{margin-top:clamp(28px,5vh,48px);display:flex;flex-direction:column;align-items:center;gap:14px}
+.trust small{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-4);font-weight:400}
+.trust ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:8px 34px}
+.trust li{font-family:var(--font-display);font-style:italic;font-size:22px;color:rgb(255 255 255/.55);letter-spacing:-.01em;transition:color .3s}
+.trust li:hover{color:#fff}
+
+/* entrance gate (only when JS set the attribute) */
+html[data-anim="pending"] .hero [data-in]{opacity:0}
+html[data-anim="pending"] .hero h1{opacity:0}
+
+/* ---------- Responsive ---------- */
+@media (max-width:899px), (pointer:coarse) and (max-width:1099px){
+  .pill a.lnk{display:none}
+  .nav{grid-template-columns:auto 1fr auto}
+  .nav .pill{justify-self:end;grid-column:3}
+  .nav .spacer{display:none}
+}
+@media (max-width:700px){
+  .bg-css::before,.bg-css::after,.bg-css i{filter:blur(60px)}
+  .stats{flex-direction:column;align-items:stretch;width:100%;max-width:340px}
+  .stat{min-width:0}
+  .trust li{font-size:19px}
+  .trust ul{gap:6px 22px}
+}
+@media (max-width:360px){
+  h1{font-size:46px}
+  .badge{font-size:12px}
+}
+@media (max-height:760px) and (min-width:701px){
+  .trust{display:none}
+  h1{font-size:clamp(48px,7vw,92px)}
+}
+@media (prefers-reduced-motion:reduce){
+  .bg-css::before,.bg-css::after,.bg-css i,.bg-css b,.orbit svg,.dot{animation:none}
+  *{transition-duration:1ms!important}
+}
+</style>
+</head>
+<body>
+<header class="hero" id="top">
+  <div class="bg-css" aria-hidden="true"><i></i><b></b></div>
+  <div class="orbit" aria-hidden="true">
+    <svg viewBox="0 0 1000 1000" fill="none">
+      <defs>
+        <linearGradient id="rg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#fff" stop-opacity=".22"/>
+          <stop offset=".5" stop-color="#fff" stop-opacity="0"/>
+          <stop offset="1" stop-color="#ffc9a3" stop-opacity=".28"/>
+        </linearGradient>
+      </defs>
+      <circle cx="500" cy="500" r="420" stroke="url(#rg)" stroke-width="1"/>
+      <circle cx="500" cy="500" r="330" stroke="#fff" stroke-opacity=".05" stroke-width="1" stroke-dasharray="2 9"/>
+      <circle cx="500" cy="80" r="3" fill="#ffc9a3" fill-opacity=".9"/>
+      <circle cx="170" cy="500" r="2" fill="#fff" fill-opacity=".5"/>
+      <circle cx="733" cy="733" r="1.6" fill="#fff" fill-opacity=".4"/>
+    </svg>
+  </div>
+  <div class="guides" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="fade" aria-hidden="true"></div>
+
+  <nav class="nav" aria-label="Fő navigáció" data-in>
+    <a href="#top" class="mono glass" aria-label="Halden — kezdőlap">H</a>
+    <div class="pill glass">
+      <a class="lnk" href="#munkak">Munkák</a>
+      <a class="lnk" href="#szolgaltatasok">Szolgáltatások</a>
+      <a class="lnk" href="#studio">Stúdió</a>
+      <a class="lnk" href="#folyamat">Folyamat</a>
+      <a class="btn-white" href="#kapcsolat">Beszéljünk
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+    <div class="spacer"><span class="dot" aria-hidden="true"></span>Budapest · 2 szabad hely Q1-re</div>
+  </nav>
+
+  <main class="content">
+    <a href="#kapcsolat" class="badge glass" data-in>
+      <span class="new">Új</span>
+      <span>Most foglalható: 2027 első negyedéves projektek</span>
+    </a>
+
+    <h1 data-blurin>Kis stúdió. <span class="dim">Weboldalak, amikre</span> <span class="acc">emlékeznek.</span></h1>
+
+    <p class="lead" data-in>A Halden háromfős webdesign stúdió. Évente <strong>tíz-tizenkét márkának</strong> tervezünk és fejlesztünk egyedi, villámgyors weboldalt — sablonok nélkül, az első vázlattól az élesítésig ugyanazokkal az emberekkel.</p>
+
+    <div class="actions" data-in>
+      <a href="#kapcsolat" class="cta glass glass-strong">Projekt indítása
+        <span class="arr"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </a>
+      <a href="#munkak" class="ghost">Válogatott munkáink
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+
+    <div class="stats" data-in>
+      <div class="stat glass">
+        <div class="well glass" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5"/></svg>
+        </div>
+        <div><div class="num"><span data-count="6">6</span> hét</div><div class="lbl">átlagos átfutás briefingtől élesítésig</div></div>
+      </div>
+      <div class="stat glass">
+        <div class="well glass" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>
+        </div>
+        <div><div class="num"><span data-count="98">98</span>/100</div><div class="lbl">átlagos Lighthouse teljesítmény</div></div>
+      </div>
+    </div>
+
+    <div class="trust" data-in>
+      <small>Akikkel dolgoztunk</small>
+      <ul>
+        <li>Nordvik</li><li>Ostra Kávé</li><li>Fenyő &amp; Társa</li><li>Lumen</li><li>Arcvo</li>
+      </ul>
+    </div>
+  </main>
+</header>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script>
+(function(){
+  var root=document.documentElement;
+  function done(){clearTimeout(window.__guard);root.removeAttribute('data-anim');}
+
+  // pointer-following light on glass (fine pointers only)
+  if(matchMedia('(hover:hover) and (pointer:fine)').matches){
+    document.querySelectorAll('.glass').forEach(function(el){
+      el.addEventListener('pointermove',function(e){var r=el.getBoundingClientRect();
+        el.style.setProperty('--gx',(e.clientX-r.left)+'px');el.style.setProperty('--gy',(e.clientY-r.top)+'px');},{passive:true});
+    });
+  }
+
+  if(root.getAttribute('data-anim')!=='pending'||!window.gsap){done();return;}
+
+  (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(function(){
+    var h1=document.querySelector('[data-blurin]');
+    var items=[].slice.call(document.querySelectorAll('.hero [data-in]')).filter(function(el){return getComputedStyle(el).display!=='none';});
+    var words=[h1];
+    if(window.SplitText){gsap.registerPlugin(SplitText);words=SplitText.create(h1,{type:'words'}).words;}
+    var nav=items.shift(), badge=items.shift();
+    var tl=gsap.timeline({defaults:{ease:'power3.out'},onComplete:done});
+    tl.set(h1,{opacity:1})
+      .from([nav,badge],{opacity:0,y:20,filter:'blur(10px)',duration:.8,stagger:.15,clearProps:'filter,transform'})
+      .from(words,{opacity:0,y:40,filter:'blur(10px)',duration:.8,stagger:.08,clearProps:'filter'},'-=.45')
+      .from(items,{opacity:0,y:20,filter:'blur(10px)',duration:.8,stagger:.22,clearProps:'filter,transform'},'-=.5');
+    root.removeAttribute('data-anim');
+
+    // rolling counters
+    document.querySelectorAll('[data-count]').forEach(function(el){
+      var o={v:0},end=+el.dataset.count;el.textContent='0';
+      tl.to(o,{v:end,duration:1.4,ease:'power2.out',onUpdate:function(){el.textContent=Math.round(o.v);}},1.1);
+    });
+  }).catch(done);
+})();
+</script>
+</body>
+</html>

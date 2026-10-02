@@ -64,6 +64,8 @@ def main(it):
     for ev in sorted(p for p in it.iterdir() if p.is_dir()):
         for cfg in ("with_skill", "without_skill"):
             run = ev / cfg / "run-1"
+            if not run.exists():
+                continue   # not every eval has both configs
             f = run / "outputs" / "index.html"
             h = f.read_text(encoding="utf-8", errors="ignore") if f.exists() else ""
             exps = []

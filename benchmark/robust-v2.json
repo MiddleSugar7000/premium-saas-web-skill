@@ -1,0 +1,78 @@
+{
+  "C:\\Users\\MiddleSugar7000\\Documents\\programozas\\NEW\\premium-saas-web-skill\\benchmark\\results-v2\\eval-1-flowpilot\\with_skill\\run-1\\outputs\\index.html": {
+    "No <video> and no <img> without a real src (no invented media)": true,
+    "Uses dvh/svh wherever 100vh is used": true,
+    "Has :focus-visible styling": true,
+    "backdrop-filter has -webkit- fallback": true,
+    "No sideways overflow at 390px": true,
+    "No sideways overflow at 320px": true,
+    "No JavaScript exceptions": true,
+    "No broken images": true,
+    "Without JS, <10% of text is invisible (and page has text)": true,
+    "With reduced motion, <10% of text is invisible": true
+  },
+  "C:\\Users\\MiddleSugar7000\\Documents\\programozas\\NEW\\premium-saas-web-skill\\benchmark\\results-v2\\eval-2-northlane\\with_skill\\run-1\\outputs\\index.html": {
+    "No <video> and no <img> without a real src (no invented media)": true,
+    "Uses dvh/svh wherever 100vh is used": true,
+    "Has :focus-visible styling": true,
+    "backdrop-filter has -webkit- fallback": true,
+    "No sideways overflow at 390px": false,
+    "No sideways overflow at 320px": false,
+    "No JavaScript exceptions": true,
+    "No broken images": true,
+    "Without JS, <10% of text is invisible (and page has text)": true,
+    "With reduced motion, <10% of text is invisible": true
+  },
+  "C:\\Users\\MiddleSugar7000\\Documents\\programozas\\NEW\\premium-saas-web-skill\\benchmark\\results-v2\\eval-3-bence\\with_skill\\run-1\\outputs\\index.html": {
+    "No <video> and no <img> without a real src (no invented media)": true,
+    "Uses dvh/svh wherever 100vh is used": true,
+    "Has :focus-visible styling": true,
+    "backdrop-filter has -webkit- fallback": true,
+    "No sideways overflow at 390px": true,
+    "No sideways overflow at 320px": true,
+    "No JavaScript exceptions": true,
+    "No broken images": true,
+    "Without JS, <10% of text is invisible (and page has text)": true,
+    "With reduced motion, <10% of text is invisible": true
+  },
+  "C:\\Users\\MiddleSugar7000\\Documents\\programozas\\NEW\\premium-saas-web-skill\\benchmark\\results-v2\\eval-4-szamlakor\\with_skill\\run-1\\outputs\\index.html": {
+    "No <video> and no <img> without a real src (no invented media)": true,
+    "Uses dvh/svh wherever 100vh is used": true,
+    "Has :focus-visible styling": true,
+    "backdrop-filter has -webkit- fallback": true,
+    "No sideways overflow at 390px": true,
+    "No sideways overflow at 320px": true,
+    "No JavaScript exceptions": true,
+    "No broken images": true,
+    "Without JS, <10% of text is invisible (and page has text)": true,
+    "With reduced motion, <10% of text is invisible": true
+  },
+  "C:\\Users\\MiddleSugar7000\\Documents\\programozas\\NEW\\premium-saas-web-skill\\benchmark\\results-v2\\eval-5-halden\\with_skill\\run-1\\outputs\\index.html": {
+    "No <video> and no <img> without a real src (no invented media)": true,
+    "Uses dvh/svh wherever 100vh is used": true,
+    "Has :focus-visible styling": true,
+    "backdrop-filter has -webkit- fallback": true,
+    "No sideways overflow at 390px": true,
+    "No sideways overflow at 320px": true,
+    "No JavaScript exceptions": true,
+    "No broken images": true,
+    "Hero-only: at most one <section>, no <footer>": true,
+    "Hero-only: page is at most ~1.3 screens tall": true,
+    "Without JS, <10% of text is invisible (and page has text)": true,
+    "With reduced motion, <10% of text is invisible": true
+  },
+  "C:\\Users\\MiddleSugar7000\\Documents\\programozas\\NEW\\premium-saas-web-skill\\benchmark\\results-v2\\eval-5-halden\\without_skill\\run-1\\outputs\\index.html": {
+    "No <video> and no <img> without a real src (no invented media)": true,
+    "Uses dvh/svh wherever 100vh is used": true,
+    "Has :focus-visible styling": true,
+    "backdrop-filter has -webkit- fallback": true,
+    "No sideways overflow at 390px": true,
+    "No sideways overflow at 320px": true,
+    "No JavaScript exceptions": true,
+    "No broken images": true,
+    "Hero-only: at most one <section>, no <footer>": true,
+    "Hero-only: page is at most ~1.3 screens tall": true,
+    "Without JS, <10% of text is invisible (and page has text)": true,
+    "With reduced motion, <10% of text is invisible": true
+  }
+}
