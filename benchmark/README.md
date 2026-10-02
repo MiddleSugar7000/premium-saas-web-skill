@@ -44,3 +44,14 @@ Set `PSW_ISO_DIR` to a folder outside any git repo where you use Claude memory.
 - Four prompts, one run each, so this is a smoke test, not a statistically strong study.
 - Mechanical checks reward techniques the skill teaches; they can't measure taste. Look at the pages.
 - The skill-built pages tend to share one long section skeleton (bento → statement → stats → steps → testimonials → pricing → FAQ). Making page structure adapt to page type is on the roadmap.
+
+## Robustness checks (`check_robust.py`)
+
+`grade.py` is regex-only and tops out at 10/10, so it cannot see browser-level problems. `check_robust.py` adds 10 checks that load the page in Chrome (Playwright): no `<video>` or empty `<img>` (no invented media), `dvh` next to `100vh`, `:focus-visible`, `-webkit-backdrop-filter`, no sideways overflow at 390 and 320 px, no JavaScript exceptions, no broken images, and almost no invisible text with JavaScript off or with reduced motion on. For single-hero prompts it also checks that the page has at most one `<section>`, no `<footer>` and is about one screen tall.
+
+```bash
+python check_robust.py --demos --json robust-baseline.json   # the before/after demo pages
+python check_robust.py path/to/index.html --hero-only
+```
+
+Baseline on the demo pages (generated with the first version of the skill, 2026-10-01): with skill 9/10, 10/10, 10/10, 10/10; without skill 5/10, 8/10, 8/10, 8/10 (see [`robust-baseline.json`](robust-baseline.json)).

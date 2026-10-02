@@ -1,0 +1,98 @@
+{
+  "C:\\Users\\MiddleSugar7000\\Documents\\programozas\\NEW\\premium-saas-web-skill\\docs\\demos\\flowpilot-after\\index.html": {
+    "No <video> and no <img> without a real src (no invented media)": true,
+    "Uses dvh/svh wherever 100vh is used": true,
+    "Has :focus-visible styling": true,
+    "backdrop-filter has -webkit- fallback": true,
+    "No sideways overflow at 390px": true,
+    "No sideways overflow at 320px": false,
+    "No JavaScript exceptions": true,
+    "No broken images": true,
+    "Without JS, <10% of text is invisible (and page has text)": true,
+    "With reduced motion, <10% of text is invisible": true
+  },
+  "C:\\Users\\MiddleSugar7000\\Documents\\programozas\\NEW\\premium-saas-web-skill\\docs\\demos\\flowpilot-before\\index.html": {
+    "No <video> and no <img> without a real src (no invented media)": true,
+    "Uses dvh/svh wherever 100vh is used": true,
+    "Has :focus-visible styling": false,
+    "backdrop-filter has -webkit- fallback": false,
+    "No sideways overflow at 390px": false,
+    "No sideways overflow at 320px": false,
+    "No JavaScript exceptions": true,
+    "No broken images": true,
+    "Without JS, <10% of text is invisible (and page has text)": false,
+    "With reduced motion, <10% of text is invisible": true
+  },
+  "C:\\Users\\MiddleSugar7000\\Documents\\programozas\\NEW\\premium-saas-web-skill\\docs\\demos\\invoicing-after\\index.html": {
+    "No <video> and no <img> without a real src (no invented media)": true,
+    "Uses dvh/svh wherever 100vh is used": true,
+    "Has :focus-visible styling": true,
+    "backdrop-filter has -webkit- fallback": true,
+    "No sideways overflow at 390px": true,
+    "No sideways overflow at 320px": true,
+    "No JavaScript exceptions": true,
+    "No broken images": true,
+    "Without JS, <10% of text is invisible (and page has text)": true,
+    "With reduced motion, <10% of text is invisible": true
+  },
+  "C:\\Users\\MiddleSugar7000\\Documents\\programozas\\NEW\\premium-saas-web-skill\\docs\\demos\\invoicing-before\\index.html": {
+    "No <video> and no <img> without a real src (no invented media)": true,
+    "Uses dvh/svh wherever 100vh is used": true,
+    "Has :focus-visible styling": false,
+    "backdrop-filter has -webkit- fallback": false,
+    "No sideways overflow at 390px": true,
+    "No sideways overflow at 320px": true,
+    "No JavaScript exceptions": true,
+    "No broken images": true,
+    "Without JS, <10% of text is invisible (and page has text)": true,
+    "With reduced motion, <10% of text is invisible": true
+  },
+  "C:\\Users\\MiddleSugar7000\\Documents\\programozas\\NEW\\premium-saas-web-skill\\docs\\demos\\northlane-after\\index.html": {
+    "No <video> and no <img> without a real src (no invented media)": true,
+    "Uses dvh/svh wherever 100vh is used": true,
+    "Has :focus-visible styling": true,
+    "backdrop-filter has -webkit- fallback": true,
+    "No sideways overflow at 390px": true,
+    "No sideways overflow at 320px": true,
+    "No JavaScript exceptions": true,
+    "No broken images": true,
+    "Without JS, <10% of text is invisible (and page has text)": true,
+    "With reduced motion, <10% of text is invisible": true
+  },
+  "C:\\Users\\MiddleSugar7000\\Documents\\programozas\\NEW\\premium-saas-web-skill\\docs\\demos\\northlane-before\\index.html": {
+    "No <video> and no <img> without a real src (no invented media)": true,
+    "Uses dvh/svh wherever 100vh is used": true,
+    "Has :focus-visible styling": false,
+    "backdrop-filter has -webkit- fallback": true,
+    "No sideways overflow at 390px": true,
+    "No sideways overflow at 320px": true,
+    "No JavaScript exceptions": true,
+    "No broken images": true,
+    "Without JS, <10% of text is invisible (and page has text)": false,
+    "With reduced motion, <10% of text is invisible": true
+  },
+  "C:\\Users\\MiddleSugar7000\\Documents\\programozas\\NEW\\premium-saas-web-skill\\docs\\demos\\portfolio-after\\index.html": {
+    "No <video> and no <img> without a real src (no invented media)": true,
+    "Uses dvh/svh wherever 100vh is used": true,
+    "Has :focus-visible styling": true,
+    "backdrop-filter has -webkit- fallback": true,
+    "No sideways overflow at 390px": true,
+    "No sideways overflow at 320px": true,
+    "No JavaScript exceptions": true,
+    "No broken images": true,
+    "Without JS, <10% of text is invisible (and page has text)": true,
+    "With reduced motion, <10% of text is invisible": true
+  },
+  "C:\\Users\\MiddleSugar7000\\Documents\\programozas\\NEW\\premium-saas-web-skill\\docs\\demos\\portfolio-before\\index.html": {
+    "No <video> and no <img> without a real src (no invented media)": true,
+    "Uses dvh/svh wherever 100vh is used": true,
+    "Has :focus-visible styling": false,
+    "backdrop-filter has -webkit- fallback": true,
+    "No sideways overflow at 390px": true,
+    "No sideways overflow at 320px": true,
+    "No JavaScript exceptions": true,
+    "No broken images": true,
+    "Without JS, <10% of text is invisible (and page has text)": false,
+    "With reduced motion, <10% of text is invisible": true
+  }
+}
