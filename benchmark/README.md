@@ -56,9 +56,9 @@ python check_robust.py path/to/index.html --hero-only
 
 Baseline on the demo pages (generated with the first version of the skill, 2026-10-01): with skill 9/10, 10/10, 10/10, 10/10; without skill 5/10, 8/10, 8/10, 8/10 (see [`robust-baseline.json`](robust-baseline.json)).
 
-## Iteration 2: skill with media-optional heroes, pitfalls and responsive rules (2026-10-02)
+## Iteration 2: an extended skill variant that was tried and not adopted (2026-10-02)
 
-Five pages generated with the updated skill, one run each: the four original prompts plus a new single-hero prompt (`5-halden`: a small web design studio, no images or videos, hero only), and a no-skill baseline for the hero-only prompt. Pages are in [`results-v2/`](results-v2/).
+An extended variant of the skill (a fifth direction, `shared/pitfalls.md`, `shared/responsive.md`, `shared/video.md`, media-optional hero rules) was tried. Five pages generated with it, one run each: the four original prompts plus a new single-hero prompt (`5-halden`: a small web design studio, no images or videos, hero only), and a no-skill baseline for the hero-only prompt. Pages are in [`results-v2/`](results-v2/).
 
 **Not comparable to iteration 1 in rigor.** These runs were made by sub-agents inside a Claude Code session (model alias `opus`), not by isolated `claude -p` processes, so memory and the surrounding environment were not fully excluded; there is one run per cell, and no timing or cost was recorded. Three of the five agents could not open the page in a browser while building.
 
@@ -76,3 +76,5 @@ What this shows, and what it does not:
 - The Halden hero-only page loses three `grade.py` checks (hairline borders, scroll-driven motion, marquee) simply because a one-screen hero does not need them; they are not failures of the brief.
 - The robustness checks found one real bug: Northlane's `.statement-glow` (a 420 px blurred circle) widened the page on phones. That led to a new rule in `shared/pitfalls.md` (clip sections that contain wide glows).
 - On the single-hero prompt the skill and the baseline were indistinguishable on these checks. The checks do not measure visual quality, so this says nothing about which page looks better.
+
+**Outcome:** the extended variant did not beat the published skill on these checks (92.5% vs 97.5% on `grade.py`, indistinguishable from the baseline on the hero-only prompt) and added about 700 lines of context, so it was not adopted. The published skill is unchanged from before this experiment. The variant is kept on the `experiment/cinematic-glass-pitfalls` branch; the robustness checker stays because it found a real overflow bug.

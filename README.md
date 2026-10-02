@@ -17,7 +17,7 @@
 
 </div>
 
-**premium-saas-web** is a free, open-source **Agent Skill** (`SKILL.md`) that teaches AI coding agents (**Claude Code, OpenAI Codex, Cursor and Google Antigravity**) to build **premium SaaS, AI-product, agency and portfolio websites**: landing pages that look like top-selling ThemeForest templates instead of generic AI output. It packs 5 complete design directions, 18 copy-ready CSS/HTML recipes (sculpted glows, animated gradient borders, tactile glass buttons, bento grids with mini product UIs, scroll-fill text) and a GSAP + Lenis motion system, all measured from real templates at the CSS level.
+**premium-saas-web** is a free, open-source **Agent Skill** (`SKILL.md`) that teaches AI coding agents (**Claude Code, OpenAI Codex, Cursor and Google Antigravity**) to build **premium SaaS, AI-product, agency and portfolio websites**: landing pages that look like top-selling ThemeForest templates instead of generic AI output. It packs 4 complete design directions, 18 copy-ready CSS/HTML recipes (sculpted glows, animated gradient borders, tactile glass buttons, bento grids with mini product UIs, scroll-fill text) and a GSAP + Lenis motion system, all measured from real templates at the CSS level.
 
 > Built and maintained by **[MiddleSugar7000](https://middlesugar7000.xyz/?utm_source=github&utm_medium=readme&utm_campaign=premium-saas-web)**, a full-stack developer who builds landing pages, SaaS products, APIs and AI integrations **to order**. If you'd rather have a human ship it, [jump to the hiring section](#need-it-built-for-real-hire-me).
 
@@ -91,23 +91,19 @@ skills/premium-saas-web/
 │   ├── ember-dark/style.md   # tokens, fonts, signature pieces + its own techniques
 │   ├── tactile-light/style.md
 │   ├── editorial-mono/style.md
-│   ├── noir-spotlight/style.md
-│   └── cinematic-glass/style.md
+│   └── noir-spotlight/style.md
 └── shared/                   # techniques every direction uses, read per section
     ├── light.md              # sculpted glow, backgrounds, hairline grid
     ├── typography.md         # display type, scroll-fill text
     ├── product-proof.md      # browser mockup, bento mini-UIs
     ├── components.md         # glass nav, badges, marquees, pricing, footer
     ├── logos.md              # real brand logos, never letter placeholders
-    ├── motion.md             # GSAP + ScrollTrigger + SplitText + Lenis setup and gotchas
-    ├── responsive.md         # independent breakpoint switches, fluid one-screen hero
-    ├── pitfalls.md           # browser-only traps + acceptance pass before hand-over
-    └── video.md              # only when the user supplies a video (CSS-first slot)
+    └── motion.md             # GSAP + ScrollTrigger + SplitText + Lenis setup and gotchas
 ```
 
 Adding a style is one new folder; see `directions/README.md`.
 
-**5 design directions**, measured from real top-selling templates and dark studio sites:
+**4 design directions**, each measured from a real top-selling template:
 
 | Direction | Feel | Best for |
 |---|---|---|
@@ -115,9 +111,8 @@ Adding a style is one new folder; see `directions/README.md`.
 | **Tactile Light** | Zinc surfaces, glossy press-able buttons, top-left sheen on cards, one hot accent | AI agencies, B2B SaaS, consultancies |
 | **Editorial Mono** | #111 on #F0F0F0, 140px grotesk at −7% tracking, hairline grid, no shadows | Studios, premium services |
 | **Noir Spotlight** | Pure black, one neon accent, giant name crossing a photo, stacking cards | Personal brands, portfolios |
-| **Cinematic Glass** | Black, drifting CSS aurora (or a supplied video), lit-edge glass chips, tight italic serif | Design/dev studios, agencies |
 
-**18 recipes**, including: sculpted glow (color blobs carved by background-colored "eraser" blobs), animated rainbow border with blurred under-glow, magnetic pill button, tactile glossy buttons (inset highlight + 5-step layered shadow), sheen cards, glass floating nav, hairline grid, display type with a dimmed half, scroll-fill text, browser-frame product mockup, bento grid with mini UIs and corner light leaks, avatar-stack eyebrow, masked marquees, dot/grid/noise backgrounds, outline-over-photo hero word, framed hero with a cut-in notch, featured pricing card and footer wordmark, plus liquid glass, stacked drop-title, blur-in words, a no-JS-safe entrance and a media-optional hero (every page must look finished with zero images or videos).
+**18 recipes**, including: sculpted glow (color blobs carved by background-colored "eraser" blobs), animated rainbow border with blurred under-glow, magnetic pill button, tactile glossy buttons (inset highlight + 5-step layered shadow), sheen cards, glass floating nav, hairline grid, display type with a dimmed half, scroll-fill text, browser-frame product mockup, bento grid with mini UIs and corner light leaks, avatar-stack eyebrow, masked marquees, dot/grid/noise backgrounds, outline-over-photo hero word, framed hero with a cut-in notch, featured pricing card and footer wordmark.
 
 ## Install
 
