@@ -96,10 +96,16 @@ function initMotion() {
 gsap.utils.toArray('.stack-card').forEach((card, i, all) => {
   if (i === all.length - 1) return;
   // dim with brightness, NOT opacity: a semi-transparent card lets the next card's text bleed through
-  gsap.to(card, { scale: 0.92, filter: 'brightness(0.45)', ease: 'none',
-    scrollTrigger: { trigger: all[i + 1], start: 'top bottom', end: 'top 96px', scrub: true } });
+  // fromTo with an explicit brightness(1): tweening from the default `filter:none`, GSAP starts at brightness(0),
+  // so the card snaps to near-black the moment the trigger starts.
+  gsap.fromTo(card, { scale: 1, filter: 'brightness(1)' },
+    { scale: 0.95, filter: 'brightness(0.7)', ease: 'power1.in',
+      scrollTrigger: { trigger: all[i + 1], start: 'top 45%', end: 'top 96px', scrub: true } });
 });
 ```
+**Always tween `filter` with `fromTo` (or set `filter:'brightness(1)'` in CSS).** From `none`, GSAP interpolates from `brightness(0)`: the card goes black instantly and then *lightens* toward the target. This is the main reason stacked cards "go dark way too early".
+
+**Don't dim too early or too hard.** The card being covered is still the one the visitor is reading. Starting the dim at `start:'top bottom'` (the moment the next card peeks in at the bottom of the screen) with `brightness(.45)` turns it dark almost as soon as it pins, so its text becomes unreadable mid-read. Start only once the next card has covered roughly half the viewport (`top 45%`), stop at its pinned top, keep brightness ≥ .65, and use an ease-in so most of the darkening happens in the last stretch, when the card is already mostly hidden.
 
 **Pinned horizontal scroll** (features or case studies):
 ```js
