@@ -53,7 +53,7 @@ Tips:
 
 - Use Agent mode (not Ask), so it can write files and run the browser self-check.
 - In an existing Next.js / React project the skill follows your stack and Tailwind config.
-- **Older Cursor versions without skill support:** create `.cursor/rules/premium-saas-web.mdc` with `alwaysApply: false` and a description, paste the body of `SKILL.md` into it, and keep the `references/` folder next to it at `.cursor/rules/premium-saas-web/references/`. Then mention `@premium-saas-web` in chat.
+- **Older Cursor versions without skill support:** create `.cursor/rules/premium-saas-web.mdc` with `alwaysApply: false` and a description, paste the body of `SKILL.md` into it, and keep the `directions/` and `shared/` folders next to it at `.cursor/rules/premium-saas-web/`. Then mention `@premium-saas-web` in chat.
 
 ## Uninstall
 

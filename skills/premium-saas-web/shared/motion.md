@@ -51,15 +51,17 @@ function initMotion() {
       scrollTrigger: { trigger: el, start: 'top 85%' } });
   });
 
-  // 4. Scroll-fill text (see recipes §9)
-  gsap.utils.toArray('.fill-text').forEach(el => {
-    const s = SplitText.create(el, { type: 'lines', linesClass: 'line' });
-    // ONE trigger + sequential timeline: lines fill strictly one after another.
-    // (A ScrollTrigger per line overlaps and fills several lines at once - don't.)
-    const tl = gsap.timeline({ defaults: { ease: 'none' },
-      scrollTrigger: { trigger: el, start: 'top 80%', end: 'bottom 40%', scrub: 0.5 } });
-    s.lines.forEach(l => tl.to(l, { backgroundPosition: '0% 0', duration: 1 }));
-  });
+  // 4. Scroll-fill text: ONE trigger + sequential timeline, lines fill strictly one after another.
+  //    (A ScrollTrigger per line overlaps and fills several lines at once - don't.) CSS in shared/typography.md.
+  gsap.utils.toArray('.fill-text').forEach(el => SplitText.create(el, {
+    type: 'lines', linesClass: 'line', autoSplit: true,
+    onSplit: self => {
+      const tl = gsap.timeline({ defaults: { ease: 'none' },
+        scrollTrigger: { trigger: el, start: 'top 80%', end: 'bottom 40%', scrub: 0.5 } });
+      self.lines.forEach(l => tl.to(l, { backgroundPosition: '0% 0', duration: 1 }));
+      return tl;
+    }
+  }));
 
   // 5. Counters
   gsap.utils.toArray('[data-count]').forEach(el => {
@@ -80,7 +82,7 @@ function initMotion() {
 ```
 
 ## Gotchas found in testing
-- **Gradient text + SplitText:** `background-clip:text` on the parent stops working once SplitText wraps words/lines in their own elements, and the headline turns invisible. Apply the gradient to the split pieces instead (`wordsClass:'w'` + `.display-metal .w{background:inherit;-webkit-background-clip:text;background-clip:text;color:transparent}`), or use a plain color for split headlines. Scroll-fill text (§9 recipes) already applies its gradient per line for this reason.
+- **Gradient text + SplitText:** `background-clip:text` on the parent stops working once SplitText wraps words/lines in their own elements, and the headline turns invisible. Apply the gradient to the split pieces instead (`wordsClass:'w'` + `.display-metal .w{background:inherit;-webkit-background-clip:text;background-clip:text;color:transparent}`), or use a plain color for split headlines. Scroll-fill text (`shared/typography.md`) already applies its gradient per line for this reason.
 - **SplitText lines + responsive:** lines are measured once. Create splits with `autoSplit:true` and build the animation in `onSplit(self){ return gsap.from(self.lines, …) }` so they re-measure on resize; otherwise headings break one word per line after a width change.
 - **Dimming stacked cards:** use `filter:brightness()`, never `opacity`, or the card underneath bleeds through.
 
@@ -106,15 +108,11 @@ gsap.to(track, { x: () => -(track.scrollWidth - innerWidth + 64), ease: 'none',
   scrollTrigger: { trigger: '.h-pin', pin: true, scrub: 1, end: () => '+=' + track.scrollWidth, invalidateOnRefresh: true } });
 ```
 
-**Logo arc** (OptimAI): place N logo tiles on an arc with `transform: rotate(θ) translateY(-R) rotate(-θ)`; scale the center one to 1.4 with a glow behind it; on scroll, rotate the arc container slightly (`rotate: -8 → 8deg`, scrubbed).
-
 **Traveling dot on a connector** (bento workflow): SVG path + `<circle>` with CSS `offset-path: path('…'); animation: travel 3s linear infinite;` `@keyframes travel{to{offset-distance:100%}}`.
 
 **Self-drawing line/sparkline**: `stroke-dasharray: L; stroke-dashoffset: L;` → animate to 0 on enter.
 
-**Preloader** (optional, use only for portfolios/agencies; it slows SaaS conversion): 3–5 accent-colored vertical bars that scale to 0 on `transform-origin: top`, staggered 0.08s, total under 1.2s.
-
-**Custom cursor** (agency/portfolio only): a 12px dot with `mix-blend-mode: exclusion; background:#fff`, scaled ×4 over links. Disable on `(pointer: coarse)`.
+Direction-specific motion lives with its direction: logo arc in `directions/ember-dark/`, preloader and custom cursor in `directions/noir-spotlight/` (cursor also in `editorial-mono/`).
 
 ## Hover micro-interactions
 - Buttons: arrow `translateX(3px)`, glow blur tightens (14→10px), tactile buttons sink 1px on `:active`.

@@ -8,9 +8,13 @@ Benchmark (Claude Opus 5.5, 4 one-line prompts, isolated runs, no memory): 97.5%
 
 ## Skill files
 - [SKILL.md](https://github.com/MiddleSugar7000/premium-saas-web-skill/blob/main/skills/premium-saas-web/SKILL.md): workflow, page rhythm, self-review checklist, anti-patterns
-- [directions.md](https://github.com/MiddleSugar7000/premium-saas-web-skill/blob/main/skills/premium-saas-web/references/directions.md): Ember Dark, Tactile Light, Editorial Mono and Noir Spotlight token sets
-- [recipes.md](https://github.com/MiddleSugar7000/premium-saas-web-skill/blob/main/skills/premium-saas-web/references/recipes.md): sculpted glow, rainbow border, tactile buttons, glass nav, bento mini-UIs, scroll-fill text and more
-- [motion.md](https://github.com/MiddleSugar7000/premium-saas-web-skill/blob/main/skills/premium-saas-web/references/motion.md): GSAP, ScrollTrigger, SplitText and Lenis setup, with gotchas
+- [directions/](https://github.com/MiddleSugar7000/premium-saas-web-skill/tree/main/skills/premium-saas-web/directions): Ember Dark, Tactile Light, Editorial Mono and Noir Spotlight, one folder each (tokens + signature techniques)
+- [shared/light.md](https://github.com/MiddleSugar7000/premium-saas-web-skill/blob/main/skills/premium-saas-web/shared/light.md): sculpted glow, backgrounds, hairline grid
+- [shared/typography.md](https://github.com/MiddleSugar7000/premium-saas-web-skill/blob/main/skills/premium-saas-web/shared/typography.md): display type, line-by-line scroll-fill text
+- [shared/product-proof.md](https://github.com/MiddleSugar7000/premium-saas-web-skill/blob/main/skills/premium-saas-web/shared/product-proof.md): browser mockup, bento mini-UIs
+- [shared/components.md](https://github.com/MiddleSugar7000/premium-saas-web-skill/blob/main/skills/premium-saas-web/shared/components.md): glass nav, badges, marquees, pricing, footer wordmark
+- [shared/logos.md](https://github.com/MiddleSugar7000/premium-saas-web-skill/blob/main/skills/premium-saas-web/shared/logos.md): real brand logos instead of letter placeholders
+- [shared/motion.md](https://github.com/MiddleSugar7000/premium-saas-web-skill/blob/main/skills/premium-saas-web/shared/motion.md): GSAP, ScrollTrigger, SplitText and Lenis setup, with gotchas
 
 ## Install guides
 - [Claude Code](https://github.com/MiddleSugar7000/premium-saas-web-skill/blob/main/guides/claude-code.md): ~/.claude/skills/ or plugin marketplace

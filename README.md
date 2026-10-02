@@ -85,12 +85,23 @@ I'm **MiddleSugar7000**, a **full-stack developer for hire**. A skill gets you m
 
 ```
 skills/premium-saas-web/
-├── SKILL.md                  # workflow, page rhythm, self-review checklist, anti-patterns
-└── references/
-    ├── directions.md         # 4 full token sets (colors, type scale, radii, signature pieces)
-    ├── recipes.md            # 18 copy-ready CSS/HTML techniques
+├── SKILL.md                  # workflow, page rhythm, file map, self-review checklist, anti-patterns
+├── directions/               # one folder per style: the agent reads only the one it picks
+│   ├── README.md             # accent swapping + how to add a new direction
+│   ├── ember-dark/style.md   # tokens, fonts, signature pieces + its own techniques
+│   ├── tactile-light/style.md
+│   ├── editorial-mono/style.md
+│   └── noir-spotlight/style.md
+└── shared/                   # techniques every direction uses, read per section
+    ├── light.md              # sculpted glow, backgrounds, hairline grid
+    ├── typography.md         # display type, scroll-fill text
+    ├── product-proof.md      # browser mockup, bento mini-UIs
+    ├── components.md         # glass nav, badges, marquees, pricing, footer
+    ├── logos.md              # real brand logos, never letter placeholders
     └── motion.md             # GSAP + ScrollTrigger + SplitText + Lenis setup and gotchas
 ```
+
+Adding a style is one new folder; see `directions/README.md`.
 
 **4 design directions**, each measured from a real top-selling template:
 
