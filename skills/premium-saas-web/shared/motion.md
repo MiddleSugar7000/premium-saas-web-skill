@@ -51,16 +51,12 @@ function initMotion() {
       scrollTrigger: { trigger: el, start: 'top 85%' } });
   });
 
-  // 4. Scroll-fill text: ONE trigger + sequential timeline, lines fill strictly one after another.
-  //    (A ScrollTrigger per line overlaps and fills several lines at once - don't.) CSS in shared/typography.md.
+  // 4. Scroll-fill text: words fade dim -> ink as an overlapping opacity wave (smooth "darkening", not a hard switch).
+  //    One scrubbed timeline per block; CSS + tuning in shared/typography.md.
   gsap.utils.toArray('.fill-text').forEach(el => SplitText.create(el, {
-    type: 'lines', linesClass: 'line', autoSplit: true,
-    onSplit: self => {
-      const tl = gsap.timeline({ defaults: { ease: 'none' },
-        scrollTrigger: { trigger: el, start: 'top 80%', end: 'bottom 40%', scrub: 0.5 } });
-      self.lines.forEach(l => tl.to(l, { backgroundPosition: '0% 0', duration: 1 }));
-      return tl;
-    }
+    type: 'words', wordsClass: 'w', autoSplit: true,
+    onSplit: self => gsap.timeline({ scrollTrigger: { trigger: el, start: 'top 80%', end: 'bottom 35%', scrub: 0.6 } })
+      .to(self.words, { opacity: 1, ease: 'sine.inOut', duration: 5, stagger: 1 })
   }));
 
   // 5. Counters
@@ -82,7 +78,7 @@ function initMotion() {
 ```
 
 ## Gotchas found in testing
-- **Gradient text + SplitText:** `background-clip:text` on the parent stops working once SplitText wraps words/lines in their own elements, and the headline turns invisible. Apply the gradient to the split pieces instead (`wordsClass:'w'` + `.display-metal .w{background:inherit;-webkit-background-clip:text;background-clip:text;color:transparent}`), or use a plain color for split headlines. Scroll-fill text (`shared/typography.md`) already applies its gradient per line for this reason.
+- **Gradient text + SplitText:** `background-clip:text` on the parent stops working once SplitText wraps words/lines in their own elements, and the headline turns invisible. Apply the gradient to the split pieces instead (`wordsClass:'w'` + `.display-metal .w{background:inherit;-webkit-background-clip:text;background-clip:text;color:transparent}`), or use a plain color for split headlines. Scroll-fill text (`shared/typography.md`) avoids the problem by fading word opacity instead of painting a gradient.
 - **SplitText lines + responsive:** lines are measured once. Create splits with `autoSplit:true` and build the animation in `onSplit(self){ return gsap.from(self.lines, …) }` so they re-measure on resize; otherwise headings break one word per line after a width change.
 - **Dimming stacked cards:** use `filter:brightness()`, never `opacity`, or the card underneath bleeds through.
 
@@ -127,7 +123,7 @@ Direction-specific motion lives with its direction: logo arc in `directions/embe
 - Images in cards: `scale(1.04)` over 700ms inside an `overflow:hidden` wrapper.
 
 ## Performance
-- Animate only `transform` and `opacity` (and `background-position` for the fill effect).
+- Animate only `transform` and `opacity` (scroll-fill text is just word `opacity`).
 - Big `filter: blur()` blobs are expensive. Keep them static or drift them slowly; add `will-change: transform` only to things that actually move.
 - On mobile (`max-width: 768px`): halve blur radii, disable magnetic/cursor effects, keep reveals.
 - Call `ScrollTrigger.refresh()` after images load if layout shifts.

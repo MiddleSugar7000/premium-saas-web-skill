@@ -51,7 +51,7 @@ Premium pages alternate density and tone. A typical SaaS home that works:
 1. **Hero**: eyebrow badge (avatar stack + "Rated 4.9 by 7,000+ users" or a pill like "✦ AI-Driven Agency"), 2-line headline with a dimmed half, 1–2 line subcopy at 60% opacity, primary + secondary CTA, then **the product itself** (browser-framed mockup or an interactive prompt box) bleeding into the next section via a gradient fade.
 2. **Logo strip**: grayscale logos, infinite marquee, masked edges.
 3. **Bento feature grid**: 5–7 cells of unequal size, each with a *mini UI illustration* built in HTML/CSS (workflow nodes, chat bubbles, toggles, charts, color chips), not stock icons.
-4. **Scroll-fill statement**: one big sentence that fills from 30% → 100% as you scroll. The fill runs strictly line by line (one scrubbed timeline per block, lines back-to-back), never several lines at once. See `shared/typography.md`.
+4. **Scroll-fill statement**: one big sentence whose words *darken* from ~18% → 100% opacity as you scroll: a smooth, overlapping per-word fade wave in reading order (one scrubbed timeline per block), never an instant dim→ink switch and never a per-line hard wipe. See `shared/typography.md`.
 5. **Numbers**: 3–4 stats with rolling counters; one giant faded number as decoration.
 6. **How it works / tabs** or **stacking cards**.
 7. **Testimonials**: real-feeling quotes, avatar + name + role, maybe a vertical marquee of cards.

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="hu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Scroll-fill: régi vs új</title>
+<style>
+:root{--bg:#0a0a0b;--panel:#101012;--line:rgb(255 255 255/.1);--fg:#f4f4f5;--mute:rgb(255 255 255/.5);--acc:#7c8cff;--ink:#fff}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--fg);font:400 15px/1.5 "Inter",system-ui,sans-serif;-webkit-font-smoothing:antialiased;padding:32px 16px 96px}
+.wrap{max-width:1280px;margin:0 auto}
+h1{font-size:clamp(26px,3.4vw,40px);letter-spacing:-.04em;font-weight:500}
+.sub{color:var(--mute);margin:8px 0 28px;max-width:70ch}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:860px){.grid{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:22px 24px 28px;overflow:hidden}
+.tag{display:inline-flex;gap:8px;align-items:center;font:500 12px/1 ui-monospace,Consolas,monospace;letter-spacing:.06em;text-transform:uppercase;padding:7px 11px;border-radius:99px;border:1px solid var(--line);color:var(--mute)}
+.tag.new{color:#bff0c9;border-color:rgb(120 220 150/.4);background:rgb(120 220 150/.08)}
+.tag.old{color:#ffc9c0;border-color:rgb(255 140 120/.35);background:rgb(255 140 120/.07)}
+.how{color:var(--mute);font-size:13px;margin:12px 0 22px;min-height:40px}
+.fill-text{font-size:clamp(26px,3.3vw,44px);line-height:1.02;letter-spacing:-.045em;font-weight:500}
+
+/* OLD: hard-stop gradient wipe, line by line */
+.old .fill-text .line{
+  background:linear-gradient(to right,var(--ink) 50%,rgb(255 255 255/.2) 50%);
+  background-size:200% 100%;background-position:100% 0;
+  -webkit-background-clip:text;background-clip:text;color:transparent;display:inline}
+
+/* NEW: per-word opacity wave */
+.new .fill-text{color:var(--ink)}
+.new .fill-text .w{display:inline-block;opacity:.18}
+
+.bar{position:sticky;bottom:16px;margin-top:20px;display:flex;gap:14px;align-items:center;background:rgb(16 16 18/.9);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:99px;padding:10px 14px}
+button{font:500 14px/1 inherit;font-family:inherit;color:#0a0a0b;background:#fff;border:0;border-radius:99px;padding:11px 18px;cursor:pointer}
+button.ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
+input[type=range]{flex:1;accent-color:var(--acc)}
+.pct{font:500 13px ui-monospace,Consolas,monospace;color:var(--mute);width:44px;text-align:right}
+.note{margin-top:28px;color:var(--mute);font-size:13px;max-width:80ch}
+.note code{color:var(--fg);font-family:ui-monospace,Consolas,monospace}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Scroll-fill szöveg: régi vs új</h1>
+  <p class="sub">Mindkét oldal ugyanazt a szöveget ugyanazon a haladáson játssza le. Húzd a csúszkát, vagy nyomj Lejátszást, és nézd, mi történik a félig kitöltött állapotban.</p>
+
+  <div class="grid">
+    <section class="card old">
+      <span class="tag old">Régi</span>
+      <p class="how">Soronként kemény éllel felülírja a színt (gradient wipe). Úgy néz ki, mint egy betöltősáv: a betű vagy halvány, vagy fehér.</p>
+      <p class="fill-text" data-text>We build software that feels effortless, so your team can stop managing tools and start shipping work that actually matters to your customers every single day.</p>
+    </section>
+    <section class="card new">
+      <span class="tag new">Új</span>
+      <p class="how">Minden szó külön, simán sötétedik (opacity), a következők már indulnak, mielőtt az előző kész lenne. Olyan, mint amikor beszívódik a tinta.</p>
+      <p class="fill-text" data-text>We build software that feels effortless, so your team can stop managing tools and start shipping work that actually matters to your customers every single day.</p>
+    </section>
+  </div>
+
+  <div class="bar">
+    <button id="play">Lejátszás</button>
+    <button id="reset" class="ghost">Vissza</button>
+    <input id="seek" type="range" min="0" max="1000" value="0" aria-label="Haladás">
+    <span class="pct" id="pct">0%</span>
+  </div>
+
+  <p class="note">Élesben a két idővonalat egy <code>ScrollTrigger</code> (<code>scrub:0.6</code>) hajtja, itt a csúszka helyettesíti, hogy egymás mellett, azonos pillanatban lehessen összevetni őket. Az új változat kódja: <code>skills/premium-saas-web/shared/typography.md</code>.</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script>
+gsap.registerPlugin(SplitText);
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const timelines = [];
+let progress = 0;
+
+function build(){
+  timelines.forEach(t => t.kill()); timelines.length = 0;
+
+  // OLD: lines, hard-stop wipe, back-to-back
+  const oldEl = document.querySelector('.old [data-text]');
+  SplitText.create(oldEl, { type:'lines', linesClass:'line', autoSplit:true, onSplit(self){
+    const tl = gsap.timeline({ paused:true, defaults:{ ease:'none' } });
+    self.lines.forEach(l => tl.to(l, { backgroundPosition:'0% 0', duration:1 }));
+    timelines[0] = tl; tl.progress(progress); return tl;
+  }});
+
+  // NEW: words, overlapping opacity wave
+  const newEl = document.querySelector('.new [data-text]');
+  SplitText.create(newEl, { type:'words', wordsClass:'w', autoSplit:true, onSplit(self){
+    const tl = gsap.timeline({ paused:true })
+      .to(self.words, { opacity:1, ease:'sine.inOut', duration:5, stagger:1 });
+    timelines[1] = tl; tl.progress(progress); return tl;
+  }});
+}
+
+const seek = document.getElementById('seek'), pct = document.getElementById('pct');
+function set(p){
+  progress = p; seek.value = p * 1000; pct.textContent = Math.round(p * 100) + '%';
+  timelines.forEach(t => t && t.progress(p));
+}
+let tween;
+document.fonts.ready.then(() => {
+  if (reduce) return;
+  build();
+  seek.addEventListener('input', () => { tween && tween.kill(); set(seek.value / 1000); });
+  document.getElementById('play').addEventListener('click', () => {
+    tween && tween.kill();
+    const o = { p: progress >= 1 ? 0 : progress };
+    tween = gsap.to(o, { p:1, duration:(1 - o.p) * 9, ease:'none', onUpdate:() => set(o.p) });
+  });
+  document.getElementById('reset').addEventListener('click', () => { tween && tween.kill(); set(0); });
+});
+</script>
+</body>
+</html>
