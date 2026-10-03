@@ -24,6 +24,35 @@
 ```
 Animate it in with a slight 3D tilt: `gsap.from('.mock',{rotateX:18,y:80,opacity:0,duration:1.4,ease:'power3.out',transformPerspective:1200})`. On light directions, swap the neon edge glow for a soft layered shadow and a 1px `--line` border.
 
+## Desktop-app hero: device bleeding off the edge, real OS chrome
+
+*Why:* For a menu-bar or desktop app, a centered browser frame says "web app" and hides the thing people buy. Show the actual OS: a laptop whose menubar has the app's tray icon, the open menu, and a dock with the app icon. Letting the device run off the viewport edge makes the hero feel larger than the screen.
+
+```html
+<section class="hero-split">
+  <div class="hero-device"><div class="laptop">
+    <div class="menubar"><i class="mb-dot"></i>…<img class="tray" src="icon.svg" alt=""></div>
+    <div class="desk" style="background:url(wallpaper.jpg) center/cover">
+      <div class="app-menu">…dark popover with grouped rows, colored 16px icons, shortcuts at right…</div>
+      <div class="dock">…4–5 icons incl. the app…</div>
+    </div></div></div>
+  <div class="hero-copy">…badge, status line, app icon, H1, subcopy, CTA, price, "Also on" chips…</div>
+</section>
+```
+```css
+.hero-split{display:grid;grid-template-columns:1.25fr 1fr;align-items:center;min-height:100svh;overflow:hidden}
+.hero-device{margin-left:-14vw;justify-self:start}             /* the bleed */
+.laptop{width:min(860px,62vw);aspect-ratio:16/10;border:10px solid #17181A;border-radius:22px 22px 6px 6px;position:relative;
+  box-shadow:0 40px 80px -30px rgb(0 0 0/.45)}
+.laptop::after{content:"";position:absolute;left:-4%;right:-4%;bottom:-18px;height:14px;border-radius:0 0 18px 18px;background:linear-gradient(#2a2b2e,#111)}
+.app-menu{position:absolute;right:6%;top:9%;width:min(240px,28%);padding:8px;border-radius:12px;background:rgb(24 24 27/.96);color:#fff;font-size:11px}
+```
+The wallpaper should be a calm soft-gradient landscape (a few overlapping hills in the brand green works) so the dark menu pops. Build the menubar and menu in HTML, not a screenshot, so it stays crisp and can animate (menu rows fade in one by one; cursor SVG glides to "Open Dashboard"). Put the handwritten notes from `shared/components.md` beside the tray icon and the app icon. Under 900px, stack: copy first, device below at full width, no negative margin.
+
+**Showcase video card:** after the hero, a white 28px card with a short H2 and a screen recording in the same laptop frame (autoplay, muted, loop, `playsinline`, a `poster`). Add a pause button and a sound toggle at the bottom-right as 40px dark circles; users notice the controls and trust the video more. Never autoplay with sound.
+
+**Screenshot gallery (feature tour):** a rounded dark container (`#101012`, radius 28px) holding a 3-column masonry of real UI screenshots, each in a 16px-radius tile with a one-line caption below in 11px grey ("Auto-disappear counts down in a tiny island"). Captions must say what the screenshot proves.
+
 ## Bento grid with mini-UIs and corner light leaks
 
 *Why:* Feature icons are interchangeable; a tiny working-looking UI proves the feature exists. Unequal cell sizes create a magazine rhythm.

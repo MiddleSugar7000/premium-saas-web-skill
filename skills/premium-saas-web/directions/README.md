@@ -1,6 +1,6 @@
 # Directions
 
-Each folder is one visual direction measured from a real top-selling template. Load only the folder you picked. Swap the accent hue to fit the brand, but keep the *structure* (how many neutrals, which opacities, which radii) intact. That structure is what makes it work.
+Each folder is one visual direction measured from a real top-selling template. Load only the folder you picked. Swap the accent hue only when the brand actually has a color (the user names one, or the product already uses one); a mood word in the brief is not a brand color. When you do swap, keep the *structure* (how many neutrals, which opacities, which radii) intact. That structure is what makes it work.
 
 | Folder | Source |
 |---|---|
@@ -8,8 +8,11 @@ Each folder is one visual direction measured from a real top-selling template. L
 | `tactile-light/` | Aigocy |
 | `editorial-mono/` | Adon |
 | `noir-spotlight/` | Davies |
+| `warm-playful/` | Pastily |
 
 ## Swapping the accent
+
+Only for a real brand color (see above). Warm Playful keeps its muted green unless that is the case: "cozy", "dusk" or "sleepy" is carried by copy and illustration, not by a new accent.
 
 Keep lightness/chroma similar to the original and use OKLCH to rotate hue:
 - Ember: orange `oklch(70% .2 50)` → blue `oklch(68% .17 255)` → violet `oklch(62% .22 295)` → green `oklch(75% .2 150)`.

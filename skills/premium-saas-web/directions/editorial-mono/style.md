@@ -9,7 +9,7 @@
   --bg:#F0F0F0; --bg-2:#FFFFFF;
   --ink:#111111; --ink-body:#555555; --ink-mute:#999999;
   --line: rgb(17 17 17 / .10); --line-2: rgb(17 17 17 / .20);
-  --dim: rgb(17 17 17 / .30);   /* dimmed words; scroll-fill text itself dims via word opacity (~.18), see shared/typography.md */
+  --dim: rgb(17 17 17 / .30);   /* un-filled scroll text, dimmed words */
 }
 ```
 - **Fonts:** a neo-grotesk for display (BDO Grotesk in the original; free near-matches: "Inter Tight", "Schibsted Grotesk", "Hanken Grotesk", "Familjen Grotesk") at weight 400 (not bold!), DM Sans for body.

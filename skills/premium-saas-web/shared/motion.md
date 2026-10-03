@@ -51,12 +51,16 @@ function initMotion() {
       scrollTrigger: { trigger: el, start: 'top 85%' } });
   });
 
-  // 4. Scroll-fill text: words fade dim -> ink as an overlapping opacity wave (smooth "darkening", not a hard switch).
-  //    One scrubbed timeline per block; CSS + tuning in shared/typography.md.
+  // 4. Scroll-fill text: ONE trigger + sequential timeline, lines fill strictly one after another.
+  //    (A ScrollTrigger per line overlaps and fills several lines at once - don't.) CSS in shared/typography.md.
   gsap.utils.toArray('.fill-text').forEach(el => SplitText.create(el, {
-    type: 'words', wordsClass: 'w', autoSplit: true,
-    onSplit: self => gsap.timeline({ scrollTrigger: { trigger: el, start: 'top 80%', end: 'bottom 35%', scrub: 0.6 } })
-      .to(self.words, { opacity: 1, ease: 'sine.inOut', duration: 5, stagger: 1 })
+    type: 'lines', linesClass: 'line', autoSplit: true,
+    onSplit: self => {
+      const tl = gsap.timeline({ defaults: { ease: 'none' },
+        scrollTrigger: { trigger: el, start: 'top 80%', end: 'bottom 40%', scrub: 0.5 } });
+      self.lines.forEach(l => tl.to(l, { backgroundPosition: '0% 0', duration: 1 }));
+      return tl;
+    }
   }));
 
   // 5. Counters
@@ -78,7 +82,7 @@ function initMotion() {
 ```
 
 ## Gotchas found in testing
-- **Gradient text + SplitText:** `background-clip:text` on the parent stops working once SplitText wraps words/lines in their own elements, and the headline turns invisible. Apply the gradient to the split pieces instead (`wordsClass:'w'` + `.display-metal .w{background:inherit;-webkit-background-clip:text;background-clip:text;color:transparent}`), or use a plain color for split headlines. Scroll-fill text (`shared/typography.md`) avoids the problem by fading word opacity instead of painting a gradient.
+- **Gradient text + SplitText:** `background-clip:text` on the parent stops working once SplitText wraps words/lines in their own elements, and the headline turns invisible. Apply the gradient to the split pieces instead (`wordsClass:'w'` + `.display-metal .w{background:inherit;-webkit-background-clip:text;background-clip:text;color:transparent}`), or use a plain color for split headlines. Scroll-fill text (`shared/typography.md`) already applies its gradient per line for this reason.
 - **SplitText lines + responsive:** lines are measured once. Create splits with `autoSplit:true` and build the animation in `onSplit(self){ return gsap.from(self.lines, …) }` so they re-measure on resize; otherwise headings break one word per line after a width change.
 - **Dimming stacked cards:** use `filter:brightness()`, never `opacity`, or the card underneath bleeds through.
 
@@ -103,6 +107,21 @@ gsap.utils.toArray('.stack-card').forEach((card, i, all) => {
 
 **Don't dim too early or too hard.** The card being covered is still the one the visitor is reading. Starting the dim at `start:'top bottom'` (the moment the next card peeks in at the bottom of the screen) with `brightness(.45)` turns it dark almost as soon as it pins, so its text becomes unreadable mid-read. Start only once the next card has covered roughly half the viewport (`top 45%`), stop at its pinned top, keep brightness ≥ .65, and use an ease-in so most of the darkening happens in the last stretch, when the card is already mostly hidden.
 
+**Tone-shifting story stack, CSS only** (Pastily "problem → fix → payoff", also good for "how it works"): no GSAP needed. Each step is a tall `<article class="story-card">` that sticks a little lower than the previous one, so the earlier cards peek out above like a deck, and each card has its own background tone.
+```css
+.story{display:grid;gap:40vh;padding-bottom:20vh}            /* gap = scroll distance between steps */
+.story-card{position:sticky;min-height:648px;border-radius:28px;padding:40px 48px;
+  box-shadow:0 1px 2px rgb(0 0 0/.04),0 24px 60px -24px rgb(0 0 0/.18)}
+.story-card:nth-child(1){top:108px;background:#fff}
+.story-card:nth-child(2){top:124px;background:var(--cream,#FAF6ED)}
+.story-card:nth-child(3){top:140px;background:var(--mint,#F1F5EC)}
+.story-card:nth-child(4){top:156px;background:#fff}
+.story-meta{display:flex;justify-content:space-between;font-size:12px}   /* "● The problem" chip left, "01 / 04" right */
+```
+Why it works: three things change at once (position, tone, step counter), so each step feels like a new beat without any scrubbing. The 16px increment of `top` is the peek. Combine with the colored-keyword scroll-fill from `shared/typography.md` inside each card. Do not dim the covered card with opacity (see gotcha above); the tone difference is enough.
+
+**Pinned UI-chip wall** (one dramatic black section): a full-bleed black section whose inner wrapper is `position:sticky;top:0;height:100vh;overflow:hidden`, filled with 6–8 rows of pill/chip components (clip cards with type badges, a countdown, a shortcut keycap row `⌘ ⇧ V`, color swatch, toast "Copied to clipboard", search field, toggle, counters like "1,824 clips saved", "0.7 ms search") in dark glass tones with 1px borders and a thin tinted fill per type. Rows are offset horizontally so it reads as a dense texture. Scale the wall from ~1.15 to 0.9 and translate it slightly with scroll progress while the headline ("Everything you copy. Reimagined for Mac.") rises over it in white, then release the pin. Only worth it when the product has a large vocabulary of small UI pieces; keep it to one per page, and under `prefers-reduced-motion` show it static.
+
 **Pinned horizontal scroll** (features or case studies):
 ```js
 const track = document.querySelector('.h-track');
@@ -123,7 +142,7 @@ Direction-specific motion lives with its direction: logo arc in `directions/embe
 - Images in cards: `scale(1.04)` over 700ms inside an `overflow:hidden` wrapper.
 
 ## Performance
-- Animate only `transform` and `opacity` (scroll-fill text is just word `opacity`).
+- Animate only `transform` and `opacity` (and `background-position` for the fill effect).
 - Big `filter: blur()` blobs are expensive. Keep them static or drift them slowly; add `will-change: transform` only to things that actually move.
 - On mobile (`max-width: 768px`): halve blur radii, disable magnetic/cursor effects, keep reveals.
 - Call `ScrollTrigger.refresh()` after images load if layout shifts.

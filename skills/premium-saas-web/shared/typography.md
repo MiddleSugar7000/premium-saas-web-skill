@@ -17,27 +17,64 @@ If the headline is split with SplitText, put the gradient on the split pieces, n
 
 ## Scroll-fill text
 
-*Why:* Text that "inks in" as you scroll rewards reading and paces the page. The premium version is a **soft opacity wave**: every word fades from dim to full ink on its own, and the next words are already starting while the previous ones finish, so the page *darkens* along the reading line instead of flipping from white to black. A hard per-line wipe or an instant color swap looks like a progress bar; the overlapping fade looks like ink soaking in.
+*Why:* Text that "inks in" as you scroll rewards reading and paces the page. Adon does it with a hard-stop gradient clipped to text, so it's crisp per line, not a blurry fade.
 
 ```css
-.fill-text{font-size:clamp(36px,6vw,90px);line-height:.98;letter-spacing:-.05em;color:var(--ink)}
-.fill-text .w{display:inline-block;opacity:.18}   /* dim = opacity, so it works on any background, light or dark */
+.fill-text{font-size:clamp(36px,6vw,90px);line-height:.95;letter-spacing:-.05em}
+.fill-text .line{
+  background:linear-gradient(to right,var(--ink) 50%,var(--dim) 50%);
+  background-size:200% 100%;background-position:100% 0;
+  -webkit-background-clip:text;background-clip:text;color:transparent;display:inline}
 ```
 ```js
-// SplitText into words (autoSplit re-measures on resize), then ONE scrubbed timeline per block:
+// split into lines (SplitText, autoSplit so it re-measures on resize), then ONE sequential timeline per block:
 gsap.utils.toArray('.fill-text').forEach(el => SplitText.create(el, {
-  type: 'words', wordsClass: 'w', autoSplit: true,
+  type: 'lines', linesClass: 'line', autoSplit: true,
   onSplit: self => {
-    const wave = 5;   // how many words are mid-fade at once: 3 = tight, 8 = dreamy
-    return gsap.timeline({ scrollTrigger: { trigger: el, start: 'top 80%', end: 'bottom 35%', scrub: 0.6 } })
-      .to(self.words, { opacity: 1, ease: 'sine.inOut', duration: wave, stagger: 1 });  // stagger 1 + duration `wave` = overlapping fades
+    const tl = gsap.timeline({ defaults: { ease: 'none' },
+      scrollTrigger: { trigger: el, start: 'top 80%', end: 'bottom 40%', scrub: 0.5 } });
+    self.lines.forEach(l => tl.to(l, { backgroundPosition: '0% 0', duration: 1 }));  // equal slices, one after another
+    return tl;
   }
 }));
 ```
-*How the wave works:* each word's tween lasts `wave` units and the next word starts 1 unit later, so about `wave` words are at different stages of fading at any moment: the one at the front is barely lit, the one at the back is nearly ink. Because words fade in reading order, the wave still travels strictly left to right, line after line (no word on line 2 lights up before line 1 is done). `sine.inOut` on each word makes the fade ease in and out instead of ramping linearly; `scrub:0.6` adds inertia so it glides with the Lenis scroll rather than tracking the scrollbar 1:1.
+**Strictly line by line, never several at once.** Do NOT give each line its own ScrollTrigger: neighbouring lines are only one line-height apart, so their start/end ranges overlap and two or three lines fill simultaneously, which reads as a muddy wave instead of reading. One trigger on the whole block + a timeline of back-to-back tweens (`duration:1`, no overlap, no position offsets) guarantees line N is fully inked before line N+1 begins. `scrub:0.5` adds a little inertia so the fill glides instead of tracking the scrollbar 1:1. For a longer block, give the trigger more scroll distance (`end:'bottom 30%'` or `+=` a multiple of the block height) so each line has room to breathe. Weight each line's `duration` by its character count if line lengths vary a lot, so the fill speed stays constant.
 
-Tuning: dimmer start (`.12`) = more drama, brighter start (`.3`) = calmer. Long block? Give the trigger more scroll distance (`end:'bottom 25%'`, or `+=` a multiple of the block height) so each word has time to fade. Playful extra, only for short statements (< ~40 words): `.fromTo(words,{opacity:.18,y:'.15em'},{opacity:1,y:0,…})`; avoid animating `filter:blur` on every word, it repaints every frame.
+Optional soft leading edge (still one line at a time): `background:linear-gradient(to right,var(--ink) 45%,var(--dim) 55%)`, so the ink edge feathers instead of cutting hard.
 
-Don't do the old way: a hard-stop gradient wipe per line (`linear-gradient(to right,ink 50%,dim 50%)` + `background-position`) or a per-line ScrollTrigger. Hard stops read as a loading bar, and per-line triggers overlap (lines are one line-height apart) so two or three lines fill at once like a muddy wave.
+On dark: `--ink:#fff; --dim:rgb(255 255 255/.2)`.
 
-Under `prefers-reduced-motion` the split never runs, so the text simply stays at full ink (the `.w` class only exists after splitting, which is why the dim opacity is on `.w`, not on `.fill-text`).
+## Word-by-word fill with semantic keyword colors (and inline mascot)
+
+*Why:* A flat grey→black fill is elegant but anonymous. When the one or two nouns that carry the meaning take the color of what they *are* (a link in blue, code in purple, the action word in green), the sentence teaches the product while it is read, and the page gets color without a second accent. The color is a code, so use it only on those words. Default to the accent green alone; add blue/purple only when the product really deals with links or code.
+
+**Contrast:** keyword colors are text, so they must pass 4.5:1 against the card they sit on. Bright "UI" greens/blues/purples (e.g. `#2FD07F`, `#4A9BEA`, `#A66BEF`) only reach 2–3.5:1 on white or cream. Use the darkened tokens from your direction's `style.md` (Warm Playful: `--k-copy:#1F7A4A`, `--k-link:#1E6FC2`, `--k-code:#7B44C9`). If you need a different hue, darken it until it passes; quick check in the console:
+```js
+const L=h=>{const c=h.match(/\w\w/g).map(x=>{x=parseInt(x,16)/255;return x<=.03928?x/12.92:((x+.055)/1.055)**2.4});return .2126*c[0]+.7152*c[1]+.0722*c[2]};
+const ratio=(a,b)=>{const[x,y]=[L(a),L(b)].sort((p,q)=>q-p);return (x+.05)/(y+.05)};  // ratio('1F7A4A','FFFFFF') → 5.33
+```
+
+```html
+<p class="sf">You <b class="k-copy">copy</b> something important. <img class="sf-mascot" src="m1.png" alt=""></p>
+<p class="sf">A <b class="k-link">link</b>. A piece of <b class="k-code">code</b>. Something you'll need again in five minutes.</p>
+```
+```css
+.sf{font-size:clamp(28px,3.6vw,44px);line-height:1.2;letter-spacing:-.02em;font-weight:500}
+.sf .w{color:rgb(29 29 31/.14);transition:color .3s}           /* unread */
+.sf .w.on{color:var(--ink)}                                    /* read */
+.sf .w.on.k-copy{color:var(--k-copy)} .sf .w.on.k-link{color:var(--k-link)} .sf .w.on.k-code{color:var(--k-code)}
+.sf b{font-weight:800}
+.sf-mascot{height:1.4em;vertical-align:-.35em;margin-left:.2em;opacity:0;scale:.8;transition:.4s cubic-bezier(.22,1,.36,1)}
+.sf-mascot.on{opacity:1;scale:1}
+```
+```js
+// wrap each word in .w (keep the <b> classes on the wrapper), then turn words on by scroll progress through the card
+const words=[...card.querySelectorAll('.w')];
+addEventListener('scroll',()=>{
+  const r=card.getBoundingClientRect(), p=Math.min(1,Math.max(0,(innerHeight*.75-r.top)/(r.height*.8)));
+  const n=Math.round(p*words.length); words.forEach((w,i)=>w.classList.toggle('on',i<n));
+  // a mascot appears once the word right before it has been read
+  card.querySelectorAll('.sf-mascot').forEach(m=>m.classList.toggle('on',!!m.previousElementSibling?.classList.contains('on')));
+},{passive:true});
+```
+Simpler variant: toggle `.on` per **sentence** instead of per word. Keep at most 3 colored words per card, and keep contrast of the unread state intentionally low (this text is not essential until it is read; make sure the *final* state passes 4.5:1 for every word, colored keywords included (see Contrast above), and that the text is fully visible with `prefers-reduced-motion` or no JS). Unlike the GSAP line-by-line fill above, this one uses plain scroll math, so it works inside `position:sticky` cards without ScrollTrigger pin conflicts.
