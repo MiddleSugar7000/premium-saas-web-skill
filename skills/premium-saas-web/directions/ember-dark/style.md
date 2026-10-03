@@ -56,28 +56,19 @@
 ```
 The middle layer (dark→transparent, top→bottom) hides the rainbow on the top edge, so the color seems to come from *below*. For a prompt box, apply the same background stack to the input wrapper with `border-radius:999px`.
 
-## Magnetic pill button with side glow
+## Pill button with side glow
 
-*Why:* A white pill on dark is the clearest CTA there is. The blurred blue-yellow blob tucked behind its right edge reads as reflected light, and following the cursor makes it feel alive.
+*Why:* A white pill on dark is the clearest CTA there is. The blurred blue-yellow blob tucked behind its right edge reads as reflected light, and the glow brightening on hover makes it feel alive. The button itself never moves.
 
 ```html
-<a class="btn-pill magnetic" href="#">Get started <svg>…chevron…</svg><span class="side-glow"></span></a>
+<a class="btn-pill" href="#">Get started <svg>…chevron…</svg><span class="side-glow"></span></a>
 ```
 ```css
 .btn-pill{position:relative;isolation:isolate;display:inline-flex;gap:7px;align-items:center;padding:13px 24px;border-radius:999px;
   background:linear-gradient(90deg,#DBE2E6 0%,#fff 71.6%);color:#0D1017;font:500 15px "IBM Plex Mono",monospace}
 .side-glow{position:absolute;z-index:-1;right:0;top:50%;translate:0 -50%;width:88px;height:56px;border-radius:999px;
-  background:linear-gradient(270deg,#5A9FFF 0%,rgb(255 250 107/.2) 95%);filter:blur(12px);transition:transform .5s}
-.btn-pill:hover .side-glow{transform:translateX(6px) scale(1.1)}
-.btn-pill svg{transition:transform .3s}.btn-pill:hover svg{transform:translateX(3px)}
-```
-Magnetic JS (desktop only):
-```js
-if(matchMedia('(pointer:fine)').matches)document.querySelectorAll('.magnetic').forEach(el=>{
-  el.addEventListener('mousemove',e=>{const r=el.getBoundingClientRect();
-    gsap.to(el,{x:(e.clientX-r.left-r.width/2)*.25,y:(e.clientY-r.top-r.height/2)*.35,duration:.4,ease:'power3.out'})});
-  el.addEventListener('mouseleave',()=>gsap.to(el,{x:0,y:0,duration:.6,ease:'elastic.out(1,.4)'}));
-});
+  background:linear-gradient(270deg,#5A9FFF 0%,rgb(255 250 107/.2) 95%);filter:blur(12px);transition:filter .4s,opacity .4s}
+.btn-pill:hover .side-glow{filter:blur(9px);opacity:1}  /* light intensifies in place, nothing slides */
 ```
 
 ## Prompt-box hero (AI tools)

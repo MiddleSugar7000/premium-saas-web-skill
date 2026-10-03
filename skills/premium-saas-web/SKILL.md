@@ -106,6 +106,7 @@ Open the page in a browser and screenshot at 1440px and 390px, if you can. Check
 
 ## What to avoid (the "cheap template" tells)
 
+- **Buttons that move on hover. Hard rule, no exceptions.** No magnetic/cursor-following buttons, no `translate`/`scale`/`rotate` on a button or its label/icon on `:hover`, no arrows sliding out, no lift-on-hover. Layout stays still under the cursor, so the click target never dodges. Show hover with color, brightness, glow, border or shadow changes only. (Cards may still lift; buttons and links styled as buttons may not.)
 - Purple-to-blue gradient on everything; multiple competing accent colors.
 - Drop shadows like `0 4px 6px rgba(0,0,0,.3)` on dark backgrounds (shadows don't read on dark; use glows and borders instead).
 - Centered everything with identical card grids of 3 icons + title + text.

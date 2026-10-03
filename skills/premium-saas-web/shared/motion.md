@@ -136,7 +136,7 @@ gsap.to(track, { x: () => -(track.scrollWidth - innerWidth + 64), ease: 'none',
 Direction-specific motion lives with its direction: logo arc in `directions/ember-dark/`, preloader and custom cursor in `directions/noir-spotlight/` (cursor also in `editorial-mono/`).
 
 ## Hover micro-interactions
-- Buttons: arrow `translateX(3px)`, glow blur tightens (14→10px), tactile buttons sink 1px on `:active`.
+- Buttons: **never move on hover** (hard rule in SKILL.md "What to avoid"). Hover = glow blur tightens (14→10px), brightness/background shift, border alpha up. Tactile buttons may sink 1px on `:active` only (a press, not a hover).
 - Cards: `translateY(-4px)` + border alpha 0.18 → 0.32 + cursor spotlight. 300ms `cubic-bezier(.2,.8,.2,1)`.
 - Links: underline grows from left (`background-size: 0 1px → 100% 1px`).
 - Images in cards: `scale(1.04)` over 700ms inside an `overflow:hidden` wrapper.
@@ -144,5 +144,5 @@ Direction-specific motion lives with its direction: logo arc in `directions/embe
 ## Performance
 - Animate only `transform` and `opacity` (and `background-position` for the fill effect).
 - Big `filter: blur()` blobs are expensive. Keep them static or drift them slowly; add `will-change: transform` only to things that actually move.
-- On mobile (`max-width: 768px`): halve blur radii, disable magnetic/cursor effects, keep reveals.
+- On mobile (`max-width: 768px`): halve blur radii, disable cursor effects, keep reveals.
 - Call `ScrollTrigger.refresh()` after images load if layout shifts.

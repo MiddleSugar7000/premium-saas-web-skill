@@ -112,7 +112,7 @@ Adding a style is one new folder; see `directions/README.md`.
 | **Editorial Mono** | #111 on #F0F0F0, 140px grotesk at −7% tracking, hairline grid, no shadows | Studios, premium services |
 | **Noir Spotlight** | Pure black, one neon accent, giant name crossing a photo, stacking cards | Personal brands, portfolios |
 
-**18 recipes**, including: sculpted glow (color blobs carved by background-colored "eraser" blobs), animated rainbow border with blurred under-glow, magnetic pill button, tactile glossy buttons (inset highlight + 5-step layered shadow), sheen cards, glass floating nav, hairline grid, display type with a dimmed half, scroll-fill text, browser-frame product mockup, bento grid with mini UIs and corner light leaks, avatar-stack eyebrow, masked marquees, dot/grid/noise backgrounds, outline-over-photo hero word, framed hero with a cut-in notch, featured pricing card and footer wordmark.
+**18 recipes**, including: sculpted glow (color blobs carved by background-colored "eraser" blobs), animated rainbow border with blurred under-glow, pill button with side glow, tactile glossy buttons (inset highlight + 5-step layered shadow), sheen cards, glass floating nav, hairline grid, display type with a dimmed half, scroll-fill text, browser-frame product mockup, bento grid with mini UIs and corner light leaks, avatar-stack eyebrow, masked marquees, dot/grid/noise backgrounds, outline-over-photo hero word, framed hero with a cut-in notch, featured pricing card and footer wordmark.
 
 ## Install
 
