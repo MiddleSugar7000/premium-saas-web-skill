@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Flowpilot — AI agents for Slack, Notion and Gmail</title>
+<meta name="description" content="Flowpilot puts AI agents to work across your team's Slack, Notion and Gmail: triage, draft, update and follow up, with a human approving anything that matters.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600&family=Sora:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-0:#0D1017;--bg-1:#11141D;--bg-2:#191D2A;--bg-3:#252A32;
+  --line:rgb(148 163 184/.18);--line-strong:rgb(148 163 184/.32);
+  --accent:#5A9FFF;--accent-deep:#1B3A8F;--glow:#2F6BFF;
+  --font-display:"Sora",system-ui,sans-serif;--font-body:"Inter Tight",system-ui,sans-serif;--font-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg-0);color:#fff;font:400 17px/1.55 var(--font-body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+.wrap{width:min(1200px,calc(100% - 32px));margin-inline:auto}
+section{position:relative}
+.dim{color:rgb(255 255 255/.5)}
+.mute{color:rgb(255 255 255/.6)}
+.eyebrow{font:500 13px/1 var(--font-mono);letter-spacing:.04em;text-transform:uppercase;color:rgb(255 255 255/.5)}
+.display{font:400 clamp(44px,6.4vw,92px)/1.04 var(--font-display);letter-spacing:-.05em;text-wrap:balance}
+h2.display{font-size:clamp(34px,4.6vw,64px)}
+.sec{padding:clamp(88px,12vw,160px) 0}
+.sec-head{max-width:760px;margin-bottom:56px}
+.sec-head .eyebrow{display:block;margin-bottom:20px}
+.sec-head p{margin-top:20px;color:rgb(255 255 255/.6);max-width:560px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+/* nav */
+.nav{position:fixed;top:20px;left:50%;translate:-50% 0;z-index:50;width:min(1200px,calc(100% - 32px));display:flex;align-items:center;justify-content:space-between;padding:10px 12px 10px 20px;border-radius:16px;background:rgb(255 255 255/.05);backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);border:1px solid rgb(255 255 255/.08);transition:background .3s}
+.nav.scrolled{background:rgb(13 16 23/.7)}
+.logo{display:flex;align-items:center;gap:10px;font:500 18px var(--font-display);letter-spacing:-.04em}
+.logo-mark{width:26px;height:26px}
+.nav ul{display:flex;gap:32px;list-style:none;padding:0}
+.nav ul a{font-size:14px;color:rgb(255 255 255/.7);transition:color .2s}.nav ul a:hover{color:#fff}
+
+/* buttons */
+.btn-pill{position:relative;isolation:isolate;display:inline-flex;gap:7px;align-items:center;padding:13px 24px;border-radius:999px;background:linear-gradient(90deg,#DBE2E6 0%,#fff 71.6%);color:#0D1017;font:500 15px var(--font-mono);transition:transform .18s cubic-bezier(.2,0,0,1)}
+.btn-pill.sm{padding:9px 18px;font-size:13px}
+.side-glow{position:absolute;z-index:-1;right:0;top:50%;translate:0 -50%;width:88px;height:56px;border-radius:999px;background:linear-gradient(270deg,#5A9FFF 0%,rgb(255 250 107/.2) 95%);filter:blur(12px);transition:transform .5s}
+.btn-pill:hover .side-glow{transform:translateX(6px) scale(1.1)}
+.btn-pill svg{width:14px;height:14px;transition:transform .3s}.btn-pill:hover svg{transform:translateX(3px)}
+.btn-ghost{display:inline-flex;align-items:center;padding:13px 24px;border-radius:999px;border:1px solid var(--line-strong);font:500 15px var(--font-mono);color:rgb(255 255 255/.85);transition:background .2s,border-color .2s}
+.btn-ghost:hover{background:rgb(255 255 255/.06);border-color:rgb(148 163 184/.5)}
+.btn-rainbow{--fill:var(--bg-2);position:relative;isolation:isolate;display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:6px;font:500 16px/1.4 var(--font-mono);color:#fff;border:2px solid transparent;cursor:pointer;
+  background:linear-gradient(var(--fill),var(--fill)) padding-box,linear-gradient(#121213 0%,rgb(18 18 19/.6) 80%,rgb(18 18 19/0)) border-box,linear-gradient(90deg,var(--fill),#8765FF,#FFF181,#FF4C52,#734CFF,#8765FF,#FFF181,#FF4C52,#734CFF,var(--fill)) border-box;background-size:400% 100%;animation:rainbow 15s linear infinite}
+.btn-rainbow::before{content:"";position:absolute;z-index:-1;left:50%;bottom:-25%;width:80%;height:40%;translate:-50% 0;background:linear-gradient(90deg,#30E3FF,#8765FF,#FFF181,#FF4C52,#734CFF,#30E3FF,#8765FF,#FFF181,#FF4C52,#734CFF,#30E3FF);background-size:400% 100%;animation:rainbow 15s linear infinite;filter:blur(14px);transition:filter .5s ease}
+.btn-rainbow:hover::before{filter:blur(10px)}
+@keyframes rainbow{to{background-position:400% 0}}
+
+/* hero */
+.hero{overflow:hidden;isolation:isolate;padding:168px 0 0;text-align:center;background:var(--bg-0)}
+.glow{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.g{position:absolute;display:block}
+.g1{top:-17%;left:50%;width:812px;height:488px;translate:-80% 0;background:var(--glow);filter:blur(100px);animation:drift 18s ease-in-out infinite alternate}
+.g2{top:-5%;right:-4%;width:212px;height:288px;background:var(--glow);filter:blur(120px)}
+.e1{top:-22%;left:50%;width:672px;height:488px;translate:-80% 0;border-radius:200px;background:var(--bg-0);filter:blur(100px);z-index:1}
+.e2{bottom:-20%;left:50%;width:min(1812px,140vw);height:1040px;translate:-50% 0;border-radius:200px;background:var(--bg-0);filter:blur(142px);z-index:1}
+.core{bottom:30%;left:50%;width:150px;height:180px;translate:-50% 0;border-radius:999px;background:linear-gradient(var(--accent-deep),var(--accent));filter:blur(78px);z-index:2}
+@keyframes drift{to{transform:translateX(40px)}}
+.guides{position:absolute;inset:0;z-index:-1;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0 calc(25% - 1px),rgb(255 255 255/.04) calc(25% - 1px) 25%);mask-image:linear-gradient(to bottom,#000 30%,transparent);-webkit-mask-image:linear-gradient(to bottom,#000 30%,transparent)}
+.noise::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.06;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.pill-eyebrow{display:inline-flex;gap:8px;align-items:center;padding:7px 14px;border-radius:999px;font-size:13px;color:rgb(255 255 255/.8);background:rgb(255 255 255/.05);border:1px solid var(--line);backdrop-filter:blur(10px)}
+.pill-eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent)}
+.hero h1{margin:28px auto 0;max-width:980px}
+.hero .sub{margin:24px auto 0;max-width:600px;color:rgb(255 255 255/.6);font-size:19px}
+.prompt{margin:40px auto 0;max-width:640px;display:flex;align-items:center;gap:12px;padding:8px 8px 8px 24px;border-radius:999px;border:2px solid transparent;text-align:left;
+  background:linear-gradient(var(--bg-2),var(--bg-2)) padding-box,linear-gradient(#121213 0%,rgb(18 18 19/.6) 80%,rgb(18 18 19/0)) border-box,linear-gradient(90deg,var(--bg-2),#8765FF,#FFF181,#FF4C52,#734CFF,#8765FF,#FFF181,#FF4C52,#734CFF,var(--bg-2)) border-box;background-size:400% 100%;animation:rainbow 15s linear infinite;position:relative;isolation:isolate}
+.prompt::before{content:"";position:absolute;z-index:-1;left:50%;bottom:-30%;width:70%;height:50%;translate:-50% 0;background:linear-gradient(90deg,#30E3FF,#8765FF,#FFF181,#FF4C52,#734CFF,#30E3FF);background-size:400% 100%;animation:rainbow 15s linear infinite;filter:blur(24px);opacity:.55}
+.prompt .typed{flex:1;font:400 15px var(--font-mono);color:rgb(255 255 255/.85);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.prompt .typed::after{content:"";display:inline-block;width:2px;height:1.1em;margin-left:3px;vertical-align:-3px;background:var(--accent);animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.prompt button{flex:none;width:44px;height:44px;border-radius:50%;border:0;background:#fff;color:#0D1017;display:grid;place-items:center;cursor:pointer;transition:transform .18s}
+.prompt button:hover{transform:scale(1.06)}
+.prompt button svg{width:18px;height:18px}
+.checks-row{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;margin-top:22px;font-size:14px;color:rgb(255 255 255/.6)}
+.checks-row span{display:inline-flex;align-items:center;gap:7px}
+.checks-row svg{width:14px;height:14px;color:var(--accent)}
+.cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+
+/* product mock */
+.mock-wrap{position:relative;max-width:1180px;margin:72px auto 0;padding:0 16px;perspective:1200px}
+.mock{border-radius:14px;overflow:hidden;background:#0B0E14;border:1px solid rgb(90 159 255/.5);box-shadow:0 0 0 1px rgb(90 159 255/.15),0 0 40px rgb(47 107 255/.45),0 0 120px rgb(47 107 255/.25);text-align:left}
+.mock-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.mock-bar i{width:11px;height:11px;border-radius:50%;background:#FF5F57}.mock-bar i:nth-child(2){background:#FEBC2E}.mock-bar i:nth-child(3){background:#28C840}
+.mock-url{margin-inline:auto;padding:4px 60px;border-radius:6px;background:var(--bg-2);font:12px var(--font-mono);color:rgb(255 255 255/.5)}
+.mock-body{display:grid;grid-template-columns:220px 1fr 300px;min-height:460px}
+.m-side{padding:18px 14px;border-right:1px solid var(--line);font-size:13px;color:rgb(255 255 255/.6)}
+.m-side b{display:block;font:500 11px var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:rgb(255 255 255/.4);margin:14px 8px 8px}
+.m-side div.it{display:flex;align-items:center;gap:9px;padding:8px;border-radius:8px}
+.m-side div.it.on{background:rgb(255 255 255/.06);color:#fff}
+.m-side img{width:15px;height:15px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none}
+.dot.ok{background:#3DD68C}.dot.wait{background:#FFC857}
+.m-main{padding:22px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.m-main h4{font:500 15px var(--font-display);letter-spacing:-.02em;margin-bottom:4px}
+.run{display:flex;gap:12px;padding:14px;border-radius:12px;background:rgb(255 255 255/.03);border:1px solid var(--line);font-size:13.5px;line-height:1.45}
+.run .ic{flex:none;width:30px;height:30px;border-radius:8px;background:#fff;display:grid;place-items:center}
+.run .ic img{width:18px;height:18px}
+.run small{display:block;color:rgb(255 255 255/.5);font-size:12px;margin-top:3px}
+.tag{margin-left:auto;flex:none;align-self:flex-start;font:500 11px var(--font-mono);padding:3px 8px;border-radius:6px;white-space:nowrap}
+.tag.done{background:rgb(61 214 140/.12);color:#6FE3AC}
+.tag.live{background:rgb(90 159 255/.14);color:var(--accent)}
+.tag.hold{background:rgb(255 200 87/.12);color:#FFC857}
+.m-right{border-left:1px solid var(--line);padding:22px 18px;font-size:13px;display:flex;flex-direction:column;gap:12px}
+.m-right .card{padding:14px;border-radius:12px;background:var(--bg-2);border:1px solid var(--line)}
+.m-right .btns{display:flex;gap:8px;margin-top:12px}
+.m-right .btns span{padding:6px 12px;border-radius:6px;font:500 12px var(--font-mono);border:1px solid var(--line-strong)}
+.m-right .btns span.p{background:#fff;color:#0D1017;border-color:#fff}
+.mock-fade{position:absolute;inset:auto 0 -2% 0;height:min(300px,40%);background:linear-gradient(180deg,transparent,var(--bg-0) 94%);pointer-events:none}
+
+/* integrations band */
+.band{padding:56px 0;background:radial-gradient(60% 140% at 50% 100%,#3F7BFF 0%,#1B3A8F 40%,var(--bg-0) 78%);border-block:1px solid var(--line);text-align:center}
+.band p{font:500 13px var(--font-mono);letter-spacing:.04em;text-transform:uppercase;color:rgb(255 255 255/.7)}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:24px}
+.chip{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:999px;background:#fff;color:#111;font-weight:500;font-size:16px}
+.chip img{width:22px;height:22px;object-fit:contain}
+
+/* bento */
+.bento{display:grid;gap:16px;grid-template-columns:repeat(6,1fr);grid-auto-rows:minmax(260px,auto)}
+.c1{grid-column:span 4}.c2{grid-column:span 2;grid-row:span 2}.c3{grid-column:span 2}.c4{grid-column:span 2}
+.cell{--x:50%;--y:50%;position:relative;overflow:hidden;border-radius:20px;border:1px solid var(--line);padding:28px;display:flex;flex-direction:column;justify-content:space-between;gap:24px;
+  background:radial-gradient(400px circle at var(--x) var(--y),rgb(255 255 255/.06),transparent 40%),var(--bg-2);box-shadow:inset 0 1px 0 rgb(255 255 255/.06);transition:border-color .3s,translate .3s cubic-bezier(.2,.8,.2,1)}
+.cell:hover{border-color:var(--line-strong);translate:0 -4px}
+.cell::before{content:"";position:absolute;top:-30%;right:-20%;width:60%;height:60%;border-radius:50%;background:radial-gradient(circle,rgb(90 159 255/.5),transparent 70%);filter:blur(40px);opacity:.6;pointer-events:none}
+.cell h3{font:500 21px/1.2 var(--font-display);letter-spacing:-.03em;position:relative}
+.cell p{color:rgb(255 255 255/.6);font-size:15px;margin-top:8px;position:relative}
+.mini{position:relative;background:rgb(255 255 255/.03);border:1px solid var(--line);border-radius:12px;padding:16px;font-size:13px}
+.flow{display:flex;align-items:center;gap:0;justify-content:space-between}
+.node{flex:none;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:12px;color:rgb(255 255 255/.7);text-align:center}
+.node .ic{width:44px;height:44px;border-radius:12px;background:#fff;display:grid;place-items:center}
+.node .ic img{width:24px;height:24px}
+.node .ic.ai{background:linear-gradient(160deg,#5A9FFF,#1B3A8F)}
+.node .ic.ai svg{width:22px;height:22px;color:#fff}
+.wire{flex:1;height:2px;margin:0 6px 22px;background:repeating-linear-gradient(90deg,var(--line-strong) 0 6px,transparent 6px 12px);position:relative;min-width:20px}
+.wire::after{content:"";position:absolute;top:-3px;left:0;width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);animation:travel 3s linear infinite}
+.wire.b::after{animation-delay:1.5s}
+@keyframes travel{from{left:0}to{left:calc(100% - 8px)}}
+.thread{display:flex;flex-direction:column;gap:10px}
+.msg{padding:10px 12px;border-radius:12px;background:rgb(255 255 255/.05);max-width:92%;font-size:13px;line-height:1.4}
+.msg.ai{align-self:flex-end;background:rgb(90 159 255/.16);border:1px solid rgb(90 159 255/.3)}
+.msg small{display:block;font:500 10.5px var(--font-mono);color:rgb(255 255 255/.45);margin-bottom:3px}
+.toggle{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}
+.toggle:last-child{border:0}
+.sw{width:34px;height:20px;border-radius:999px;background:rgb(255 255 255/.15);position:relative;transition:background .3s;flex:none}
+.sw::after{content:"";position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:#fff;transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.sw.on{background:var(--accent)}.sw.on::after{transform:translateX(14px)}
+.sw.loop{animation:swbg 6s ease-in-out infinite}.sw.loop::after{animation:swknob 6s ease-in-out infinite}
+@keyframes swbg{0%,40%{background:rgb(255 255 255/.15)}50%,90%{background:var(--accent)}}
+@keyframes swknob{0%,40%{transform:none}50%,90%{transform:translateX(14px)}}
+.spark{width:100%;height:70px}
+.spark path{stroke-dasharray:420;stroke-dashoffset:420;animation:draw 4s ease-out infinite alternate}
+@keyframes draw{to{stroke-dashoffset:0}}
+.big{font:400 44px/1 var(--font-display);letter-spacing:-.05em}
+.big small{font-size:16px;color:rgb(255 255 255/.5);letter-spacing:0;margin-left:6px;font-family:var(--font-body)}
+
+/* statement */
+.statement{padding:clamp(88px,12vw,160px) 0;background:var(--bg-1);border-block:1px solid var(--line)}
+.fill-text{font:400 clamp(30px,5vw,68px)/1.1 var(--font-display);letter-spacing:-.05em;max-width:1050px}
+.fill-text .line{background:linear-gradient(to right,#fff 50%,rgb(255 255 255/.2) 50%);background-size:200% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent;display:inline}
+.accent-w{color:var(--accent)}
+
+/* steps (stacking) */
+.stack{display:grid;gap:36px}
+.step{position:sticky;display:grid;grid-template-columns:1fr 1.1fr;gap:40px;align-items:center;border-radius:28px;padding:44px;border:1px solid var(--line);background:var(--bg-2);box-shadow:inset 0 1px 0 rgb(255 255 255/.06);min-height:420px;filter:brightness(1)}
+.step:nth-child(1){top:96px}.step:nth-child(2){top:112px;background:#161A26}.step:nth-child(3){top:128px;background:#131722}
+.step .n{font:500 13px var(--font-mono);color:var(--accent);letter-spacing:.04em}
+.step h3{font:400 clamp(28px,3.4vw,44px)/1.1 var(--font-display);letter-spacing:-.04em;margin:16px 0}
+.step p{color:rgb(255 255 255/.6);max-width:420px}
+.rules .r{display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:10px;background:rgb(255 255 255/.04);border:1px solid var(--line);font:13px var(--font-mono);color:rgb(255 255 255/.8);margin-bottom:10px}
+.rules .r b{color:var(--accent);font-weight:500}
+
+/* trust */
+.trust{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.trust>div{padding:36px 32px}
+.trust>div+div{border-left:1px solid var(--line)}
+.trust svg{width:26px;height:26px;color:var(--accent);margin-bottom:22px;stroke-width:1.5}
+.trust h3{font:500 20px var(--font-display);letter-spacing:-.03em;margin-bottom:10px}
+.trust p{color:rgb(255 255 255/.6);font-size:15px}
+
+/* faq */
+.faq{display:grid;grid-template-columns:1fr 1.4fr;gap:64px;align-items:start}
+.faq-side{position:sticky;top:110px}
+.faq details{border-bottom:1px solid var(--line);padding:22px 0}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;font:500 19px/1.3 var(--font-display);letter-spacing:-.025em}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";flex:none;width:30px;height:30px;border-radius:50%;border:1px solid var(--line-strong);display:grid;place-items:center;font:400 18px var(--font-body);transition:rotate .3s,background .3s}
+.faq details[open] summary::after{rotate:45deg;background:rgb(255 255 255/.08)}
+.faq details p{margin-top:14px;color:rgb(255 255 255/.6);max-width:560px;font-size:16px}
+
+/* cta */
+.final{overflow:hidden;isolation:isolate;text-align:center;padding:clamp(100px,14vw,200px) 0 0;background:var(--bg-0)}
+.final .g1{top:auto;bottom:-30%;left:50%;translate:-50% 0;width:900px;height:440px}
+.final .e1{top:-30%;left:50%;translate:-50% 0;width:1400px;height:420px;border-radius:200px}
+.final .core{bottom:2%}
+.final h2{max-width:820px;margin-inline:auto}
+.final form{display:flex;gap:10px;justify-content:center;margin:40px auto 0;max-width:520px;flex-wrap:wrap}
+.final input{flex:1;min-width:220px;padding:14px 20px;border-radius:999px;border:1px solid var(--line-strong);background:rgb(25 29 42/.8);color:#fff;font:16px var(--font-body)}
+.final input::placeholder{color:rgb(255 255 255/.45)}
+.final .note{margin-top:16px;font-size:14px;color:rgb(255 255 255/.5)}
+footer{position:relative;margin-top:120px;padding:0 0 0}
+.foot-links{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;padding:28px 0;border-top:1px solid var(--line);font-size:14px;color:rgb(255 255 255/.5);text-align:left}
+.foot-links nav{display:flex;gap:24px;flex-wrap:wrap}
+.foot-links a:hover{color:#fff}
+.wordmark{font:500 20vw/.8 var(--font-display);letter-spacing:-.06em;text-align:center;background:linear-gradient(#fff 0%,transparent 90%);-webkit-background-clip:text;background-clip:text;color:transparent;overflow:hidden;height:15vw;margin-top:20px;user-select:none}
+
+/* responsive */
+@media(max-width:1000px){
+  .mock-body{grid-template-columns:1fr}.m-side,.m-right{display:none}
+  .bento{grid-template-columns:1fr}.bento>*{grid-column:auto!important;grid-row:auto!important}
+  .step{grid-template-columns:1fr;padding:28px;min-height:0}
+  .trust{grid-template-columns:1fr}.trust>div+div{border-left:0;border-top:1px solid var(--line)}
+  .faq{grid-template-columns:1fr;gap:32px}.faq-side{position:static}
+}
+@media(max-width:768px){
+  .nav ul{display:none}
+  .hero{padding-top:128px}
+  .g{filter:blur(60px)!important;scale:.6}
+  .cell{padding:22px}
+  .flow{gap:0}.node .ic{width:38px;height:38px}
+  .prompt{padding-left:18px}
+  .prompt .typed{font-size:13px}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <a class="logo" href="#top" aria-label="Flowpilot home">
+    <svg class="logo-mark" viewBox="0 0 26 26" fill="none" aria-hidden="true"><rect width="26" height="26" rx="8" fill="url(#lg)"/><path d="M7 13.5 19 7l-4 12-3-5-5-.5Z" fill="#fff"/><defs><linearGradient id="lg" x1="0" y1="0" x2="26" y2="26"><stop stop-color="#5A9FFF"/><stop offset="1" stop-color="#1B3A8F"/></linearGradient></defs></svg>
+    Flowpilot
+  </a>
+  <ul>
+    <li><a href="#product">Product</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#trust">Safety</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a class="btn-pill sm" href="#access">Get early access <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3l5 5-5 5"/></svg><span class="side-glow"></span></a>
+</header>
+
+<main id="top">
+<!-- HERO -->
+<section class="hero noise" data-nav="Home">
+  <div class="glow" aria-hidden="true"><span class="g g1"></span><span class="g g2"></span><span class="g e1"></span><span class="g e2"></span><span class="g core"></span></div>
+  <div class="guides" aria-hidden="true"></div>
+  <div class="wrap">
+    <span class="pill-eyebrow" data-fade><i></i> AI agents for Slack, Notion and Gmail</span>
+    <h1 class="display">Your team's busywork, <span class="dim">handled by agents.</span></h1>
+    <p class="sub" data-fade>Flowpilot reads the threads, pages and inboxes your team already lives in, then triages, drafts and updates for you. You approve anything that matters.</p>
+    <div class="prompt" data-fade role="img" aria-label="Example instruction typed into Flowpilot">
+      <span class="typed" id="typed">Turn Friday's standup thread into Notion tasks…</span>
+      <button type="button" aria-label="Run agent"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 16V4M5 9l5-5 5 5"/></svg></button>
+    </div>
+    <div class="checks-row" data-fade>
+      <span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg>Plain-English instructions</span>
+      <span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg>Approve before it sends</span>
+      <span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8.5l3.2 3L13 4.5"/></svg>Full activity log</span>
+    </div>
+    <div class="cta-row" data-fade>
+      <a class="btn-rainbow" href="#access">Get early access</a>
+      <a class="btn-ghost" href="#how">See how it works</a>
+    </div>
+  </div>
+
+  <div class="mock-wrap">
+    <div class="mock mock-el" role="img" aria-label="Flowpilot dashboard showing agents completing tasks across Slack, Notion and Gmail">
+      <div class="mock-bar"><i></i><i></i><i></i><span class="mock-url">app.flowpilot.ai/agents</span></div>
+      <div class="mock-body">
+        <aside class="m-side">
+          <b>Agents</b>
+          <div class="it on"><span class="dot"></span>Inbox triage</div>
+          <div class="it"><span class="dot ok"></span>Standup to tasks</div>
+          <div class="it"><span class="dot wait"></span>Client follow-ups</div>
+          <div class="it"><span class="dot ok"></span>Weekly digest</div>
+          <b>Connected</b>
+          <div class="it"><img src="https://api.iconify.design/logos:slack-icon.svg" alt="" width="15" height="15">Slack</div>
+          <div class="it"><img src="https://api.iconify.design/logos:notion-icon.svg" alt="" width="15" height="15" style="background:#fff;border-radius:3px">Notion</div>
+          <div class="it"><img src="https://api.iconify.design/logos:google-gmail.svg" alt="" width="15" height="15">Gmail</div>
+        </aside>
+        <div class="m-main">
+          <h4>Today's activity</h4>
+          <div class="run"><div class="ic"><img src="https://api.iconify.design/logos:google-gmail.svg" alt="" width="18" height="18"></div><div>Sorted 38 new emails and labeled 6 as urgent<small>Inbox triage · 9:02</small></div><span class="tag done">Done</span></div>
+          <div class="run"><div class="ic"><img src="https://api.iconify.design/logos:slack-icon.svg" alt="" width="18" height="18"></div><div>Found 5 action items in #product-standup<small>Standup to tasks · 9:15</small></div><span class="tag done">Done</span></div>
+          <div class="run"><div class="ic"><img src="https://api.iconify.design/logos:notion-icon.svg" alt="" width="18" height="18"></div><div>Creating 5 tasks in Sprint board and assigning owners<small>Standup to tasks · now</small></div><span class="tag live">Running</span></div>
+          <div class="run"><div class="ic"><img src="https://api.iconify.design/logos:google-gmail.svg" alt="" width="18" height="18"></div><div>Drafted a reply to the Northwind renewal question<small>Client follow-ups · 9:21</small></div><span class="tag hold">Needs you</span></div>
+        </div>
+        <aside class="m-right">
+          <span class="eyebrow">Waiting for approval</span>
+          <div class="card">
+            <b style="font-weight:500">Reply to Dana, Northwind</b>
+            <p class="mute" style="margin-top:6px;font-size:12.5px;line-height:1.45">"Thanks Dana, yes, the renewal covers all 12 seats. I've attached the updated order form…"</p>
+            <div class="btns"><span class="p">Approve</span><span>Edit</span></div>
+          </div>
+          <div class="card">
+            <b style="font-weight:500">Post digest to #team</b>
+            <p class="mute" style="margin-top:6px;font-size:12.5px">Scheduled for Friday, 4:00 pm</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+    <div class="mock-fade"></div>
+  </div>
+</section>
+
+<!-- INTEGRATIONS -->
+<div class="band" aria-label="Integrations">
+  <div class="wrap">
+    <p>Works where your team already works</p>
+    <div class="chips" data-reveal>
+      <span class="chip"><img src="https://api.iconify.design/logos:slack-icon.svg" alt="" width="22" height="22">Slack</span>
+      <span class="chip"><img src="https://api.iconify.design/logos:notion-icon.svg" alt="" width="22" height="22">Notion</span>
+      <span class="chip"><img src="https://api.iconify.design/logos:google-gmail.svg" alt="" width="22" height="22">Gmail</span>
+    </div>
+  </div>
+</div>
+
+<!-- BENTO -->
+<section class="sec" id="product" data-nav="Product">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">What agents do</span>
+      <h2 class="display" data-split>One agent crew. <span class="dim">Three tools, zero copy-paste.</span></h2>
+      <p>Each agent has a job, a set of permissions and a trail you can read. They hand work to each other across apps, so a Slack decision ends up as a Notion task and a Gmail follow-up.</p>
+    </div>
+    <div class="bento" data-reveal>
+      <div class="cell c1 spot">
+        <div class="mini">
+          <div class="flow" aria-label="Flow from Slack to an agent to Notion to Gmail">
+            <div class="node"><div class="ic"><img src="https://api.iconify.design/logos:slack-icon.svg" alt="" width="24" height="24"></div>Decision<br>in Slack</div>
+            <div class="wire"></div>
+            <div class="node"><div class="ic ai"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5 19 5l-4.5 14-3-6-6.5-.5Z"/></svg></div>Flowpilot<br>agent</div>
+            <div class="wire b"></div>
+            <div class="node"><div class="ic"><img src="https://api.iconify.design/logos:notion-icon.svg" alt="" width="24" height="24"></div>Task in<br>Notion</div>
+            <div class="wire"></div>
+            <div class="node"><div class="ic"><img src="https://api.iconify.design/logos:google-gmail.svg" alt="" width="24" height="24"></div>Update<br>by Gmail</div>
+          </div>
+        </div>
+        <div><h3>Work that crosses apps, finished across apps</h3><p>Describe the outcome once. The agent moves it from thread to page to inbox, and stops to ask when it isn't sure.</p></div>
+      </div>
+
+      <div class="cell c2 spot">
+        <div class="mini thread">
+          <div class="msg"><small>#support · Marta</small>Anyone know if Northwind is on the annual plan?</div>
+          <div class="msg ai"><small>Flowpilot</small>Yes, annual, renews Nov 14. Linked the account page in Notion.</div>
+          <div class="msg"><small>#support · Marta</small>Can you draft the renewal reply?</div>
+          <div class="msg ai"><small>Flowpilot</small>Draft is in Gmail drafts. Waiting for your approval before it sends.</div>
+        </div>
+        <div><h3>Answers in the thread, not in a new tab</h3><p>Mention an agent in Slack like a teammate. It pulls from your Notion pages and email history, and replies where the question was asked.</p></div>
+      </div>
+
+      <div class="cell c3 spot">
+        <div class="mini">
+          <div class="toggle"><span>Send emails</span><span class="sw"></span></div>
+          <div class="toggle"><span>Create Notion pages</span><span class="sw on"></span></div>
+          <div class="toggle"><span>Post to channels</span><span class="sw loop"></span></div>
+        </div>
+        <div><h3>Permissions per agent</h3><p>Give each agent only what its job needs, and switch actions on or off at any time.</p></div>
+      </div>
+
+      <div class="cell c4 spot">
+        <div class="mini">
+          <div class="big">3 → 1<small>steps per handoff</small></div>
+          <svg class="spark" viewBox="0 0 300 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 60C40 58 60 30 100 36S160 56 200 28 260 10 300 6" fill="none" stroke="#5A9FFF" stroke-width="2.5" stroke-linecap="round"/></svg>
+        </div>
+        <div><h3>A log for every action</h3><p>See what each agent read, decided and changed, with a one-click undo where the app allows it.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATEMENT -->
+<section class="statement" data-nav="Why">
+  <div class="wrap">
+    <p class="fill-text">Your team shouldn't spend Monday copying notes from Slack into Notion and chasing replies in Gmail. <span class="accent-w">Let agents carry the work.</span> Keep the decisions.</p>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="sec" id="how" data-nav="How it works">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">How it works</span>
+      <h2 class="display" data-split>Connect, instruct, <span class="dim">approve.</span></h2>
+    </div>
+    <div class="stack">
+      <article class="step">
+        <div><span class="n">01 / 03</span><h3>Connect your tools</h3><p>Sign in to Slack, Notion and Gmail with the access you choose. Pick the channels, workspaces and labels agents may see; everything else stays invisible to them.</p></div>
+        <div class="mini rules">
+          <div class="r"><b>Slack</b> #product-standup, #support</div>
+          <div class="r"><b>Notion</b> Sprint board, Client accounts</div>
+          <div class="r"><b>Gmail</b> label: clients, label: invoices</div>
+        </div>
+      </article>
+      <article class="step">
+        <div><span class="n">02 / 03</span><h3>Tell an agent the job</h3><p>Write what you want the way you'd brief a colleague. Flowpilot turns it into a repeatable agent with a trigger, steps and limits you can read and edit.</p></div>
+        <div class="mini rules">
+          <div class="r"><b>When</b> a standup thread is posted</div>
+          <div class="r"><b>Then</b> extract action items and owners</div>
+          <div class="r"><b>Create</b> Notion tasks in Sprint board</div>
+          <div class="r"><b>Ask</b> before assigning anyone new</div>
+        </div>
+      </article>
+      <article class="step">
+        <div><span class="n">03 / 03</span><h3>Approve what matters</h3><p>Routine steps run on their own. Emails, public posts and edits to shared pages wait in a queue until someone on your team says go.</p></div>
+        <div class="mini">
+          <div class="run" style="margin:0 0 10px"><div class="ic"><img src="https://api.iconify.design/logos:google-gmail.svg" alt="" width="18" height="18"></div><div>Send renewal reply to Dana<small>Client follow-ups</small></div><span class="tag hold">Review</span></div>
+          <div class="run" style="margin:0"><div class="ic"><img src="https://api.iconify.design/logos:slack-icon.svg" alt="" width="18" height="18"></div><div>Post weekly digest to #team<small>Weekly digest</small></div><span class="tag done">Approved</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="sec" id="trust" data-nav="Safety" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Control</span>
+      <h2 class="display" data-split>Autonomy with <span class="dim">a leash you hold.</span></h2>
+    </div>
+    <div class="trust" data-reveal>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6l8-3Z"/><path d="M9 12l2 2 4-4"/></svg><h3>Approval gates</h3><p>Choose which actions need a human yes. Anything that leaves your company by email or goes public in Slack can always be held for review.</p></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg><h3>Scoped access</h3><p>Agents only see the channels, pages and labels you grant. Revoke an app connection and every agent using it stops immediately.</p></div>
+      <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16M4 12h16M4 19h10"/></svg><h3>Readable audit trail</h3><p>Every read, decision and write is logged in plain language, so you can answer "why did it do that?" in seconds.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="faq" data-nav="FAQ" style="padding-top:0">
+  <div class="wrap faq">
+    <div class="faq-side">
+      <span class="eyebrow">FAQ</span>
+      <h2 class="display" style="margin-top:20px">Questions, <span class="dim">answered.</span></h2>
+      <p class="mute" style="margin-top:20px;max-width:360px">Something we missed? Ask when you request early access and we'll reply personally.</p>
+    </div>
+    <div>
+      <details open><summary>Which apps does Flowpilot work with?</summary><p>Slack, Notion and Gmail. Agents can work inside one app or hand tasks between all three.</p></details>
+      <details><summary>Will an agent send emails without asking?</summary><p>Only if you allow it. Sending email and posting publicly can each require approval, and approvals are set per agent.</p></details>
+      <details><summary>Do I need to write code or build flowcharts?</summary><p>No. You describe the job in plain English and Flowpilot sets up the agent. You can read and adjust the steps it produced, but you never have to.</p></details>
+      <details><summary>Can agents see everything in our workspace?</summary><p>No. Each agent gets only the channels, Notion pages and Gmail labels you grant it, and you can remove access whenever you like.</p></details>
+      <details><summary>What happens when an agent isn't sure?</summary><p>It stops and asks. Low-confidence steps land in your approval queue with the context it used, instead of guessing.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final noise" id="access" data-nav="Early access">
+  <div class="glow" aria-hidden="true"><span class="g g1"></span><span class="g e1"></span><span class="g core"></span></div>
+  <div class="wrap">
+    <h2 class="display" data-split>Give your team the week back.</h2>
+    <p class="mute" style="margin-top:20px">Join the early access list and be among the first teams to put agents on the busywork.</p>
+    <form id="form" novalidate>
+      <input type="email" name="email" placeholder="you@company.com" aria-label="Work email" required autocomplete="email">
+      <button class="btn-pill" type="submit" style="border:0;cursor:pointer">Request access <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3l5 5-5 5"/></svg><span class="side-glow"></span></button>
+    </form>
+    <p class="note" id="note" role="status">No card needed. We'll only email you about access.</p>
+  </div>
+  <footer>
+    <div class="wrap foot-links">
+      <span>© 2026 Flowpilot</span>
+      <nav><a href="#product">Product</a><a href="#how">How it works</a><a href="#trust">Safety</a><a href="#faq">FAQ</a></nav>
+    </div>
+    <div class="wordmark" aria-hidden="true">Flowpilot</div>
+  </footer>
+</section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script>
+// nav state
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+// form: front-end only, no backend yet
+document.getElementById('form').addEventListener('submit',e=>{
+  e.preventDefault();
+  const i=e.target.email,n=document.getElementById('note');
+  if(!/^\S+@\S+\.\S+$/.test(i.value)){n.textContent='Please enter a valid email address.';i.focus();return}
+  n.textContent='Thanks! You are on the list.';i.value='';
+});
+
+// hero prompt: cycle through example instructions
+const typed=document.getElementById('typed');
+const lines=["Turn Friday's standup thread into Notion tasks…","Draft replies to every client email waiting on us…","Post a weekly digest of shipped work to #team…"];
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches){
+  let li=0,ci=0,del=false;
+  (function tick(){
+    const s=lines[li];
+    typed.textContent=s.slice(0,ci);
+    if(!del&&ci<s.length){ci++;setTimeout(tick,45)}
+    else if(!del){del=true;setTimeout(tick,2200)}
+    else if(ci>0){ci-=2;if(ci<0)ci=0;setTimeout(tick,18)}
+    else{del=false;li=(li+1)%lines.length;setTimeout(tick,300)}
+  })();
+}
+
+// card spotlight (desktop)
+function initCursorEffects(){
+  document.querySelectorAll('.spot').forEach(c=>c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--x',e.clientX-r.left+'px');c.style.setProperty('--y',e.clientY-r.top+'px')}));
+  document.querySelectorAll('.btn-pill').forEach(el=>{
+    el.addEventListener('mousemove',e=>{const r=el.getBoundingClientRect();gsap.to(el,{x:(e.clientX-r.left-r.width/2)*.2,y:(e.clientY-r.top-r.height/2)*.3,duration:.4,ease:'power3.out'})});
+    el.addEventListener('mouseleave',()=>gsap.to(el,{x:0,y:0,duration:.6,ease:'elastic.out(1,.4)'}));
+  });
+}
+
+function initMotion(){
+  // hero cascade
+  const h=SplitText.create('.hero h1',{type:'words,lines',mask:'lines'});
+  gsap.from(h.words,{yPercent:110,rotateX:-40,opacity:0,transformOrigin:'50% 100%',duration:1.1,ease:'expo.out',stagger:.06,delay:.15});
+  gsap.from('.hero [data-fade]',{y:24,opacity:0,duration:.9,ease:'power3.out',stagger:.08,delay:.5});
+  gsap.from('.mock-el',{y:80,rotateX:14,opacity:0,transformPerspective:1200,duration:1.4,ease:'power3.out',delay:.7});
+
+  // reveals
+  gsap.utils.toArray('[data-reveal]').forEach(g=>{
+    gsap.from(g.children,{y:40,opacity:0,duration:.9,ease:'power3.out',stagger:.08,scrollTrigger:{trigger:g,start:'top 85%'}});
+  });
+  // headings
+  gsap.utils.toArray('[data-split]').forEach(el=>{
+    SplitText.create(el,{type:'lines',mask:'lines',autoSplit:true,onSplit:s=>gsap.from(s.lines,{yPercent:100,duration:1,ease:'expo.out',stagger:.1,scrollTrigger:{trigger:el,start:'top 88%'}})});
+  });
+  // scroll-fill: one timeline, lines strictly in sequence
+  gsap.utils.toArray('.fill-text').forEach(el=>SplitText.create(el,{
+    type:'lines',linesClass:'line',autoSplit:true,
+    onSplit:self=>{
+      const tl=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{trigger:el,start:'top 80%',end:'bottom 35%',scrub:.5}});
+      self.lines.forEach(l=>tl.to(l,{backgroundPosition:'0% 0',duration:1}));
+      return tl;
+    }}));
+  // stacking steps: dim with brightness, late and gentle
+  gsap.utils.toArray('.step').forEach((card,i,all)=>{
+    if(i===all.length-1)return;
+    gsap.fromTo(card,{scale:1,filter:'brightness(1)'},{scale:.95,filter:'brightness(0.7)',ease:'power1.in',
+      scrollTrigger:{trigger:all[i+1],start:'top 45%',end:'top 112px',scrub:true}});
+  });
+}
+
+document.fonts.ready.then(()=>{
+  gsap.registerPlugin(ScrollTrigger,SplitText);
+  gsap.matchMedia().add({motion:'(prefers-reduced-motion: no-preference)',desktop:'(min-width:769px)'},ctx=>{
+    const {motion,desktop}=ctx.conditions;
+    if(!motion)return;
+    const lenis=new Lenis({lerp:.1,smoothWheel:true});
+    lenis.on('scroll',ScrollTrigger.update);
+    const tick=t=>lenis.raf(t*1000);
+    gsap.ticker.add(tick);gsap.ticker.lagSmoothing(0);
+    initMotion();
+    if(desktop)initCursorEffects();
+    return()=>{gsap.ticker.remove(tick);lenis.destroy()};
+  });
+});
+</script>
+</body>
+</html>

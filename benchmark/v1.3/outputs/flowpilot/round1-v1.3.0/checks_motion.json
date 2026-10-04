@@ -1,0 +1,21 @@
+{
+ "static": {
+  "reduced_motion_css": true,
+  "gsap_matchmedia": true,
+  "transition_all": 0,
+  "scale0": 0,
+  "layout_tween": 0,
+  "linear_spatial": 0,
+  "webgl": false
+ },
+ "runtime": {
+  "console_errors": [],
+  "canvas": 0,
+  "hover_transition_max_s": 0.2,
+  "mobile_overflow_px": 0,
+  "mobile_canvas_rendering": 0,
+  "rm_infinite_css_anims": 0,
+  "rm_h1_opacity": 1
+ },
+ "issues": []
+}

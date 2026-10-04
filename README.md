@@ -52,7 +52,7 @@ Click any screenshot to open the live page; the animations don't show in a still
 | API cost per page | ~$2.70 | ~$0.70 |
 | Opens its own page in a browser and fixes issues | yes | no |
 
-The checks are mechanical, for example: design tokens on `:root`, tight display tracking, a real light source (large-blur glow), hairline borders, scroll-driven motion, `prefers-reduced-motion`, a marquee, responsive breakpoints, no lorem ipsum and no emoji icons. The scoring script and raw results are in [`benchmark/`](benchmark/). The skill costs more time and tokens because it plans a direction, builds richer sections and reviews its own output.
+The checks are mechanical, for example: design tokens on `:root`, tight display tracking, a real light source (large-blur glow), hairline borders, scroll-driven motion, `prefers-reduced-motion`, a marquee, responsive breakpoints, no lorem ipsum and no emoji icons. The scoring script and raw results are in [`benchmark/`](benchmark/). The motion and WebGL additions of v1.3.0 have their own small A/B check: [`benchmark/v1.3/`](benchmark/v1.3/README.md). The skill costs more time and tokens because it plans a direction, builds richer sections and reviews its own output.
 
 ## Need it built for real? Hire me.
 

@@ -1,0 +1,504 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bence Kovács — UX/UI Designer</title>
+<meta name="description" content="Bence Kovács is a UX/UI designer crafting calm, precise interfaces for fintech, health and developer products.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#000;--bg-2:#0A0A0A;--card:#111;--card-2:#191919;
+  --fg:#fff;--fg-2:rgb(255 255 255/.62);--fg-3:rgb(255 255 255/.5);--line:rgb(255 255 255/.1);
+  --accent:#D4FF3A;
+  --font:"Figtree",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace;
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{font:400 17px/1.55 var(--font);color:var(--fg);background:var(--bg);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--accent);color:#000}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{width:min(1280px,100% - 48px);margin-inline:auto}
+.mono{font:500 12px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--fg-3)}
+
+/* nav */
+nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:6px;padding:6px;border-radius:999px;
+  background:rgb(10 10 10/.6);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--line)}
+nav a{font-size:12px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;padding:10px 16px;border-radius:999px;color:var(--fg-2);transition:color .3s,background .3s}
+nav a:hover{color:#fff;background:rgb(255 255 255/.08)}
+nav a.cta{background:#fff;color:#000}
+nav a.cta:hover{background:var(--accent)}
+.logo{font-weight:600;color:#fff;padding:10px 14px 10px 16px;font-size:14px;letter-spacing:-.01em}
+.logo i{display:inline-block;width:6px;height:6px;background:var(--accent);margin-left:2px;border-radius:1px}
+
+/* hero */
+.hero{position:relative;min-height:100svh;display:grid;align-content:end;overflow:hidden;padding:120px 0 40px;isolation:isolate}
+#gl{position:absolute;inset:0;width:100%;height:100%;z-index:-2;display:block}
+.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:
+  radial-gradient(ellipse 80% 50% at 50% 100%,#000 10%,transparent 70%),
+  linear-gradient(180deg,rgb(0 0 0/.45),transparent 30%)}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:200px;z-index:-1;background:linear-gradient(transparent,#000)}
+.badge{display:inline-flex;align-items:center;gap:10px;padding:8px 14px 8px 10px;border:1px solid var(--line);border-radius:999px;background:rgb(0 0 0/.4);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font-size:13px;color:var(--fg-2)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 rgb(212 255 58/.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgb(212 255 58/0)}100%{box-shadow:0 0 0 0 rgb(212 255 58/0)}}
+.name{font-size:clamp(64px,17.5vw,270px);font-weight:500;line-height:.82;letter-spacing:-.045em;text-transform:uppercase;margin:28px 0 36px;white-space:nowrap}
+.name .l2{display:block;color:transparent;-webkit-text-stroke:1.5px rgb(255 255 255/.85)}
+.caret{display:inline-block;width:.32em;height:.07em;margin-left:.06em;background:var(--accent);animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero-foot{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:28px}
+.hero-foot p{max-width:460px;font-size:clamp(17px,1.6vw,21px);color:var(--fg-2);line-height:1.4;letter-spacing:-.01em}
+.hero-foot p b{color:#fff;font-weight:500}
+.btns{display:flex;gap:10px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:15px 24px;border-radius:999px;font-weight:600;font-size:15px;transition:transform .3s var(--ease),background .3s,border-color .3s,box-shadow .3s}
+.btn svg{width:16px;height:16px;transition:transform .3s var(--ease)}
+.btn:hover svg{transform:translateX(3px)}
+.btn.w{background:#fff;color:#000}
+.btn.w:hover{background:var(--accent);box-shadow:0 0 40px -6px rgb(212 255 58/.6)}
+.btn.g{border:1px solid rgb(255 255 255/.2);background:rgb(0 0 0/.3);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.btn.g:hover{border-color:rgb(255 255 255/.5)}
+.btn:active{transform:translateY(1px)}
+.scroll-hint{position:absolute;right:24px;top:50%;writing-mode:vertical-rl;display:none}
+@media(min-width:1100px){.scroll-hint{display:block}}
+
+/* marquee */
+.marq{border-block:1px solid var(--line);overflow:hidden;padding:36px 0;background:#000;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;width:max-content;animation:mq 38s linear infinite}
+.marq:hover .track{animation-play-state:paused}
+.track span{font-size:clamp(48px,8vw,110px);font-weight:500;letter-spacing:-.04em;line-height:1;padding-right:.5em;display:flex;align-items:center;gap:.5em;white-space:nowrap}
+.track svg{width:.8em;height:.8em;stroke:var(--accent);fill:none;stroke-width:1.2}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+section{padding:clamp(88px,12vw,168px) 0}
+.sec-h{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:56px;flex-wrap:wrap}
+h2{font-size:clamp(40px,6vw,88px);font-weight:500;line-height:1;letter-spacing:-.045em;text-wrap:balance}
+h2 .dim{color:rgb(255 255 255/.45)}
+h2 u{text-decoration:none;color:var(--accent)}
+
+/* work: stacking cards */
+.stack{display:grid;gap:34vh;padding-bottom:10vh}
+.pcard{position:sticky;border-radius:28px;background:var(--card);border:1px solid var(--line);overflow:hidden;
+  display:grid;grid-template-columns:1fr 1.25fr;min-height:min(620px,78vh);filter:brightness(1);transform-origin:50% 0}
+.pcard:nth-child(1){top:96px}.pcard:nth-child(2){top:112px}.pcard:nth-child(3){top:128px}.pcard:nth-child(4){top:144px}
+.pinfo{padding:clamp(28px,4vw,56px);display:flex;flex-direction:column;justify-content:space-between;gap:32px}
+.pinfo h3{font-size:clamp(34px,4.4vw,64px);font-weight:500;letter-spacing:-.04em;line-height:1;margin:18px 0 16px}
+.pinfo h3 i{font-style:normal;color:var(--accent)}
+.pinfo p{color:var(--fg-2);max-width:420px}
+.tags{display:flex;gap:8px;flex-wrap:wrap}
+.tags span{font-size:12px;padding:7px 12px;border:1px solid var(--line);border-radius:999px;color:var(--fg-2)}
+.metrics{display:flex;gap:36px;border-top:1px solid var(--line);padding-top:24px}
+.metrics b{display:block;font-size:34px;font-weight:500;letter-spacing:-.04em;line-height:1}
+.metrics small{font-size:12px;color:var(--fg-3)}
+.pvis{position:relative;background:var(--bg-2);border-left:1px solid var(--line);display:grid;place-items:center;overflow:hidden;padding:32px}
+.pvis::before{content:"";position:absolute;width:420px;height:420px;border-radius:50%;background:var(--accent);opacity:.12;filter:blur(110px);top:-120px;right:-80px}
+.pvis.b2::before{background:#8cf;left:-100px;top:auto;bottom:-140px;right:auto}
+.pvis.b3::before{background:#ff7a3a;opacity:.1}
+.pvis.b4::before{background:#c8a0ff;opacity:.1}
+/* mini UI pieces */
+.ui{position:relative;width:min(100%,460px);border:1px solid var(--line);border-radius:18px;background:linear-gradient(160deg,#1b1b1b,#0c0c0c);padding:18px;box-shadow:inset 0 1px 0 rgb(255 255 255/.08);transition:transform .7s var(--ease)}
+.pcard:hover .ui{transform:translateY(-6px) rotate(-.6deg)}
+.ui-bar{display:flex;gap:6px;margin-bottom:16px}
+.ui-bar i{width:8px;height:8px;border-radius:50%;background:rgb(255 255 255/.18)}
+.row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);font-size:14px}
+.row:last-child{border:0}
+.row em{font-style:normal;color:var(--fg-3);font:400 12px var(--mono)}
+.pill{padding:4px 10px;border-radius:999px;font-size:11px;background:rgb(212 255 58/.14);color:var(--accent)}
+.big{font-size:42px;font-weight:500;letter-spacing:-.04em;line-height:1;margin:6px 0 4px}
+.spark{display:block;width:100%;height:80px;margin:10px 0}
+.spark path{fill:none;stroke:var(--accent);stroke-width:2;stroke-dasharray:600;stroke-dashoffset:600;transition:stroke-dashoffset 2s var(--ease)}
+.pcard.in .spark path{stroke-dashoffset:0}
+.bars{display:flex;align-items:flex-end;gap:8px;height:120px;margin:12px 0}
+.bars i{flex:1;background:rgb(255 255 255/.12);border-radius:5px 5px 2px 2px;height:var(--h)}
+.bars i.a{background:var(--accent)}
+.node{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;font-size:13px;background:#0e0e0e}
+.node+.node{margin-top:22px}
+.node+.node::before{content:"";position:absolute;margin:-23px 0 0 20px;width:1px;height:22px;background:linear-gradient(var(--accent),transparent)}
+.node b{width:26px;height:26px;border-radius:8px;background:rgb(212 255 58/.14);color:var(--accent);display:grid;place-items:center;font:500 12px var(--mono)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.chips i{font-style:normal;font-size:12px;padding:6px 11px;border-radius:8px;border:1px solid var(--line);color:var(--fg-2)}
+.toggle{width:38px;height:22px;border-radius:999px;background:var(--accent);position:relative}
+.toggle::after{content:"";position:absolute;right:3px;top:3px;width:16px;height:16px;border-radius:50%;background:#000}
+.toggle.off{background:#333}.toggle.off::after{right:auto;left:3px;background:#777}
+
+/* about */
+.about{background:var(--bg-2);border-block:1px solid var(--line)}
+.fill{font-size:clamp(30px,4.6vw,68px);line-height:1.08;letter-spacing:-.04em;font-weight:500;max-width:1100px}
+.fill .w{color:rgb(255 255 255/.2);transition:color .35s}
+.fill .w.on{color:#fff}
+.fill .w.on.k{color:var(--accent)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-top:96px}
+.stats div{background:var(--bg);padding:32px 28px}
+.stats b{display:block;font-size:clamp(44px,5vw,72px);font-weight:500;letter-spacing:-.05em;line-height:1}
+.stats span{color:var(--fg-3);font-size:14px}
+
+/* services */
+.svc{border-top:1px solid var(--line)}
+.svc a,.svc div.it{display:grid;grid-template-columns:80px 1fr 1.2fr 40px;gap:24px;align-items:center;padding:34px 0;border-bottom:1px solid var(--line);transition:padding .4s var(--ease),background .4s}
+.svc .it:hover{padding-left:16px;background:linear-gradient(90deg,rgb(212 255 58/.06),transparent)}
+.svc h3{font-size:clamp(26px,3vw,44px);font-weight:500;letter-spacing:-.035em;line-height:1.05}
+.svc p{color:var(--fg-2)}
+.svc .arr{justify-self:end;color:var(--fg-3);transition:color .3s,transform .3s var(--ease)}
+.svc .it:hover .arr{color:var(--accent);transform:translate(3px,-3px)}
+
+/* testimonials */
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.q{padding:32px;border:1px solid var(--line);border-radius:24px;background:linear-gradient(160deg,var(--card-2),var(--card));display:flex;flex-direction:column;justify-content:space-between;gap:36px;transition:transform .4s var(--ease),border-color .4s}
+.q:hover{transform:translateY(-4px);border-color:rgb(255 255 255/.28)}
+.q p{font-size:20px;line-height:1.4;letter-spacing:-.015em}
+.who{display:flex;align-items:center;gap:12px;font-size:14px}
+.who i{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#333,#111);border:1px solid var(--line);display:grid;place-items:center;font:500 13px var(--mono);font-style:normal;color:var(--accent)}
+.who small{display:block;color:var(--fg-3)}
+
+/* contact */
+.cta-sec{position:relative;overflow:hidden;text-align:center;border-top:1px solid var(--line);isolation:isolate}
+.cta-sec::before{content:"";position:absolute;left:50%;bottom:-340px;width:900px;height:620px;transform:translateX(-50%);background:radial-gradient(closest-side,rgb(212 255 58/.5),transparent);filter:blur(60px);z-index:-1;opacity:.55}
+.cta-sec h2{font-size:clamp(48px,10vw,160px);line-height:.9;margin-bottom:40px}
+.mail{display:inline-block;font-size:clamp(20px,3vw,40px);letter-spacing:-.03em;border-bottom:1px solid rgb(255 255 255/.3);padding-bottom:6px;transition:border-color .3s,color .3s}
+.mail:hover{color:var(--accent);border-color:var(--accent)}
+.socials{display:flex;gap:12px;justify-content:center;margin-top:44px;flex-wrap:wrap}
+footer{padding:28px 0;border-top:1px solid var(--line);color:var(--fg-3);font-size:13px}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+/* cursor */
+.cur{position:fixed;left:0;top:0;width:12px;height:12px;border-radius:50%;background:#fff;mix-blend-mode:exclusion;pointer-events:none;z-index:99;transition:width .3s var(--ease),height .3s var(--ease),margin .3s var(--ease);margin:-6px 0 0 -6px}
+.cur.big{width:48px;height:48px;margin:-24px 0 0 -24px}
+@media(pointer:coarse){.cur{display:none}}
+
+/* reveal fallback: visible without JS */
+.js [data-r]{opacity:0;transform:translateY(32px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.js [data-r].in{opacity:1;transform:none}
+
+/* preloader */
+.pre{position:fixed;inset:0;z-index:200;display:flex;pointer-events:none}
+.pre i{flex:1;background:var(--accent);transform-origin:top;animation:wipe .7s var(--ease) forwards}
+.pre i:nth-child(1){animation-delay:.1s}.pre i:nth-child(2){animation-delay:.18s}.pre i:nth-child(3){animation-delay:.26s}.pre i:nth-child(4){animation-delay:.34s}.pre i:nth-child(5){animation-delay:.42s}
+@keyframes wipe{to{transform:scaleY(0)}}
+
+@media(max-width:900px){
+  .pcard{grid-template-columns:1fr;min-height:0}
+  .pvis{border-left:0;border-top:1px solid var(--line);order:-1;padding:24px 16px}
+  .pcard:nth-child(n){top:84px}
+  .stack{gap:22vh}
+  .stats{grid-template-columns:1fr 1fr}
+  .svc a,.svc div.it{grid-template-columns:40px 1fr 24px}
+  .svc p{grid-column:2/3;grid-row:2}
+  .quotes{grid-template-columns:1fr}
+  nav a:not(.cta):not(.logo){display:none}
+  .hero{padding-top:100px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001s!important;animation-iteration-count:1!important;transition-duration:.001s!important}
+  .track{animation:none}
+  .pre{display:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<div class="pre" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+<div class="cur" aria-hidden="true"></div>
+
+<nav aria-label="Primary">
+  <a class="logo" href="#top">Bence<i></i></a>
+  <a href="#work">Work</a><a href="#about">About</a><a href="#services">Services</a>
+  <a class="cta" href="#contact">Let's talk</a>
+</nav>
+
+<header class="hero" id="top">
+  <canvas id="gl" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <span class="badge" data-r><span class="dot"></span>Booking projects for November</span>
+    <h1 class="name" aria-label="Bence Kovács"><span class="l1">Bence</span><span class="l2" aria-hidden="true">Kovács<span class="caret"></span></span></h1>
+    <div class="hero-foot">
+      <p data-r><b>UX/UI designer</b> in Budapest. I shape calm, precise interfaces for fintech, health and developer tools — from the first messy sketch to the shipped pixel.</p>
+      <div class="btns" data-r>
+        <a class="btn w" href="#work">See selected work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn g" href="#contact">Start a project</a>
+      </div>
+    </div>
+  </div>
+  <span class="mono scroll-hint">Scroll ↓</span>
+</header>
+
+<div class="marq" aria-hidden="true">
+  <div class="track">
+    <script>document.write(Array(8).fill('<span>Selected Work <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><ellipse cx="12" cy="12" rx="4" ry="10"/><path d="M2 12h20M4 7h16M4 17h16"/></svg></span>').join(''))</script>
+  </div>
+</div>
+
+<main>
+<section id="work">
+  <div class="wrap">
+    <div class="sec-h">
+      <h2 data-r>Selected <span class="dim">work, 2023–25</span></h2>
+      <span class="mono" data-r>04 projects</span>
+    </div>
+    <div class="stack">
+
+      <article class="pcard">
+        <div class="pinfo">
+          <div>
+            <span class="mono">01 — Fintech · Mobile app</span>
+            <h3>Nexbot<i>_</i></h3>
+            <p>Redesigned the onboarding and budgeting flow of a neo-bank so first-time users reach their first saved goal in under two minutes.</p>
+          </div>
+          <div>
+            <div class="tags" style="margin-bottom:24px"><span>Product design</span><span>Design system</span><span>Prototyping</span></div>
+            <div class="metrics"><div><b>+38%</b><small>Activation</small></div><div><b>2:04</b><small>Time to first goal</small></div></div>
+          </div>
+        </div>
+        <div class="pvis">
+          <div class="ui">
+            <div class="ui-bar"><i></i><i></i><i></i></div>
+            <span class="mono">Savings · October</span>
+            <div class="big">€2,480.00</div>
+            <svg class="spark" viewBox="0 0 400 80" preserveAspectRatio="none"><path d="M0 70 C50 66 70 40 120 44 S190 60 230 30 S320 20 400 6"/></svg>
+            <div class="row">Holiday fund <span class="pill">On track</span></div>
+            <div class="row">Rent buffer <em>€1,200 / €1,500</em></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="pcard">
+        <div class="pinfo">
+          <div>
+            <span class="mono">02 — Health · Web platform</span>
+            <h3>Pulsewell<i>_</i></h3>
+            <p>A clinician dashboard that turns forty fields of patient data into one glanceable daily view. Built with nurses, tested on night shifts.</p>
+          </div>
+          <div>
+            <div class="tags" style="margin-bottom:24px"><span>UX research</span><span>Dashboard</span><span>Accessibility</span></div>
+            <div class="metrics"><div><b>-27%</b><small>Charting time</small></div><div><b>AAA</b><small>Contrast rating</small></div></div>
+          </div>
+        </div>
+        <div class="pvis b2">
+          <div class="ui">
+            <div class="ui-bar"><i></i><i></i><i></i></div>
+            <span class="mono">Ward 4 · Heart rate</span>
+            <div class="bars"><i style="--h:40%"></i><i style="--h:55%"></i><i style="--h:35%"></i><i class="a" style="--h:90%"></i><i style="--h:60%"></i><i style="--h:48%"></i><i style="--h:70%"></i></div>
+            <div class="row">Bed 12 · M. Szabó <span class="pill">Review</span></div>
+            <div class="row">Bed 07 · A. Varga <em>Stable</em></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="pcard">
+        <div class="pinfo">
+          <div>
+            <span class="mono">03 — Dev tools · SaaS</span>
+            <h3>Flowline<i>_</i></h3>
+            <p>Visual workflow builder for backend teams. I designed the node canvas, the command palette and a dark-first design language.</p>
+          </div>
+          <div>
+            <div class="tags" style="margin-bottom:24px"><span>Interaction design</span><span>Design language</span><span>Motion</span></div>
+            <div class="metrics"><div><b>4.8</b><small>Store rating</small></div><div><b>12k</b><small>Teams onboarded</small></div></div>
+          </div>
+        </div>
+        <div class="pvis b3">
+          <div class="ui">
+            <div class="ui-bar"><i></i><i></i><i></i></div>
+            <div class="node"><b>01</b>Webhook received</div>
+            <div class="node"><b>02</b>Transform payload</div>
+            <div class="node"><b>03</b>Notify #deploys</div>
+            <div class="chips"><i>⌘ K</i><i>Run</i><i>v2.4</i></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="pcard">
+        <div class="pinfo">
+          <div>
+            <span class="mono">04 — Brand + Web · Studio</span>
+            <h3>Oda Studio<i>_</i></h3>
+            <p>Identity, website and a small component kit for an architecture studio that wanted to feel quiet, confident and slightly strange.</p>
+          </div>
+          <div>
+            <div class="tags" style="margin-bottom:24px"><span>Art direction</span><span>Web design</span><span>Type</span></div>
+            <div class="metrics"><div><b>3×</b><small>Inbound enquiries</small></div><div><b>6 wk</b><small>Brief to launch</small></div></div>
+          </div>
+        </div>
+        <div class="pvis b4">
+          <div class="ui">
+            <div class="ui-bar"><i></i><i></i><i></i></div>
+            <span class="mono">Preferences</span>
+            <div class="row">Dark interface <span class="toggle"></span></div>
+            <div class="row">Reduced motion <span class="toggle off"></span></div>
+            <div class="row">Project updates <span class="toggle"></span></div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <span class="mono" data-r style="display:block;margin-bottom:32px">About</span>
+    <p class="fill" id="fill">I design products people <b class="k">understand</b> in a glance and enjoy using for years. Eight years across startups and studios taught me one thing: clarity is a <b class="k">craft</b>, and every pixel is a decision someone will feel.</p>
+    <div class="stats" data-r>
+      <div><b data-count="8" data-suffix="+">8+</b><span>Years designing</span></div>
+      <div><b data-count="42">42</b><span>Products shipped</span></div>
+      <div><b data-count="19">19</b><span>Happy clients</span></div>
+      <div><b data-count="3">3</b><span>Design awards</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="sec-h"><h2 data-r>What I <span class="dim">do best</span></h2><span class="mono" data-r>Services</span></div>
+    <div class="svc" data-r>
+      <div class="it"><span class="mono">01</span><h3>Product design</h3><p>End-to-end UX and UI for web and mobile: flows, wireframes, high-fidelity screens and interactive prototypes.</p><span class="arr">↗</span></div>
+      <div class="it"><span class="mono">02</span><h3>Design systems</h3><p>Tokens, components and documentation in Figma, handed off in a form your engineers actually want to use.</p><span class="arr">↗</span></div>
+      <div class="it"><span class="mono">03</span><h3>UX research &amp; audits</h3><p>Interviews, usability tests and heuristic reviews that end in a prioritised, honest list of what to fix first.</p><span class="arr">↗</span></div>
+      <div class="it"><span class="mono">04</span><h3>Brand &amp; web</h3><p>Identity systems and marketing sites with a point of view, designed and prototyped to be built.</p><span class="arr">↗</span></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-h"><h2 data-r>Kind <span class="dim">words</span></h2><span class="mono" data-r>Testimonials</span></div>
+    <div class="quotes" data-r>
+      <figure class="q"><p>“Bence untangled a product we'd been patching for three years. The new onboarding paid for itself in a quarter.”</p><figcaption class="who"><i>AL</i><span>Anna Lakatos<small>CPO, Nexbot</small></span></figcaption></figure>
+      <figure class="q"><p>“He sat with our nurses on night shift before drawing a single screen. That's why it works.”</p><figcaption class="who"><i>DT</i><span>Dr. Dániel Tóth<small>Head of Digital, Pulsewell</small></span></figcaption></figure>
+      <figure class="q"><p>“Rare mix of taste and rigor. Our dev team shipped the system in half the time we planned.”</p><figcaption class="who"><i>MR</i><span>Marcus Reyes<small>CTO, Flowline</small></span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="cta-sec" id="contact">
+  <div class="wrap">
+    <span class="mono" data-r style="display:block;margin-bottom:28px">Available from November</span>
+    <h2 data-r>Let's make<br>something <u>good</u><span class="caret"></span></h2>
+    <a class="mail" data-r href="mailto:hello@bencekovacs.design">hello@bencekovacs.design</a>
+    <div class="socials" data-r>
+      <a class="btn g" href="#">Dribbble</a><a class="btn g" href="#">LinkedIn</a><a class="btn g" href="#">Read.cv</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><span>© 2025 Bence Kovács</span><span>Designed &amp; built in Budapest</span></div></footer>
+
+<script>
+document.documentElement.classList.add('js');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- WebGL shader background ---------- */
+(function(){
+  const c = document.getElementById('gl');
+  const gl = c.getContext('webgl',{antialias:false,alpha:false,powerPreference:'low-power'});
+  if(!gl){c.style.background='radial-gradient(60% 60% at 70% 30%,#1c2410,#000)';return;}
+  const vs='attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+  const fs=`precision mediump float;
+  uniform vec2 r;uniform float t;uniform vec2 m;
+  float h(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+  float n(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);
+    return mix(mix(h(i),h(i+vec2(1,0)),f.x),mix(h(i+vec2(0,1)),h(i+vec2(1,1)),f.x),f.y);}
+  float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<5;i++){v+=a*n(p);p=p*2.02+vec2(1.7,9.2);a*=.5;}return v;}
+  void main(){
+    vec2 uv=gl_FragCoord.xy/r;vec2 p=(gl_FragCoord.xy-.5*r)/r.y;
+    vec2 mm=(m-.5)*vec2(r.x/r.y,1.);
+    // domain-warped smoke with a cursor ripple
+    float d=length(p-mm*vec2(1.,1.));
+    p+=.06*sin(d*18.-t*2.)*exp(-d*3.5)*normalize(p-mm+1e-4);
+    vec2 q=vec2(fbm(p*1.6+t*.05),fbm(p*1.6+vec2(5.2,1.3)-t*.04));
+    float f=fbm(p*1.8+2.4*q+t*.03);
+    float ridge=smoothstep(.45,.9,f)*(1.-smoothstep(.0,1.,uv.y*.7));
+    vec3 acc=vec3(.831,1.,.227);
+    vec3 col=vec3(.02)+vec3(.07)*f*f;
+    col+=acc*pow(ridge,2.2)*.55;
+    col+=acc*.12*exp(-length(p-vec2(.35,.1))*2.2);
+    col+=vec3(.9)*.05*smoothstep(.6,1.,f);
+    col*=1.-.55*dot(uv-.5,uv-.5)*2.;
+    col+=(h(gl_FragCoord.xy+t)-.5)*.025;
+    gl_FragColor=vec4(col,1.);
+  }`;
+  const mk=(type,src)=>{const s=gl.createShader(type);gl.shaderSource(s,src);gl.compileShader(s);return s;};
+  const pr=gl.createProgram();gl.attachShader(pr,mk(gl.VERTEX_SHADER,vs));gl.attachShader(pr,mk(gl.FRAGMENT_SHADER,fs));gl.linkProgram(pr);
+  if(!gl.getProgramParameter(pr,gl.LINK_STATUS)){c.style.background='radial-gradient(60% 60% at 70% 30%,#1c2410,#000)';return;}
+  gl.useProgram(pr);
+  const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);
+  gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([-1,-1,3,-1,-1,3]),gl.STATIC_DRAW);
+  const a=gl.getAttribLocation(pr,'p');gl.enableVertexAttribArray(a);gl.vertexAttribPointer(a,2,gl.FLOAT,false,0,0);
+  const U={r:gl.getUniformLocation(pr,'r'),t:gl.getUniformLocation(pr,'t'),m:gl.getUniformLocation(pr,'m')};
+  let mx=.7,my=.5,tx=.7,ty=.5,vis=true,start=performance.now();
+  const size=()=>{const s=Math.min(devicePixelRatio,1.5)*(innerWidth<768?.6:.75);
+    c.width=Math.max(2,c.clientWidth*s);c.height=Math.max(2,c.clientHeight*s);gl.viewport(0,0,c.width,c.height);};
+  size();addEventListener('resize',size);
+  addEventListener('pointermove',e=>{const R=c.getBoundingClientRect();tx=(e.clientX-R.left)/R.width;ty=1-(e.clientY-R.top)/R.height;},{passive:true});
+  new IntersectionObserver(e=>vis=e[0].isIntersecting).observe(c);
+  const draw=now=>{
+    mx+=(tx-mx)*.06;my+=(ty-my)*.06;
+    gl.uniform2f(U.r,c.width,c.height);gl.uniform1f(U.t,reduce?8:(now-start)/1000);gl.uniform2f(U.m,mx,my);
+    gl.drawArrays(gl.TRIANGLES,0,3);
+  };
+  if(reduce){draw(performance.now());addEventListener('resize',()=>draw(performance.now()));return;}
+  (function loop(now){if(vis&&!document.hidden)draw(now);requestAnimationFrame(loop);})(performance.now());
+})();
+
+/* ---------- cursor ---------- */
+(function(){
+  const cur=document.querySelector('.cur');if(!cur||matchMedia('(pointer:coarse)').matches)return;
+  addEventListener('pointermove',e=>{cur.style.transform=`translate(${e.clientX}px,${e.clientY}px)`},{passive:true});
+  document.querySelectorAll('a,.it,.q').forEach(el=>{el.addEventListener('pointerenter',()=>cur.classList.add('big'));el.addEventListener('pointerleave',()=>cur.classList.remove('big'));});
+})();
+
+/* ---------- reveals ---------- */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){
+  const sib=[...e.target.parentElement.children].filter(x=>x.hasAttribute('data-r'));
+  e.target.style.transitionDelay=(Math.max(0,sib.indexOf(e.target))*80)+'ms';
+  e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.15});
+document.querySelectorAll('[data-r]').forEach(el=>reduce?el.classList.add('in'):io.observe(el));
+
+/* ---------- project cards: draw-in + stack dimming ---------- */
+const cards=[...document.querySelectorAll('.pcard')];
+new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&e.target.classList.add('in')),{threshold:.3}).observe&&cards.forEach(c=>
+  new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&c.classList.add('in')),{threshold:.3}).observe(c));
+function stackFx(){
+  if(reduce||innerWidth<900)return cards.forEach(c=>{c.style.transform='';c.style.filter=''});
+  cards.forEach((c,i)=>{
+    const nx=cards[i+1];if(!nx)return;
+    const top=parseFloat(getComputedStyle(nx).top), y=nx.getBoundingClientRect().top;
+    // dim only once the next card covers about half the viewport; ease-in; keep brightness >= .65
+    const p=Math.min(1,Math.max(0,(innerHeight*.45-y)/(innerHeight*.45-top)));
+    const e=p*p;
+    c.style.transform=`scale(${1-.05*e})`;c.style.filter=`brightness(${1-.3*e})`;
+  });
+}
+addEventListener('scroll',stackFx,{passive:true});addEventListener('resize',stackFx);stackFx();
+
+/* ---------- scroll-fill statement (word by word, plain scroll math) ---------- */
+(function(){
+  const el=document.getElementById('fill');if(!el)return;
+  const walk=(node,cls)=>{[...node.childNodes].forEach(n=>{
+    if(n.nodeType===3){const f=document.createDocumentFragment();
+      n.textContent.split(/(\s+)/).forEach(t=>{if(!t)return;if(/^\s+$/.test(t)){f.append(t);return}
+        const s=document.createElement('span');s.className='w'+(cls?' '+cls:'');s.textContent=t;f.append(s);});
+      n.replaceWith(f);}
+    else if(n.nodeType===1)walk(n,n.className);});};
+  walk(el,'');
+  const ws=[...el.querySelectorAll('.w')];
+  const upd=()=>{const r=el.getBoundingClientRect();
+    const p=reduce?1:Math.min(1,Math.max(0,(innerHeight*.8-r.top)/(r.height+innerHeight*.25)));
+    const n=Math.round(p*ws.length);ws.forEach((w,i)=>w.classList.toggle('on',i<n));};
+  addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd();
+})();
+
+/* ---------- counters ---------- */
+document.querySelectorAll('[data-count]').forEach(el=>{
+  if(reduce)return;
+  const end=+el.dataset.count,suf=el.dataset.suffix||'';
+  new IntersectionObserver((es,ob)=>{if(!es[0].isIntersecting)return;ob.disconnect();
+    const t0=performance.now();(function f(t){const k=Math.min(1,(t-t0)/1600),v=1-Math.pow(1-k,3);
+      el.textContent=Math.round(end*v)+suf;if(k<1)requestAnimationFrame(f);})(t0);
+  },{threshold:.6}).observe(el);
+});
+</script>
+</body>
+</html>

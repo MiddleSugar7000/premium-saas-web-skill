@@ -5,7 +5,7 @@ license: MIT
 metadata:
   author: MiddleSugar7000
   homepage: https://github.com/MiddleSugar7000/premium-saas-web-skill
-  version: "1.2.0"
+  version: "1.3.0"
 ---
 
 # Premium SaaS Web
@@ -73,7 +73,8 @@ The recipes are copy-ready CSS/HTML/JS. Your direction's `style.md` already hold
 | Product mockup in the hero (browser frame **or desktop-app device with OS chrome**), screenshot gallery, bento grid with mini-UIs | `shared/product-proof.md` |
 | Glass nav, section-aware pill nav, eyebrow badge & avatar stack, handwritten annotations, soft white cards, card spotlight, marquees, pricing (3-tier, **photo-backed single price, or plain single-price card**), FAQ, footer wordmark | `shared/components.md` |
 | Any named brand with an icon (integrations, logo strip, orbit, "works with") | `shared/logos.md` |
-| GSAP + Lenis boilerplate, reveals, counters, stacking cards, CSS-only tone-shifting story stack, pinned UI-chip wall, pinned scroll, hover, gotchas | `shared/motion.md` |
+| GSAP + Lenis boilerplate, timing/easing table, `gsap.matchMedia()` reduced-motion pattern, reveals, counters, stacking cards, CSS-only tone-shifting story stack, pinned UI-chip wall, pinned scroll, hover, gotchas, native CSS scroll-driven motion | `shared/motion.md` |
+| Shader/WebGL background, particle field, bloom (Three.js, with CSS fallback and mobile gate) | `shared/webgl.md` |
 
 A full landing page usually needs all of them; a single section or a small edit needs only its row. All GSAP plugins incl. SplitText are free since 3.13, load them from jsDelivr.
 
@@ -97,7 +98,8 @@ Open the page in a browser and screenshot at 1440px and 390px, if you can. Check
 - [ ] At least one sculpted light source per dark section; no flat rectangles of pure color.
 - [ ] Borders are hairlines (1px, 6–20% alpha), radii are consistent (pick a scale: 8/12/20/28/999).
 - [ ] Buttons have hover states that change *light* (glow tightens, sheen shifts, arrow nudges 2–4px), not just color.
-- [ ] Motion: hero text reveal, scroll-triggered fades with stagger, at least one scrubbed effect, marquee. All disabled under `prefers-reduced-motion`.
+- [ ] Motion: hero text reveal, scroll-triggered fades with stagger, at least one scrubbed effect, marquee. All disabled under `prefers-reduced-motion` (via `gsap.matchMedia()`), durations taken from the timing table in `shared/motion.md`, nothing animates width/height/top/left.
+- [ ] If WebGL is used: CSS glow underneath as fallback, DPR capped, renders only while visible, skipped on mobile/low-core devices, text stays in HTML.
 - [ ] Every real brand named on the page has its real logo (or no icon). No initial-letter squares.
 - [ ] If Warm Playful: the hero device is a real-looking OS (menubar, dock, app menu) built in HTML, bleeds off one edge, and has at most two Caveat notes; story cards stick with a 16px `top` step and a tone change per card; keyword colors appear on single words only and pass 4.5:1; the accent is still the green (unless the user gave a brand color) and gold appears only at the end of the CTA gradient; one-time pricing is a single white card (photo-backed if you have a photo, plain otherwise), with any free trial as a line inside it.
 - [ ] No lorem ipsum. Copy is specific to the product: concrete numbers, real-sounding features.

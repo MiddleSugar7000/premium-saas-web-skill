@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Clipnest — a $9 clipboard manager for Mac and Windows</title>
+<meta name="description" content="Clipnest lives in your menu bar and remembers everything you copy. Offline, no account, $9 once.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Nunito:wght@600;800&family=Rethink+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --page:#F5F5F3;--cream:#FAF6ED;--mint:#F1F5EC;--card:#fff;
+  --ink:#1D1D1F;--ink-2:#2D2F33;--ink-3:#6E6E73;--line:rgb(0 0 0/.08);
+  --accent:#4F7F40;
+  --g-0:#12211A;--g-1:#1B2F22;--g-2:#3F5A34;--gold-1:#8A7A3A;--gold-2:#C99A3F;
+  --cta-grad:linear-gradient(100deg,var(--g-0) 0%,var(--g-1) 30%,var(--g-2) 52%,var(--gold-1) 76%,var(--gold-2) 100%);
+  --dark-btn:linear-gradient(#2A2A2A,#0A0A0A);
+  --k-copy:#1FA866;--k-link:#3A86D6;--k-code:#8E55D8;
+  --soft:0 1px 2px rgb(0 0 0/.03),0 8px 28px -12px rgb(0 0 0/.08);
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--page);color:var(--ink-2);font:400 16px/1.55 "Rethink Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,.disp{font-family:"Nunito",sans-serif;font-weight:800;color:var(--ink)}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1160px;margin:0 auto;padding:0 24px}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.03em;color:var(--accent);margin-bottom:14px;display:block}
+h2{font-size:clamp(34px,4.4vw,56px);letter-spacing:-.03em;line-height:1.04}
+.sub{color:var(--ink-3);max-width:540px;margin-top:16px}
+section{position:relative}
+.sec{padding:clamp(80px,12vw,160px) 0}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:999px;background:var(--dark-btn);color:#fff;font-weight:600;font-size:15px;
+  border:1px solid rgb(255 255 255/.08);box-shadow:inset 0 1px 0 rgb(255 255 255/.12),0 12px 24px -12px rgb(0 0 0/.5);transition:transform .3s var(--ease),box-shadow .3s}
+.btn svg{width:16px;height:16px;transition:transform .3s var(--ease)}
+.btn:hover svg{transform:translateX(3px)}.btn:active{transform:translateY(1px)}
+.btn-grad{background:var(--cta-grad);border-radius:24px;padding:20px 40px;font-size:19px;box-shadow:inset 0 1px 0 rgb(255 255 255/.14),0 18px 40px -16px rgb(0 0 0/.6)}
+.btn-ghost{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:var(--soft)}
+
+/* nav */
+.di{position:fixed;top:12px;left:50%;translate:-50% 0;z-index:60}
+.di nav,.di-mini{display:flex;align-items:center;gap:6px;padding:6px;border-radius:999px;background:#0A0A0A;color:#fff;box-shadow:0 14px 34px -14px rgb(0 0 0/.55)}
+.di nav a{padding:8px 14px;font-size:14px;font-weight:500;opacity:.75;transition:opacity .2s}
+.di nav a:hover{opacity:1}
+.di nav .logo{opacity:1;font:800 16px "Nunito";display:flex;align-items:center;gap:8px;padding-right:20px}
+.di .buy{background:#fff;color:#0A0A0A;opacity:1;font-weight:600;border-radius:999px}
+.di-mini{display:none;gap:10px;padding:6px 6px 6px 14px;font-size:12px;font-weight:600}
+.di[data-state=mini] nav{display:none}.di[data-state=mini] .di-mini{display:flex}
+.di-label{min-width:60px;transition:opacity .2s}
+.di-cta{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#7DB36B;color:#0A0A0A;font-weight:800}
+.appicon{width:26px;height:26px;flex:none}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.2fr 1fr;align-items:center;min-height:100svh;overflow:hidden;padding-top:60px}
+.hero-device{margin-left:-14vw;position:relative}
+.laptop{width:min(860px,62vw);aspect-ratio:16/10;border:10px solid #17181A;border-radius:22px 22px 6px 6px;position:relative;box-shadow:0 40px 80px -30px rgb(0 0 0/.45);background:#17181A}
+.laptop::after{content:"";position:absolute;left:-4%;right:-4%;bottom:-20px;height:14px;border-radius:0 0 18px 18px;background:linear-gradient(#2a2b2e,#111)}
+.screen{position:absolute;inset:0;border-radius:10px 10px 0 0;overflow:hidden;
+  background:radial-gradient(120% 70% at 20% 110%,#8FB27C 0%,transparent 60%),radial-gradient(90% 60% at 90% 100%,#D9C486 0%,transparent 60%),linear-gradient(180deg,#DDE8D2,#EFE9D2)}
+.screen::before,.screen::after{content:"";position:absolute;border-radius:50%}
+.screen::before{width:70%;height:60%;left:-12%;bottom:-32%;background:#7FA66C;opacity:.7}
+.screen::after{width:60%;height:50%;right:-10%;bottom:-28%;background:#B6A25A;opacity:.55}
+.menubar{position:relative;z-index:2;display:flex;align-items:center;gap:14px;height:7%;min-height:20px;padding:0 14px;background:rgb(255 255 255/.55);backdrop-filter:blur(12px);font-size:clamp(8px,.95vw,12px);font-weight:600;color:#1d1d1f}
+.menubar .sp{flex:1}
+.tray{width:1.6em;height:1.6em;border-radius:5px;background:#1d1d1f;display:grid;place-items:center;outline:2px solid rgb(79 127 64/.55);outline-offset:2px}
+.tray svg{width:70%}
+.app-menu{position:absolute;z-index:3;right:6%;top:9%;width:min(270px,34%);padding:8px;border-radius:12px;background:rgb(24 24 27/.96);color:#fff;font-size:clamp(7px,.85vw,11px);box-shadow:0 24px 50px -16px rgb(0 0 0/.6)}
+.app-menu .srch{display:flex;gap:6px;align-items:center;padding:6px 8px;border-radius:8px;background:rgb(255 255 255/.08);color:rgb(255 255 255/.55);margin-bottom:6px}
+.app-menu .srch b{color:#fff;font-weight:500}
+.app-menu .row{display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:7px;white-space:nowrap;overflow:hidden}
+.app-menu .row.on{background:#4F7F40}
+.app-menu .row i{width:1.5em;height:1.5em;border-radius:5px;flex:none;display:grid;place-items:center;font-style:normal;font-size:.85em;font-weight:800}
+.app-menu .row span{overflow:hidden;text-overflow:ellipsis;flex:1}
+.app-menu kbd{font:inherit;opacity:.5}
+.i-t{background:#2FD07F;color:#06301b}.i-l{background:#4A9BEA;color:#06213f}.i-c{background:#A66BEF;color:#240a4a}.i-p{background:#F2B13F;color:#3b2603}
+.dock{position:absolute;z-index:2;left:50%;bottom:3%;translate:-50% 0;display:flex;gap:8px;padding:6px 10px;border-radius:16px;background:rgb(255 255 255/.45);backdrop-filter:blur(10px)}
+.dock i{width:clamp(16px,2.8vw,34px);aspect-ratio:1;border-radius:22%;display:block}
+.dock i:nth-child(1){background:#6AA3F0}.dock i:nth-child(2){background:#F08C6A}.dock i:nth-child(3){background:#F2D26A}.dock i:nth-child(5){background:#8E8E93}
+.dock i:nth-child(4){background:#1d1d1f;display:grid;place-items:center}.dock i:nth-child(4) svg{width:62%}
+.cursor{position:absolute;z-index:4;width:16px;right:calc(6% + 90px);top:34%;filter:drop-shadow(0 2px 3px rgb(0 0 0/.4))}
+.note{font:600 22px/1 "Caveat",cursive;color:var(--ink-3);rotate:var(--r);display:inline-flex;align-items:flex-end;gap:6px;position:absolute}
+.note svg{width:54px;height:30px}
+.hero-copy{padding:40px 24px 40px 3vw;max-width:520px;position:relative}
+.badge-row{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-3);line-height:1.3;margin-bottom:12px}
+.dots{display:flex}.dots i{width:30px;height:30px;border-radius:50%;box-shadow:0 0 0 2px var(--page);margin-left:-8px;display:grid;place-items:center;font:800 12px "Nunito";color:#fff;font-style:normal}
+.dots i:first-child{margin-left:0}
+.status{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:500;color:var(--ink-3);margin-bottom:22px}
+.pulse{width:8px;height:8px;border-radius:50%;background:#3FBF6F;box-shadow:0 0 0 0 rgb(63 191 111/.5);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 9px rgb(63 191 111/0)}100%{box-shadow:0 0 0 0 rgb(63 191 111/0)}}
+.hero-copy .appicon{width:64px;height:64px;margin-bottom:20px;filter:drop-shadow(0 10px 14px rgb(0 0 0/.18))}
+h1{font-size:clamp(40px,4.6vw,62px);letter-spacing:-.033em;line-height:1.03}
+.hero-copy .sub{font-size:17px}
+.cta-row{display:flex;flex-wrap:wrap;align-items:center;gap:16px;margin:30px 0 14px}
+.price-line{font-size:13px;color:var(--ink-3)}
+.chips{display:flex;gap:8px;align-items:center;margin-top:22px;font-size:12px;color:var(--ink-3)}
+.chip{padding:5px 12px;border-radius:999px;background:#fff;box-shadow:var(--soft);color:var(--ink);font-weight:600}
+
+/* video-card-ish promise card */
+.promise{background:#fff;border-radius:28px;padding:clamp(32px,6vw,72px);box-shadow:var(--soft);text-align:center}
+.promise h2{margin-bottom:8px}
+.promise .sub{margin:0 auto}
+.flow{display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:12px;margin-top:40px}
+.flow .step{padding:14px 20px;border-radius:16px;background:var(--page);font-weight:600;color:var(--ink);display:flex;gap:10px;align-items:center}
+.flow .step kbd{font:600 12px "Rethink Sans";padding:3px 8px;border-radius:6px;background:#fff;box-shadow:0 1px 0 rgb(0 0 0/.15),0 0 0 1px var(--line)}
+.flow .arr{color:var(--ink-3)}
+
+/* bento */
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:16px;margin-top:56px}
+.card{background:#fff;border-radius:28px;padding:26px 26px 22px;box-shadow:var(--soft);display:flex;flex-direction:column;gap:18px;transition:box-shadow .3s,translate .3s var(--ease);overflow:hidden}
+.card:hover{box-shadow:0 1px 2px rgb(0 0 0/.04),0 18px 40px -14px rgb(0 0 0/.14);translate:0 -3px}
+.card h3{font-size:14px;text-transform:uppercase;letter-spacing:-.01em;font-weight:800}
+.card p{font-size:13px;color:var(--ink-3)}
+.card .ui{flex:1;min-height:150px;display:flex;flex-direction:column;justify-content:center;gap:8px}
+.b1{grid-column:span 5}.b2{grid-column:span 7}.b3{grid-column:span 4}.b4{grid-column:span 4}.b5{grid-column:span 4}
+.sbox{padding:12px 16px;border-radius:14px;background:var(--page);font-size:14px;color:var(--ink);display:flex;align-items:center;gap:8px}
+.sbox svg{width:16px;color:var(--ink-3);flex:none}
+.caret{display:inline-block;width:1.5px;height:1em;background:var(--ink);vertical-align:-2px;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.hit{padding:10px 14px;border-radius:12px;font-size:13px;display:flex;gap:10px;align-items:center;color:var(--ink)}
+.hit.on{background:var(--mint)}.hit small{margin-left:auto;color:var(--ink-3)}
+.hit b{font-weight:600;background:#E4EFD9;border-radius:4px;padding:0 2px}
+.pins{display:flex;flex-wrap:wrap;gap:8px}
+.pin{padding:8px 12px;border-radius:12px;background:var(--cream);font-size:13px;color:var(--ink);display:flex;gap:8px;align-items:center}
+.pin kbd{font:600 11px "Rethink Sans";color:var(--ink-3)}
+.lock{display:grid;place-items:center;gap:12px}
+.lock svg{width:64px;color:var(--ink)}
+.lock .dots2{display:flex;gap:6px}.lock .dots2 i{width:8px;height:8px;border-radius:50%;background:var(--ink)}
+.offline{display:flex;align-items:center;gap:14px;justify-content:center}
+.wifi{position:relative;width:70px;height:70px;display:grid;place-items:center}
+.wifi svg{width:54px;color:var(--ink)}
+.wifi::after{content:"";position:absolute;width:84px;height:3px;background:#E0523E;border-radius:3px;rotate:-40deg}
+.ping{font:600 12px ui-monospace,Menlo,Consolas,monospace;color:var(--ink-3);line-height:1.7}
+.ping b{color:var(--accent)}
+.ring{display:grid;place-items:center}
+.ring svg{width:120px;transform:rotate(-90deg)}
+.ring text{transform:rotate(90deg);transform-origin:60px 60px;font:800 22px "Nunito";fill:var(--ink)}
+.ring .tr{stroke:var(--page)}.ring .pr{stroke:var(--accent);stroke-dasharray:314;stroke-dashoffset:314;animation:ringgo 5s linear infinite}
+@keyframes ringgo{to{stroke-dashoffset:0}}
+
+/* black interlude: chip wall */
+.black{background:#0B0B0C;color:#fff;overflow:hidden;border-radius:36px;margin:0 12px}
+.wall{padding:clamp(80px,10vw,140px) 0 clamp(60px,8vw,110px)}
+.rows{display:grid;gap:14px;transform:scale(1.08);transition:transform .2s linear}
+.rowc{display:flex;gap:14px;width:max-content}
+.rowc:nth-child(odd){margin-left:-120px}.rowc:nth-child(even){margin-left:-20px}
+.gc{padding:12px 18px;border-radius:14px;border:1px solid rgb(255 255 255/.1);background:rgb(255 255 255/.04);font-size:14px;display:flex;gap:10px;align-items:center;white-space:nowrap;color:rgb(255 255 255/.8)}
+.gc i{width:8px;height:8px;border-radius:50%;flex:none}
+.gc kbd{font:600 12px "Rethink Sans";padding:2px 8px;border-radius:6px;background:rgb(255 255 255/.12);color:#fff}
+.black .over{text-align:center;margin-top:clamp(48px,7vw,90px);padding:0 24px}
+.black h2{color:#fff}.black .sub{margin:16px auto 0;color:rgb(255 255 255/.6)}
+
+/* story stack */
+.story{display:grid;gap:40vh;padding-bottom:14vh;margin-top:56px}
+.sc{position:sticky;min-height:520px;border-radius:28px;padding:40px 48px;box-shadow:0 1px 2px rgb(0 0 0/.04),0 24px 60px -24px rgb(0 0 0/.18);display:flex;flex-direction:column}
+.sc:nth-child(1){top:96px;background:#fff}
+.sc:nth-child(2){top:112px;background:var(--cream)}
+.sc:nth-child(3){top:128px;background:var(--mint)}
+.sc:nth-child(4){top:144px;background:#fff}
+.meta{display:flex;justify-content:space-between;font-size:12px;font-weight:600;color:var(--ink-3)}
+.meta span:first-child{display:flex;gap:8px;align-items:center}.meta span:first-child::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.sc p.big{font:800 clamp(28px,4vw,52px)/1.1 "Nunito";letter-spacing:-.03em;color:var(--ink);margin:auto 0;max-width:820px;padding:30px 0}
+.sc p.big em{font-style:normal}
+.k-copy{color:var(--k-copy)}.k-link{color:var(--k-link)}.k-code{color:var(--k-code)}
+.sc small{font-size:14px;color:var(--ink-3);max-width:520px}
+
+/* trust */
+.cream{background:var(--cream)}
+.trust{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.checks{list-style:none;padding:0;display:grid;gap:18px}
+.checks li{display:flex;gap:14px;align-items:flex-start;color:var(--ink-2)}
+.checks b{display:block;color:var(--ink);font-family:"Nunito";font-weight:800;font-size:18px;letter-spacing:-.01em}
+.checks svg{flex:none;width:26px;height:26px;padding:6px;border-radius:50%;background:var(--g-1);color:#fff;margin-top:2px}
+.checks span{font-size:15px;color:var(--ink-3)}
+
+/* reviews */
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:48px}
+.q{background:#fff;border-radius:28px;padding:28px;box-shadow:var(--soft);display:flex;flex-direction:column;gap:20px}
+.q p{color:var(--ink);font-size:16px}
+.who{display:flex;gap:12px;align-items:center;font-size:13px;color:var(--ink-3);line-height:1.3;margin-top:auto}
+.who i{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;color:#fff;font:800 14px "Nunito";font-style:normal}
+.who b{display:block;color:var(--ink)}
+
+/* faq */
+.faq{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px}
+.faq-side{position:sticky;top:96px;align-self:start}
+.help{margin-top:28px;background:#fff;border-radius:20px;padding:20px;box-shadow:var(--soft);font-size:14px}
+.help b{display:block;color:var(--ink);font-family:"Nunito";font-weight:800}
+.help a{display:inline-flex;gap:10px;margin-top:8px;color:var(--accent);font-weight:600}
+details{border-bottom:1px solid var(--line);padding:6px 0;border-radius:20px;transition:background .3s,box-shadow .3s}
+details[open]{background:#fff;box-shadow:var(--soft);border-color:transparent;padding:6px 20px;margin:6px 0}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:18px 0;font:800 18px "Nunito";color:var(--ink);letter-spacing:-.01em}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";flex:none;width:30px;height:30px;border-radius:50%;background:var(--page);display:grid;place-items:center;font:600 18px "Rethink Sans";transition:rotate .3s var(--ease)}
+details[open] summary::after{rotate:45deg}
+details p{padding:0 0 18px;color:var(--ink-3);max-width:560px}
+details{padding-left:0}
+
+/* pricing */
+.pricing{background:radial-gradient(90% 70% at 50% 0%,#E6EFD9 0%,transparent 70%),radial-gradient(70% 60% at 85% 100%,#F1E6C6 0%,transparent 70%),var(--page);text-align:center;overflow:hidden}
+.pc{max-width:440px;margin:44px auto 28px;padding:32px;border-radius:28px;background:#fff;color:var(--ink);text-align:left;box-shadow:0 1px 2px rgb(0 0 0/.04),0 30px 60px -24px rgb(0 0 0/.25)}
+.pc .top{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:600;color:var(--ink-3)}
+.pc .tag{padding:4px 10px;border-radius:999px;background:var(--mint);color:var(--accent)}
+.amt{font:800 104px/1 "Nunito";letter-spacing:-.05em;margin:20px 0 4px;color:var(--ink);display:flex;align-items:flex-start}
+.amt sup{font-size:36px;margin:12px 6px 0 0;letter-spacing:0}
+.per{font-size:14px;color:var(--ink-3);margin-bottom:22px}
+.pc ul{list-style:none;padding:0;display:grid;gap:10px;font-size:15px;margin-bottom:6px}
+.pc li{display:flex;gap:12px;align-items:center}
+.pc li svg{width:20px;height:20px;padding:4px;border-radius:50%;background:var(--g-1);color:#fff;flex:none}
+.pc .os{display:flex;gap:8px;margin-top:20px;padding-top:18px;border-top:1px solid var(--line);font-size:13px;color:var(--ink-3);align-items:center}
+.trustline{font-size:13px;color:var(--ink-3);margin-top:18px}
+
+/* footer */
+footer{background:var(--page);padding:60px 0 0;overflow:hidden}
+.fcols{display:flex;justify-content:space-between;flex-wrap:wrap;gap:32px;font-size:14px;color:var(--ink-3)}
+.fcols a:hover{color:var(--ink)}
+.fcols div{display:grid;gap:8px;align-content:start}.fcols b{color:var(--ink);font-family:"Nunito";font-weight:800}
+.word{font:800 clamp(90px,23vw,330px)/.8 "Nunito";letter-spacing:-.05em;color:rgb(0 0 0/.07);text-align:center;margin-top:60px;white-space:nowrap;translate:0 14%;user-select:none}
+.legal{font-size:12px;color:var(--ink-3);margin-top:36px}
+
+/* reveal */
+.js [data-r]{opacity:0;translate:0 32px}
+
+@media(max-width:1000px){
+  .hero{grid-template-columns:1fr;min-height:0;padding-top:96px}
+  .hero-copy{order:-1;padding:0 24px;max-width:none}
+  .hero-device{margin:48px 0 0 -8vw}.laptop{width:108vw}
+  .note{display:none}
+  .b1,.b2,.b3,.b4,.b5{grid-column:span 12}
+  .trust,.faq{grid-template-columns:1fr}.faq-side{position:static}
+  .quotes{grid-template-columns:1fr}
+  .sc{padding:28px 24px;min-height:440px}
+  .di nav a:not(.logo):not(.buy){display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}*{animation:none!important;transition:none!important}
+  .js [data-r]{opacity:1;translate:none}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="logo" viewBox="0 0 64 64"><rect width="64" height="64" rx="15" fill="#1B2F22"/><rect x="19" y="14" width="26" height="36" rx="6" fill="#F5F5F3"/><rect x="26" y="10" width="12" height="9" rx="3.5" fill="#C99A3F"/><path d="M25 30h14M25 36h14M25 42h8" stroke="#3F5A34" stroke-width="3" stroke-linecap="round"/></symbol>
+    <symbol id="check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  </defs>
+</svg>
+
+<header class="di" data-state="full">
+  <nav aria-label="Main">
+    <a class="logo" href="#top"><svg class="appicon"><use href="#logo"/></svg>Clipnest</a>
+    <a href="#how">How it works</a><a href="#features">Features</a><a href="#privacy">Privacy</a><a href="#faq">FAQ</a>
+    <a class="buy" href="#price">Get it, $9</a>
+  </nav>
+  <a class="di-mini" href="#price" aria-label="Jump to pricing"><svg class="appicon"><use href="#logo"/></svg><span class="di-label">Clipnest</span><span class="di-cta" aria-hidden="true">$</span></a>
+</header>
+
+<main id="top">
+<section class="hero" data-nav="Clipnest">
+  <div class="hero-device" aria-hidden="true">
+    <div class="laptop"><div class="screen">
+      <div class="menubar"><b>&#63743;</b><span>File</span><span>Edit</span><span>View</span><span class="sp"></span><span>Wed 9:41</span><span class="tray"><svg viewBox="0 0 64 64"><use href="#logo"/></svg></span></div>
+      <div class="app-menu">
+        <div class="srch"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><b>invoice</b></div>
+        <div class="row on"><i class="i-t">T</i><span>Invoice #2041 is attached</span><kbd>1</kbd></div>
+        <div class="row"><i class="i-l">L</i><span>figma.com/file/invoice-tpl</span><kbd>2</kbd></div>
+        <div class="row"><i class="i-c">&lt;&gt;</i><span>const invoice = total * 1.2</span><kbd>3</kbd></div>
+        <div class="row"><i class="i-p">&#9632;</i><span>Screenshot 9:12</span><kbd>4</kbd></div>
+        <div class="row"><i class="i-t">T</i><span>IBAN DE89 3704 0044 0532</span><kbd>5</kbd></div>
+      </div>
+      <svg class="cursor" viewBox="0 0 16 22"><path d="M1 1l13 10-6 1 3.5 8-2.5 1.2L5.6 13 1 17z" fill="#fff" stroke="#111" stroke-width="1.2" stroke-linejoin="round"/></svg>
+      <div class="dock"><i></i><i></i><i></i><i><svg viewBox="0 0 64 64"><use href="#logo"/></svg></i><i></i></div>
+    </div></div>
+    <p class="note" style="--r:-5deg;right:14%;top:-4%;left:auto;position:absolute">your whole history
+      <svg viewBox="0 0 60 30" aria-hidden="true"><path d="M2 8C20 2 42 8 54 24M44 22l10 3 0-11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
+  </div>
+
+  <div class="hero-copy">
+    <div class="badge-row" data-fade><div class="dots"><i style="background:#5E8F4E">A</i><i style="background:#C99A3F">M</i><i style="background:#3F5A34">J</i><i style="background:#8A7A3A">S</i></div><span>Loved by writers, devs<br>and spreadsheet people</span></div>
+    <div class="status" data-fade><span class="pulse"></span>Windows version is here, same price</div>
+    <svg class="appicon" data-fade role="img" aria-label="Clipnest app icon"><use href="#logo"/></svg>
+    <h1>Everything you copy,<br>right where you left it.</h1>
+    <p class="sub" data-fade>Clipnest sits quietly in your menu bar and remembers the last thing you copied, and the thousand before it. One shortcut, a quick search, pasted.</p>
+    <div class="cta-row" data-fade>
+      <a class="btn" href="#price">Get Clipnest <svg><use href="#arrow"/></svg></a>
+      <a class="btn btn-ghost" href="#how">See how it works</a>
+    </div>
+    <p class="price-line" data-fade>$9 &middot; One-time purchase &middot; No account, no subscription</p>
+    <div class="chips" data-fade>Works on <span class="chip">macOS</span><span class="chip">Windows</span></div>
+  </div>
+</section>
+
+<section class="sec" id="how" data-nav="How it works" style="padding-top:60px">
+  <div class="wrap">
+    <div class="promise" data-r>
+      <span class="eyebrow">How it works</span>
+      <h2>Copy like always.<br>Clipnest does the remembering.</h2>
+      <p class="sub">No new habits. You copy and paste exactly the way you do now. When you need something from earlier, it is one shortcut away.</p>
+      <div class="flow">
+        <div class="step">Copy anything</div><span class="arr">&rarr;</span>
+        <div class="step">Press <kbd>&#8984; &#8679; V</kbd></div><span class="arr">&rarr;</span>
+        <div class="step">Type a few letters</div><span class="arr">&rarr;</span>
+        <div class="step">Hit <kbd>Enter</kbd></div>
+      </div>
+      <p class="price-line" style="margin-top:22px">On Windows it is <b>Ctrl + Shift + V</b>. Change it in settings if you like.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="features" data-nav="Features" style="padding-top:20px">
+  <div class="wrap">
+    <span class="eyebrow" data-r>Features</span>
+    <h2 data-r>Small app. Surprisingly<br>few things to learn.</h2>
+    <div class="bento">
+      <article class="card b1" data-r><div class="ui">
+        <div class="sbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><span>ret<span class="caret"></span></span></div>
+        <div class="hit on"><b>ret</b>urn policy, final.pdf<small>2 days ago</small></div>
+        <div class="hit">Your <b>ret</b>reat is booked<small>Mon</small></div>
+        <div class="hit">/<b>ret</b>ry-after header<small>Sep 3</small></div>
+      </div><div><h3>Search that keeps up</h3><p>Finds text as you type, across everything you have copied. Instant on tens of thousands of clips.</p></div></article>
+
+      <article class="card b2" data-r><div class="ui">
+        <div class="pins">
+          <span class="pin">hello@yourstudio.com <kbd>&#8984;1</kbd></span>
+          <span class="pin">Thanks for waiting, here is the update <kbd>&#8984;2</kbd></span>
+          <span class="pin">+36 30 123 4567 <kbd>&#8984;3</kbd></span>
+          <span class="pin">npm run build &amp;&amp; npm test <kbd>&#8984;4</kbd></span>
+          <span class="pin">VAT HU12345678 <kbd>&#8984;5</kbd></span>
+        </div>
+      </div><div><h3>Pin the things you paste every day</h3><p>Emails, addresses, replies, commands. Pin them once and they stay on top, with a shortcut each.</p></div></article>
+
+      <article class="card b3" data-r><div class="ui lock">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2.5"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>
+        <div class="dots2"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div><div><h3>Skips your passwords</h3><p>Copies from password managers are ignored on purpose. Add any other app to the skip list.</p></div></article>
+
+      <article class="card b4" data-r><div class="ui ring">
+        <svg viewBox="0 0 120 120"><circle class="tr" cx="60" cy="60" r="50" fill="none" stroke-width="10"/><circle class="pr" cx="60" cy="60" r="50" fill="none" stroke-width="10" stroke-linecap="round"/><text x="60" y="68" text-anchor="middle">30d</text></svg>
+      </div><div><h3>Tidy by itself</h3><p>Keep history for a day, a month or forever. Old clips quietly clear out, pinned ones stay.</p></div></article>
+
+      <article class="card b5" data-r><div class="ui offline">
+        <div class="wifi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M2 9a15 15 0 0120 0M5 12.5a10.5 10.5 0 0114 0M8.5 16a5.5 5.5 0 017 0"/><circle cx="12" cy="19.5" r="1" fill="currentColor"/></svg></div>
+        <div class="ping">network calls<br><b>0</b> since install<br>history lives on<br>this machine</div>
+      </div><div><h3>Fully offline</h3><p>No cloud, no sync server, no analytics. It has nowhere to send anything.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="black" aria-label="Everything it remembers">
+  <div class="wall" data-nav="Remembers">
+    <div class="rows" id="rows" aria-hidden="true">
+      <div class="rowc"><span class="gc"><i style="background:#2FD07F"></i>Meeting notes, Thursday</span><span class="gc"><i style="background:#4A9BEA"></i>github.com/you/side-project</span><span class="gc"><kbd>&#8984; &#8679; V</kbd>Open Clipnest</span><span class="gc"><i style="background:#A66BEF"></i>SELECT * FROM orders</span><span class="gc"><i style="background:#F2B13F"></i>Screenshot 14:02</span><span class="gc"><i style="background:#2FD07F"></i>Can you send the final file?</span></div>
+      <div class="rowc"><span class="gc"><i style="background:#3FBF6F"></i>Copied to clipboard</span><span class="gc"><i style="background:#2FD07F"></i>1,824 clips saved</span><span class="gc"><i style="background:#4A9BEA"></i>docs.google.com/spreadsheets</span><span class="gc"><i style="background:#F2B13F"></i>#E8D9B0</span><span class="gc"><i style="background:#A66BEF"></i>git rebase --continue</span><span class="gc"><i style="background:#2FD07F"></i>Order #88213 confirmed</span></div>
+      <div class="rowc"><span class="gc"><i style="background:#2FD07F"></i>Sorry for the late reply!</span><span class="gc"><kbd>Enter</kbd>Paste</span><span class="gc"><i style="background:#4A9BEA"></i>maps.app/home-office</span><span class="gc"><i style="background:#A66BEF"></i>border-radius: 28px</span><span class="gc"><i style="background:#F2B13F"></i>Invoice-2041.png</span><span class="gc"><i style="background:#2FD07F"></i>0.7 ms search</span></div>
+      <div class="rowc"><span class="gc"><i style="background:#A66BEF"></i>npm i &amp;&amp; npm run dev</span><span class="gc"><i style="background:#2FD07F"></i>Dear Anna, attached is...</span><span class="gc"><kbd>&#8984; 1</kbd>Pinned: work email</span><span class="gc"><i style="background:#4A9BEA"></i>zoom.us/j/8421</span><span class="gc"><i style="background:#F2B13F"></i>Receipt.pdf</span><span class="gc"><i style="background:#2FD07F"></i>Grocery list</span></div>
+    </div>
+    <div class="over wrap">
+      <h2>Text, links, code, images.<br>All of it, right there.</h2>
+      <p class="sub">Clipnest keeps what you copy and shows it the way you remember it.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" data-nav="Why" style="padding-bottom:40px">
+  <div class="wrap">
+    <span class="eyebrow" data-r>Why people keep it</span>
+    <h2 data-r>Three little moments.</h2>
+    <div class="story">
+      <article class="sc"><div class="meta"><span>The problem</span><span>01 / 04</span></div>
+      <p class="big">You copy a link, then copy a name, and the <span class="k-link">link</span> is gone for good.</p><small>The system clipboard holds exactly one thing. Everything else you copied is lost the moment you copy again.</small></article>
+      <article class="sc"><div class="meta"><span>The fix</span><span>02 / 04</span></div>
+      <p class="big">Clipnest keeps every <span class="k-copy">copy</span> and finds it when you type two letters.</p><small>It runs in the background, uses almost no memory and never asks for your attention.</small></article>
+      <article class="sc"><div class="meta"><span>The details</span><span>03 / 04</span></div>
+      <p class="big">Snippets of <span class="k-code">code</span> stay formatted, images stay sharp, and passwords stay out.</p><small>Plain text, rich text, links, files and screenshots all land in history in their original form.</small></article>
+      <article class="sc"><div class="meta"><span>The payoff</span><span>04 / 04</span></div>
+      <p class="big">Paste what you meant to, every time. And pay for it <span class="k-copy">once</span>.</p><small>$9, one time. No trial clock, no renewal email, nothing to log in to.</small></article>
+    </div>
+  </div>
+</section>
+
+<section class="sec cream" id="privacy" data-nav="Privacy">
+  <div class="wrap trust">
+    <div data-r>
+      <span class="eyebrow">Privacy, plainly</span>
+      <h2>What you copy is yours.<br>It never leaves.</h2>
+      <p class="sub">Clipboards hold passwords, addresses and half-written emails. We built Clipnest so we could never see any of it.</p>
+    </div>
+    <ul class="checks" data-r>
+      <li><svg><use href="#check"/></svg><div><b>No account</b><span>Install it, open it, use it. No email address, no sign-in.</span></div></li>
+      <li><svg><use href="#check"/></svg><div><b>No internet needed</b><span>It works on a plane. History is stored in a local file on your computer.</span></div></li>
+      <li><svg><use href="#check"/></svg><div><b>No tracking</b><span>No analytics, no crash reporters, no ads. You can verify with a firewall.</span></div></li>
+      <li><svg><use href="#check"/></svg><div><b>One payment</b><span>Pay $9 once and keep it. Updates for this major version are free.</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec" data-nav="Reviews">
+  <div class="wrap">
+    <span class="eyebrow" data-r>Kind words</span>
+    <h2 data-r>Quietly useful.</h2>
+    <div class="quotes" data-r>
+      <figure class="q"><p>I forgot it was running until I needed something from last Tuesday. It was just there.</p><figcaption class="who"><i style="background:#5E8F4E">M</i><span><b>Maya R.</b>Freelance editor</span></figcaption></figure>
+      <figure class="q"><p>Nine dollars, no login, no nagging. I wish more apps were this honest about what they are.</p><figcaption class="who"><i style="background:#C99A3F">D</i><span><b>Daniel K.</b>Backend developer</span></figcaption></figure>
+      <figure class="q"><p>Same price on my Mac at home and my Windows laptop at work. That was the part that sold me.</p><figcaption class="who"><i style="background:#3F5A34">J</i><span><b>Judit S.</b>Accountant</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="faq" data-nav="FAQ" style="padding-top:20px">
+  <div class="wrap faq">
+    <div class="faq-side" data-r>
+      <span class="eyebrow">FAQ</span>
+      <h2>Questions, answered.</h2>
+      <p class="sub">The short, honest version.</p>
+      <div class="help"><b>Still wondering?</b>Write to us, a real person answers.<br><a href="mailto:hello@clipnest.app">hello@clipnest.app</a></div>
+    </div>
+    <div>
+      <details open><summary>Is it really a one-time $9?</summary><p>Yes. One payment, no subscription, no upsell. Your license covers every update of this major version.</p></details>
+      <details><summary>Does one license cover Mac and Windows?</summary><p>One license works on both platforms, on up to three of your own computers.</p></details>
+      <details><summary>Does it need an account or internet?</summary><p>Neither. Clipnest never connects to the internet, so there is nothing to sign in to. Your license key is checked on your machine.</p></details>
+      <details><summary>Where is my clipboard history stored?</summary><p>In a local file on your computer. You can wipe it from the menu at any time, or set it to clear automatically.</p></details>
+      <details><summary>What about passwords I copy?</summary><p>Clipnest ignores copies from popular password managers by default, and you can add any app to the skip list.</p></details>
+      <details><summary>Can I try it first?</summary><p>If it is not for you, email within 30 days and you get your $9 back, no questions.</p></details>
+      <details><summary>Does it sync between my devices?</summary><p>No, and that is on purpose. Syncing would require a server, and a server means your clipboard leaves your computer.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="sec pricing" id="price" data-nav="Pricing">
+  <div class="wrap">
+    <span class="eyebrow" data-r>Pricing</span>
+    <h2 data-r>One price. That is the whole page.</h2>
+    <div class="pc" data-r>
+      <div class="top"><span>Clipnest for Mac and Windows</span><span class="tag">One-time</span></div>
+      <div class="amt"><sup>$</sup>9</div>
+      <p class="per">once, yours to keep</p>
+      <ul>
+        <li><svg><use href="#check"/></svg>Unlimited clipboard history</li>
+        <li><svg><use href="#check"/></svg>Instant search, pins and shortcuts</li>
+        <li><svg><use href="#check"/></svg>Mac and Windows, up to 3 computers</li>
+        <li><svg><use href="#check"/></svg>Works fully offline, no account</li>
+        <li><svg><use href="#check"/></svg>Free updates for this major version</li>
+        <li><svg><use href="#check"/></svg>30-day money-back guarantee</li>
+      </ul>
+      <div class="os">Download for <span class="chip">macOS</span><span class="chip">Windows</span></div>
+    </div>
+    <a class="btn btn-grad" href="#" data-r>Get Clipnest, $9 <svg><use href="#arrow"/></svg></a>
+    <p class="trustline" data-r>Secure checkout &middot; Licence key by email &middot; One payment, no renewals</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fcols">
+      <div><b>Clipnest</b><span>A small clipboard manager,<br>made by one person.</span></div>
+      <div><b>Product</b><a href="#how">How it works</a><a href="#features">Features</a><a href="#price">Pricing</a></div>
+      <div><b>Help</b><a href="#faq">FAQ</a><a href="mailto:hello@clipnest.app">Contact</a></div>
+      <div><b>Legal</b><a href="#">Privacy policy</a><a href="#">Terms</a><a href="#">Refunds</a></div>
+    </div>
+    <div class="word" aria-hidden="true">Clipnest</div>
+    <p class="legal">&copy; 2026 Clipnest. macOS is a trademark of Apple Inc. Windows is a trademark of Microsoft.</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // section-aware nav (works without GSAP)
+  var di=document.querySelector('.di'), label=di.querySelector('.di-label');
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(!e.isIntersecting||!e.target.dataset.nav) return;
+    label.style.opacity=0;
+    setTimeout(function(){label.textContent=e.target.dataset.nav;label.style.opacity=1},120);
+  })},{rootMargin:'-45% 0px -50% 0px'});
+  document.querySelectorAll('[data-nav]').forEach(function(s){io.observe(s)});
+  addEventListener('scroll',function(){di.dataset.state=scrollY>120?'mini':'full'},{passive:true});
+  di.addEventListener('pointerenter',function(){di.dataset.state='full'});
+  di.addEventListener('pointerleave',function(){if(scrollY>120)di.dataset.state='mini'});
+
+  if(reduce || !window.gsap) return;
+  document.documentElement.classList.add('js');
+  gsap.registerPlugin(ScrollTrigger, SplitText);
+
+  document.fonts.ready.then(function(){
+    // hero
+    var h=SplitText.create('.hero h1',{type:'words,lines',mask:'lines'});
+    gsap.from(h.words,{yPercent:110,duration:1.1,ease:'expo.out',stagger:.06,delay:.1});
+    gsap.from('.hero [data-fade]',{y:24,opacity:0,duration:.9,ease:'power3.out',stagger:.08,delay:.4});
+    gsap.from('.laptop',{x:-80,opacity:0,duration:1.3,ease:'power3.out',delay:.3});
+    gsap.from('.app-menu .row',{opacity:0,x:10,duration:.5,ease:'power2.out',stagger:.12,delay:1.1});
+    gsap.from('.cursor',{x:80,y:70,opacity:0,duration:1.4,ease:'power2.inOut',delay:1.6});
+
+    // reveals
+    gsap.utils.toArray('[data-r]').forEach(function(el){
+      gsap.to(el,{opacity:1,y:0,translate:'0 0',duration:.9,ease:'power3.out',
+        scrollTrigger:{trigger:el,start:'top 88%'}});
+    });
+
+    // chip wall drifts and settles as you scroll
+    gsap.utils.toArray('.rowc').forEach(function(r,i){
+      gsap.fromTo(r,{x:i%2?60:-60},{x:i%2?-60:60,ease:'none',
+        scrollTrigger:{trigger:'.wall',start:'top bottom',end:'bottom top',scrub:true}});
+    });
+    gsap.fromTo('#rows',{scale:1.15},{scale:.92,ease:'none',
+      scrollTrigger:{trigger:'.wall',start:'top bottom',end:'bottom top',scrub:true}});
+  });
+})();
+</script>
+</body>
+</html>

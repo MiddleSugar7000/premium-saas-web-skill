@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Clipnest: the clipboard that remembers</title>
+<meta name="description" content="Clipnest is a menu-bar clipboard manager for Mac and Windows. Works offline, no account, $9 once.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%231B2F22'/%3E%3Cpath d='M9 19c0-4 3-7 7-7s7 3 7 7' fill='none' stroke='%23fff' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='20' r='2.6' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Nunito:wght@600;800&family=Rethink+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --page:#F5F5F3;--cream:#FAF6ED;--mint:#F1F5EC;--card:#fff;
+  --ink:#1D1D1F;--ink-2:#2D2F33;--ink-3:#6E6E73;--line:rgb(0 0 0/.08);
+  --accent:#4A7A3C;--accent-soft:#5E8F4E;
+  --g-0:#12211A;--g-1:#1B2F22;--g-2:#3F5A34;--gold-1:#8A7A3A;--gold-2:#C99A3F;
+  --cta-grad:linear-gradient(100deg,var(--g-0) 0%,var(--g-1) 30%,var(--g-2) 52%,var(--gold-1) 76%,var(--gold-2) 100%);
+  --dark-btn:linear-gradient(#2A2A2A,#0A0A0A);
+  --k-copy:#1F7A4A;--k-link:#1E6FC2;--k-code:#7B44C9;
+  --soft-shadow:0 1px 2px rgb(0 0 0/.03),0 8px 28px -12px rgb(0 0 0/.08);
+  --font-display:"Nunito",system-ui,sans-serif;--font-body:"Rethink Sans",system-ui,sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1)
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--page);color:var(--ink-2);font:400 16px/1.55 var(--font-body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3{font-family:var(--font-display);font-weight:800;color:var(--ink)}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.025em;color:var(--accent);text-transform:uppercase;margin-bottom:14px}
+h2{font-size:clamp(36px,4.4vw,56px);letter-spacing:-.03em;line-height:1.05}
+.dim{opacity:.5}
+.lede{color:var(--ink-3);max-width:520px;margin-top:16px}
+section{position:relative}
+.btn-dark{display:inline-flex;align-items:center;gap:8px;padding:16px 32px;border-radius:999px;background:var(--dark-btn);border:1px solid rgb(255 255 255/.08);color:#fff;font-size:15px;font-weight:600;
+  box-shadow:inset 0 1px 0 rgb(255 255 255/.12),0 10px 24px -12px rgb(0 0 0/.5);transition:translate .18s cubic-bezier(.2,0,0,1),box-shadow .18s}
+.btn-dark:hover{translate:0 -2px;box-shadow:inset 0 1px 0 rgb(255 255 255/.18),0 16px 28px -12px rgb(0 0 0/.55)}
+.btn-dark:active{translate:0 1px}
+.btn-dark svg,.btn-cta-grad svg{transition:translate .18s}.btn-dark:hover svg,.btn-cta-grad:hover svg{translate:3px 0}
+.btn-ghost{display:inline-flex;padding:16px 8px;font-weight:600;font-size:15px;color:var(--ink);border-bottom:1px solid transparent}
+.btn-ghost:hover{border-color:var(--ink)}
+
+/* nav */
+.di{position:fixed;top:12px;left:50%;translate:-50% 0;z-index:60}
+.di nav,.di-mini{display:flex;align-items:center;gap:22px;padding:6px 6px 6px 20px;border-radius:999px;background:#0A0A0A;color:#fff;box-shadow:0 14px 34px -14px rgb(0 0 0/.55)}
+.di nav a{font-size:13px;color:rgb(255 255 255/.75);transition:color .15s}.di nav a:hover{color:#fff}
+.di .logo{display:flex;align-items:center;gap:8px;color:#fff;font:800 15px var(--font-display)}
+.logo i{width:20px;height:20px;border-radius:6px;background:var(--g-1);display:grid;place-items:center}
+.nav-cta{padding:9px 18px;border-radius:999px;background:#fff;color:#0A0A0A!important;font-weight:600}
+.di-mini{display:none;gap:10px;padding:6px 6px 6px 14px;font-size:12px;font-weight:600;border:0;font-family:var(--font-body);cursor:pointer}
+.di-label{min-width:56px;text-align:left;transition:opacity .2s}
+.di-cta{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--accent-soft);color:#0A0A0A}
+.di[data-state=mini] nav{display:none}.di[data-state=mini] .di-mini{display:flex}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.2fr 1fr;align-items:center;min-height:100svh;overflow:hidden;padding-top:60px}
+.hero-device{margin-left:-12vw;justify-self:start;position:relative}
+.laptop{width:min(880px,64vw);aspect-ratio:16/10;border:10px solid #17181A;border-radius:22px 22px 6px 6px;position:relative;background:#cfe0c4;box-shadow:0 40px 80px -30px rgb(0 0 0/.45)}
+.laptop::after{content:"";position:absolute;left:-4%;right:-4%;bottom:-24px;height:14px;border-radius:0 0 18px 18px;background:linear-gradient(#2a2b2e,#111)}
+.desk{position:absolute;inset:0;overflow:hidden;border-radius:6px;background:linear-gradient(180deg,#e9efe0 0%,#d4e2c6 60%,#b9cfa6 100%)}
+.hill{position:absolute;border-radius:50%}
+.h1{width:90%;height:70%;left:-20%;bottom:-38%;background:#9dbb8a}.h2{width:100%;height:80%;right:-30%;bottom:-48%;background:#7ea36c}.h3{width:80%;height:60%;left:20%;bottom:-40%;background:#5e8f4e}
+.menubar{position:absolute;top:0;left:0;right:0;height:5%;min-height:20px;display:flex;align-items:center;gap:14px;padding:0 14px;background:rgb(255 255 255/.55);backdrop-filter:blur(14px);font-size:11px;font-weight:600;color:#111;z-index:3}
+.menubar .sp{margin-left:auto}.menubar .tray{width:15px;height:15px;border-radius:4px;background:var(--g-1);display:grid;place-items:center;outline:2px solid rgb(29 29 31/.25);outline-offset:2px}
+.menubar .dot{width:10px;height:10px;border-radius:50%;background:#111}
+.app-menu{position:absolute;right:5%;top:9%;width:min(270px,32%);padding:8px;border-radius:14px;background:rgb(24 24 27/.96);color:#fff;font-size:11px;z-index:3;box-shadow:0 24px 50px -20px rgb(0 0 0/.6)}
+.app-menu .search{display:flex;gap:6px;align-items:center;padding:7px 9px;border-radius:8px;background:rgb(255 255 255/.08);color:rgb(255 255 255/.6);margin-bottom:6px}
+.row{display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:8px;opacity:0;animation:rowin .6s var(--ease) forwards}
+.row:nth-of-type(2){animation-delay:.6s}.row:nth-of-type(3){animation-delay:.75s}.row:nth-of-type(4){animation-delay:.9s}.row:nth-of-type(5){animation-delay:1.05s}.row:nth-of-type(6){animation-delay:1.2s}
+@keyframes rowin{from{opacity:0;translate:0 6px}to{opacity:1;translate:0}}
+.row.sel{background:rgb(255 255 255/.12)}
+.row .ic{width:16px;height:16px;border-radius:5px;flex:none}
+.row .t{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.row kbd{font:inherit;color:rgb(255 255 255/.5)}
+.dock{position:absolute;bottom:4%;left:50%;translate:-50% 0;display:flex;gap:8px;padding:6px 10px;border-radius:16px;background:rgb(255 255 255/.5);backdrop-filter:blur(12px);z-index:2}
+.dock i{width:30px;height:30px;border-radius:8px;background:#fff;box-shadow:0 1px 2px rgb(0 0 0/.15)}
+.dock i:nth-child(2){background:#e8e4d9}.dock i:nth-child(3){background:#d9e4ee}.dock i.me{background:var(--g-1);display:grid;place-items:center}
+.note{font:600 22px/1 "Caveat",cursive;color:var(--ink-3);rotate:var(--r);display:inline-flex;align-items:flex-end;gap:6px;position:absolute;z-index:4}
+.note svg{width:54px;height:28px}
+.n1{right:calc(5% + 6px);top:-4%;--r:-4deg;flex-direction:row-reverse}
+.n2{left:42%;bottom:-17%;--r:3deg;color:var(--ink-3)}
+.hero-copy{padding:40px 20px 40px 0;max-width:520px}
+.status{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:8px;background:#fff;font-size:13px;color:var(--accent);box-shadow:inset 0 -2px 0 #ececec,0 1px 2px rgb(0 0 0/.08)}
+.status b{width:7px;height:7px;border-radius:50%;background:var(--accent-soft);animation:pulse 2s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 6px rgb(94 143 78/0);opacity:.6}0%{box-shadow:0 0 0 0 rgb(94 143 78/.5)}}
+.app-icon{width:64px;height:64px;border-radius:18px;background:linear-gradient(160deg,var(--g-2),var(--g-0));display:grid;place-items:center;margin:28px 0 20px;box-shadow:0 10px 24px -10px rgb(18 33 26/.6),inset 0 1px 0 rgb(255 255 255/.2)}
+h1{font-size:clamp(44px,5.2vw,64px);letter-spacing:-.033em;line-height:1.04}
+.hero-copy p.sub{margin:20px 0 28px;font-size:18px;color:var(--ink-3)}
+.cta-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.price-line{margin-top:16px;font-size:14px;color:var(--ink-3)}
+.chips{display:flex;gap:8px;margin-top:22px;align-items:center;font-size:13px;color:var(--ink-3);flex-wrap:wrap}
+.chip{padding:6px 12px;border-radius:999px;background:#fff;box-shadow:var(--soft-shadow);font-weight:600;color:var(--ink);font-size:13px}
+
+/* video card (demo card) */
+.demo{padding:20px 0 140px}
+.card-soft{background:#fff;border-radius:28px;padding:26px 26px 22px;box-shadow:var(--soft-shadow);transition:box-shadow .3s cubic-bezier(.2,.8,.2,1),translate .3s cubic-bezier(.2,.8,.2,1)}
+.card-soft:hover{box-shadow:0 1px 2px rgb(0 0 0/.04),0 18px 40px -14px rgb(0 0 0/.14);translate:0 -3px}
+.demo-card{padding:64px 32px 0;text-align:center;overflow:hidden}
+.demo-card h2{font-size:clamp(44px,6vw,80px)}
+.demo-card p{color:var(--ink-3);margin:12px auto 40px;max-width:480px}
+.popover{max-width:640px;margin:0 auto;border-radius:20px 20px 0 0;background:#18181B;color:#fff;padding:14px;text-align:left;font-size:14px;box-shadow:0 -20px 60px -30px rgb(0 0 0/.5)}
+.popover .search{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:12px;background:rgb(255 255 255/.08);margin-bottom:8px;font-size:15px}
+.popover .typed{border-right:2px solid #fff;padding-right:2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{border-color:transparent}}
+.clip{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px}
+.clip.sel{background:rgb(255 255 255/.1)}
+.clip .badge{font-size:10px;font-weight:600;padding:3px 8px;border-radius:6px;background:rgb(255 255 255/.1);color:rgb(255 255 255/.75);min-width:44px;text-align:center}
+.clip .t{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.clip .when{font-size:12px;color:rgb(255 255 255/.55)}
+.mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}
+
+/* bento */
+.bento-sec{padding:0 0 160px}
+.bento{display:grid;gap:14px;grid-template-columns:repeat(12,1fr);margin-top:48px}
+.cell h3{font-size:14px;text-transform:uppercase;letter-spacing:-.01em;margin-top:18px}
+.cell p{font-size:13px;color:var(--ink-3);margin-top:6px}
+.cell .ui{min-height:150px;border-radius:16px;background:var(--page);padding:14px;display:flex;flex-direction:column;justify-content:center;gap:8px;overflow:hidden}
+.b1{grid-column:span 5}.b2{grid-column:span 4}.b3{grid-column:span 3}.b4{grid-column:span 4}.b5{grid-column:span 4}.b6{grid-column:span 4}
+.field{display:flex;align-items:center;gap:8px;padding:10px 12px;border-radius:10px;background:#fff;box-shadow:0 1px 2px rgb(0 0 0/.06);font-size:13px}
+.field .typed{border-right:2px solid var(--ink);padding-right:2px;animation:blink 1s steps(1) infinite}
+.mini-clip{padding:9px 12px;border-radius:10px;background:#fff;font-size:12px;box-shadow:0 1px 2px rgb(0 0 0/.05);display:flex;justify-content:space-between;gap:8px}
+.mini-clip.hit{outline:2px solid var(--accent-soft)}
+.keys{display:flex;gap:8px;justify-content:center}
+.key{min-width:48px;height:48px;padding:0 12px;border-radius:12px;background:linear-gradient(#fff,#f1f1ef);box-shadow:0 2px 0 #d8d8d4,0 1px 2px rgb(0 0 0/.1);display:grid;place-items:center;font:600 18px var(--font-body);color:var(--ink)}
+.cloud{display:grid;place-items:center;gap:10px;text-align:center}
+.cloud svg{width:76px;height:76px}.cloud span{font-size:12px;font-weight:600;color:var(--ink)}
+.toggle-row{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;border-radius:10px;background:#fff;font-size:12px;box-shadow:0 1px 2px rgb(0 0 0/.05)}
+.tg{width:34px;height:20px;border-radius:99px;background:var(--accent-soft);position:relative}.tg::after{content:"";position:absolute;right:2px;top:2px;width:16px;height:16px;border-radius:50%;background:#fff}
+.tg.off{background:#d6d6d2}.tg.off::after{right:auto;left:2px}
+.pin{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ink);margin-right:6px}
+
+/* black interlude */
+.wall{background:#050505;color:#fff;overflow:hidden;padding:140px 0;position:relative}
+.wall-rows{display:grid;gap:12px;transform:scale(1.08);opacity:.9}
+.wall-row{display:flex;gap:12px;width:max-content;animation:marq 60s linear infinite}
+.wall-row:nth-child(even){animation-direction:reverse;animation-duration:75s}
+@keyframes marq{to{transform:translateX(-50%)}}
+.wchip{padding:14px 20px;border-radius:14px;background:rgb(255 255 255/.05);border:1px solid rgb(255 255 255/.1);font-size:14px;color:rgb(255 255 255/.8);white-space:nowrap;display:flex;gap:10px;align-items:center}
+.wchip b{font-size:10px;padding:2px 7px;border-radius:5px;background:rgb(255 255 255/.1);font-weight:600}
+.wall-title{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:20px;background:radial-gradient(closest-side,rgb(5 5 5/.88),rgb(5 5 5/.55) 70%,transparent)}
+.wall-title h2{color:#fff;font-size:clamp(40px,6vw,84px);max-width:900px}
+.wall-title p{color:rgb(255 255 255/.7);margin-top:14px}
+
+/* story stack */
+.story-sec{padding:160px 0 100px;background:var(--page)}
+.story{display:grid;gap:40vh;padding-bottom:20vh;margin-top:56px}
+.story-card{position:sticky;min-height:520px;border-radius:28px;padding:40px 48px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 1px 2px rgb(0 0 0/.04),0 24px 60px -24px rgb(0 0 0/.18)}
+.story-card:nth-child(1){top:108px;background:#fff}.story-card:nth-child(2){top:124px;background:var(--cream)}.story-card:nth-child(3){top:140px;background:var(--mint)}.story-card:nth-child(4){top:156px;background:#fff}
+.story-meta{display:flex;justify-content:space-between;font-size:12px;font-weight:600;color:var(--ink-3)}
+.story-meta span:first-child{color:var(--accent)}
+.story-card h3{font-size:clamp(30px,4vw,54px);letter-spacing:-.03em;line-height:1.1;max-width:880px;font-weight:800}
+.story-card h3 .k{color:var(--ink)}
+.kc{color:var(--k-copy)}.kl{color:var(--k-link)}.kk{color:var(--k-code)}
+.story-card p{color:var(--ink-3);max-width:520px;margin-top:20px;font-size:17px}
+
+/* privacy band */
+.trust{background:var(--cream);padding:150px 0}
+.trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.trust ul{list-style:none;padding:0;display:grid;gap:14px;margin-top:32px}
+.trust li{display:flex;gap:14px;align-items:flex-start;padding:18px 20px;background:#fff;border-radius:20px;box-shadow:var(--soft-shadow)}
+.trust li b{display:block;color:var(--ink);font-family:var(--font-display);font-size:17px;font-weight:800;margin-bottom:2px}
+.trust li span{font-size:14px;color:var(--ink-3)}
+.ck{flex:none;width:22px;height:22px;border-radius:50%;background:var(--g-1);display:grid;place-items:center;margin-top:2px}
+.net{padding:28px;border-radius:28px;background:#fff;box-shadow:var(--soft-shadow);text-align:center}
+.net svg{width:100%;max-width:420px}
+.net p{font-size:13px;color:var(--ink-3);margin-top:12px}
+
+/* maker note */
+.maker{padding:150px 0 40px;background:var(--page)}
+.maker-card{max-width:760px;margin:0 auto;padding:48px;text-align:left;position:relative}
+.maker-card blockquote{font:800 clamp(24px,3vw,34px)/1.2 var(--font-display);letter-spacing:-.02em;color:var(--ink)}
+.maker-card p{margin-top:18px;color:var(--ink-3)}
+.sig{font:600 28px "Caveat",cursive;color:var(--ink);margin-top:18px;display:block;rotate:-2deg}
+
+/* pricing */
+.price-solo{padding:140px 16px 160px;text-align:center;background:linear-gradient(var(--page),var(--cream))}
+.price-card-solo{max-width:460px;margin:48px auto 0;padding:28px;border-radius:28px;background:#fff;text-align:left;box-shadow:var(--soft-shadow);position:relative}
+.pc-head{display:flex;align-items:center;gap:12px}
+.pc-head .mini{width:36px;height:36px;border-radius:10px;background:linear-gradient(160deg,var(--g-2),var(--g-0));display:grid;place-items:center}
+.pc-head b{font:800 20px var(--font-display);color:var(--ink)}
+.pc-head .chip{margin-left:auto;box-shadow:none;background:var(--mint);color:var(--accent);font-size:12px}
+.pc-price{font:800 96px/.9 var(--font-display);letter-spacing:-.04em;color:var(--ink);margin:28px 0 24px}
+.pc-price small{font-size:32px;vertical-align:top;margin-right:2px}
+.pc-price span{display:inline-block;margin-left:10px;font:500 14px/1.3 var(--font-body);color:var(--ink-3);letter-spacing:0}
+.checks{list-style:none;padding:0;display:grid;gap:12px}
+.checks li{display:flex;gap:12px;align-items:center;font-size:15px}
+.checks .ck{margin:0}
+.btn-cta-grad{display:flex;justify-content:center;align-items:center;gap:10px;margin-top:26px;padding:20px;border-radius:24px;background:var(--cta-grad);color:#fff;font:700 19px var(--font-body);
+  box-shadow:inset 0 1px 0 rgb(255 255 255/.12),0 18px 40px -16px rgb(0 0 0/.6);transition:translate .18s,box-shadow .18s}
+.btn-cta-grad:hover{translate:0 -2px}.btn-cta-grad:active{translate:0 1px}
+.pc-trust{text-align:center;font-size:12px;color:var(--ink-3);margin-top:16px}
+.pc-os{display:flex;gap:8px;margin-top:18px;justify-content:center}
+.sidenote{position:absolute;left:calc(100% + 16px);top:36%;--r:4deg;white-space:nowrap}
+.sidenote{position:absolute}
+
+/* faq */
+.faq{padding:120px 0 150px;background:var(--page)}
+.faq-grid{display:grid;grid-template-columns:5fr 7fr;gap:64px;align-items:start}
+.faq-side{position:sticky;top:96px}
+.help{margin-top:28px;padding:20px;border-radius:20px;background:#fff;box-shadow:var(--soft-shadow);font-size:14px}
+.help b{display:block;font:800 16px var(--font-display);color:var(--ink);margin-bottom:4px}
+.help a{color:var(--accent);font-weight:600}
+details{border-bottom:1px solid var(--line);padding:6px 0}
+details[open]{background:#fff;border-radius:20px;border-bottom-color:transparent;padding:6px 20px;box-shadow:var(--soft-shadow);margin:6px 0}
+summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 0;font:800 18px var(--font-display);color:var(--ink);letter-spacing:-.01em}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";flex:none;width:32px;height:32px;border-radius:50%;background:var(--page);display:grid;place-items:center;font:600 18px var(--font-body);transition:rotate .3s var(--ease)}
+details[open] summary::after{rotate:45deg;background:var(--mint)}
+details p{padding:0 0 18px;color:var(--ink-3);max-width:560px}
+
+/* footer */
+footer{background:var(--cream);padding:80px 0 0;overflow:hidden;position:relative}
+.foot-cols{display:flex;justify-content:space-between;gap:32px;flex-wrap:wrap;font-size:14px;color:var(--ink-3)}
+.foot-cols a:hover{color:var(--ink)}.foot-cols div{display:grid;gap:8px}.foot-cols b{color:var(--ink);font-family:var(--font-display)}
+.wordmark{font:800 clamp(90px,24vw,330px)/.78 var(--font-display);letter-spacing:-.05em;color:var(--page);text-align:center;margin-top:60px;margin-bottom:-.12em;user-select:none;background:linear-gradient(var(--g-2),var(--g-0));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;opacity:.92}
+.legal{font-size:12px;color:var(--ink-3);margin-top:48px}
+
+/* reveals */
+.rv{opacity:0;translate:0 28px;transition:opacity .9s var(--ease),translate .9s var(--ease);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;translate:0}
+.no-js .rv{opacity:1;translate:0}
+
+@media(max-width:1000px){
+  .hero{grid-template-columns:1fr;min-height:auto;padding-top:96px}
+  .hero-copy{order:-1;padding:20px;max-width:none}
+  .hero-device{margin:0 -4vw 0 -2vw;justify-self:stretch;padding-bottom:50px}
+  .laptop{width:96vw}.n1,.n2{display:none}
+  .bento{grid-template-columns:1fr}.bento>*{grid-column:auto!important}
+  .trust-grid,.faq-grid{grid-template-columns:1fr}.faq-side{position:static}
+  .sidenote{display:none}
+  .di nav a:not(.logo):not(.nav-cta){display:none}.di nav{gap:12px}
+}
+@media(max-width:640px){
+  .story-card{padding:28px 22px;min-height:460px}.story{gap:30vh}
+  .demo-card{padding:44px 16px 0}.maker-card{padding:30px 22px}
+  .app-menu{width:44%;font-size:9px}.row{padding:5px}
+  .wall{padding:100px 0}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .rv{opacity:1;translate:0}.row{opacity:1}.wall-row{animation:none}
+}
+</style>
+</head>
+<body class="no-js">
+<script>document.body.classList.remove('no-js')</script>
+
+<!-- NAV -->
+<header class="di" data-state="full">
+  <nav aria-label="Main">
+    <a class="logo" href="#top"><i><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"><path d="M5 15c0-4.5 3-8 7-8s7 3.500 7 8"/><circle cx="12" cy="16" r="2.4" fill="#fff" stroke="none"/></svg></i>Clipnest</a>
+    <a href="#how">How it works</a><a href="#privacy">Privacy</a><a href="#faq">FAQ</a>
+    <a class="nav-cta" href="#pricing">Get it, $9</a>
+  </nav>
+  <button class="di-mini" aria-label="Open full menu"><span class="di-label">Clipnest</span><a class="di-cta" href="#pricing" aria-label="Go to pricing"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a></button>
+</header>
+
+<main id="top">
+<!-- HERO -->
+<section class="hero" data-nav="Clipnest">
+  <div class="hero-device" aria-hidden="true">
+    <div class="laptop">
+      <div class="desk">
+        <i class="hill h1"></i><i class="hill h2"></i><i class="hill h3"></i>
+        <div class="menubar"><i class="dot"></i><span>Finder</span><span style="font-weight:400">File</span><span style="font-weight:400">Edit</span><span class="sp"></span><span style="font-weight:400">Wi-Fi off</span>
+          <i class="tray"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M5 15c0-4.500 3-8 7-8s7 3.500 7 8"/></svg></i><span style="font-weight:400">Fri 9:41</span></div>
+        <div class="app-menu">
+          <div class="search"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.500-3.500"/></svg>Search your clips</div>
+          <div class="row sel"><i class="ic" style="background:#5E8F4E"></i><span class="t">Flight BA 2490, gate B12</span><kbd>1</kbd></div>
+          <div class="row"><i class="ic" style="background:#4A8FD9"></i><span class="t">figma.com/design/8Xk2…</span><kbd>2</kbd></div>
+          <div class="row"><i class="ic" style="background:#9A6BE0"></i><span class="t">npm run build --watch</span><kbd>3</kbd></div>
+          <div class="row"><i class="ic" style="background:#E0A24A"></i><span class="t">Door code: 4471</span><kbd>4</kbd></div>
+          <div class="row"><i class="ic" style="background:#888"></i><span class="t">Screenshot 9.41.png</span><kbd>5</kbd></div>
+        </div>
+        <div class="dock"><i></i><i></i><i></i><i class="me"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.600" stroke-linecap="round"><path d="M5 15c0-4.500 3-8 7-8s7 3.500 7 8"/><circle cx="12" cy="16" r="2.400" fill="#fff" stroke="none"/></svg></i><i></i></div>
+      </div>
+    </div>
+    <p class="note n1">your history, one click away<svg viewBox="0 0 60 30"><path d="M58 8C44 2 22 4 8 22M6 14l2 9 9-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
+  </div>
+
+  <div class="hero-copy">
+    <span class="status rv"><b></b>Mac and Windows, same $9 licence</span>
+    <div class="app-icon rv" style="--d:.05s"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.200" stroke-linecap="round"><path d="M4.500 15c0-4.500 3.200-8.500 7.500-8.500s7.500 4 7.500 8.500"/><circle cx="12" cy="16" r="2.800" fill="#fff" stroke="none"/></svg></div>
+    <h1 class="rv" style="--d:.1s">The clipboard that <span class="dim">finally remembers.</span></h1>
+    <p class="sub rv" style="--d:.18s">Clipnest sits quietly in your menu bar and keeps everything you copy. Find it again in a second. It never leaves your computer.</p>
+    <div class="cta-row rv" style="--d:.26s">
+      <a class="btn-dark" href="#pricing">Get Clipnest for $9 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn-ghost" href="#how">See how it works</a>
+    </div>
+    <p class="price-line rv" style="--d:.3s">$9 · One-time purchase · No account · Works offline</p>
+    <div class="chips rv" style="--d:.34s">Runs on <span class="chip">macOS</span><span class="chip">Windows</span></div>
+  </div>
+</section>
+
+<!-- DEMO CARD -->
+<section class="demo" id="how" data-nav="How it works">
+  <div class="wrap">
+    <div class="card-soft demo-card rv">
+      <p class="eyebrow">One shortcut away</p>
+      <h2>Copy anything.</h2>
+      <p>Text, links, code, images. Press your shortcut, type a few letters, hit return. It's pasted.</p>
+      <div class="popover" aria-label="Illustration of the Clipnest popup">
+        <div class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgb(255 255 255/.6)" stroke-width="2.200" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.500-3.500"/></svg><span class="typed">invoice</span></div>
+        <div class="clip sel"><span class="badge">Text</span><span class="t">Invoice #1042 is attached. Payment due on the 28th.</span><span class="when">2 h ago</span></div>
+        <div class="clip"><span class="badge">Link</span><span class="t">https://docs.example.com/invoice-template</span><span class="when">Yesterday</span></div>
+        <div class="clip"><span class="badge">Code</span><span class="t mono">const invoiceTotal = items.reduce(sum, 0)</span><span class="when">Tue</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENTO -->
+<section class="bento-sec" data-nav="Features">
+  <div class="wrap">
+    <p class="eyebrow rv">What it does</p>
+    <h2 class="rv">Small app. <span class="dim">Does the one thing well.</span></h2>
+    <div class="bento">
+      <article class="card-soft cell b1 rv">
+        <div class="ui">
+          <div class="field"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.200" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.500-3.500"/></svg><span class="typed">flight</span></div>
+          <div class="mini-clip hit"><span>Flight BA 2490, gate B12</span><span style="color:var(--ink-3)">Text</span></div>
+          <div class="mini-clip"><span>flight-receipt.pdf</span><span style="color:var(--ink-3)">File</span></div>
+        </div>
+        <h3>Search everything you copied</h3><p>Type a word and the clip you need floats to the top. No scrolling through a wall of text.</p>
+      </article>
+      <article class="card-soft cell b2 rv" style="--d:.08s">
+        <div class="ui"><div class="keys"><span class="key">Ctrl / Cmd</span><span class="key">Shift</span><span class="key">V</span></div>
+          <p style="text-align:center;font-size:12px;color:var(--ink-3);margin-top:10px">Pick your own shortcut</p></div>
+        <h3>One shortcut, anywhere</h3><p>Open your history over whatever you're doing, paste, and you're back in your work.</p>
+      </article>
+      <article class="card-soft cell b3 rv" style="--d:.16s">
+        <div class="ui"><div class="cloud">
+          <svg viewBox="0 0 80 80" fill="none"><path d="M24 54h30a12 12 0 0 0 1-24 16 16 0 0 0-31-3 14 14 0 0 0 0 27z" stroke="#1D1D1F" stroke-width="2.400" stroke-linejoin="round"/><path d="M18 68 62 12" stroke="#4A7A3C" stroke-width="4" stroke-linecap="round"/></svg>
+          <span>No cloud. No sync.</span></div></div>
+        <h3>Stays on your machine</h3><p>Nothing is uploaded, ever.</p>
+      </article>
+      <article class="card-soft cell b4 rv">
+        <div class="ui"><div class="mini-clip"><span><i class="pin"></i>Home wifi password</span><span style="color:var(--ink-3)">Pinned</span></div>
+          <div class="mini-clip"><span><i class="pin"></i>Email signature</span><span style="color:var(--ink-3)">Pinned</span></div>
+          <div class="mini-clip" style="opacity:.6"><span>Something from earlier</span><span style="color:var(--ink-3)">Text</span></div></div>
+        <h3>Pin the keepers</h3><p>Things you paste every day stay at the top, however much you copy after.</p>
+      </article>
+      <article class="card-soft cell b5 rv" style="--d:.08s">
+        <div class="ui"><div class="toggle-row"><span>Ignore password managers</span><i class="tg"></i></div>
+          <div class="toggle-row"><span>Launch at login</span><i class="tg"></i></div>
+          <div class="toggle-row"><span>Save images</span><i class="tg off"></i></div></div>
+        <h3>You decide what's kept</h3><p>Skip certain apps, turn off images, clear history whenever you like.</p>
+      </article>
+      <article class="card-soft cell b6 rv" style="--d:.16s">
+        <div class="ui"><div class="mini-clip"><span>Meeting notes, draft 2</span><span style="color:var(--ink-3)">Text</span></div>
+          <p style="font-size:12px;color:var(--ink-3);text-align:center;padding:6px 8px">A quiet little icon, always there when you need it.</p></div>
+        <h3>Lives in the menu bar</h3><p>No window to manage and no dock icon. Just a small icon you click when you need it.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- BLACK INTERLUDE -->
+<section class="wall" aria-label="Everything you copy" data-nav="Everything">
+  <div class="wall-rows" aria-hidden="true">
+    <div class="wall-row"><span class="wchip"><b>Text</b>Meeting moved to 3pm</span><span class="wchip"><b>Link</b>https://maps.example.com/p/cafe</span><span class="wchip"><b>Code</b>git rebase --onto main</span><span class="wchip"><b>Image</b>Screenshot 14.02.png</span><span class="wchip"><b>Text</b>Order #88213 confirmation</span><span class="wchip"><b>Link</b>https://news.example.com/story</span><span class="wchip"><b>Text</b>Flight BA 2490</span><span class="wchip"><b>Code</b>SELECT * FROM orders</span>
+    <span class="wchip"><b>Text</b>Meeting moved to 3pm</span><span class="wchip"><b>Link</b>https://maps.example.com/p/cafe</span><span class="wchip"><b>Code</b>git rebase --onto main</span><span class="wchip"><b>Image</b>Screenshot 14.02.png</span><span class="wchip"><b>Text</b>Order #88213 confirmation</span><span class="wchip"><b>Link</b>https://news.example.com/story</span><span class="wchip"><b>Text</b>Flight BA 2490</span><span class="wchip"><b>Code</b>SELECT * FROM orders</span></div>
+    <div class="wall-row"><span class="wchip"><b>Text</b>Thanks, talk Monday!</span><span class="wchip"><b>Code</b>#1F7A4A</span><span class="wchip"><b>Link</b>https://recipes.example.com/soup</span><span class="wchip"><b>Text</b>Door code 4471</span><span class="wchip"><b>Image</b>Whiteboard.jpg</span><span class="wchip"><b>Code</b>npm run dev</span><span class="wchip"><b>Text</b>Parcel tracking 7731 2209</span><span class="wchip"><b>Link</b>https://docs.example.com/spec</span>
+    <span class="wchip"><b>Text</b>Thanks, talk Monday!</span><span class="wchip"><b>Code</b>#1F7A4A</span><span class="wchip"><b>Link</b>https://recipes.example.com/soup</span><span class="wchip"><b>Text</b>Door code 4471</span><span class="wchip"><b>Image</b>Whiteboard.jpg</span><span class="wchip"><b>Code</b>npm run dev</span><span class="wchip"><b>Text</b>Parcel tracking 7731 2209</span><span class="wchip"><b>Link</b>https://docs.example.com/spec</span></div>
+    <div class="wall-row"><span class="wchip"><b>Link</b>https://flights.example.com/b12</span><span class="wchip"><b>Text</b>Happy birthday!</span><span class="wchip"><b>Code</b>ssh deploy@staging</span><span class="wchip"><b>Text</b>Address: 12 Mill Lane</span><span class="wchip"><b>Image</b>Receipt.png</span><span class="wchip"><b>Text</b>Reset code 902114</span><span class="wchip"><b>Link</b>https://photos.example.com/trip</span><span class="wchip"><b>Code</b>margin: 0 auto</span>
+    <span class="wchip"><b>Link</b>https://flights.example.com/b12</span><span class="wchip"><b>Text</b>Happy birthday!</span><span class="wchip"><b>Code</b>ssh deploy@staging</span><span class="wchip"><b>Text</b>Address: 12 Mill Lane</span><span class="wchip"><b>Image</b>Receipt.png</span><span class="wchip"><b>Text</b>Reset code 902114</span><span class="wchip"><b>Link</b>https://photos.example.com/trip</span><span class="wchip"><b>Code</b>margin: 0 auto</span></div>
+  </div>
+  <div class="wall-title"><div><h2 class="rv">Everything you copy. <span style="opacity:.55">Never lost again.</span></h2><p class="rv">Yes, even that thing from two hours ago.</p></div></div>
+</section>
+
+<!-- STORY STACK -->
+<section class="story-sec" data-nav="Why">
+  <div class="wrap">
+    <p class="eyebrow rv">The short story</p>
+    <h2 class="rv">Sound familiar?</h2>
+    <div class="story">
+      <article class="story-card">
+        <div class="story-meta"><span>● The problem</span><span>01 / 04</span></div>
+        <div><h3>You copied it <span class="kc">once</span>. Then you copied something else, and it was gone.</h3><p>The built-in clipboard holds exactly one thing. Everything before it vanishes.</p></div>
+        <div></div>
+      </article>
+      <article class="story-card">
+        <div class="story-meta"><span>● The fix</span><span>02 / 04</span></div>
+        <div><h3>Clipnest keeps a <span class="kc">history</span> of text, <span class="kl">links</span>, <span class="kk">code</span> and images.</h3><p>It runs in the background and quietly saves each thing you copy.</p></div>
+        <div></div>
+      </article>
+      <article class="story-card">
+        <div class="story-meta"><span>● The calm part</span><span>03 / 04</span></div>
+        <div><h3>No account. No cloud. <span class="kc">No internet needed</span> at all.</h3><p>Your clips live on your computer and nowhere else. Pull the plug on your wifi and it works the same.</p></div>
+        <div></div>
+      </article>
+      <article class="story-card">
+        <div class="story-meta"><span>● The payoff</span><span>04 / 04</span></div>
+        <div><h3>Pay <span class="kc">$9</span> once. That's the whole relationship.</h3><p>No subscription, no upsell, no "free tier" with the good stuff locked away.</p></div>
+        <div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PRIVACY -->
+<section class="trust" id="privacy" data-nav="Privacy">
+  <div class="wrap trust-grid">
+    <div>
+      <p class="eyebrow rv">Trust, without the fine print</p>
+      <h2 class="rv">Your clipboard is <span class="dim">full of private stuff.</span></h2>
+      <p class="lede rv">Passwords, addresses, half-written emails. Clipnest is built so none of it goes anywhere.</p>
+      <ul>
+        <li class="rv"><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.200" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span><div><b>Fully offline</b><span>Clipnest doesn't need a connection to do its job.</span></div></li>
+        <li class="rv" style="--d:.06s"><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.200" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span><div><b>No account, no sign-up</b><span>Buy it, enter your licence key, done. No email loop, no profile.</span></div></li>
+        <li class="rv" style="--d:.12s"><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.200" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span><div><b>Yours to clear</b><span>Wipe your history in one click, whenever you want.</span></div></li>
+      </ul>
+    </div>
+    <div class="net rv" style="--d:.1s">
+      <svg viewBox="0 0 420 240" fill="none" role="img" aria-label="Your computer with Clipnest, disconnected from the internet">
+        <rect x="110" y="40" width="200" height="130" rx="14" fill="#fff" stroke="#1D1D1F" stroke-width="3"/>
+        <rect x="124" y="54" width="172" height="12" rx="6" fill="#F1F5EC"/>
+        <rect x="124" y="78" width="120" height="10" rx="5" fill="#E8E8E4"/><rect x="124" y="98" width="150" height="10" rx="5" fill="#E8E8E4"/><rect x="124" y="118" width="90" height="10" rx="5" fill="#4A7A3C"/>
+        <path d="M80 182h260" stroke="#1D1D1F" stroke-width="3" stroke-linecap="round"/>
+        <g stroke="#6E6E73" stroke-width="2.500" stroke-linecap="round" stroke-dasharray="2 8"><path d="M330 100h40"/><path d="M370 100c14 0 20-20 20-40"/></g>
+        <g transform="translate(372 24)" stroke="#6E6E73" stroke-width="2.500" stroke-linecap="round" fill="none"><path d="M0 14a22 22 0 0 1 44 0"/><path d="M8 20a14 14 0 0 1 28 0"/><circle cx="22" cy="26" r="2" fill="#6E6E73"/><path d="M4 36 40 0" stroke="#4A7A3C" stroke-width="3.500"/></g>
+        <text x="210" y="218" text-anchor="middle" font-family="Caveat,cursive" font-size="22" fill="#6E6E73">stays right here</text>
+      </svg>
+      <p>Clipnest works the same with the wifi switched off.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MAKER NOTE -->
+<section class="maker" data-nav="Note">
+  <div class="wrap">
+    <div class="card-soft maker-card rv">
+      <p class="eyebrow">A note from the maker</p>
+      <blockquote>I wanted a clipboard manager I wouldn't have to think about, or trust with an account.</blockquote>
+      <p>So Clipnest does one job, stays small, and asks for $9 one time. If it's not for you, write to me and we'll sort it out.</p>
+      <span class="sig">the Clipnest maker</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="price-solo" id="pricing" data-nav="Pricing">
+  <p class="eyebrow rv">Pricing</p>
+  <h2 class="rv">One price. <span class="dim">Yours to keep.</span></h2>
+  <div class="price-card-solo rv">
+    <p class="note sidenote">no subscription, promise<svg viewBox="0 0 60 30" style="transform:scaleX(-1)"><path d="M58 8C44 2 22 4 8 22M6 14l2 9 9-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></p>
+    <div class="pc-head"><span class="mini"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.400" stroke-linecap="round"><path d="M4.500 15c0-4.500 3.200-8.500 7.500-8.500s7.500 4 7.500 8.500"/><circle cx="12" cy="16" r="2.800" fill="#fff" stroke="none"/></svg></span><b>Clipnest</b><span class="chip">One-time purchase</span></div>
+    <p class="pc-price"><small>$</small>9<span>once, no renewals</span></p>
+    <ul class="checks">
+      <li><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.200" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>Mac and Windows</li>
+      <li><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.200" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>Searchable history of text, links, code and images</li>
+      <li><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.200" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>Works fully offline</li>
+      <li><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.200" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>No account, no sign-up</li>
+      <li><span class="ck"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.200" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg></span>Pinned clips and a shortcut you choose</li>
+    </ul>
+    <a class="btn-cta-grad" href="#">Get Clipnest for $9 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.400" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    <p class="pc-trust">Secure checkout · Licence key by email · One payment, no renewals</p>
+    <div class="pc-os"><span class="chip">macOS</span><span class="chip">Windows</span></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq" data-nav="FAQ">
+  <div class="wrap faq-grid">
+    <div class="faq-side">
+      <p class="eyebrow">FAQ</p>
+      <h2>Questions, <span class="dim">answered.</span></h2>
+      <p class="lede">The short, honest versions.</p>
+      <div class="help"><b>Still wondering?</b>Write to <a href="mailto:hello@clipnest.app">hello@clipnest.app</a> and a real person will answer.</div>
+    </div>
+    <div>
+      <details open><summary>Is it really a one-time $9?</summary><p>Yes. You pay once and the licence is yours. There's no subscription and no renewal.</p></details>
+      <details><summary>Does it need an account or internet?</summary><p>Neither. There's no sign-up, and Clipnest works fully offline. Your clips never leave your computer.</p></details>
+      <details><summary>Does it work on both Mac and Windows?</summary><p>Yes, it runs on both and lives in the menu bar on Mac and the system tray on Windows.</p></details>
+      <details><summary>Can I use one licence on several computers?</summary><p>Your licence covers your own computers. Check the licence terms at checkout for the exact details.</p></details>
+      <details><summary>What does it save?</summary><p>Text, links, code snippets and images. You can switch types off, skip chosen apps and clear everything whenever you like.</p></details>
+      <details><summary>What if I don't like it?</summary><p>Email us and we'll sort it out. Our refund terms are shown at checkout.</p></details>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-cols">
+      <div><b>Clipnest</b><span>The clipboard that remembers.</span></div>
+      <div><b>Product</b><a href="#how">How it works</a><a href="#privacy">Privacy</a><a href="#pricing">Pricing</a></div>
+      <div><b>Help</b><a href="#faq">FAQ</a><a href="mailto:hello@clipnest.app">Contact</a></div>
+    </div>
+    <p class="legal">© 2026 Clipnest. Mac and the Mac logo are trademarks of Apple Inc. Windows is a trademark of Microsoft.</p>
+  </div>
+  <div class="wordmark" aria-hidden="true">Clipnest</div>
+</footer>
+
+<script>
+(function(){
+  // reveal on scroll
+  var els=[].slice.call(document.querySelectorAll('.rv'));
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});}
+  else{
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.05});
+    els.forEach(function(e){io.observe(e)});
+    // safety net: never leave content hidden
+    setTimeout(function(){els.forEach(function(e){if(e.getBoundingClientRect().top<innerHeight)e.classList.add('in')})},1200);
+  }
+  // section-aware nav
+  var di=document.querySelector('.di'),label=di.querySelector('.di-label');
+  var so=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;label.style.opacity=0;setTimeout(function(){label.textContent=e.target.dataset.nav;label.style.opacity=1},120)})},{rootMargin:'-45% 0px -50% 0px'});
+  document.querySelectorAll('[data-nav]').forEach(function(s){so.observe(s)});
+  addEventListener('scroll',function(){di.dataset.state=scrollY>120?'mini':'full'},{passive:true});
+  di.addEventListener('pointerenter',function(){di.dataset.state='full'});
+  di.addEventListener('pointerleave',function(){if(scrollY>120)di.dataset.state='mini'});
+  di.querySelector('.di-mini').addEventListener('click',function(e){if(e.target.closest('.di-cta'))return;di.dataset.state='full'});
+})();
+</script>
+</body>
+</html>

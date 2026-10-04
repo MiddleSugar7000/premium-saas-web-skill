@@ -12,7 +12,7 @@
 }
 ```
 - **Fonts:** Figtree (or Outfit) 500–600; hero word 260–300px, uppercase, tracking ~0; small caps nav at 11–12px with +0.04em tracking.
-- **Signature pieces:** preloader with accent-colored vertical bars wiping away; hero = huge wordmark + B/W portrait (outline-over-photo, below); an accent block as a blinking "_" cursor after the name; brand names with a trailing underscore ("Nexbot_"); WebGL ripple/water background (Unicorn Studio embed, or a CSS/SVG turbulence fallback); big-type marquee; full-width project cards that *stack* (sticky) as you scroll (`shared/motion.md`); white pill CTA.
+- **Signature pieces:** preloader with accent-colored vertical bars wiping away; hero = huge wordmark + B/W portrait (outline-over-photo, below); an accent block as a blinking "_" cursor after the name; brand names with a trailing underscore ("Nexbot_"); WebGL background (own Three.js shader from `shared/webgl.md`, a Unicorn Studio embed, or a CSS/SVG turbulence fallback); big-type marquee; full-width project cards that *stack* (sticky) as you scroll (`shared/motion.md`); white pill CTA.
 
 ## Outline-over-photo hero word
 
@@ -31,6 +31,8 @@
 .word.outline{color:transparent;-webkit-text-stroke:1px #fff;
   clip-path:inset(0 36% 0 36%)}   /* match the portrait's horizontal span */
 ```
+**Diacritics:** `line-height:.8` puts the second line's accents (Á, Ő, Ű, Ä...) into the first line, and any `overflow:hidden`/SplitText `mask` on the lines clips them. Names are often Hungarian/Czech/Nordic, so use `line-height:.92` or more when the text has capitals with accents (check the real name, not DAVIES), give each line `padding-top:.18em; margin-top:-.18em` instead of a tight box, and never mask hero lines whose glyphs carry accents; reveal them with opacity + `y` instead.
+
 Letters are solid outside the photo and *outlined* where they cross it. Add the accent block after the word: `<span class="caret"></span>` with `width:.35em;height:.08em;background:var(--accent);animation:blink 1s steps(1) infinite`.
 
 ## Big-type marquee

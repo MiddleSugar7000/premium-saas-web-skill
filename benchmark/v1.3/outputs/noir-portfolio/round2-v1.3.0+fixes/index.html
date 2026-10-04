@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bence Kovács — UX/UI Designer</title>
+<meta name="description" content="Bence Kovács is a UX/UI designer crafting calm, precise product interfaces.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050505; --bg-2:#0A0A0A; --card:#111; --card-2:#171717;
+  --fg:#fff; --fg-2:rgb(255 255 255/.64); --fg-3:rgb(255 255 255/.5);
+  --line:rgb(255 255 255/.1); --line-2:rgb(255 255 255/.18);
+  --accent:#D4FF3A;
+  --r-s:12px; --r-m:20px; --r-l:28px;
+  --ease:cubic-bezier(.2,0,0,1);
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{background:var(--bg);color:var(--fg);font-family:'Figtree',system-ui,sans-serif;font-weight:400;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.mono{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.04em;text-transform:uppercase}
+.wrap{max-width:1280px;margin:0 auto;padding:0 32px}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+/* nav */
+nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:50;display:flex;align-items:center;gap:28px;padding:10px 12px 10px 22px;border-radius:999px;background:rgb(10 10 10/.6);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--line)}
+nav .logo{font-weight:600;font-size:15px}
+nav .logo i{display:inline-block;width:.5em;height:.12em;background:var(--accent);margin-left:2px;animation:blink 1s steps(1) infinite}
+nav .links{display:flex;gap:22px}
+nav .links a{font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--fg-2);transition:color .15s var(--ease)}
+nav .links a:hover{color:#fff}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;background:#fff;color:#000;font-weight:500;font-size:14px;transition:box-shadow .15s var(--ease),transform .15s var(--ease)}
+.pill svg{transition:transform .15s var(--ease)}
+.pill:hover{box-shadow:0 0 24px rgb(212 255 58/.45)}
+.pill:hover svg{transform:translateX(3px)}
+.pill.ghost{background:transparent;color:#fff;border:1px solid var(--line-2)}
+.pill.ghost:hover{box-shadow:0 0 0 1px var(--line-2)}
+@keyframes blink{50%{opacity:0}}
+
+/* hero */
+.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:140px 0 48px;overflow:hidden;isolation:isolate}
+.glow{position:absolute;inset:0;z-index:-3;background:
+  radial-gradient(60% 50% at 50% 100%,rgb(212 255 58/.18),transparent 70%),
+  radial-gradient(40% 40% at 80% 20%,rgb(212 255 58/.06),transparent 70%),var(--bg)}
+#gl{position:absolute;inset:0;width:100%;height:100%;z-index:-2;pointer-events:none;opacity:0;transition:opacity 1.2s ease-out}
+#gl.on{opacity:1}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(to bottom,transparent 60%,var(--bg));pointer-events:none}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;padding:7px 14px;border:1px solid var(--line);border-radius:999px;color:var(--fg-2);background:rgb(0 0 0/.35);width:max-content;max-width:100%}
+.eyebrow b{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);flex:none}
+.name-hero{position:relative;display:grid;place-items:center;margin:28px 0 36px}
+.name-hero>*{grid-area:1/1}
+.word{font-size:clamp(64px,19vw,290px);font-weight:500;line-height:1;color:#fff;letter-spacing:-.025em;text-transform:uppercase;white-space:nowrap;padding-top:.14em}
+.word.outline{color:transparent;-webkit-text-stroke:1px rgb(255 255 255/.9);clip-path:inset(0 34% 0 34%);pointer-events:none}
+.orb{width:clamp(110px,22%,300px);aspect-ratio:3/4;border-radius:999px 999px 24px 24px;background:
+  radial-gradient(70% 50% at 50% 30%,rgb(212 255 58/.9),rgb(212 255 58/.15) 60%,transparent 80%),
+  linear-gradient(#141414,#050505);border:1px solid var(--line-2);box-shadow:0 0 80px rgb(212 255 58/.2)}
+.caret{display:inline-block;width:.32em;height:.07em;background:var(--accent);margin-left:.06em;animation:blink 1s steps(1) infinite}
+.hero-row{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap}
+.hero-row p{max-width:460px;color:var(--fg-2);font-size:18px}
+.hero-row p strong{color:#fff;font-weight:500}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.scroll-hint{position:absolute;right:32px;top:50%;writing-mode:vertical-rl;color:var(--fg-3)}
+
+/* marquee */
+.marquee{border-block:1px solid var(--line);overflow:hidden;padding:28px 0;mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;width:max-content;animation:slide 40s linear infinite}
+.marquee:hover .track{animation-play-state:paused}
+.track span{font-size:clamp(48px,8vw,112px);font-weight:500;letter-spacing:-.02em;white-space:nowrap;padding-right:48px;display:flex;align-items:center;gap:48px}
+.track svg{width:.7em;height:.7em;flex:none;color:var(--accent)}
+@keyframes slide{to{transform:translateX(-50%)}}
+
+section{padding:136px 0;position:relative}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:64px;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(40px,6vw,88px);font-weight:500;line-height:1.02;letter-spacing:-.035em;max-width:900px}
+.sec-head h2 em{font-style:normal;color:rgb(255 255 255/.45)}
+.label{color:var(--accent);display:block;margin-bottom:20px}
+
+/* stacking project cards */
+.stack{display:grid;gap:28vh;padding-bottom:12vh}
+.pcard{position:sticky;top:96px;min-height:560px;border-radius:var(--r-l);background:var(--card);border:1px solid var(--line);display:grid;grid-template-columns:1fr 1.25fr;overflow:hidden;filter:brightness(1)}
+.pcard:nth-child(2){top:112px;background:var(--card-2)}
+.pcard:nth-child(3){top:128px;background:#141414}
+.pinfo{padding:44px;display:flex;flex-direction:column;justify-content:space-between;gap:32px}
+.pinfo h3{font-size:clamp(34px,4vw,56px);font-weight:500;letter-spacing:-.03em;line-height:1.05;margin:16px 0}
+.pinfo h3 i{font-style:normal;color:var(--accent)}
+.pinfo p{color:var(--fg-2);max-width:420px}
+.tags{display:flex;gap:8px;flex-wrap:wrap}
+.tags span{padding:6px 12px;border:1px solid var(--line);border-radius:999px;color:var(--fg-2)}
+.pmeta{display:flex;justify-content:space-between;color:var(--fg-3)}
+.pvis{position:relative;border-left:1px solid var(--line);background:#070707;display:grid;place-items:center;overflow:hidden}
+.pvis::before{content:"";position:absolute;inset:0;background:radial-gradient(60% 60% at 50% 110%,rgb(212 255 58/.16),transparent 70%)}
+.ui{position:relative;width:min(78%,420px);border-radius:var(--r-m);background:rgb(255 255 255/.04);border:1px solid var(--line-2);padding:18px;display:grid;gap:12px;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.pcard:hover .ui{transform:translateY(-6px)}
+.ui .bar{height:10px;border-radius:99px;background:rgb(255 255 255/.12)}
+.ui .bar.a{background:var(--accent);width:38%}
+.ui .row{display:flex;gap:10px;align-items:center}
+.ui .chip{flex:1;height:64px;border-radius:var(--r-s);border:1px solid var(--line);background:rgb(255 255 255/.03);padding:10px;display:flex;flex-direction:column;justify-content:space-between;font-size:11px;color:var(--fg-3)}
+.ui .chip b{font-size:20px;font-weight:500;color:#fff;letter-spacing:-.02em}
+.ui .toggle{width:36px;height:20px;border-radius:99px;background:var(--accent);position:relative;flex:none}
+.ui .toggle::after{content:"";position:absolute;right:3px;top:3px;width:14px;height:14px;border-radius:50%;background:#000}
+.ui .toggle.off{background:rgb(255 255 255/.15)}
+.ui .toggle.off::after{right:auto;left:3px;background:#fff}
+.ui .line-chart{height:90px}
+.ui .line-chart path{fill:none;stroke:var(--accent);stroke-width:2;stroke-dasharray:400;stroke-dashoffset:400;animation:draw 2.4s var(--ease) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+/* services bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.cell{border:1px solid var(--line);border-radius:var(--r-m);background:var(--bg-2);padding:32px;position:relative;overflow:hidden;transition:border-color .3s cubic-bezier(.2,.8,.2,1),transform .3s cubic-bezier(.2,.8,.2,1)}
+.cell:hover{border-color:var(--line-2);transform:translateY(-4px)}
+.cell::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 60% at 0% 0%,rgb(255 255 255/.06),transparent 50%);pointer-events:none}
+.cell.s2{grid-column:span 2}.cell.s3{grid-column:span 3}.cell.s4{grid-column:span 4}
+.cell h3{font-size:24px;font-weight:500;letter-spacing:-.02em;margin:48px 0 10px}
+.cell p{color:var(--fg-2);font-size:15px;max-width:440px}
+.cell .num{color:var(--fg-3)}
+.cell ul{list-style:none;padding:0;margin-top:20px;display:flex;flex-wrap:wrap;gap:8px}
+.cell li{padding:6px 12px;border:1px solid var(--line);border-radius:999px;font-size:13px;color:var(--fg-2)}
+
+/* process */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+.step{padding:32px 28px 0 0;border-right:0}
+.step .mono{color:var(--accent)}
+.step h3{font-size:22px;font-weight:500;margin:20px 0 10px;letter-spacing:-.02em}
+.step p{color:var(--fg-2);font-size:15px;padding-right:12px}
+
+/* about */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.about p.big{font-size:clamp(26px,3vw,40px);line-height:1.2;letter-spacing:-.025em;font-weight:500}
+.about p.big span{color:rgb(255 255 255/.45)}
+.facts{display:grid;gap:0;border-top:1px solid var(--line)}
+.facts div{display:flex;justify-content:space-between;gap:24px;padding:18px 0;border-bottom:1px solid var(--line)}
+.facts dt{color:var(--fg-3)} .facts dd{margin:0;text-align:right}
+
+/* contact */
+.contact{text-align:center;overflow:hidden;isolation:isolate;padding:160px 0 120px}
+.contact::before{content:"";position:absolute;inset:auto 0 -40% 0;height:100%;z-index:-1;background:radial-gradient(50% 50% at 50% 50%,rgb(212 255 58/.28),transparent 70%);filter:blur(20px)}
+.contact h2{font-size:clamp(48px,10vw,152px);font-weight:500;line-height:1;letter-spacing:-.04em}
+.contact h2 em{font-style:normal;color:rgb(255 255 255/.45)}
+.contact .cta{justify-content:center;margin-top:48px}
+.mail{display:inline-block;margin-top:32px;font-size:clamp(18px,2.4vw,28px);border-bottom:1px solid var(--line-2);padding-bottom:4px;transition:border-color .15s var(--ease),color .15s var(--ease)}
+.mail:hover{border-color:var(--accent);color:var(--accent)}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--fg-3)}
+footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer a:hover{color:#fff}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(32px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);transition-delay:var(--d,0s)}
+.rv.in{opacity:1;transform:none}
+.hero .rv{transition-delay:calc(var(--d,0s) + .2s)}
+
+@media(max-width:900px){
+  nav .links{display:none}
+  nav{padding-left:18px;gap:16px}
+  .wrap{padding:0 20px}
+  section{padding:88px 0}
+  .pcard{grid-template-columns:1fr;min-height:0}
+  .pvis{border-left:0;border-top:1px solid var(--line);min-height:260px}
+  .pinfo{padding:28px}
+  .bento{grid-template-columns:1fr}
+  .cell.s2,.cell.s3,.cell.s4{grid-column:auto}
+  .steps{grid-template-columns:1fr 1fr;gap:32px 0}
+  .about{grid-template-columns:1fr;gap:40px}
+  .scroll-hint{display:none}
+  .word.outline{clip-path:inset(0 30% 0 30%)}
+  .stack{gap:16vh}
+}
+@media(max-width:520px){.steps{grid-template-columns:1fr}}
+@media(pointer:fine){body{cursor:auto}}
+#dot{position:fixed;top:0;left:0;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:#fff;mix-blend-mode:exclusion;pointer-events:none;z-index:100;transition:width .2s var(--ease),height .2s var(--ease),margin .2s var(--ease)}
+#dot.big{width:48px;height:48px;margin:-24px 0 0 -24px}
+@media(pointer:coarse){#dot{display:none}}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .rv{opacity:1;transform:none}
+  .ui .line-chart path{stroke-dashoffset:0}
+}
+</style>
+</head>
+<body>
+<div id="dot" aria-hidden="true"></div>
+
+<nav aria-label="Primary">
+  <a class="logo" href="#top">Bence Kovács<i></i></a>
+  <div class="links"><a href="#work">Work</a><a href="#services">Services</a><a href="#process">Process</a><a href="#about">About</a></div>
+  <a class="pill" href="#contact">Let’s talk <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+</nav>
+
+<header class="hero" id="top">
+  <div class="glow"></div>
+  <canvas id="gl" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <span class="eyebrow mono rv"><b></b>Available for projects</span>
+    <div class="name-hero rv" style="--d:.1s">
+      <h1 class="word">Kovács<span class="caret"></span></h1>
+      <div class="orb" aria-hidden="true"></div>
+      <div class="word outline" aria-hidden="true">Kovács</div>
+    </div>
+    <div class="hero-row">
+      <p class="rv" style="--d:.2s"><strong>Bence</strong> is a UX/UI designer. He turns tangled products into calm, precise interfaces: research, flows, systems and pixels, all in the dark if you like.</p>
+      <div class="cta rv" style="--d:.3s">
+        <a class="pill" href="#work">See selected work <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
+        <a class="pill ghost" href="#contact">Get in touch</a>
+      </div>
+    </div>
+  </div>
+  <span class="scroll-hint mono">Scroll</span>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="track">
+    <span>Product design <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg> Design systems <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg> UX research <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg> Prototyping <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg></span>
+    <span>Product design <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg> Design systems <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg> UX research <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg> Prototyping <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg></span>
+  </div>
+</div>
+
+<main>
+<section id="work">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><span class="label mono">01 / Selected work</span><h2>Interfaces that feel <em>inevitable.</em></h2></div>
+      <p class="mono" style="color:var(--fg-3)">Sample case studies &middot; replace with real projects</p>
+    </div>
+    <div class="stack">
+      <article class="pcard">
+        <div class="pinfo">
+          <div><div class="pmeta mono"><span>01</span><span>Fintech &middot; Mobile</span></div>
+            <h3>Ledger<i>_</i></h3>
+            <p>A budgeting app rebuilt around one question: what can I safely spend today? Fewer screens, one number, clear next step.</p></div>
+          <div class="tags mono"><span>Research</span><span>iOS</span><span>Design system</span></div>
+        </div>
+        <div class="pvis"><div class="ui">
+          <div class="bar a"></div><div class="bar" style="width:62%"></div>
+          <div class="row"><div class="chip">Safe today<b>€42</b></div><div class="chip">This week<b>€218</b></div></div>
+          <svg class="line-chart" viewBox="0 0 300 90" preserveAspectRatio="none"><path d="M0 70 C40 60 60 20 100 38 S160 80 200 40 S260 10 300 22"/></svg>
+        </div></div>
+      </article>
+      <article class="pcard">
+        <div class="pinfo">
+          <div><div class="pmeta mono"><span>02</span><span>B2B SaaS &middot; Web</span></div>
+            <h3>Orbit<i>_</i></h3>
+            <p>A dashboard for logistics teams. Dense data, calm hierarchy: alerts that earn attention and a keyboard-first workflow.</p></div>
+          <div class="tags mono"><span>Dashboard</span><span>Data viz</span><span>Accessibility</span></div>
+        </div>
+        <div class="pvis"><div class="ui">
+          <div class="row"><div class="bar a"></div><div class="toggle"></div></div>
+          <div class="row"><div class="chip">On time<b>96%</b></div><div class="chip">Delayed<b>14</b></div><div class="chip">Open<b>212</b></div></div>
+          <div class="row"><div class="bar" style="flex:1"></div><div class="toggle off"></div></div>
+          <div class="row"><div class="bar" style="flex:1;width:70%"></div><div class="toggle"></div></div>
+        </div></div>
+      </article>
+      <article class="pcard">
+        <div class="pinfo">
+          <div><div class="pmeta mono"><span>03</span><span>Health &middot; Design system</span></div>
+            <h3>Pulse<i>_</i></h3>
+            <p>One component library shared by four product teams: tokens, documentation and a contribution model that kept it alive.</p></div>
+          <div class="tags mono"><span>Tokens</span><span>Figma</span><span>Governance</span></div>
+        </div>
+        <div class="pvis"><div class="ui">
+          <div class="row"><div class="chip" style="height:44px"><b style="color:var(--accent)">Aa</b></div><div class="chip" style="height:44px"><b>12</b></div><div class="chip" style="height:44px"><b>8px</b></div></div>
+          <div class="bar a" style="width:50%"></div><div class="bar"></div><div class="bar" style="width:80%"></div>
+          <div class="row"><div class="toggle"></div><div class="bar" style="flex:1"></div></div>
+        </div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="services" style="background:var(--bg-2)">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <div><span class="label mono">02 / Services</span><h2>From first sketch to <em>shipped pixels.</em></h2></div>
+    </div>
+    <div class="bento" data-rv>
+      <div class="cell s4 rv"><span class="num mono">A</span><h3>Product &amp; interface design</h3><p>End-to-end design of web and mobile products: flows, wireframes, high-fidelity UI and interaction details, ready for engineering.</p><ul><li>Web apps</li><li>Mobile</li><li>Prototypes</li></ul></div>
+      <div class="cell s2 rv" style="--d:.08s"><span class="num mono">B</span><h3>UX research</h3><p>Interviews, usability tests and audits that turn opinions into evidence.</p></div>
+      <div class="cell s2 rv"><span class="num mono">C</span><h3>Design systems</h3><p>Tokens, components and docs that keep teams fast and consistent.</p></div>
+      <div class="cell s4 rv" style="--d:.08s"><span class="num mono">D</span><h3>Redesigns &amp; UX audits</h3><p>A fresh pair of eyes on an existing product. You get a prioritised list of what to fix first and why, then the designs to fix it.</p><ul><li>Heuristic review</li><li>Accessibility</li><li>Quick wins</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section id="process">
+  <div class="wrap">
+    <div class="sec-head rv"><div><span class="label mono">03 / Process</span><h2>Slow to decide, <em>fast to refine.</em></h2></div></div>
+    <div class="steps" data-rv>
+      <div class="step rv"><span class="mono">01</span><h3>Understand</h3><p>Goals, users, constraints. I ask uncomfortable questions early.</p></div>
+      <div class="step rv"><span class="mono">02</span><h3>Explore</h3><p>Flows and rough options on the table, so the right direction is obvious.</p></div>
+      <div class="step rv"><span class="mono">03</span><h3>Design</h3><p>High-fidelity screens, states and motion, built on a small, solid system.</p></div>
+      <div class="step rv"><span class="mono">04</span><h3>Hand off</h3><p>Clean files, specs and support through build until it ships as designed.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="about" style="background:var(--bg-2)">
+  <div class="wrap about">
+    <div class="rv"><span class="label mono">04 / About</span>
+      <p class="big">I’m Bence, a UX/UI designer who cares about the small things. <span>Spacing, empty states, the word on a button. Good products are mostly made of details nobody notices.</span></p></div>
+    <dl class="facts rv" style="--d:.1s">
+      <div><dt class="mono">Role</dt><dd>UX/UI Designer</dd></div>
+      <div><dt class="mono">Focus</dt><dd>Product, systems, research</dd></div>
+      <div><dt class="mono">Tools</dt><dd>Figma, Framer, Notion</dd></div>
+      <div><dt class="mono">Working</dt><dd>Freelance &amp; remote</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <span class="label mono rv">05 / Contact</span>
+    <h2 class="rv">Have something <em>to build?</em></h2>
+    <a class="mail rv" href="mailto:hello@bencekovacs.design">hello@bencekovacs.design</a>
+    <div class="cta rv"><a class="pill" href="mailto:hello@bencekovacs.design">Start a project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap mono"><span>&copy; 2026 Bence Kovács</span><span><a href="#top">Back to top &uarr;</a></span></div></footer>
+
+<script>
+// reveal on scroll
+(function(){
+  const els=[...document.querySelectorAll('.rv')];
+  if(!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches){els.forEach(e=>e.classList.add('in'));return}
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+  els.forEach(e=>io.observe(e));
+  // hero is in view at load
+  requestAnimationFrame(()=>document.querySelectorAll('.hero .rv').forEach(e=>e.classList.add('in')));
+})();
+// stacking card dim: fromTo-equivalent, brightness only, late and gentle
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const cards=[...document.querySelectorAll('.pcard')];
+  let tick=false;
+  const upd=()=>{tick=false;const vh=innerHeight;
+    cards.forEach((c,i)=>{const n=cards[i+1];if(!n)return;
+      const t=n.getBoundingClientRect().top,s=vh*.45,e=96;
+      const p=Math.min(1,Math.max(0,(s-t)/(s-e)));
+      c.style.filter='brightness('+(1-.3*p*p).toFixed(3)+')';c.style.transform='scale('+(1-.05*p).toFixed(4)+')'})};
+  addEventListener('scroll',()=>{if(!tick){tick=true;requestAnimationFrame(upd)}},{passive:true});upd();
+})();
+// cursor dot (desktop only)
+(function(){
+  if(matchMedia('(pointer:coarse)').matches)return;
+  const d=document.getElementById('dot');
+  addEventListener('pointermove',e=>{d.style.transform='translate('+e.clientX+'px,'+e.clientY+'px)'},{passive:true});
+  document.querySelectorAll('a').forEach(a=>{a.addEventListener('pointerenter',()=>d.classList.add('big'));a.addEventListener('pointerleave',()=>d.classList.remove('big'))});
+})();
+</script>
+
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js"}}</script>
+<script type="module">
+import * as THREE from 'three';
+const el=document.getElementById('gl');
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const lite=matchMedia('(max-width:768px)').matches||navigator.hardwareConcurrency<=4;
+if(!lite)try{
+  const renderer=new THREE.WebGLRenderer({canvas:el,antialias:false,alpha:false});
+  renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));
+  const scene=new THREE.Scene(),cam=new THREE.Camera();
+  const u={uTime:{value:0},uRes:{value:new THREE.Vector2()},uMouse:{value:new THREE.Vector2(.5,.5)},uScroll:{value:0},
+    uBg:{value:new THREE.Color('#050505')},uAccent:{value:new THREE.Color('#D4FF3A')}};
+  scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2,2),new THREE.ShaderMaterial({uniforms:u,
+    vertexShader:`varying vec2 vUv; void main(){ vUv=uv; gl_Position=vec4(position.xy,0.,1.); }`,
+    fragmentShader:`
+      uniform float uTime,uScroll; uniform vec2 uRes,uMouse; uniform vec3 uBg,uAccent; varying vec2 vUv;
+      float hash(vec2 p){ return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453); }
+      float noise(vec2 p){ vec2 i=floor(p),f=fract(p); f=f*f*(3.-2.*f);
+        return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y); }
+      float fbm(vec2 p){ float v=0.,a=.5; for(int i=0;i<4;i++){ v+=a*noise(p); p*=2.; a*=.5; } return v; }
+      void main(){
+        vec2 asp=vec2(uRes.x/uRes.y,1.),p=(vUv-.5)*asp,t=vec2(uTime*.05,-uTime*.04);
+        float n=fbm(p*2.2+t+fbm(p*3.-t));
+        vec2 m=(uMouse-.5)*asp*.5;
+        float d=length(p-m*.6-vec2(0.,-.3));
+        float ripple=sin(length(p-m)*18.-uTime*1.2)*.5+.5;          // soft ripple around cursor
+        float lit=smoothstep(.72,0.,d)*n*1.5*(1.-uScroll*.8);
+        lit+=smoothstep(.35,0.,length(p-m))*ripple*.08;
+        vec3 c=mix(uBg,uAccent*.75,clamp(lit,0.,1.));
+        c*=1.-.4*length(vUv-.5);                                     // vignette: moody edges
+        c+=(hash(vUv*uRes+uTime)-.5)*.014;
+        gl_FragColor=vec4(c,1.);
+        #include <colorspace_fragment>
+      }`})));
+  const size=()=>{const r=el.getBoundingClientRect();renderer.setSize(r.width,r.height,false);
+    u.uRes.value.set(r.width*renderer.getPixelRatio(),r.height*renderer.getPixelRatio())};
+  size();addEventListener('resize',size);
+  let visible=true,raf=0;
+  const frame=t=>{u.uTime.value=t/1000;u.uScroll.value=Math.min(1,scrollY/innerHeight);renderer.render(scene,cam);
+    raf=visible&&!reduce?requestAnimationFrame(frame):0};
+  new IntersectionObserver(([e])=>{visible=e.isIntersecting;if(visible&&!raf)raf=requestAnimationFrame(frame)}).observe(el);
+  if(!reduce)addEventListener('pointermove',e=>u.uMouse.value.set(e.clientX/innerWidth,1-e.clientY/innerHeight),{passive:true});
+  requestAnimationFrame(t=>{frame(t);el.classList.add('on')});
+}catch(e){/* CSS glow stays */}
+</script>
+</body>
+</html>

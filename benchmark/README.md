@@ -78,3 +78,7 @@ What this shows, and what it does not:
 - On the single-hero prompt the skill and the baseline were indistinguishable on these checks. The checks do not measure visual quality, so this says nothing about which page looks better.
 
 **Outcome:** the extended variant did not beat the published skill on these checks (92.5% vs 97.5% on `grade.py`, indistinguishable from the baseline on the hero-only prompt) and added about 700 lines of context, so it was not adopted. The published skill is unchanged from before this experiment. The variant is kept on the `experiment/cinematic-glass-pitfalls` branch; the robustness checker stays because it found a real overflow bug.
+
+## Later: skill 1.3.0 vs 1.2.0
+
+A small A/B of the motion and WebGL additions (3 prompts, scripted checks plus screenshots) is in [`v1.3/`](v1.3/README.md).

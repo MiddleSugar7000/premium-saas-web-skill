@@ -1,0 +1,122 @@
+[
+ {
+  "prompt": "flowpilot",
+  "round": "round1",
+  "skill_version": "v1.2.0",
+  "issues": 0,
+  "issue_list": [],
+  "total_tokens": 127549,
+  "duration_s": 192.0,
+  "reduced_motion_handling": true,
+  "gsap_matchmedia": false,
+  "webgl": false,
+  "hover_transition_max_s": 0.3
+ },
+ {
+  "prompt": "flowpilot",
+  "round": "round1",
+  "skill_version": "v1.3.0",
+  "issues": 0,
+  "issue_list": [],
+  "total_tokens": 125308,
+  "duration_s": 160.5,
+  "reduced_motion_handling": true,
+  "gsap_matchmedia": true,
+  "webgl": false,
+  "hover_transition_max_s": 0.2
+ },
+ {
+  "prompt": "noir-portfolio",
+  "round": "round1",
+  "skill_version": "v1.2.0",
+  "issues": 2,
+  "issue_list": [
+   "webgl_lite_gate missing",
+   "webgl_try_catch missing"
+  ],
+  "total_tokens": 103620,
+  "duration_s": 104.5,
+  "reduced_motion_handling": true,
+  "gsap_matchmedia": false,
+  "webgl": true,
+  "hover_transition_max_s": 0.9
+ },
+ {
+  "prompt": "noir-portfolio",
+  "round": "round1",
+  "skill_version": "v1.3.0",
+  "issues": 0,
+  "issue_list": [],
+  "total_tokens": 106927,
+  "duration_s": 101.2,
+  "reduced_motion_handling": true,
+  "gsap_matchmedia": true,
+  "webgl": true,
+  "hover_transition_max_s": 0.3
+ },
+ {
+  "prompt": "clipnest",
+  "round": "round1",
+  "skill_version": "v1.2.0",
+  "issues": 0,
+  "issue_list": [],
+  "total_tokens": 113899,
+  "duration_s": 129.7,
+  "reduced_motion_handling": true,
+  "gsap_matchmedia": false,
+  "webgl": false,
+  "hover_transition_max_s": 0.3
+ },
+ {
+  "prompt": "clipnest",
+  "round": "round1",
+  "skill_version": "v1.3.0",
+  "issues": 0,
+  "issue_list": [],
+  "total_tokens": 118036,
+  "duration_s": 127.5,
+  "reduced_motion_handling": true,
+  "gsap_matchmedia": false,
+  "webgl": false,
+  "hover_transition_max_s": 0.3
+ },
+ {
+  "prompt": "flowpilot",
+  "round": "round2",
+  "skill_version": "v1.3.0+fixes",
+  "issues": 0,
+  "issue_list": [],
+  "total_tokens": 114077,
+  "duration_s": 129.0,
+  "reduced_motion_handling": true,
+  "gsap_matchmedia": true,
+  "webgl": false,
+  "hover_transition_max_s": 0.18
+ },
+ {
+  "prompt": "noir-portfolio",
+  "round": "round2",
+  "skill_version": "v1.3.0+fixes",
+  "issues": 0,
+  "issue_list": [],
+  "total_tokens": 105493,
+  "duration_s": 91.8,
+  "reduced_motion_handling": true,
+  "gsap_matchmedia": false,
+  "webgl": true,
+  "hover_transition_max_s": 0.9
+ },
+ {
+  "prompt": "clipnest",
+  "round": "round2",
+  "skill_version": "v1.3.0+fixes",
+  "issues": 0,
+  "issue_list": [],
+  "total_tokens": 121535,
+  "duration_s": 149.0,
+  "reduced_motion_handling": true,
+  "gsap_matchmedia": false,
+  "webgl": false,
+  "hover_transition_max_s": 0.18
+ }
+]

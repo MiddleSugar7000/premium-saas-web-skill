@@ -9,6 +9,23 @@ All five reference sites use GSAP + ScrollTrigger + SplitText. Three of them als
 - **One hero moment.** The headline reveal + product mockup entrance are the most choreographed thing on the page; everything else is a quiet fade-up.
 - **Respect `prefers-reduced-motion`.** Skip all of it, show final states.
 
+### Timing & easing (use these numbers, not guesses)
+
+| Moment | Duration | Ease |
+|---|---|---|
+| Hover / press / focus | 120–180ms | `cubic-bezier(.2,0,0,1)` |
+| Card / tab / accordion state change | 250–400ms | `power2.inOut` or the same bezier |
+| Section reveal (fade-up) | 800–1000ms | `power3.out` |
+| Hero cascade, counters, dramatic reveal | 1000–1400ms | `expo.out` / `power3.out` |
+| Ambient (glow drift, marquee) | 20–60s | `sine.inOut` / `none` |
+| Scrubbed | tied to scroll | `none` |
+
+- Premium personality = the slow end of every range, but UI feedback stays fast: the more often something plays (hover), the shorter and subtler it is.
+- Exits run 65–75% of the entrance, `ease-in`, opacity-only is fine.
+- Scale distance and time together: a 24px rise is ~0.8s, an 80px rise 1.2s+.
+- Roughly a third of the elements in view animate at once; stagger totals stay under ~0.5s for UI lists (the hero cascade is the one exception).
+- Never `scale(0)` (start from .92–.96). Never animate `width/height/top/left`; use transforms (the Flip plugin for real layout moves).
+
 ## Boilerplate
 
 ```html
@@ -81,10 +98,32 @@ function initMotion() {
 </script>
 ```
 
+### Reduced motion + mobile in one place: `gsap.matchMedia()`
+
+The `reduce` flag above is decided once. `gsap.matchMedia()` re-evaluates when the user flips the OS setting or rotates the phone and reverts every tween it created. Use it for the reveal layer and keep cursor effects desktop-only:
+
+```js
+document.fonts.ready.then(() => {            // tweens must be created inside the callback, so wait for fonts first
+  gsap.matchMedia().add({ motion:'(prefers-reduced-motion: no-preference)', desktop:'(min-width:769px)' }, ctx => {
+    const { motion, desktop } = ctx.conditions;
+    if (!motion) return;                     // final states stay visible, nothing animates
+    initMotion();                            // reveals, scrub, counters
+    if (desktop) initCursorEffects();        // card spotlight, cursor glow (buttons never move)
+  });
+});
+```
+Add a CSS safety net as well: `@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}`, and make marquees pausable.
+
 ## Gotchas found in testing
 - **Gradient text + SplitText:** `background-clip:text` on the parent stops working once SplitText wraps words/lines in their own elements, and the headline turns invisible. Apply the gradient to the split pieces instead (`wordsClass:'w'` + `.display-metal .w{background:inherit;-webkit-background-clip:text;background-clip:text;color:transparent}`), or use a plain color for split headlines. Scroll-fill text (`shared/typography.md`) already applies its gradient per line for this reason.
 - **SplitText lines + responsive:** lines are measured once. Create splits with `autoSplit:true` and build the animation in `onSplit(self){ return gsap.from(self.lines, …) }` so they re-measure on resize; otherwise headings break one word per line after a width change.
 - **Dimming stacked cards:** use `filter:brightness()`, never `opacity`, or the card underneath bleeds through.
+- **SplitText `mask:'lines'` clips accents.** The mask is a tight overflow box, so Á/Ő/Ű and descenders get cut on non-English copy. Use `mask:'lines'` only for text without diacritics, or add vertical padding to the mask (`linesClass` with `padding-block:.15em; margin-block:-.15em`), or reveal with opacity + `y`.
+- **`containerAnimation` needs `ease:'none'`** on the parent tween (horizontal-scroll sections); any ease breaks the scroll mapping.
+- **One ScrollTrigger per timeline.** A ScrollTrigger on a child tween of a timeline that already has one is ignored: use one trigger on the timeline, or standalone tweens.
+- **`from()` after another tween in a timeline** jumps to its start state immediately (`immediateRender:true`). Pass `immediateRender:false`.
+- Scrubbed tweens use `ease:'none'`. Call `ScrollTrigger.refresh()` after fonts/images change layout.
+- In React/Next use `useGSAP()` with a scoped ref, and never `setState` inside `onUpdate`; mutate a ref or the DOM.
 
 ## Signature sequences
 
@@ -136,7 +175,7 @@ gsap.to(track, { x: () => -(track.scrollWidth - innerWidth + 64), ease: 'none',
 Direction-specific motion lives with its direction: logo arc in `directions/ember-dark/`, preloader and custom cursor in `directions/noir-spotlight/` (cursor also in `editorial-mono/`).
 
 ## Hover micro-interactions
-- Buttons: **never move on hover** (hard rule in SKILL.md "What to avoid"). Hover = glow blur tightens (14→10px), brightness/background shift, border alpha up. Tactile buttons may sink 1px on `:active` only (a press, not a hover).
+- Buttons: arrow `translateX(3px)`, glow blur tightens (14→10px), tactile buttons sink 1px on `:active`.
 - Cards: `translateY(-4px)` + border alpha 0.18 → 0.32 + cursor spotlight. 300ms `cubic-bezier(.2,.8,.2,1)`.
 - Links: underline grows from left (`background-size: 0 1px → 100% 1px`).
 - Images in cards: `scale(1.04)` over 700ms inside an `overflow:hidden` wrapper.
@@ -144,5 +183,24 @@ Direction-specific motion lives with its direction: logo arc in `directions/embe
 ## Performance
 - Animate only `transform` and `opacity` (and `background-position` for the fill effect).
 - Big `filter: blur()` blobs are expensive. Keep them static or drift them slowly; add `will-change: transform` only to things that actually move.
-- On mobile (`max-width: 768px`): halve blur radii, disable cursor effects, keep reveals.
+- On mobile (`max-width: 768px`): halve blur radii, disable magnetic/cursor effects, keep reveals.
 - Call `ScrollTrigger.refresh()` after images load if layout shifts.
+
+## Native CSS motion (no JS, progressive enhancement)
+
+Good for a scroll-progress bar, simple reveals on pages without GSAP, and a fallback layer. Support is uneven (Firefox has no stable scroll-driven animations, Safari only recently), so guard it with `@supports` and make the un-animated state the correct one. Pick one system per element: never GSAP and `animation-timeline` on the same node.
+
+```css
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal   { animation: rise linear both; animation-timeline: view(); animation-range: entry 10% entry 60%; }
+    .progress { transform-origin: 0 50%; animation: grow linear both; animation-timeline: scroll(root block); }
+  }
+}
+@keyframes rise { from { opacity: 0; transform: translateY(32px); } to { opacity: 1; transform: none; } }
+@keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+```
+- Use `both` as the fill mode for scroll-driven animations (`forwards` can lock the end state when scrolling back).
+- `@starting-style` gives a menu/dialog an enter animation from `display:none` without JS: transition `opacity, transform, display` with `allow-discrete` and put the from-state in `@starting-style{}`.
+- Same-document View Transitions (`document.startViewTransition(() => update())`) suit tab and pricing-toggle swaps. Guard with `if (!document.startViewTransition)` and just update the DOM.
+- Never `transition: all`; list the properties.

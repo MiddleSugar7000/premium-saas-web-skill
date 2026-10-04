@@ -1,0 +1,677 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Flowpilot — AI agents for your team's Slack, Notion and Gmail</title>
+<meta name="description" content="Flowpilot deploys AI agents that triage email, update docs and answer threads across Slack, Notion and Gmail, so your team ships instead of shuffling.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500&family=Inter+Tight:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-0:#0D1017;--bg-1:#11141D;--bg-2:#191D2A;--bg-3:#252A32;
+  --light-0:#F8F9FA;--light-2:#E4EAEE;
+  --line:rgb(148 163 184/.18);--line-strong:rgb(148 163 184/.32);
+  --fg:#fff;--accent:#FF7300;--accent-deep:#5E1818;--glow:#FF0000;
+  --font-display:"Sora",sans-serif;--font-body:"Inter Tight",sans-serif;--font-mono:"IBM Plex Mono",monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:auto}
+body{background:var(--bg-0);color:#fff;font:400 17px/1.55 var(--font-body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img,svg{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.wrap{width:min(1200px,calc(100% - 40px));margin-inline:auto}
+section{position:relative}
+.sec{padding:clamp(80px,11vw,160px) 0}
+.mono{font-family:var(--font-mono)}
+.eyebrow-num{font:500 13px/1 var(--font-mono);letter-spacing:.04em;text-transform:uppercase;color:rgb(255 255 255/.6)}
+.display{font-family:var(--font-display);font-weight:400;font-size:clamp(40px,6vw,88px);line-height:1.06;letter-spacing:-.05em;text-wrap:balance}
+.h2{font-family:var(--font-display);font-weight:400;font-size:clamp(34px,4.6vw,60px);line-height:1.1;letter-spacing:-.045em;text-wrap:balance}
+.dim{color:rgb(255 255 255/.5)}
+.sub{color:rgb(255 255 255/.7);max-width:560px}
+.head{display:grid;gap:18px;margin-bottom:56px}
+.head.center{justify-items:center;text-align:center}
+
+/* nav */
+.nav{position:fixed;top:20px;left:50%;translate:-50% 0;z-index:50;width:min(1200px,calc(100% - 32px));display:flex;align-items:center;justify-content:space-between;padding:10px 12px 10px 20px;border-radius:16px;background:rgb(255 255 255/.05);backdrop-filter:blur(25px);-webkit-backdrop-filter:blur(25px);border:1px solid rgb(255 255 255/.08);transition:background .3s}
+.nav.scrolled{background:rgb(13 16 23/.7)}
+.logo{display:flex;align-items:center;gap:10px;font:500 19px var(--font-display);letter-spacing:-.04em}
+.logo-mark{width:26px;height:26px}
+.nav ul{display:flex;gap:30px;list-style:none}
+.nav ul a{font-size:14px;color:rgb(255 255 255/.7);transition:color .2s}
+.nav ul a:hover{color:#fff}
+.nav-r{display:flex;align-items:center;gap:14px}
+.nav-r .signin{font-size:14px;color:rgb(255 255 255/.7)}
+
+/* buttons */
+.btn-pill{position:relative;isolation:isolate;display:inline-flex;gap:7px;align-items:center;padding:13px 24px;border-radius:999px;background:linear-gradient(90deg,#DBE2E6 0%,#fff 71.6%);color:#0D1017;font:500 15px var(--font-mono)}
+.btn-pill.sm{padding:9px 18px;font-size:13px}
+.side-glow{position:absolute;z-index:-1;right:0;top:50%;translate:0 -50%;width:88px;height:56px;border-radius:999px;background:linear-gradient(270deg,#FF7300 0%,rgb(255 250 107/.2) 95%);filter:blur(12px);transition:transform .5s}
+.btn-pill:hover .side-glow{transform:translateX(6px) scale(1.1)}
+.btn-pill svg{width:14px;height:14px;transition:transform .3s}.btn-pill:hover svg{transform:translateX(3px)}
+.btn-rainbow{--fill:var(--bg-2);position:relative;isolation:isolate;display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:6px;font:500 16px/1.4 var(--font-mono);color:#fff;border:2px solid transparent;
+  background:linear-gradient(var(--fill),var(--fill)) padding-box,linear-gradient(#121213 0%,rgb(18 18 19/.6) 80%,rgb(18 18 19/0)) border-box,linear-gradient(90deg,var(--fill),#8765FF,#FFF181,#FF4C52,#734CFF,#8765FF,#FFF181,#FF4C52,#734CFF,var(--fill)) border-box;
+  background-size:100% 100%,100% 100%,400% 100%;animation:rainbow 15s linear infinite}
+.btn-rainbow::before{content:"";position:absolute;z-index:-1;left:50%;bottom:-25%;width:80%;height:40%;translate:-50% 0;background:linear-gradient(90deg,#30E3FF,#8765FF,#FFF181,#FF4C52,#734CFF,#30E3FF,#8765FF,#FFF181,#FF4C52,#734CFF,#30E3FF);background-size:400% 100%;animation:rainbow 15s linear infinite;filter:blur(14px);transition:filter .5s}
+.btn-rainbow:hover::before{filter:blur(10px)}
+.btn-rainbow svg{width:14px;height:14px;transition:transform .3s}.btn-rainbow:hover svg{transform:translateX(3px)}
+@keyframes rainbow{to{background-position:0 0,0 0,400% 0}}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:6px;border:1px solid var(--line-strong);font:500 15px var(--font-mono);color:rgb(255 255 255/.85);transition:background .3s,border-color .3s}
+.btn-ghost:hover{background:rgb(255 255 255/.05);border-color:rgb(255 255 255/.5)}
+
+/* hero */
+.hero{overflow:hidden;isolation:isolate;padding:170px 0 0;text-align:center;background:var(--bg-0)}
+.glow{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.g{position:absolute;display:block}
+.g1{top:-17%;left:50%;width:812px;height:488px;translate:-80% 0;background:var(--glow);filter:blur(100px);animation:drift 18s ease-in-out infinite alternate}
+.g2{top:-5%;right:-4%;width:212px;height:288px;background:var(--glow);filter:blur(120px)}
+.e1{top:-22%;left:50%;width:672px;height:488px;translate:-80% 0;border-radius:200px;background:var(--bg-0);filter:blur(100px);z-index:1}
+.e2{bottom:-20%;left:50%;width:min(1812px,140vw);height:1040px;translate:-50% 0;border-radius:200px;background:var(--bg-0);filter:blur(142px);z-index:1}
+.core{bottom:10%;left:50%;width:150px;height:180px;translate:-50% 0;border-radius:999px;background:linear-gradient(var(--accent-deep),var(--accent));filter:blur(78px);z-index:2}
+@keyframes drift{to{transform:translateX(40px)}}
+.guides{position:absolute;inset:0;z-index:-1;pointer-events:none;background:repeating-linear-gradient(90deg,transparent 0 calc(25% - 1px),rgb(255 255 255/.04) calc(25% - 1px) 25%);mask-image:linear-gradient(to bottom,#000 30%,transparent);-webkit-mask-image:linear-gradient(to bottom,#000 30%,transparent)}
+.noise::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.06;mix-blend-mode:overlay;z-index:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.hero .wrap{position:relative;z-index:3}
+.pill-eyebrow{display:inline-flex;gap:8px;align-items:center;padding:7px 14px;border-radius:999px;font-size:13px;color:rgb(255 255 255/.8);background:rgb(255 255 255/.05);border:1px solid var(--line);backdrop-filter:blur(10px)}
+.pill-eyebrow b{color:var(--accent);font-weight:500}
+.pill-eyebrow svg{width:14px;height:14px;color:var(--accent)}
+.hero h1{margin:26px auto 22px;max-width:1000px}
+.hero .sub{margin:0 auto 34px;font-size:19px}
+.cta-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.proof{display:inline-flex;align-items:center;gap:12px;margin-top:36px;font-size:13px;line-height:1.3;text-align:left;color:rgb(255 255 255/.7)}
+.avatars{display:flex}
+.avatars span{width:34px;height:34px;border-radius:50%;box-shadow:0 0 0 2px var(--bg-0);margin-left:-10px;display:grid;place-items:center;font:600 12px var(--font-body);color:#fff}
+.avatars span:first-child{margin-left:0}
+.stars{color:var(--accent);letter-spacing:2px;font-size:13px}
+
+/* hero mock */
+.mock-wrap{position:relative;max-width:1100px;margin:72px auto 0;perspective:1200px}
+.mock{border-radius:14px;overflow:hidden;background:#0B0E14;border:1px solid rgb(255 115 0/.45);box-shadow:0 0 0 1px rgb(255 115 0/.12),0 0 40px rgb(255 80 0/.3),0 0 120px rgb(255 60 0/.2);text-align:left}
+.mock-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.mock-bar i{width:11px;height:11px;border-radius:50%;background:#FF5F57}.mock-bar i:nth-child(2){background:#FEBC2E}.mock-bar i:nth-child(3){background:#28C840}
+.mock-url{margin-inline:auto;padding:4px 70px;border-radius:6px;background:var(--bg-2);font-size:12px;color:rgb(255 255 255/.55)}
+.mock-body{display:grid;grid-template-columns:210px 1fr 280px;min-height:420px}
+.m-side{border-right:1px solid var(--line);padding:18px 14px;display:flex;flex-direction:column;gap:6px;font-size:13px;color:rgb(255 255 255/.6)}
+.m-side .lbl{font:500 10px var(--font-mono);letter-spacing:.08em;text-transform:uppercase;color:rgb(255 255 255/.4);margin:10px 8px 4px}
+.m-item{display:flex;align-items:center;gap:9px;padding:8px 10px;border-radius:8px}
+.m-item.on{background:rgb(255 255 255/.06);color:#fff}
+.m-item img{width:15px;height:15px}
+.m-dot{width:8px;height:8px;border-radius:50%;background:#28C840;box-shadow:0 0 8px #28C840}
+.m-main{padding:20px 22px;display:flex;flex-direction:column;gap:12px}
+.m-title{display:flex;justify-content:space-between;align-items:center;font:500 15px var(--font-display);letter-spacing:-.02em}
+.m-title small{font:400 11px var(--font-mono);color:rgb(255 255 255/.5)}
+.step{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:12px;background:rgb(255 255 255/.03);border:1px solid var(--line);font-size:13px;line-height:1.4}
+.step .ic{flex:none;width:30px;height:30px;border-radius:8px;background:#fff;display:grid;place-items:center}
+.step .ic img{width:18px;height:18px}
+.step b{display:block;font-weight:500;color:#fff}
+.step span{color:rgb(255 255 255/.6)}
+.step .tag{margin-left:auto;flex:none;font:500 10px var(--font-mono);padding:3px 8px;border-radius:999px;background:rgb(40 200 64/.12);color:#4ADE80}
+.step .tag.run{background:rgb(255 115 0/.14);color:var(--accent)}
+.typing i{display:inline-block;width:4px;height:4px;border-radius:50%;background:currentColor;margin-right:3px;animation:blink 1.2s infinite}
+.typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,80%,100%{opacity:.2}40%{opacity:1}}
+.m-right{border-left:1px solid var(--line);padding:18px;display:flex;flex-direction:column;gap:12px;font-size:12px}
+.m-card{padding:14px;border-radius:12px;background:rgb(255 255 255/.03);border:1px solid var(--line)}
+.m-card .n{font:400 30px var(--font-display);letter-spacing:-.04em}
+.m-card small{color:rgb(255 255 255/.55)}
+.spark{width:100%;height:36px;margin-top:6px}
+.spark path{stroke:var(--accent);stroke-width:1.6;fill:none;stroke-dasharray:300;stroke-dashoffset:300;animation:draw 3s .6s ease-out forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.mock-fade{position:absolute;inset:auto 0 -2% 0;height:min(300px,45%);background:linear-gradient(180deg,transparent,var(--bg-0) 94%);pointer-events:none}
+
+/* logos */
+.strip{padding:56px 0 20px}
+.strip p{text-align:center;font-size:13px;color:rgb(255 255 255/.55);margin-bottom:28px}
+.marquee{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.marquee-track{display:flex;gap:72px;width:max-content;animation:marquee 40s linear infinite;align-items:center}
+.marquee:hover .marquee-track{animation-play-state:paused}
+@keyframes marquee{to{transform:translateX(-50%)}}
+.cust{font:500 22px var(--font-display);letter-spacing:-.04em;color:rgb(255 255 255/.4);white-space:nowrap;transition:color .3s}
+.cust:hover{color:#fff}
+
+/* bento */
+.bento{display:grid;gap:16px;grid-template-columns:repeat(6,1fr);grid-auto-rows:minmax(260px,auto)}
+.bento>.c1{grid-column:span 4;grid-row:span 2}.bento>.c2{grid-column:span 2}.bento>.c3{grid-column:span 2}.bento>.c4{grid-column:span 3}.bento>.c5{grid-column:span 3}
+.cell{--x:50%;--y:50%;position:relative;overflow:hidden;border-radius:20px;background:radial-gradient(400px circle at var(--x) var(--y),rgb(255 255 255/.06),transparent 40%),var(--bg-2);border:1px solid var(--line);box-shadow:inset 0 1px 0 rgb(255 255 255/.06);padding:28px;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;transition:border-color .3s,translate .3s cubic-bezier(.2,.8,.2,1)}
+.cell:hover{border-color:var(--line-strong);translate:0 -4px}
+.cell::before{content:"";position:absolute;top:-30%;right:-20%;width:60%;height:60%;border-radius:50%;background:radial-gradient(circle,rgb(255 115 0/.5),transparent 70%);filter:blur(40px);opacity:.6;pointer-events:none}
+.cell h3{font:400 22px/1.2 var(--font-display);letter-spacing:-.035em;position:relative}
+.cell p{color:rgb(255 255 255/.65);font-size:15px;position:relative}
+.ui{position:relative;flex:1;margin-bottom:18px;border-radius:12px;background:rgb(255 255 255/.03);border:1px solid var(--line);padding:16px;display:flex;flex-direction:column;justify-content:center;gap:10px;min-height:150px;overflow:hidden}
+/* workflow */
+.flow{display:flex;align-items:center;justify-content:space-between;gap:8px;position:relative;padding:10px 4px}
+.node{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:8px;font-size:12px;color:rgb(255 255 255/.7)}
+.node .b{width:58px;height:58px;border-radius:16px;background:#fff;display:grid;place-items:center;box-shadow:0 0 30px rgb(255 115 0/.2)}
+.node .b img{width:30px;height:30px}
+.node .b.agent{background:linear-gradient(160deg,var(--accent),#B02A00);box-shadow:0 0 40px rgb(255 90 0/.55)}
+.node .b.agent svg{width:28px;height:28px;color:#fff}
+.flow svg.wire{position:absolute;left:0;right:0;top:50%;width:100%;height:60px;translate:0 -70%;z-index:0}
+.wire path{stroke:rgb(255 255 255/.25);stroke-dasharray:4 5;fill:none}
+.dotter{position:absolute;left:0;top:0;width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent);offset-path:path('M20 30 L600 30');offset-distance:0;animation:travel 3.2s linear infinite;z-index:1}
+@keyframes travel{to{offset-distance:100%}}
+.chat{display:flex;flex-direction:column;gap:8px;font-size:12.5px}
+.bub{padding:9px 12px;border-radius:12px;max-width:88%;line-height:1.4}
+.bub.u{background:rgb(255 255 255/.08);align-self:flex-start}
+.bub.a{background:rgb(255 115 0/.14);border:1px solid rgb(255 115 0/.3);align-self:flex-end}
+.tog{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:rgb(255 255 255/.8)}
+.sw{width:36px;height:20px;border-radius:999px;background:var(--bg-3);position:relative;animation:swbg 6s infinite}
+.sw::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;animation:swk 6s infinite}
+.sw.o2,.sw.o2::after{animation-delay:1.5s}.sw.o3,.sw.o3::after{animation-delay:3s}
+@keyframes swbg{0%,15%{background:var(--bg-3)}25%,85%{background:var(--accent)}100%{background:var(--bg-3)}}
+@keyframes swk{0%,15%{left:2px}25%,85%{left:18px}100%{left:2px}}
+.ring{display:grid;place-items:center;position:relative}
+.ring svg{width:110px;height:110px;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:8}
+.ring .bg{stroke:rgb(255 255 255/.08)}
+.ring .fg{stroke:var(--accent);stroke-linecap:round;stroke-dasharray:289;stroke-dashoffset:289;transition:stroke-dashoffset 2s cubic-bezier(.2,.8,.2,1)}
+.ring.in .fg{stroke-dashoffset:52}
+.ring b{position:absolute;font:400 26px var(--font-display);letter-spacing:-.04em}
+.mails{display:flex;flex-direction:column;gap:7px;font-size:12.5px}
+.mail{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;background:rgb(255 255 255/.04)}
+.mail img{width:16px;height:16px}
+.mail span{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:rgb(255 255 255/.8)}
+.mail em{font:500 10px var(--font-mono);font-style:normal;padding:2px 7px;border-radius:999px;background:rgb(255 115 0/.14);color:var(--accent)}
+.mail em.g{background:rgb(40 200 64/.12);color:#4ADE80}
+.code{font:400 12.5px/1.7 var(--font-mono);color:rgb(255 255 255/.75)}
+.code .k{color:var(--accent)}.code .s{color:#8EC5FF}
+.cur{display:inline-block;width:7px;height:14px;background:var(--accent);vertical-align:-2px;animation:cur 1s steps(1) infinite}
+@keyframes cur{50%{opacity:0}}
+
+/* fill statement */
+.statement{background:var(--bg-1);border-block:1px solid var(--line)}
+.fill-text{font-family:var(--font-display);font-size:clamp(32px,5.4vw,76px);line-height:1.08;letter-spacing:-.05em;max-width:1100px}
+.fill-text .line{background:linear-gradient(to right,#fff 50%,rgb(255 255 255/.22) 50%);background-size:200% 100%;background-position:100% 0;-webkit-background-clip:text;background-clip:text;color:transparent;display:inline}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:20px;overflow:hidden;position:relative}
+.stat{padding:40px 28px;border-left:1px solid var(--line)}
+.stat:first-child{border-left:0}
+.stat .num{font:400 clamp(44px,5vw,72px)/1 var(--font-display);letter-spacing:-.06em;background:linear-gradient(180deg,#fff 30%,rgb(255 255 255/.35));-webkit-background-clip:text;background-clip:text;color:transparent}
+.stat p{margin-top:12px;color:rgb(255 255 255/.65);font-size:15px}
+.big-ghost{position:absolute;right:-2%;bottom:-18%;font:400 clamp(160px,26vw,380px)/1 var(--font-display);letter-spacing:-.07em;color:rgb(255 115 0/.06);pointer-events:none;user-select:none}
+
+/* stack */
+.stack{display:grid;gap:40px}
+.stack-card{position:sticky;top:110px;border-radius:28px;padding:clamp(24px,4vw,48px);display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;min-height:430px;background:var(--bg-2);border:1px solid var(--line);box-shadow:inset 0 1px 0 rgb(255 255 255/.06)}
+.stack-card:nth-child(2){top:126px;background:#1C2030}
+.stack-card:nth-child(3){top:142px;background:#1F2335}
+.stack-card .n{font:500 13px var(--font-mono);color:var(--accent);margin-bottom:18px;display:block}
+.stack-card h3{font:400 clamp(28px,3.2vw,42px)/1.1 var(--font-display);letter-spacing:-.045em;margin-bottom:16px}
+.stack-card p{color:rgb(255 255 255/.7);max-width:440px}
+.stack-card .ui{margin:0;min-height:270px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border-radius:999px;background:#fff;color:#111;font-size:13px;font-weight:500}
+.chip img{width:16px;height:16px}
+
+/* testimonials */
+.tcols{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;height:640px;overflow:hidden;mask-image:linear-gradient(180deg,transparent,#000 12%,#000 88%,transparent);-webkit-mask-image:linear-gradient(180deg,transparent,#000 12%,#000 88%,transparent)}
+.tcol{display:flex;flex-direction:column;gap:16px;animation:vmq 40s linear infinite}
+.tcol:nth-child(2){animation-direction:reverse;animation-duration:50s}
+.tcol:nth-child(3){animation-duration:44s}
+@keyframes vmq{to{transform:translateY(-50%)}}
+.tcols:hover .tcol{animation-play-state:paused}
+.quote{padding:24px;border-radius:20px;background:var(--bg-2);border:1px solid var(--line);box-shadow:inset 0 1px 0 rgb(255 255 255/.06);font-size:15px}
+.quote p{color:rgb(255 255 255/.85)}
+.who{display:flex;align-items:center;gap:12px;margin-top:18px}
+.who i{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;font:600 13px var(--font-body);font-style:normal}
+.who b{display:block;font-weight:500;font-size:14px}.who small{color:rgb(255 255 255/.55);font-size:12.5px}
+
+/* pricing */
+.toggle{display:inline-flex;padding:4px;border-radius:999px;border:1px solid var(--line);background:var(--bg-2);font:500 13px var(--font-mono)}
+.toggle button{padding:8px 18px;border-radius:999px;color:rgb(255 255 255/.6);transition:.3s}
+.toggle button.on{background:#fff;color:#0D1017}
+.toggle small{color:var(--accent);margin-left:4px}
+.toggle button.on small{color:#B02A00}
+.prices{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch;margin-top:44px}
+.price-card{border-radius:24px;padding:34px;background:var(--bg-2);border:1px solid var(--line);display:flex;flex-direction:column;gap:20px;box-shadow:inset 0 1px 0 rgb(255 255 255/.06)}
+.price-card.featured{background:linear-gradient(var(--bg-2),var(--bg-2)) padding-box,linear-gradient(160deg,var(--accent),transparent 60%) border-box;border:1px solid transparent;box-shadow:0 30px 80px -20px color-mix(in oklab,var(--accent) 45%,transparent);translate:0 -12px}
+.price-card h3{font:500 15px var(--font-mono);color:rgb(255 255 255/.7)}
+.price{font:400 56px/1 var(--font-display);letter-spacing:-.05em}.price small{font:400 15px var(--font-body);letter-spacing:0;color:rgb(255 255 255/.55)}
+.price-card ul{list-style:none;display:grid;gap:12px;font-size:15px;color:rgb(255 255 255/.8);flex:1}
+.price-card li{display:flex;gap:10px;align-items:flex-start}
+.price-card li svg{flex:none;width:18px;height:18px;margin-top:3px;color:var(--accent)}
+.price-card .btn-ghost,.price-card .btn-rainbow{justify-content:center}
+.badge{align-self:flex-start;font:500 11px var(--font-mono);padding:4px 10px;border-radius:999px;background:rgb(255 115 0/.14);color:var(--accent);margin-bottom:-6px}
+
+/* faq */
+.faq-grid{display:grid;grid-template-columns:5fr 7fr;gap:60px;align-items:start}
+.faq-side{position:sticky;top:110px;display:grid;gap:18px}
+.faq-help{padding:20px;border-radius:16px;background:var(--bg-2);border:1px solid var(--line);font-size:14px;color:rgb(255 255 255/.7);margin-top:12px}
+.faq-help b{display:block;color:#fff;font-weight:500;margin-bottom:4px}
+.faq-help a{color:var(--accent)}
+.faq-list{border-top:1px solid var(--line)}
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-item button{width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:24px 0;text-align:left;font:400 20px/1.3 var(--font-display);letter-spacing:-.03em}
+.faq-item .pm{flex:none;width:30px;height:30px;border-radius:50%;border:1px solid var(--line-strong);position:relative;transition:.3s}
+.faq-item .pm::before,.faq-item .pm::after{content:"";position:absolute;left:50%;top:50%;width:10px;height:1.5px;background:#fff;translate:-50% -50%;transition:.3s}
+.faq-item .pm::after{rotate:90deg}
+.faq-item.open .pm{background:#fff}.faq-item.open .pm::before,.faq-item.open .pm::after{background:#0D1017}.faq-item.open .pm::after{rotate:0deg}
+.faq-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s cubic-bezier(.2,.8,.2,1)}
+.faq-body>div{overflow:hidden}
+.faq-body p{padding-bottom:24px;color:rgb(255 255 255/.7);max-width:560px}
+.faq-item.open .faq-body{grid-template-rows:1fr}
+
+/* final cta */
+.final{overflow:hidden;isolation:isolate;text-align:center;padding:clamp(100px,14vw,200px) 0 clamp(80px,10vw,140px)}
+.final .glow .g1{top:auto;bottom:-30%;translate:-50% 0;left:50%;width:900px;height:520px;animation:none;filter:blur(110px)}
+.final .glow .e2{bottom:auto;top:-70%}
+.final .core{bottom:0;width:280px;height:220px}
+.final .wrap{position:relative;z-index:3;display:grid;gap:26px;justify-items:center}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding-top:64px;overflow:hidden;background:var(--bg-0)}
+.foot{display:grid;grid-template-columns:2fr repeat(3,1fr);gap:40px;padding-bottom:60px}
+.foot p{color:rgb(255 255 255/.55);font-size:14px;max-width:280px;margin-top:14px}
+.foot h4{font:500 12px var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:rgb(255 255 255/.5);margin-bottom:16px}
+.foot ul{list-style:none;display:grid;gap:10px;font-size:14px;color:rgb(255 255 255/.75)}
+.foot ul a:hover{color:#fff}
+.word{font:500 clamp(100px,21vw,320px)/.8 var(--font-display);letter-spacing:-.06em;text-align:center;background:linear-gradient(#fff 0%,transparent 90%);-webkit-background-clip:text;background-clip:text;color:transparent;opacity:.25;height:.62em;overflow:hidden;white-space:nowrap;user-select:none}
+.legal{display:flex;justify-content:space-between;font-size:13px;color:rgb(255 255 255/.45);padding:0 0 28px}
+
+/* responsive */
+@media(max-width:1000px){
+  .nav ul{display:none}
+  .mock-body{grid-template-columns:1fr}.m-side,.m-right{display:none}
+  .bento{grid-template-columns:1fr}.bento>*{grid-column:auto!important;grid-row:auto!important}
+  .stats{grid-template-columns:1fr 1fr}.stat:nth-child(3){border-left:0}.stat:nth-child(n+3){border-top:1px solid var(--line)}
+  .stack-card{grid-template-columns:1fr;position:relative;top:auto!important}
+  .tcols{grid-template-columns:1fr 1fr}.tcol:nth-child(3){display:none}
+  .prices{grid-template-columns:1fr}.price-card.featured{translate:0}
+  .faq-grid{grid-template-columns:1fr}.faq-side{position:static}
+  .foot{grid-template-columns:1fr 1fr}
+}
+@media(max-width:768px){
+  .g{filter:blur(60px)!important;scale:.6}
+  .nav .signin{display:none}
+  .hero{padding-top:130px}
+  .tcols{grid-template-columns:1fr;height:560px}.tcol:nth-child(2){display:none}
+  .flow .node span{display:none}
+  .node .b{width:48px;height:48px}
+  .dotter{display:none}
+  .legal{flex-direction:column;gap:6px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .fill-text .line{background-position:0 0}
+  .spark path{stroke-dashoffset:0}
+  .ring .fg{stroke-dashoffset:52}
+}
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <a class="logo" href="#top" aria-label="Flowpilot home">
+    <svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFB066"/><stop offset="1" stop-color="#FF4A00"/></linearGradient></defs><rect width="32" height="32" rx="9" fill="url(#lg)"/><path d="M9 21.5 23 9l-4.2 14-3.3-5.2L9 21.5Z" fill="#0D1017"/></svg>
+    Flowpilot
+  </a>
+  <nav aria-label="Primary"><ul>
+    <li><a href="#features">Product</a></li><li><a href="#how">How it works</a></li><li><a href="#customers">Customers</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#faq">FAQ</a></li>
+  </ul></nav>
+  <div class="nav-r"><a class="signin" href="#">Sign in</a><a class="btn-pill sm" href="#pricing">Start free <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg><span class="side-glow"></span></a></div>
+</header>
+
+<main id="top">
+<!-- HERO -->
+<section class="hero noise" data-nav="Home">
+  <div class="glow" aria-hidden="true"><span class="g g1"></span><span class="g g2"></span><span class="g e1"></span><span class="g e2"></span><span class="g core"></span></div>
+  <div class="guides" aria-hidden="true"></div>
+  <div class="wrap">
+    <span class="pill-eyebrow" data-fade><svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0l1.6 5.4L15 7l-5.4 1.6L8 14 6.4 8.6 1 7l5.4-1.6z"/></svg><b>New</b> Agents now run across Slack, Notion and Gmail at once</span>
+    <h1 class="display">Your team's busywork, <span class="dim">handled by agents.</span></h1>
+    <p class="sub" data-fade>Flowpilot deploys AI agents that triage your inbox, keep Notion current and answer Slack threads. Every action is logged, reviewable and reversible.</p>
+    <div class="cta-row" data-fade>
+      <a class="btn-rainbow magnetic" href="#pricing">Start free for 14 days <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+      <a class="btn-ghost" href="#how">See how it works</a>
+    </div>
+    <div class="proof" data-fade>
+      <div class="avatars" aria-hidden="true"><span style="background:#E8590C">AM</span><span style="background:#3B5BDB">JK</span><span style="background:#2F9E44">SR</span><span style="background:#AE3EC9">LT</span></div>
+      <p><span class="stars" aria-hidden="true">★★★★★</span><br>Rated 4.9/5 by 2,400+ teams</p>
+    </div>
+
+    <div class="mock-wrap">
+      <div class="mock" role="img" aria-label="Flowpilot dashboard showing an agent triaging Gmail, updating Notion and posting to Slack">
+        <div class="mock-bar"><i></i><i></i><i></i><span class="mock-url">app.flowpilot.ai/agents</span></div>
+        <div class="mock-body">
+          <div class="m-side">
+            <div class="m-item on"><span class="m-dot"></span> Ops Copilot</div>
+            <div class="m-item"><span class="m-dot"></span> Inbox Triage</div>
+            <div class="m-item"><span class="m-dot" style="background:#FF7300;box-shadow:0 0 8px #FF7300"></span> Weekly Report</div>
+            <div class="lbl">Connected</div>
+            <div class="m-item"><img src="https://api.iconify.design/logos:slack-icon.svg" alt="" width="15" height="15"> Slack</div>
+            <div class="m-item"><img src="https://api.iconify.design/logos:notion-icon.svg" alt="" width="15" height="15"> Notion</div>
+            <div class="m-item"><img src="https://api.iconify.design/logos:google-gmail.svg" alt="" width="15" height="15"> Gmail</div>
+          </div>
+          <div class="m-main">
+            <div class="m-title">Ops Copilot <small>run #4,182 · 38s</small></div>
+            <div class="step"><div class="ic"><img src="https://api.iconify.design/logos:google-gmail.svg" alt="" width="18" height="18"></div><div><b>Read 14 new emails</b><span>3 customer requests, 2 invoices, 9 newsletters archived</span></div><span class="tag">done</span></div>
+            <div class="step"><div class="ic"><img src="https://api.iconify.design/logos:notion-icon.svg" alt="" width="18" height="18"></div><div><b>Updated “Q4 Launch Tracker”</b><span>Moved 2 tasks to In review, added link to Acme brief</span></div><span class="tag">done</span></div>
+            <div class="step"><div class="ic"><img src="https://api.iconify.design/logos:slack-icon.svg" alt="" width="18" height="18"></div><div><b>Drafting reply in #customer-success</b><span class="typing"><i></i><i></i><i></i></span> waiting for approval from Maya</div><span class="tag run">running</span></div>
+          </div>
+          <div class="m-right">
+            <div class="m-card"><small>Hours saved this week</small><div class="n">126</div><svg class="spark" viewBox="0 0 200 36" preserveAspectRatio="none"><path d="M0 30 C25 28 35 20 60 22 S100 10 125 14 S170 4 200 2"/></svg></div>
+            <div class="m-card"><small>Actions awaiting approval</small><div class="n">3</div></div>
+            <div class="m-card"><small>Accuracy on reviewed actions</small><div class="n">98.4%</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="mock-fade"></div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS -->
+<section class="strip" aria-label="Customers">
+  <p>Powering the busiest teams at fast-moving companies</p>
+  <div class="marquee"><div class="marquee-track">
+    <span class="cust">Northwind</span><span class="cust">Lumen&amp;Co</span><span class="cust">Fieldstone</span><span class="cust">Parallel</span><span class="cust">Hexwave</span><span class="cust">Brightloop</span><span class="cust">Oakridge</span><span class="cust">Vantage Labs</span>
+    <span class="cust" aria-hidden="true">Northwind</span><span class="cust" aria-hidden="true">Lumen&amp;Co</span><span class="cust" aria-hidden="true">Fieldstone</span><span class="cust" aria-hidden="true">Parallel</span><span class="cust" aria-hidden="true">Hexwave</span><span class="cust" aria-hidden="true">Brightloop</span><span class="cust" aria-hidden="true">Oakridge</span><span class="cust" aria-hidden="true">Vantage Labs</span>
+  </div></div>
+</section>
+
+<!-- FEATURES -->
+<section class="sec" id="features" data-nav="Product">
+  <div class="wrap">
+    <div class="head center" data-reveal>
+      <span class="eyebrow-num">Product</span>
+      <h2 class="h2">One agent layer across <span class="dim">the tools you already live in.</span></h2>
+      <p class="sub">No new app for your team to learn. Flowpilot works inside Slack, Notion and Gmail, and asks before anything risky.</p>
+    </div>
+    <div class="bento" data-reveal>
+      <article class="cell c1 spot">
+        <div class="ui"><div class="flow">
+          <svg class="wire" viewBox="0 0 620 60" preserveAspectRatio="none" aria-hidden="true"><path d="M20 30 L600 30"/></svg>
+          <span class="dotter" aria-hidden="true"></span>
+          <div class="node"><div class="b"><img src="https://api.iconify.design/logos:google-gmail.svg" alt="" width="30" height="30"></div><span>Email arrives</span></div>
+          <div class="node"><div class="b agent"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/><circle cx="12" cy="12" r="2.5"/></svg></div><span>Agent decides</span></div>
+          <div class="node"><div class="b"><img src="https://api.iconify.design/logos:notion-icon.svg" alt="" width="30" height="30"></div><span>Doc updated</span></div>
+          <div class="node"><div class="b"><img src="https://api.iconify.design/logos:slack-icon.svg" alt="" width="30" height="30"></div><span>Team notified</span></div>
+        </div></div>
+        <h3>Cross-app workflows, described in plain English</h3>
+        <p>“When a customer emails about billing, log it in Notion and ping #finance.” Flowpilot builds the workflow and runs it.</p>
+      </article>
+      <article class="cell c2 spot">
+        <div class="ui"><div class="chat">
+          <div class="bub u">@Flowpilot what's the status of the Acme renewal?</div>
+          <div class="bub a">Contract sent Tuesday, legal review due Friday. I've nudged Dan.</div>
+        </div></div>
+        <h3>Answers in Slack threads</h3>
+        <p>Ask anything about your docs and inboxes without leaving the channel.</p>
+      </article>
+      <article class="cell c3 spot">
+        <div class="ui">
+          <div class="tog">Auto-reply to FAQs <span class="sw"></span></div>
+          <div class="tog">Approve before sending <span class="sw o2"></span></div>
+          <div class="tog">Sync meeting notes <span class="sw o3"></span></div>
+        </div>
+        <h3>Guardrails you control</h3>
+        <p>Set what agents may do alone and what needs a human yes.</p>
+      </article>
+      <article class="cell c4 spot">
+        <div class="ui"><div class="mails">
+          <div class="mail"><img src="https://api.iconify.design/logos:google-gmail.svg" alt="" width="16" height="16"><span>Re: Invoice #2291 overdue</span><em>billing</em></div>
+          <div class="mail"><img src="https://api.iconify.design/logos:google-gmail.svg" alt="" width="16" height="16"><span>Demo request from Hexwave</span><em class="g">sales</em></div>
+          <div class="mail"><img src="https://api.iconify.design/logos:google-gmail.svg" alt="" width="16" height="16"><span>Can't log in on mobile</span><em>support</em></div>
+        </div></div>
+        <h3>Inbox triage that learns your rules</h3>
+        <p>Labels, drafts and follow-ups sorted before you open Gmail.</p>
+      </article>
+      <article class="cell c5 spot">
+        <div class="ui ring-wrap" style="align-items:center"><div class="ring" id="ring"><svg viewBox="0 0 100 100"><circle class="bg" cx="50" cy="50" r="46"/><circle class="fg" cx="50" cy="50" r="46"/></svg><b>82%</b></div></div>
+        <h3>Reviewed and traceable</h3>
+        <p>82% of actions run unattended. Every one has a log and an undo.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- STATEMENT -->
+<section class="sec statement" data-nav="Why">
+  <div class="wrap"><p class="fill-text">Your team spends a third of its week moving information between tabs. Flowpilot gives that week back.</p></div>
+</section>
+
+<!-- STATS -->
+<section class="sec" data-nav="Results">
+  <div class="wrap">
+    <div class="stats" data-reveal>
+      <div class="stat"><div class="num"><span data-count="11" data-suffix="h">0</span></div><p>saved per person, every week</p></div>
+      <div class="stat"><div class="num"><span data-count="2400" data-suffix="+">0</span></div><p>teams running agents in production</p></div>
+      <div class="stat"><div class="num"><span data-count="38" data-suffix="M">0</span></div><p>actions completed last quarter</p></div>
+      <div class="stat"><div class="num"><span data-count="94" data-suffix="%">0</span></div><p>of emails triaged with no edits</p></div>
+      <span class="big-ghost" aria-hidden="true">11h</span>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="sec" id="how" data-nav="How it works" style="padding-top:0">
+  <div class="wrap">
+    <div class="head" data-reveal>
+      <span class="eyebrow-num">How it works</span>
+      <h2 class="h2">Live in an afternoon. <span class="dim">Trusted by Friday.</span></h2>
+    </div>
+    <div class="stack">
+      <article class="stack-card">
+        <div><span class="n">01 / 03</span><h3>Connect your tools</h3><p>Authorize Slack, Notion and Gmail with scoped, read-first permissions. Nothing is sent or edited until you say so.</p>
+          <div class="chips"><span class="chip"><img src="https://api.iconify.design/logos:slack-icon.svg" alt="" width="16" height="16">Slack</span><span class="chip"><img src="https://api.iconify.design/logos:notion-icon.svg" alt="" width="16" height="16">Notion</span><span class="chip"><img src="https://api.iconify.design/logos:google-gmail.svg" alt="" width="16" height="16">Gmail</span></div></div>
+        <div class="ui"><div class="code"><span class="k">scopes</span>: [<br>&nbsp;&nbsp;<span class="s">"gmail.readonly"</span>,<br>&nbsp;&nbsp;<span class="s">"notion.pages:read"</span>,<br>&nbsp;&nbsp;<span class="s">"slack.channels:history"</span><br>]<br><span class="k">mode</span>: <span class="s">"suggest-only"</span> <span class="cur"></span></div></div>
+      </article>
+      <article class="stack-card">
+        <div><span class="n">02 / 03</span><h3>Describe the job</h3><p>Write what you want in a sentence. Flowpilot turns it into an agent with steps, triggers and a clear definition of done.</p></div>
+        <div class="ui"><div class="chat"><div class="bub u">Every Monday, summarize last week's customer emails and post the top 5 themes in #product.</div><div class="bub a">Done. Agent “Weekly Voice of Customer” created. Next run: Mon 8:00. Want a Notion copy too?</div></div></div>
+      </article>
+      <article class="stack-card">
+        <div><span class="n">03 / 03</span><h3>Review, then let it run</h3><p>Start in approval mode. As accuracy proves out, promote actions to autonomous with one click. Roll back any run in seconds.</p></div>
+        <div class="ui"><div class="tog">Draft replies <span style="font:500 11px var(--font-mono);color:#4ADE80">autonomous</span></div><div class="tog">Edit Notion pages <span style="font:500 11px var(--font-mono);color:var(--accent)">needs approval</span></div><div class="tog">Send external email <span style="font:500 11px var(--font-mono);color:var(--accent)">needs approval</span></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="sec" id="customers" data-nav="Customers" style="padding-top:40px">
+  <div class="wrap">
+    <div class="head center" data-reveal>
+      <span class="eyebrow-num">Customers</span>
+      <h2 class="h2">Teams stopped copy-pasting. <span class="dim">Here's what they say.</span></h2>
+    </div>
+    <div class="tcols" id="tcols">
+      <div class="tcol">
+        <figure class="quote"><p>“Our support inbox went from 400 unread to a handful of conversations that actually need a human.”</p><div class="who"><i style="background:#E8590C">PN</i><div><b>Priya Nair</b><small>Head of Support, Northwind</small></div></div></figure>
+        <figure class="quote"><p>“Notion finally stays current. The agent updates the tracker the moment a thread decides something.”</p><div class="who"><i style="background:#3B5BDB">DK</i><div><b>Daniel Kerr</b><small>COO, Fieldstone</small></div></div></figure>
+        <figure class="quote"><p>“The approval mode is why legal said yes. We watched it for two weeks, then flipped it on.”</p><div class="who"><i style="background:#2F9E44">SR</i><div><b>Sofia Reyes</b><small>VP Operations, Lumen&amp;Co</small></div></div></figure>
+        <figure class="quote"><p>“Our support inbox went from 400 unread to a handful of conversations that actually need a human.”</p><div class="who"><i style="background:#E8590C">PN</i><div><b>Priya Nair</b><small>Head of Support, Northwind</small></div></div></figure>
+        <figure class="quote"><p>“Notion finally stays current. The agent updates the tracker the moment a thread decides something.”</p><div class="who"><i style="background:#3B5BDB">DK</i><div><b>Daniel Kerr</b><small>COO, Fieldstone</small></div></div></figure>
+        <figure class="quote"><p>“The approval mode is why legal said yes. We watched it for two weeks, then flipped it on.”</p><div class="who"><i style="background:#2F9E44">SR</i><div><b>Sofia Reyes</b><small>VP Operations, Lumen&amp;Co</small></div></div></figure>
+      </div>
+      <div class="tcol">
+        <figure class="quote"><p>“I asked Flowpilot in Slack about a renewal and it pulled the answer from an email and a Notion doc. Magic.”</p><div class="who"><i style="background:#AE3EC9">LT</i><div><b>Liam Torres</b><small>Account Director, Parallel</small></div></div></figure>
+        <figure class="quote"><p>“We replaced three Zaps and a virtual assistant. The monthly cost dropped and the quality went up.”</p><div class="who"><i style="background:#0C8599">HA</i><div><b>Hana Abe</b><small>Founder, Brightloop</small></div></div></figure>
+        <figure class="quote"><p>“Every action has a log and an undo. That's what separates this from a clever demo.”</p><div class="who"><i style="background:#C2255C">MO</i><div><b>Marcus Olsen</b><small>CTO, Hexwave</small></div></div></figure>
+        <figure class="quote"><p>“I asked Flowpilot in Slack about a renewal and it pulled the answer from an email and a Notion doc. Magic.”</p><div class="who"><i style="background:#AE3EC9">LT</i><div><b>Liam Torres</b><small>Account Director, Parallel</small></div></div></figure>
+        <figure class="quote"><p>“We replaced three Zaps and a virtual assistant. The monthly cost dropped and the quality went up.”</p><div class="who"><i style="background:#0C8599">HA</i><div><b>Hana Abe</b><small>Founder, Brightloop</small></div></div></figure>
+        <figure class="quote"><p>“Every action has a log and an undo. That's what separates this from a clever demo.”</p><div class="who"><i style="background:#C2255C">MO</i><div><b>Marcus Olsen</b><small>CTO, Hexwave</small></div></div></figure>
+      </div>
+      <div class="tcol">
+        <figure class="quote"><p>“Onboarding took one afternoon. By Monday the weekly report was writing itself.”</p><div class="who"><i style="background:#E67700">EW</i><div><b>Elena Wu</b><small>Chief of Staff, Oakridge</small></div></div></figure>
+        <figure class="quote"><p>“It drafts in our tone of voice, and the edits we make teach it. Rare for AI tools.”</p><div class="who"><i style="background:#5F3DC4">TB</i><div><b>Tom Becker</b><small>Customer Success Lead, Vantage Labs</small></div></div></figure>
+        <figure class="quote"><p>“The 11 hours a week figure is real. I measured it with our own timesheets.”</p><div class="who"><i style="background:#1971C2">AS</i><div><b>Amara Singh</b><small>Operations Manager, Northwind</small></div></div></figure>
+        <figure class="quote"><p>“Onboarding took one afternoon. By Monday the weekly report was writing itself.”</p><div class="who"><i style="background:#E67700">EW</i><div><b>Elena Wu</b><small>Chief of Staff, Oakridge</small></div></div></figure>
+        <figure class="quote"><p>“It drafts in our tone of voice, and the edits we make teach it. Rare for AI tools.”</p><div class="who"><i style="background:#5F3DC4">TB</i><div><b>Tom Becker</b><small>Customer Success Lead, Vantage Labs</small></div></div></figure>
+        <figure class="quote"><p>“The 11 hours a week figure is real. I measured it with our own timesheets.”</p><div class="who"><i style="background:#1971C2">AS</i><div><b>Amara Singh</b><small>Operations Manager, Northwind</small></div></div></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="sec" id="pricing" data-nav="Pricing" style="background:var(--bg-1);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <div class="head center" data-reveal>
+      <span class="eyebrow-num">Pricing</span>
+      <h2 class="h2">Pay for the work done, <span class="dim">not for seats you don't use.</span></h2>
+      <div class="toggle" role="group" aria-label="Billing period"><button class="on" data-bill="monthly">Monthly</button><button data-bill="yearly">Yearly <small>-20%</small></button></div>
+    </div>
+    <div class="prices" data-reveal>
+      <div class="price-card">
+        <h3>Starter</h3>
+        <div class="price">$<span data-m="0" data-y="0">0</span> <small>/ month</small></div>
+        <p style="color:rgb(255 255 255/.65);font-size:15px">For solo operators trying agents on their own inbox.</p>
+        <ul>
+          <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>1 agent, 500 actions / month</li>
+          <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>Gmail + Slack + Notion</li>
+          <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>Approval mode</li>
+        </ul>
+        <a class="btn-ghost" href="#">Start free</a>
+      </div>
+      <div class="price-card featured">
+        <span class="badge">Most popular</span>
+        <h3>Team</h3>
+        <div class="price">$<span data-m="49" data-y="39">49</span> <small>/ user / month</small></div>
+        <p style="color:rgb(255 255 255/.65);font-size:15px">For teams that want agents running in the background every day.</p>
+        <ul>
+          <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>Unlimited agents, 20,000 actions</li>
+          <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>Shared workflows and templates</li>
+          <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>Autonomous mode with undo</li>
+          <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>Priority support</li>
+        </ul>
+        <a class="btn-rainbow" href="#">Start 14-day trial</a>
+      </div>
+      <div class="price-card">
+        <h3>Enterprise</h3>
+        <div class="price" style="font-size:44px;padding:6px 0">Custom</div>
+        <p style="color:rgb(255 255 255/.65);font-size:15px">For companies with security reviews and compliance needs.</p>
+        <ul>
+          <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>SSO, SCIM and audit export</li>
+          <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>Data residency (EU / US)</li>
+          <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5l4 4 8-9"/></svg>Dedicated success engineer</li>
+        </ul>
+        <a class="btn-ghost" href="#">Talk to sales</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="faq" data-nav="FAQ">
+  <div class="wrap faq-grid">
+    <div class="faq-side">
+      <span class="eyebrow-num">FAQ</span>
+      <h2 class="h2">Questions, <span class="dim">answered.</span></h2>
+      <p class="sub">Everything security teams and skeptical founders ask us first.</p>
+      <div class="faq-help"><b>Still have questions?</b>Email <a href="mailto:hello@flowpilot.ai">hello@flowpilot.ai</a> and a human replies within a few hours.</div>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item open"><button aria-expanded="true">Can an agent send emails or messages without me knowing?<span class="pm"></span></button><div class="faq-body"><div><p>Only if you allow it. Every action type starts in approval mode, and you promote it to autonomous per action. Everything is logged and can be undone.</p></div></div></div>
+      <div class="faq-item"><button aria-expanded="false">What data does Flowpilot see and store?<span class="pm"></span></button><div class="faq-body"><div><p>Agents read only the channels, pages and labels you scope. We never train models on your data, and you can delete everything from settings at any time.</p></div></div></div>
+      <div class="faq-item"><button aria-expanded="false">How is this different from Zapier or Make?<span class="pm"></span></button><div class="faq-body"><div><p>Zaps follow fixed rules. Flowpilot agents read context, decide what a message means and handle the messy cases, then hand off to you when they are unsure.</p></div></div></div>
+      <div class="faq-item"><button aria-expanded="false">How long does setup take?<span class="pm"></span></button><div class="faq-body"><div><p>Most teams connect their tools and run a first agent within an hour. Templates for support triage, weekly reports and meeting notes ship in the box.</p></div></div></div>
+      <div class="faq-item"><button aria-expanded="false">Can I cancel any time?<span class="pm"></span></button><div class="faq-body"><div><p>Yes. Plans are month to month, and yearly plans refund unused months pro rata in the first 60 days.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final noise" data-nav="Start">
+  <div class="glow" aria-hidden="true"><span class="g g1"></span><span class="g e2"></span><span class="g core"></span></div>
+  <div class="wrap" data-reveal>
+    <h2 class="display">Give your team <span class="dim">its week back.</span></h2>
+    <p class="sub">Connect Slack, Notion and Gmail in minutes. No credit card required.</p>
+    <a class="btn-rainbow magnetic" href="#pricing">Start free for 14 days <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div><a class="logo" href="#top"><svg class="logo-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="url(#lg)"/><path d="M9 21.5 23 9l-4.2 14-3.3-5.2L9 21.5Z" fill="#0D1017"/></svg>Flowpilot</a><p>AI agents that run the busywork across Slack, Notion and Gmail.</p></div>
+    <div><h4>Product</h4><ul><li><a href="#features">Features</a></li><li><a href="#how">How it works</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#">Changelog</a></li></ul></div>
+    <div><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#customers">Customers</a></li><li><a href="#">Careers</a></li><li><a href="#">Contact</a></li></ul></div>
+    <div><h4>Trust</h4><ul><li><a href="#">Security</a></li><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li><li><a href="#">Status</a></li></ul></div>
+  </div>
+  <div class="wrap legal"><span>© 2026 Flowpilot, Inc.</span><span>Built for teams who'd rather ship.</span></div>
+  <div class="word" aria-hidden="true">Flowpilot</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js"></script>
+<script>
+const $=(s,r=document)=>[...r.querySelectorAll(s)];
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* nav state */
+addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>40),{passive:true});
+
+/* cursor spotlight */
+$('.spot').forEach(c=>c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--x',e.clientX-r.left+'px');c.style.setProperty('--y',e.clientY-r.top+'px')}));
+
+/* FAQ */
+$('.faq-item button').forEach(b=>b.addEventListener('click',()=>{
+  const it=b.parentElement,open=!it.classList.contains('open');
+  $('.faq-item').forEach(i=>{i.classList.remove('open');i.firstElementChild.setAttribute('aria-expanded','false')});
+  if(open){it.classList.add('open');b.setAttribute('aria-expanded','true')}
+}));
+
+/* pricing toggle */
+$('.toggle button').forEach(b=>b.addEventListener('click',()=>{
+  $('.toggle button').forEach(x=>x.classList.toggle('on',x===b));
+  const k=b.dataset.bill==='yearly'?'y':'m';
+  $('[data-m]').forEach(el=>{
+    const to=+el.dataset[k];
+    if(window.gsap&&!reduce){const o={v:+el.textContent};gsap.to(o,{v:to,duration:.6,ease:'power2.out',onUpdate:()=>el.textContent=Math.round(o.v)})}
+    else el.textContent=to;
+  });
+}));
+
+/* ring */
+const ring=document.getElementById('ring');
+new IntersectionObserver((e,o)=>{if(e[0].isIntersecting){ring.classList.add('in');o.disconnect()}},{threshold:.4}).observe(ring);
+
+/* section-aware reveal fallback + counters without GSAP */
+if(reduce||!window.gsap){
+  $('[data-count]').forEach(el=>el.textContent=(+el.dataset.count).toLocaleString()+(el.dataset.suffix||''));
+}else{
+  gsap.registerPlugin(ScrollTrigger,SplitText);
+  const lenis=new Lenis({lerp:.1,smoothWheel:true});
+  lenis.on('scroll',ScrollTrigger.update);
+  gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);
+  $('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();lenis.scrollTo(t,{offset:-70})}}));
+
+  document.fonts.ready.then(()=>{
+    const h=SplitText.create('.hero h1',{type:'words,lines',mask:'lines'});
+    gsap.from(h.words,{yPercent:110,rotateX:-40,opacity:0,transformOrigin:'50% 100%',duration:1.1,ease:'expo.out',stagger:.06,delay:.15});
+    gsap.from('.hero [data-fade]',{y:24,opacity:0,duration:.9,ease:'power3.out',stagger:.08,delay:.5});
+    gsap.from('.mock',{y:80,rotateX:18,opacity:0,transformPerspective:1200,duration:1.4,ease:'power3.out',delay:.7});
+
+    $('[data-reveal]').forEach(g=>gsap.from(g.children,{y:40,opacity:0,duration:.9,ease:'power3.out',stagger:.08,scrollTrigger:{trigger:g,start:'top 82%'}}));
+
+    $('.fill-text').forEach(el=>SplitText.create(el,{type:'lines',linesClass:'line',autoSplit:true,onSplit:self=>{
+      const tl=gsap.timeline({defaults:{ease:'none'},scrollTrigger:{trigger:el,start:'top 80%',end:'bottom 40%',scrub:.5}});
+      self.lines.forEach(l=>tl.to(l,{backgroundPosition:'0% 0',duration:1}));
+      return tl;
+    }}));
+
+    $('[data-count]').forEach(el=>{
+      const end=+el.dataset.count,suf=el.dataset.suffix||'',o={v:0};
+      gsap.to(o,{v:end,duration:2,ease:'power2.out',scrollTrigger:{trigger:el,start:'top 88%'},onUpdate:()=>el.textContent=Math.round(o.v).toLocaleString()+suf});
+    });
+
+    if(innerWidth>1000)$('.stack-card').forEach((c,i,all)=>{
+      if(i===all.length-1)return;
+      gsap.fromTo(c,{scale:1,filter:'brightness(1)'},{scale:.95,filter:'brightness(.7)',ease:'power1.in',scrollTrigger:{trigger:all[i+1],start:'top 45%',end:'top 110px',scrub:true}});
+    });
+
+    if(matchMedia('(pointer:fine)').matches)$('.magnetic').forEach(el=>{
+      el.addEventListener('mousemove',e=>{const r=el.getBoundingClientRect();gsap.to(el,{x:(e.clientX-r.left-r.width/2)*.25,y:(e.clientY-r.top-r.height/2)*.35,duration:.4,ease:'power3.out'})});
+      el.addEventListener('mouseleave',()=>gsap.to(el,{x:0,y:0,duration:.6,ease:'elastic.out(1,.4)'}));
+    });
+  });
+}
+</script>
+</body>
+</html>

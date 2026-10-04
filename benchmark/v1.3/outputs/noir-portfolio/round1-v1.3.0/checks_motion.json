@@ -1,0 +1,26 @@
+{
+ "static": {
+  "reduced_motion_css": true,
+  "gsap_matchmedia": true,
+  "transition_all": 0,
+  "scale0": 0,
+  "layout_tween": 0,
+  "linear_spatial": 0,
+  "webgl": true,
+  "webgl_visibility_pause": true,
+  "webgl_dpr_cap": true,
+  "webgl_lite_gate": true,
+  "webgl_try_catch": true
+ },
+ "runtime": {
+  "console_errors": [],
+  "canvas": 1,
+  "canvas_stddev": 50.98,
+  "hover_transition_max_s": 0.3,
+  "mobile_overflow_px": 0,
+  "mobile_canvas_rendering": 1,
+  "rm_infinite_css_anims": 0,
+  "rm_h1_opacity": 1
+ },
+ "issues": []
+}
