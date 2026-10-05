@@ -117,3 +117,4 @@ Open the page in a browser and screenshot at 1440px and 390px, if you can. Check
 - Bouncy/elastic easing, fade-ins that take >1s, animations on every element at once.
 - Gradient text on body copy; more than one gradient-text phrase per viewport.
 - Stock "AI brain" imagery. Show the product or an abstract render instead.
+- Low-contrast body text on dark: keep body copy at least ~70% white so it stays readable against glows.
