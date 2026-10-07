@@ -185,3 +185,4 @@ The design analysis studied publicly available demos of ThemeForest templates (O
 </div>
 
 <!-- update: v1 -->
+<!-- update: v2 -->
