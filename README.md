@@ -184,3 +184,4 @@ The design analysis studied publicly available demos of ThemeForest templates (O
 <a href="https://middlesugar7000.xyz/?utm_source=github&utm_medium=readme&utm_campaign=premium-saas-web#contact"><img src="assets/banners/btn-hire.svg" alt="Hire MiddleSugar7000" height="64"></a>
 </div>
 
+<!-- update: v1 -->
