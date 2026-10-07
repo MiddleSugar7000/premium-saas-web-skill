@@ -183,3 +183,4 @@ The design analysis studied publicly available demos of ThemeForest templates (O
 <a href="https://github.com/MiddleSugar7000/premium-saas-web-skill/stargazers"><img src="assets/banners/btn-star.svg" alt="Star this repo on GitHub" height="64"></a>
 <a href="https://middlesugar7000.xyz/?utm_source=github&utm_medium=readme&utm_campaign=premium-saas-web#contact"><img src="assets/banners/btn-hire.svg" alt="Hire MiddleSugar7000" height="64"></a>
 </div>
+
