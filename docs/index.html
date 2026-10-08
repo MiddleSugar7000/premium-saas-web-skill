@@ -6,7 +6,7 @@
 <title>premium-saas-web: before/after demo of an Agent Skill for premium SaaS websites</title>
 <meta name="description" content="Same prompt, same model (Claude Opus 5.5), one skill. Before/after comparison of landing pages built with and without premium-saas-web, an open-source Agent Skill for Claude Code, Codex, Cursor and Antigravity.">
 <link rel="canonical" href="https://middlesugar7000.github.io/premium-saas-web-skill/">
-<meta name="author" content="MiddleSugar7000">
+<meta name="author" content="Vantle">
 <meta property="og:type" content="website">
 <meta property="og:title" content="premium-saas-web: premium SaaS websites from a one-line prompt">
 <meta property="og:description" content="Before/after demo tested with Claude Opus 5.5. Open-source Agent Skill for Claude Code, Codex, Cursor and Antigravity.">
@@ -22,12 +22,12 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
  {"@type":"SoftwareSourceCode","name":"premium-saas-web","description":"Open-source Agent Skill (SKILL.md) that teaches Claude Code, OpenAI Codex, Cursor and Google Antigravity to build premium SaaS, AI, agency and portfolio websites.","codeRepository":"https://github.com/MiddleSugar7000/premium-saas-web-skill","programmingLanguage":["HTML","CSS","JavaScript","Markdown"],"license":"https://opensource.org/licenses/MIT","author":{"@id":"#me"},"keywords":"agent skill, SKILL.md, Claude Code skill, Codex skill, Cursor skill, Antigravity skill, SaaS landing page, web design, Tailwind CSS, GSAP"},
- {"@type":"Person","@id":"#me","name":"MiddleSugar7000","jobTitle":"Full-stack developer","url":"https://middlesugar7000.xyz","sameAs":["https://github.com/MiddleSugar7000","https://t.me/middlesugar7000","https://x.com/CurtlyAi"],"knowsAbout":["Next.js","TypeScript","PostgreSQL","Cloudflare Workers","SaaS development","Landing page design","AI integrations"]},
+ {"@type":"Organization","@id":"#me","name":"Vantle","description":"Independent design and development studio","url":"https://vantle.studio","email":"hello@vantle.studio","sameAs":["https://x.com/vantlestudio","https://github.com/MiddleSugar7000"],"knowsAbout":["Brand identity","Web design","Three.js","SaaS development","Landing page design","AI integrations"]},
  {"@type":"FAQPage","mainEntity":[
   {"@type":"Question","name":"What is premium-saas-web?","acceptedAnswer":{"@type":"Answer","text":"An open-source Agent Skill (a SKILL.md folder) that teaches AI coding agents to build premium SaaS, AI-product, agency and portfolio websites, with 4 design directions, 18 CSS recipes and a GSAP + Lenis motion system."}},
   {"@type":"Question","name":"Which agents does it work with?","acceptedAnswer":{"@type":"Answer","text":"Claude Code, OpenAI Codex, Cursor and Google Antigravity, plus any agent that supports the SKILL.md standard. Install with: npx skills add MiddleSugar7000/premium-saas-web-skill"}},
   {"@type":"Question","name":"How was it tested?","acceptedAnswer":{"@type":"Answer","text":"With Claude Opus 5.5 in isolated runs: the same four one-line prompts with and without the skill. With the skill 97.5% of automated quality checks passed, without it 75%."}},
-  {"@type":"Question","name":"Can I hire someone to build my website?","acceptedAnswer":{"@type":"Answer","text":"Yes. The author, MiddleSugar7000, is a full-stack developer who builds landing pages from $450, SaaS MVPs from $950 and API or AI integrations from $650. See middlesugar7000.xyz."}}]}
+  {"@type":"Question","name":"Can I hire someone to build my website?","acceptedAnswer":{"@type":"Answer","text":"Yes. Vantle, the independent design and development studio behind this skill, designs and builds landing pages, SaaS products and AI features. Write to hello@vantle.studio or see vantle.studio."}}]}
 ]}
 </script>
 <style>
@@ -181,7 +181,7 @@ footer{padding:80px 0 0;border-top:1px solid var(--line);overflow:hidden}
 
 <nav class="nav" aria-label="Main">
   <a class="brand" href="#top"><img src="favicon.svg" width="28" height="28" alt=""> premium-saas-web</a>
-  <ul><li><a href="#demo">Demo</a></li><li><a href="#benchmark">Benchmark</a></li><li><a href="#install">Install</a></li><li><a href="#hire">Hire me</a></li></ul>
+  <ul><li><a href="#demo">Demo</a></li><li><a href="#benchmark">Benchmark</a></li><li><a href="#install">Install</a></li><li><a href="#hire">Studio</a></li></ul>
   <a class="btn btn-white" href="https://github.com/MiddleSugar7000/premium-saas-web-skill" style="padding:10px 18px;font-size:14px">GitHub <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
 </nav>
 
@@ -194,7 +194,7 @@ footer{padding:80px 0 0;border-top:1px solid var(--line);overflow:hidden}
     <p class="lead">premium-saas-web is an open-source Agent Skill that makes Claude Code, Codex, Cursor and Antigravity build SaaS websites that look like top-selling templates. Drag the sliders and compare.</p>
     <div class="cta">
       <a class="btn btn-rainbow" href="#demo">See before / after <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg></a>
-      <a class="btn btn-ghost" href="https://middlesugar7000.xyz/?utm_source=demo&utm_medium=hero&utm_campaign=premium-saas-web#contact">Hire the author</a>
+      <a class="btn btn-ghost" href="https://vantle.studio/?utm_source=demo&utm_medium=hero&utm_campaign=premium-saas-web">Made by Vantle</a>
     </div>
     <button class="cmd" id="copy" type="button" title="Copy install command"><b>$</b> npx skills add MiddleSugar7000/premium-saas-web-skill <small id="copied">copy</small></button>
   </div>
@@ -239,21 +239,21 @@ footer{padding:80px 0 0;border-top:1px solid var(--line);overflow:hidden}
   <div class="wrap">
     <div class="hire reveal">
       <div>
-        <span class="eyebrow"><i></i> Booking new projects for October</span>
-        <h2 style="margin-top:22px">Need it built for real? <em>Hire me.</em></h2>
-        <p class="muted" style="margin-top:16px">I'm <b style="color:#fff">MiddleSugar7000</b>, a full-stack developer. I design, build and launch landing pages, SaaS products, APIs and AI integrations to order. Fixed quotes, weekly previews, you own the code.</p>
+        <span class="eyebrow"><i></i> Independent design &amp; development studio</span>
+        <h2 style="margin-top:22px">Need it built for real? <em>Work with Vantle.</em></h2>
+        <p class="muted" style="margin-top:16px">This skill comes from <b style="color:#fff">Vantle</b>. We turn what you're building into a brand people remember, a website they understand, and a product they can use: design and engineering in one team, from the first sketch to launch.</p>
         <div class="prices">
-          <div class="price"><div>Landing page<small>Custom design, SEO + GEO, 48–72 h</small></div><b>from $450</b></div>
-          <div class="price feat"><div>Web app or SaaS MVP<small>Auth, Postgres, dashboard, payments, 4–6 days</small></div><b>from $950</b></div>
-          <div class="price"><div>API, AI or automation<small>LLM routing, Workers, webhooks, 3–4 days</small></div><b>from $650</b></div>
+          <div class="price"><div>Landing page<small>Custom design, 3D and motion, SEO and GEO</small></div><b>2–4 weeks</b></div>
+          <div class="price feat"><div>SaaS product<small>Auth, Postgres, dashboard, payments, AI features</small></div><b>6–12 weeks</b></div>
+          <div class="price"><div>First reply<small>Scope and feasibility, in writing</small></div><b>1 business day</b></div>
         </div>
         <div class="cta" style="justify-content:flex-start">
-          <a class="btn btn-brand" href="https://middlesugar7000.xyz/?utm_source=demo&utm_medium=hire&utm_campaign=premium-saas-web#contact">Get a quote <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
-          <a class="btn btn-ghost" href="https://middlesugar7000.xyz/?utm_source=demo&utm_medium=hire&utm_campaign=premium-saas-web#work">See my work</a>
-          <a class="btn btn-ghost" href="https://t.me/middlesugar7000">Telegram</a>
+          <a class="btn btn-brand" href="https://vantle.studio/?utm_source=demo&utm_medium=hire&utm_campaign=premium-saas-web#start">Start a project <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
+          <a class="btn btn-ghost" href="https://vantle.studio/?utm_source=demo&utm_medium=hire&utm_campaign=premium-saas-web#work">See the work</a>
+          <a class="btn btn-ghost" href="mailto:hello@vantle.studio">hello@vantle.studio</a>
         </div>
       </div>
-      <a class="shot" href="https://middlesugar7000.xyz/?utm_source=demo&utm_medium=shot&utm_campaign=premium-saas-web"><img src="img/portfolio-middlesugar7000.jpg" alt="MiddleSugar7000 full-stack developer portfolio" width="1440" height="900" loading="lazy"></a>
+      <a class="shot" href="https://vantle.studio/?utm_source=demo&utm_medium=shot&utm_campaign=premium-saas-web"><img src="img/vantle-studio.jpg" alt="vantle.studio: A good idea. In full focus." width="1600" height="900" loading="lazy"></a>
     </div>
   </div>
 </section>
@@ -265,15 +265,15 @@ footer{padding:80px 0 0;border-top:1px solid var(--line);overflow:hidden}
     <details><summary>Which AI agents does it work with?</summary><p>Claude Code, OpenAI Codex, Cursor and Google Antigravity, plus any agent that reads the SKILL.md standard. <code class="mono">npx skills add MiddleSugar7000/premium-saas-web-skill</code> installs it for all of them.</p></details>
     <details><summary>How was it tested?</summary><p>With Claude Opus 5.5. The same four one-line prompts ran in separate claude -p processes in empty folders with no memory, once with the skill and once without. 97.5% of automated checks passed with the skill, 75% without. The pages above are the unedited output.</p></details>
     <details><summary>Is it free for client work?</summary><p>Yes, it's MIT licensed.</p></details>
-    <details><summary>Can I hire someone to build my site instead?</summary><p>Yes. MiddleSugar7000 builds landing pages from $450, SaaS MVPs from $950 and API/AI integrations from $650. <a href="https://middlesugar7000.xyz/?utm_source=demo&utm_medium=faq&utm_campaign=premium-saas-web#contact" style="text-decoration:underline">Get a quote</a>.</p></details>
+    <details><summary>Can I hire someone to build my site instead?</summary><p>Yes. Vantle, the studio behind this skill, designs and builds landing pages, SaaS products and AI features, and replies within one business day. <a href="https://vantle.studio/?utm_source=demo&utm_medium=faq&utm_campaign=premium-saas-web#start" style="text-decoration:underline">Start a project</a>.</p></details>
   </div>
 </section>
 </main>
 
 <footer>
   <div class="wrap foot">
-    <span>© 2026 <a href="https://middlesugar7000.xyz/?utm_source=demo&utm_medium=footer&utm_campaign=premium-saas-web">MiddleSugar7000</a> · MIT license</span>
-    <span><a href="https://github.com/MiddleSugar7000/premium-saas-web-skill">GitHub</a> · <a href="https://t.me/middlesugar7000">Telegram</a> · <a href="https://middlesugar7000.xyz/?utm_source=demo&utm_medium=footer&utm_campaign=premium-saas-web#contact">Hire me</a></span>
+    <span>© 2026 MiddleSugar7000 · Made by <a href="https://vantle.studio/?utm_source=demo&utm_medium=footer&utm_campaign=premium-saas-web">Vantle</a> · MIT license</span>
+    <span><a href="https://github.com/MiddleSugar7000/premium-saas-web-skill">GitHub</a> · <a href="https://vantle.studio/?utm_source=demo&utm_medium=footer&utm_campaign=premium-saas-web#start">Work with Vantle</a></span>
   </div>
   <div class="wordmark" aria-hidden="true">premium-saas-web</div>
 </footer>

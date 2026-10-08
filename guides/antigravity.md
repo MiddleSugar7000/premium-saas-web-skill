@@ -60,4 +60,4 @@ Delete `premium-saas-web` from `~/.gemini/antigravity/skills/` or `.agents/skill
 
 ---
 
-Need a site built by a human? **[Hire MiddleSugar7000](https://middlesugar7000.xyz/?utm_source=github&utm_medium=guide&utm_campaign=premium-saas-web#contact)**, a full-stack developer: landing pages from $450, SaaS MVPs from $950.
+Want a studio to build it instead? **[Vantle](https://vantle.studio/?utm_source=github&utm_medium=guide&utm_campaign=premium-saas-web#start)**, the team behind this skill, designs and builds brands, websites and software products.

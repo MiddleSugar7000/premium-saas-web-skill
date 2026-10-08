@@ -1,7 +1,7 @@
 {
   "name": "middlesugar7000",
-  "owner": { "name": "MiddleSugar7000", "url": "https://middlesugar7000.xyz" },
-  "metadata": { "description": "Agent Skills by MiddleSugar7000, full-stack developer for hire." },
+  "owner": { "name": "MiddleSugar7000", "url": "https://vantle.studio" },
+  "metadata": { "description": "Agent Skills by Vantle, an independent design and development studio (vantle.studio)." },
   "plugins": [
     {
       "name": "premium-saas-web",

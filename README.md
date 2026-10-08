@@ -6,7 +6,7 @@
 
 <a href="https://middlesugar7000.github.io/premium-saas-web-skill/"><img src="assets/banners/btn-demo.svg" alt="Live before / after demo" height="64"></a>
 <a href="#install"><img src="assets/banners/btn-install.svg" alt="Install guide" height="64"></a>
-<a href="https://middlesugar7000.xyz/?utm_source=github&utm_medium=readme&utm_campaign=premium-saas-web#contact"><img src="assets/banners/btn-hire.svg" alt="Hire MiddleSugar7000, full-stack developer" height="64"></a>
+<a href="https://vantle.studio/?utm_source=github&utm_medium=readme&utm_campaign=premium-saas-web#start"><img src="assets/banners/btn-vantle-start.svg" alt="Start a project with Vantle, the studio behind this skill" height="64"></a>
 
 <br>
 
@@ -19,12 +19,12 @@
 
 **premium-saas-web** is a free, open-source **Agent Skill** (`SKILL.md`) that teaches AI coding agents (**Claude Code, OpenAI Codex, Cursor and Google Antigravity**) to build **premium SaaS, AI-product, agency and portfolio websites**: landing pages that look like top-selling ThemeForest templates instead of generic AI output. It packs 4 complete design directions, 18 copy-ready CSS/HTML recipes (sculpted glows, animated gradient borders, tactile glass buttons, bento grids with mini product UIs, scroll-fill text) and a GSAP + Lenis motion system, all measured from real templates at the CSS level.
 
-> Built and maintained by **[MiddleSugar7000](https://middlesugar7000.xyz/?utm_source=github&utm_medium=readme&utm_campaign=premium-saas-web)**, a full-stack developer who builds landing pages, SaaS products, APIs and AI integrations **to order**. If you'd rather have a human ship it, [jump to the hiring section](#need-it-built-for-real-hire-me).
+> Built and maintained by **[Vantle](https://vantle.studio/?utm_source=github&utm_medium=readme&utm_campaign=premium-saas-web)**, an independent design and development studio for brands, websites and software. If you'd rather have a studio ship it, [see how we work](#built-by-vantle).
 
 ## Contents
 
 - [Benchmark: before vs after](#benchmark-before-vs-after)
-- [Hire me](#need-it-built-for-real-hire-me)
+- [Built by Vantle](#built-by-vantle)
 - [What's inside](#whats-inside)
 - [Install](#install) for [Claude Code](guides/claude-code.md) · [Codex](guides/codex.md) · [Cursor](guides/cursor.md) · [Antigravity](guides/antigravity.md)
 - [Usage](#usage)
@@ -54,32 +54,27 @@ Click any screenshot to open the live page; the animations don't show in a still
 
 The checks are mechanical, for example: design tokens on `:root`, tight display tracking, a real light source (large-blur glow), hairline borders, scroll-driven motion, `prefers-reduced-motion`, a marquee, responsive breakpoints, no lorem ipsum and no emoji icons. The scoring script and raw results are in [`benchmark/`](benchmark/). The motion and WebGL additions of v1.3.0 have their own small A/B check: [`benchmark/v1.3/`](benchmark/v1.3/README.md). The skill costs more time and tokens because it plans a direction, builds richer sections and reviews its own output.
 
-## Need it built for real? Hire me.
+## Built by Vantle
 
-<a href="https://middlesugar7000.xyz/?utm_source=github&utm_medium=readme&utm_campaign=premium-saas-web#contact"><img src="assets/banners/hire.svg" alt="Hire MiddleSugar7000: full-stack developer. Landing page from $450, SaaS MVP from $950, API and AI integrations from $650" width="100%"></a>
+<a href="https://vantle.studio/?utm_source=github&utm_medium=readme&utm_campaign=premium-saas-web"><img src="assets/banners/vantle.svg" alt="Vantle, an independent design and development studio. A good idea, in full focus." width="100%"></a>
 
-<div align="center">
+<p align="center">
+  <a href="https://vantle.studio/?utm_source=github&utm_medium=readme&utm_campaign=premium-saas-web#start"><img src="assets/banners/btn-vantle-start.svg" alt="Start a project with Vantle" height="54"></a>&nbsp;
+  <a href="https://vantle.studio/?utm_source=github&utm_medium=readme&utm_campaign=premium-saas-web#work"><img src="assets/banners/btn-vantle-work.svg" alt="See the work" height="54"></a>&nbsp;
+  <a href="mailto:hello@vantle.studio"><img src="assets/banners/btn-vantle-mail.svg" alt="Email hello@vantle.studio" height="54"></a>
+</p>
 
-<a href="https://middlesugar7000.xyz/?utm_source=github&utm_medium=readme&utm_campaign=premium-saas-web#contact"><img src="assets/banners/btn-hire.svg" alt="Hire me, get a quote" height="64"></a>
-<a href="https://middlesugar7000.xyz/?utm_source=github&utm_medium=readme&utm_campaign=premium-saas-web#work"><img src="assets/banners/btn-portfolio.svg" alt="See my portfolio" height="64"></a>
-<a href="https://t.me/middlesugar7000"><img src="assets/banners/btn-telegram.svg" alt="Message me on Telegram" height="64"></a>
+This skill comes from **[Vantle](https://vantle.studio/?utm_source=github&utm_medium=readme&utm_campaign=premium-saas-web)**, an independent design and development studio. We turn what you're building into a brand people remember, a website they understand, and a product they can use.
 
-</div>
+- **Brand & identity:** positioning, logo systems, typography, colour and full design systems
+- **Web design & 3D:** launch pages, Three.js and WebGL, GSAP motion, responsive builds
+- **Full-stack product:** SaaS platforms, dashboards, APIs, auth, payments and AI features
 
-I'm **MiddleSugar7000**, a **full-stack developer for hire**. A skill gets you most of the way; a developer gets you to launch. I take projects **to order** and ship them end to end: design, front end, back end, payments, deployment.
+A focused landing page usually takes 2 to 4 weeks; a complete SaaS build 6 to 12. Tell us what you're making at [hello@vantle.studio](mailto:hello@vantle.studio) or through the [project form](https://vantle.studio/?utm_source=github&utm_medium=readme&utm_campaign=premium-saas-web#start), and we'll reply within one business day.
 
-| What I build | From | Typical timeline |
-|---|---|---|
-| **Landing page**: custom design, Next.js + Tailwind, SEO + GEO, contact form, your domain | **$450** | 48 to 72 hours |
-| **Web app or SaaS MVP**: auth, PostgreSQL + Prisma, dashboard, admin, Stripe / Dodo Payments / Whop checkout, emails | **$950** | 4 to 6 days |
-| **API, AI or automation**: REST APIs, webhooks, OpenAI / Anthropic integration, LLM model routing, Cloudflare Workers | **$650** | 3 to 4 days |
+<a href="https://vantle.studio/?utm_source=github&utm_medium=readme&utm_campaign=premium-saas-web#work"><img src="assets/banners/vantle-work.svg" alt="Selected work by Vantle: LIMEN, a watch that only runs while you scroll; Curtly, an LLM gateway with 58.2% average input reduction; Draftify, an AI coding workspace; VOLT Arc, an electric superbike launch page" width="100%"></a>
 
-- **Fixed quotes, weekly previews, you own all the code.**
-- **Stack:** Next.js, React, TypeScript, Tailwind CSS, PostgreSQL, Prisma, Cloudflare, Stripe, OpenAI and Anthropic APIs, Three.js, GSAP.
-- **Shipped:** [Curtly](https://curtly.dev) (LLM gateway that cuts AI token costs), [Draftify](https://draftify.site) (AI coding workspace), Isohel and VOLT Arc ([see the work](https://middlesugar7000.xyz/?utm_source=github&utm_medium=readme&utm_campaign=premium-saas-web#work)).
-- **Text-only, async communication** (Discord `middlesugar7000.main`, [Telegram](https://t.me/middlesugar7000), [X](https://x.com/CurtlyAi) or the [contact form](https://middlesugar7000.xyz/?utm_source=github&utm_medium=readme&utm_campaign=premium-saas-web#contact)). Replies within 24 hours.
-
-<a href="https://middlesugar7000.xyz/?utm_source=github&utm_medium=readme&utm_campaign=premium-saas-web"><img src="assets/screenshots/portfolio-middlesugar7000.jpg" alt="MiddleSugar7000 full-stack developer portfolio: from the first pixel to the last webhook" width="100%"></a>
+<a href="https://vantle.studio/?utm_source=github&utm_medium=readme&utm_campaign=premium-saas-web"><img src="assets/screenshots/vantle-studio.jpg" alt="vantle.studio: A good idea. In full focus." width="100%"></a>
 
 ## What's inside
 
@@ -170,7 +165,7 @@ Claude Opus 5.5, in isolated `claude -p` runs: same prompt, same model, no memor
 Yes. MIT license: use it for client projects, products and templates.
 
 **Can I hire someone to build my site instead?**
-Yes, that's me. [MiddleSugar7000](https://middlesugar7000.xyz/?utm_source=github&utm_medium=readme&utm_campaign=premium-saas-web#contact) builds landing pages from $450, SaaS MVPs from $950 and API/AI integrations from $650, with fixed quotes.
+Yes. [Vantle](https://vantle.studio/?utm_source=github&utm_medium=faq&utm_campaign=premium-saas-web#start), the studio behind this skill, designs and builds landing pages, SaaS products and AI features. Write to hello@vantle.studio; we reply within one business day.
 
 ## Credits and license
 
@@ -181,7 +176,7 @@ The design analysis studied publicly available demos of ThemeForest templates (O
 <div align="center">
 <br>
 <a href="https://github.com/MiddleSugar7000/premium-saas-web-skill/stargazers"><img src="assets/banners/btn-star.svg" alt="Star this repo on GitHub" height="64"></a>
-<a href="https://middlesugar7000.xyz/?utm_source=github&utm_medium=readme&utm_campaign=premium-saas-web#contact"><img src="assets/banners/btn-hire.svg" alt="Hire MiddleSugar7000" height="64"></a>
+<a href="https://vantle.studio/?utm_source=github&utm_medium=readme&utm_campaign=premium-saas-web#start"><img src="assets/banners/btn-vantle-start.svg" alt="Start a project with Vantle" height="64"></a>
 </div>
 
 <!-- update: v1 -->

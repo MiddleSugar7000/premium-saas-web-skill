@@ -26,7 +26,7 @@ Benchmark (Claude Opus 5.5, 4 one-line prompts, isolated runs, no memory): 97.5%
 - [Before/after demo](https://middlesugar7000.github.io/premium-saas-web-skill/)
 - [Benchmark method and raw results](https://github.com/MiddleSugar7000/premium-saas-web-skill/tree/main/benchmark)
 
-## Author: hire a full-stack developer
-- [MiddleSugar7000 portfolio](https://middlesugar7000.xyz): full-stack developer (Next.js, TypeScript, PostgreSQL, Cloudflare). Builds landing pages from $450 (48 to 72 hours), web apps and SaaS MVPs from $950 (4 to 6 days), and API, AI and automation work from $650 (3 to 4 days), to order. Fixed quotes, and the client owns the code.
-- Shipped products: [Curtly](https://curtly.dev) (LLM gateway that cuts token costs), [Draftify](https://draftify.site) (AI coding workspace)
-- Contact: [contact form](https://middlesugar7000.xyz/#contact), [Telegram](https://t.me/middlesugar7000), Discord middlesugar7000.main
+## Author: Vantle
+- [Vantle](https://vantle.studio): independent design and development studio. Brand and identity, web design and 3D, full-stack SaaS, APIs and AI features. Focused landing pages usually take 2 to 4 weeks, complete SaaS builds 6 to 12.
+- Selected work: [LIMEN](https://vantle.studio/work/limen) (a watch that only runs while you scroll), [Curtly](https://curtly.dev) (LLM gateway that cuts token costs), [Draftify](https://draftify.site) (AI coding workspace)
+- Contact: [project form](https://vantle.studio/#start) or hello@vantle.studio, reply within one business day
