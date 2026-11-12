@@ -2,6 +2,7 @@
 
 ## Display type: tight tracking, dimmed half, metallic gradient
 
+<!-- Optical display type rules: negative tracking ratios, dual-tone headlines, and metallic linear gradient clipping -->
 *Why:* Large type at default tracking looks loose and amateur. Tightening by 3–7% makes words read as shapes, the way a logo does. Dimming half the headline creates a reading order.
 
 ```css
