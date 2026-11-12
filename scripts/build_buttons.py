@@ -34,6 +34,11 @@ BUTTONS = [
 
 
 def button(label, style, icon):
+    """Synthesizes a standalone, responsive SVG button element with embedded CSS keyframe animations.
+    
+    Calculates dynamic pixel widths based on label character counts, leaving calibrated margins
+    for outer gaussian blur glows to avoid clipping in GitHub README renders.
+    """
     h = 56
     text_w = len(label) * CHAR_W
     w = int(28 + text_w + 14 + 18 + 26)  # pad + text + gap + icon + pad
