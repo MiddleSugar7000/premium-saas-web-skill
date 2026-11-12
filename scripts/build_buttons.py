@@ -82,6 +82,7 @@ def button(label, style, icon):
         )
         fg, weight = "#0D1017", 600
     else:  # ghost / glass
+        # Translucent glassmorphism pill: deep dark background fill, hairline border stroke, and 1px specular top highlight
         body.append(
             f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{h/2}" fill="#191D2A"/>'
             f'<rect x="{x+.5}" y="{y+.5}" width="{w-1}" height="{h-1}" rx="{(h-1)/2}" fill="none" stroke="#fff" stroke-opacity=".16"/>'
