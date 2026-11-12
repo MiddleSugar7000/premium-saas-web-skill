@@ -2,6 +2,7 @@
 
 ## Sculpted glow (hero light source)
 
+<!-- Light sculpting methodology: subtractive masking with dark blurred shapes to craft atmospheric depth -->
 *Why:* A single radial gradient looks like a gradient. Real light has shape. OptimAI stacks pure-hue blobs and then lays **bg-colored blobs on top** (also blurred) to carve the glow into a crescent or arch. That's why it feels like an eclipse, not a wallpaper. Main use: dark heroes and final CTAs.
 
 ```html
