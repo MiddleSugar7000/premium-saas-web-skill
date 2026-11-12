@@ -11,6 +11,8 @@ OUT = Path(__file__).resolve().parent.parent / "assets" / "banners"
 SANS = "'Inter','Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif"
 CHAR_W = 8.35  # rough advance width at 16px, good enough to size the pill
 
+# Compact vector glyph definitions centered vertically around (0, 0)
+# Formatted with color placeholder {c} for dynamic theme fill and stroke inheritance
 ICONS = {
     "arrow": '<path d="M0 -6l6 6-6 6" fill="none" stroke="{c}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>',
     "play": '<path d="M-1 -6.5v13l10-6.5z" fill="{c}"/>',
