@@ -49,6 +49,8 @@ def button(label, style, icon):
     ix = x + 28 + text_w + 16
     defs, body = [], []
     if style == "rainbow":
+        # Multi-stop chromatic gradient cycling between vibrant pink, violet, and electric cyan
+        # Combined with an expanded filter bounding box to render soft ambient drop glows
         defs.append(
             '<linearGradient id="rb" x1="0" x2="1">'
             + "".join(
