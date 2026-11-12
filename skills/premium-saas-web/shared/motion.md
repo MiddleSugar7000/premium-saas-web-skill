@@ -3,6 +3,7 @@
 All five reference sites use GSAP + ScrollTrigger + SplitText. Three of them also use a smooth-scroll layer (Lenis or ScrollSmoother). Since GSAP 3.13 every plugin, including SplitText, is free and on the public CDN.
 
 ## Principles (why motion feels premium)
+<!-- Kinematic animation philosophy: physical weight, exponential deceleration, and controlled staggers -->
 - **Ease out, never linear** (except scrubbed and infinite loops). `power3.out` / `expo.out` for entrances, `power2.inOut` for state changes.
 - **Short distances, longer durations.** Move 24–60px over 0.8–1.2s. Big moves look cheap.
 - **Stagger is the luxury.** 0.04–0.08s between words/cards creates a cascade that reads as craft.
