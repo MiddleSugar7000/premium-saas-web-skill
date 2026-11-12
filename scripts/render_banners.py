@@ -15,6 +15,10 @@ OUT = ROOT / "assets" / "png"
 
 
 def main(names):
+    """Renders standalone SVG banners inside headless Chromium via Playwright and captures high-DPI PNGs.
+    
+    Configures device_scale_factor=2 to simulate retina displays and ensures transparent background alpha channels.
+    """
     OUT.mkdir(exist_ok=True)
     svgs = [BANNERS / f"{n}.svg" for n in names] if names else sorted(BANNERS.glob("*.svg"))
     with sync_playwright() as p:
