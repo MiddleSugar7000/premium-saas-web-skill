@@ -4,6 +4,7 @@ Use WebGL only when the direction asks for it (Noir Spotlight's shader bg, a her
 
 ## Setup (single-file, no build)
 
+<!-- Zero-dependency Three.js ESM import map architecture and responsive canvas layering -->
 ```html
 <script type="importmap">{"imports":{
   "three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
