@@ -2,6 +2,7 @@
 
 ## Glass floating nav
 
+<!-- Decoupled app-like floating navigation bar with backdrop blur filter fallbacks -->
 *Why:* A detached, centered pill that floats over content feels like an app, not a website. Glass only works when something colorful passes under it, so keep the hero glow behind it.
 
 ```css
