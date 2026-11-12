@@ -93,6 +93,7 @@ def button(label, style, icon):
         f'<text x="{tx:.0f}" y="{y + h/2 + 6:.0f}" font-family="{SANS}" font-size="16.5" font-weight="{weight}" fill="{fg}">{label}</text>'
         f'<g class="ic" transform="translate({ix:.0f} {y + h/2:.0f})">{ICONS[icon].format(c=fg)}</g>'
     )
+    # Embedded SVG CSS stylesheet: continuous border translation, glow pulse, trailing icon nudge, and accessibility toggle
     css = (
         "<style>.rb{animation:rb 5s linear infinite}@keyframes rb{to{transform:translateX(-50%)}}"
         ".sg{animation:sg 3s ease-in-out infinite}@keyframes sg{50%{opacity:.55}}"
