@@ -25,6 +25,7 @@ def main(names):
         browser = p.chromium.launch()
         for svg in svgs:
             page = browser.new_page(device_scale_factor=2)
+            # Inject base64 data-URI into isolated HTML container, wait for CSS animation stability, and measure bounding geometry
             page.set_content(
                 f'<html><body style="margin:0;background:#0d1117">'
                 f'<img id="i" src="data:image/svg+xml;base64,{__import__("base64").b64encode(svg.read_bytes()).decode()}"></body></html>'
