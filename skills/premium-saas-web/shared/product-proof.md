@@ -2,6 +2,7 @@
 
 ## Browser-frame mockup fading into the page
 
+<!-- Production-grade browser shell UI: HTML-native controls, multi-stop bottom fade, and subtle 3D perspective tilt -->
 *Why:* Every top SaaS template puts the actual product in the hero. Buyers trust what they can see. Build it in HTML so it's crisp and can be animated.
 
 ```html
