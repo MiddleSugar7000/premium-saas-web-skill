@@ -21,6 +21,7 @@ ICONS = {
     "star": '<path d="M5 -8l2.6 5.3 5.8.8-4.2 4.1 1 5.8L5 5.3 -.2 8l1-5.8-4.2-4.1 5.8-.8z" fill="{c}"/>',
 }
 
+# Button generation registry mapping slug identifiers to display copy, aesthetic recipe, and trailing icon
 BUTTONS = [
     # name, label, style, icon
     ("btn-hire", "Hire me · get a quote", "rainbow", "arrow"),
