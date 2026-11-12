@@ -70,6 +70,7 @@ def button(label, style, icon):
         )
         fg, weight = "#0E1018", 600
     elif style == "white":
+        # White pill recipe: subtle metallic core gradient paired with an asymmetric specular kicker (#5A9FFF / #FFFA6B)
         defs.append(
             '<linearGradient id="p" x1="0" x2="1"><stop offset="0" stop-color="#DBE2E6"/><stop offset=".72" stop-color="#fff"/></linearGradient>'
             '<linearGradient id="sg" x1="1" x2="0"><stop offset="0" stop-color="#5A9FFF"/><stop offset="1" stop-color="#FFFA6B" stop-opacity=".2"/></linearGradient>'
