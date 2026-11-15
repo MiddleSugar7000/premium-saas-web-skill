@@ -22,7 +22,7 @@ Cheap pages and premium pages often use the *same* components (hero, logos, feat
 
 1. **Light** — surfaces look lit, not filled. Glows are sculpted from blurred shapes; cards have a top-left sheen; buttons have an inner highlight and an inner bottom edge; borders are hairlines at 6–20% opacity. Real light falls off, so nothing is a flat block of color.
 2. **Restraint** — one accent color, used on ≤5% of the page. Text hierarchy comes from *opacity of one color* (100 / 80 / 60 / 50%), not from many grays. Two fonts max (+ an optional mono for labels). Zero decoration that doesn't carry meaning.
-3. **Typography with tension** — display type is big and *tightly tracked* (letter-spacing −2% to −7%), line-height ≈ 1.0–1.2. Half of a headline is often dimmed (`opacity .5` or a lighter gradient) so the eye reads the strong half first.
+3. **Typography with tension** — display type is big and *tightly tracked* (letter-spacing −2% to −7%), line-height ≈ 1.0–1.2. Half of a headline is often dimmed (`opacity .5` or a lighter gradient) so the eye reads the strong half first. Controlled line lengths (max 18–24 characters on display sizes) prevent tracking compression from impairing scanability.
 4. **Motion with weight** — smooth scroll (Lenis), headlines that rise word-by-word, text that fills as you scroll, counters that roll, marquees that never stop, cards that stack. Everything eases out (no linear), nothing bounces, and it all respects `prefers-reduced-motion`.
 
 If an output only has the components but not these four layers, it will look like a free Bootstrap theme no matter how many sections it has.
