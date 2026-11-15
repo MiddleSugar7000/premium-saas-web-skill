@@ -24,6 +24,7 @@
 - **Signature pieces:** sculpted red/orange hero glow (`shared/light.md`), prompt-box hero, rainbow-border primary button with blurred rainbow under-glow, avatar stack + rating eyebrow, AI-model logo arc (center logo enlarged, glow behind), tilted image cards on an arc, browser-frame mockup with neon edge glow, bento with corner light leaks, integration logos on a blue radial spotlight band, dark/light section alternation.
 - **Light sections:** `--light-0` bg, cards white with 1px `rgb(16 24 40 / .08)` border and `0 1px 4px rgb(16 24 40 / .1)` shadow; dark CTA buttons inside them keep the rainbow glow.
 - **Cards:** `background:var(--bg-2); border:1px solid var(--line); border-radius:20px;` plus an optional top hairline highlight `box-shadow: inset 0 1px 0 rgb(255 255 255/.06)`.
+- **Elevation & Tinting:** Maintaining slight blue undertones (`#0D1017` to `#191D2A`) ensures natural contrast falloff without muddying deep saturation during bright amber/red emission.
 
 ## Animated rainbow border + under-glow
 
