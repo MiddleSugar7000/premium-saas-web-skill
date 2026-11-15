@@ -17,7 +17,7 @@
 
 </div>
 
-**premium-saas-web** is a free, open-source **Agent Skill** (`SKILL.md`) that teaches AI coding agents (**Claude Code, OpenAI Codex, Cursor and Google Antigravity**) to build **premium SaaS, AI-product, agency and portfolio websites**: landing pages that look like top-selling ThemeForest templates instead of generic AI output. It packs 4 complete design directions, 18 copy-ready CSS/HTML recipes (sculpted glows, animated gradient borders, tactile glass buttons, bento grids with mini product UIs, scroll-fill text) and a GSAP + Lenis motion system, all measured from real templates at the CSS level.
+**premium-saas-web** is a free, open-source **Agent Skill** (`SKILL.md`) that teaches AI coding agents (**Claude Code, OpenAI Codex, Cursor and Google Antigravity**) to build **premium SaaS, AI-product, agency and portfolio websites**: landing pages that look like top-selling ThemeForest templates instead of generic AI output. It packs 4 complete design directions, 18 copy-ready CSS/HTML recipes (sculpted glows, animated gradient borders, tactile glass buttons, bento grids with mini product UIs, scroll-fill text) and a GSAP + Lenis motion system, all measured from real templates at the CSS level. Each direction is architected with strict token separation, making styles easily portable across React, Vue, Svelte, Astro, or static HTML workflows.
 
 > Built and maintained by **[Vantle](https://vantle.studio/?utm_source=github&utm_medium=readme&utm_campaign=premium-saas-web)**, an independent design and development studio for brands, websites and software. If you'd rather have a studio ship it, [see how we work](#built-by-vantle).
 
