@@ -24,4 +24,4 @@ A 12px dot with `mix-blend-mode: exclusion; background:#fff`, scaled ×4 over li
 
 ## Progress bars
 
-Black bars of varying heights (`height: var(--v)` on a flex row aligned to the bottom), each with a "%" label in display type above it. Grow them from `scaleY(0)` with `transform-origin:bottom` on enter, staggered 0.08s.
+Black bars of varying heights (`height: var(--v)` on a flex row aligned to the bottom), each with a "%" label in display type above it. Grow them from `scaleY(0)` with `transform-origin:bottom` on enter, staggered 0.08s. Setting `transform-origin: bottom` guarantees vertical expansion from the floor baseline, while micro-staggered cubic-bezier timings give mechanical credibility to simulated data.
