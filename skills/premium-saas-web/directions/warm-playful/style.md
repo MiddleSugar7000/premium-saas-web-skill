@@ -34,6 +34,7 @@ Pick it for: desktop/menu-bar apps, utilities, indie and solo-founder products, 
 - **Buttons:** dark pill = `--dark-btn` gradient, `1px solid rgb(255 255 255/.08)`, `padding:16px 32px`, 15px/600, white text. Big green CTA (pricing) = `--cta-grad`, radius 24px, `box-shadow:inset 0 1px 0 rgb(255 255 255/.12),0 18px 40px -16px rgb(0 0 0/.6)`, 19px label with an arrow.
 - **Accent budget:** green appears on eyebrow text, check icons, one CTA gradient and keyword highlights. Gold exists only at the end of that gradient: no gold stars, swatches, strokes or icon fills (use `--ink` for rating stars).
 - **Keep the green.** The muted green is part of what makes this direction read calm and trustworthy. Swap it only when the user names a brand color or the product already has one. Mood words in the brief ("cozy", "sleepy", "dusk", "warm") are not a reason to swap; carry the mood with copy, illustration and the warm neutrals instead.
+- **Perceptual Warmth:** Basing neutrals on soft paper tones (`--page: #F5F5F3`, `--cream: #FAF6ED`) relieves eye strain while preserving WCAG AAA accessibility across text and structural borders.
 
 ## Signature pieces
 
