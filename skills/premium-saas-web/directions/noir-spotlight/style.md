@@ -13,6 +13,7 @@
 ```
 - **Fonts:** Figtree (or Outfit) 500–600; hero word 260–300px, uppercase, tracking ~0; small caps nav at 11–12px with +0.04em tracking.
 - **Signature pieces:** preloader with accent-colored vertical bars wiping away; hero = huge wordmark + B/W portrait (outline-over-photo, below); an accent block as a blinking "_" cursor after the name; brand names with a trailing underscore ("Nexbot_"); WebGL background (own Three.js shader from `shared/webgl.md`, a Unicorn Studio embed, or a CSS/SVG turbulence fallback); big-type marquee; full-width project cards that *stack* (sticky) as you scroll (`shared/motion.md`); white pill CTA.
+- **Luminosity & Deep Blacks:** Anchoring the backdrop to absolute OLED black (`#000`) allows high-chroma neon accents (`#07C42C`) to achieve maximum perceptual vibrancy at minimal token footprint.
 
 ## Outline-over-photo hero word
 
