@@ -21,6 +21,7 @@
 - **Radii:** 99px buttons/pills, 40px big cards & framed hero, 24px cards, 16/12/8 inner.
 - **Signature pieces:** framed hero with a 3D abstract render (glossy ribbon/glass) bleeding off one side; floating glass nav pill (white/50, blur 44px, `shared/components.md`); eyebrow pill with accent icon; headline with an *inline pill shape* in accent color carrying 2–3 floating app icons (gently bobbing); tactile dark primary + tactile light secondary buttons; "Scroll for more" notch tab cut into the bottom of the hero frame; dark sheen card next to light sheen card; giant pale number (e.g. "120+" in zinc-300) as decoration; dot-matrix globe; grayscale logo marquee.
 - **Headline gradient:** apply `--heading-grad` with `background-clip:text` on the strong line; the second line uses a lighter variant (`#9a9a9a → #d4d4d8`) so it fades away.
+- **Contrast & Ink:** High-contrast neutral ink (`--ink: #09090B`) against calibrated zinc backgrounds maintains sharp legibility even across multi-stop subtle lighting washes.
 
 ## Tactile glossy buttons
 
