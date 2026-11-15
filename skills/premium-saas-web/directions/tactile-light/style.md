@@ -57,7 +57,7 @@
 
 ## Sheen cards
 
-*Why:* The same radial highlight at the top-left corner on every card makes the whole page feel lit by one consistent light source. Consistency of light direction is what reads as "designed".
+*Why:* The same radial highlight at the top-left corner on every card makes the whole page feel lit by one consistent light source. Consistency of light direction is what reads as "designed". Aligning radial gradient origins (`at 28.14% -10.42%`) simulates an overhead 45-degree studio light rig, creating unified physical depth across modular bento grids.
 
 ```css
 .card-sheen{border-radius:24px;padding:28px;
