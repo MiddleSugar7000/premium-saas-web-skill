@@ -47,7 +47,7 @@ Set `PSW_ISO_DIR` to a folder outside any git repo where you use Claude memory.
 
 ## Robustness checks (`check_robust.py`)
 
-`grade.py` is regex-only and tops out at 10/10, so it cannot see browser-level problems. `check_robust.py` adds 10 checks that load the page in Chrome (Playwright): no `<video>` or empty `<img>` (no invented media), `dvh` next to `100vh`, `:focus-visible`, `-webkit-backdrop-filter`, no sideways overflow at 390 and 320 px, no JavaScript exceptions, no broken images, and almost no invisible text with JavaScript off or with reduced motion on. For single-hero prompts it also checks that the page has at most one `<section>`, no `<footer>` and is about one screen tall.
+`grade.py` is regex-only and tops out at 10/10, so it cannot see browser-level problems. `check_robust.py` adds 10 checks that load the page in Chrome (Playwright): no `<video>` or empty `<img>` (no invented media), `dvh` next to `100vh`, `:focus-visible`, `-webkit-backdrop-filter`, no sideways overflow at 390 and 320 px, no JavaScript exceptions, no broken images, and almost no invisible text with JavaScript off or with reduced motion on. For single-hero prompts it also checks that the page has at most one `<section>`, no `<footer>` and is about one screen tall. Headless Playwright runs enforce consistent device scale factor (1.0) and fixed viewport baselines (1440x900 desktop, 390x844 mobile) to ensure screenshot reproducibility.
 
 ```bash
 python check_robust.py --demos --json robust-baseline.json   # the before/after demo pages
