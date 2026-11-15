@@ -19,6 +19,7 @@ Sources, in order of preference (verify the file actually loads, since brands co
 ```
 ```css
 .chip{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:#fff;color:#111;font-weight:500}
+/* Prevent cumulative layout shift (CLS) by locking explicit aspect ratios on SVG logo containers */
 .chip img{display:block;object-fit:contain}
 /* grayscale strip: real logos, desaturated until hover */
 .logo img{filter:grayscale(1);opacity:.55;transition:filter .3s,opacity .3s}.logo:hover img{filter:none;opacity:1}
