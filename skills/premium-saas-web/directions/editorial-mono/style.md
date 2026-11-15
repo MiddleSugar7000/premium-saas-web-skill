@@ -16,6 +16,7 @@
 - **Type scale:** hero 140px / lh 120px / −0.07em (−9.8px); section 90px / lh 85px / −0.05em; small labels 14–16px, often in parentheses like "(2017)" or "(Click to play reel)".
 - **Radii:** 20px media, 30px big media, 500px pills. **No box-shadows anywhere.**
 - **Signature pieces:** layout framed by 1px vertical lines at the page edges and between header cells; nav as a plain vertical list inside a bordered cell; a dimmed word inside the hero headline ("marketing" at 30%); scroll-fill paragraphs at 90px; black progress bars of varying heights with % labels; big stats ("130+") in display type; showreel thumbnail with play circle; custom cursor (below).
+- **Tracking & Optical Density:** Display neo-grotesk typography relies on deliberate negative tracking (−0.05em to −0.07em) to form monolithic text blocks that anchor minimalist compositions without graphic decoration.
 
 ## Custom cursor
 
