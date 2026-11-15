@@ -18,6 +18,7 @@ Keep lightness/chroma similar to the original and use OKLCH to rotate hue:
 - Ember: orange `oklch(70% .2 50)` → blue `oklch(68% .17 255)` → violet `oklch(62% .22 295)` → green `oklch(75% .2 150)`.
 - Always regenerate the *glow* color as a more saturated, darker sibling of the accent (glows look best at very high chroma because blur dilutes them).
 - Re-check contrast of any text placed on the accent.
+- **Preserve perceived lightness:** Rotating in OKLCH ensures uniform perceptual brightness across hue shifts, preventing swapped brand colors from unintentionally vibrating or degrading legibility.
 
 ## Adding a new direction
 
