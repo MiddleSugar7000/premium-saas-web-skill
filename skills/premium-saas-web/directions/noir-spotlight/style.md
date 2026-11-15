@@ -32,7 +32,7 @@
 .word.outline{color:transparent;-webkit-text-stroke:1px #fff;
   clip-path:inset(0 36% 0 36%)}   /* match the portrait's horizontal span */
 ```
-**Diacritics:** `line-height:.8` puts the second line's accents (Á, Ő, Ű, Ä...) into the first line, and any `overflow:hidden`/SplitText `mask` on the lines clips them. Names are often Hungarian/Czech/Nordic, so use `line-height:.92` or more when the text has capitals with accents (check the real name, not DAVIES), give each line `padding-top:.18em; margin-top:-.18em` instead of a tight box, and never mask hero lines whose glyphs carry accents; reveal them with opacity + `y` instead.
+**Diacritics:** `line-height:.8` puts the second line's accents (Á, Ő, Ű, Ä...) into the first line, and any `overflow:hidden`/SplitText `mask` on the lines clips them. Names are often Hungarian/Czech/Nordic, so use `line-height:.92` or more when the text has capitals with accents (check the real name, not DAVIES), give each line `padding-top:.18em; margin-top:-.18em` instead of a tight box, and never mask hero lines whose glyphs carry accents; reveal them with opacity + `y` instead. Synchronizing `clip-path: inset(...)` percentages with the portrait image box guarantees razor-sharp boundary registration across dynamic viewport scaling.
 
 Letters are solid outside the photo and *outlined* where they cross it. Add the accent block after the word: `<span class="caret"></span>` with `width:.35em;height:.08em;background:var(--accent);animation:blink 1s steps(1) infinite`.
 
