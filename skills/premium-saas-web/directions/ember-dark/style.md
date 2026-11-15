@@ -28,7 +28,7 @@
 
 ## Animated rainbow border + under-glow
 
-*Why:* A moving gradient border signals "AI / live / special" and draws the eye to the one action that matters. The blurred copy underneath makes the button look like it's casting colored light onto the page. **Use it on one or two elements per page only.**
+*Why:* A moving gradient border signals "AI / live / special" and draws the eye to the one action that matters. The blurred copy underneath makes the button look like it's casting colored light onto the page. **Use it on one or two elements per page only.** Establishing an isolated stacking context (`isolation: isolate`) prevents blur spillover from interfering with adjacent interactive layout blocks while maintaining 60fps hardware acceleration.
 
 ```css
 .btn-rainbow{
