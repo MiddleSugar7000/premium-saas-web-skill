@@ -37,6 +37,7 @@ New-Item -ItemType Directory -Force "$HOME\.gemini\antigravity\skills" | Out-Nul
 Copy-Item -Recurse "$env:TEMP\psw\skills\premium-saas-web" "$HOME\.gemini\antigravity\skills\"
 ```
 
+<!-- Directory structure requirement: relative markdown links in SKILL.md resolve against directions/ and shared/ subfolders -->
 The final layout must be `.../skills/premium-saas-web/SKILL.md`, with the `directions/` and `shared/` folders next to it.
 
 ## Check it works
