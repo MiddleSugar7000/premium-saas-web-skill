@@ -12,6 +12,7 @@
 .display-fade{background:linear-gradient(180deg,#fff 30%,rgb(255 255 255/.35));-webkit-background-clip:text;background-clip:text;color:transparent}
 .eyebrow-num{font:500 13px/1 "IBM Plex Mono",monospace;letter-spacing:.04em;text-transform:uppercase;color:rgb(255 255 255/.5)}
 ```
+<!-- Calibrated letter-spacing ratios maintain balanced typographic color across fluid viewport scaling -->
 Letter-spacing guide: 48px → −0.04em, 64px → −0.05em, 96px → −0.03 to −0.05em, 140px → −0.07em. Body text stays at 0.
 
 If the headline is split with SplitText, put the gradient on the split pieces, not the parent (see Gotchas in `shared/motion.md`).
