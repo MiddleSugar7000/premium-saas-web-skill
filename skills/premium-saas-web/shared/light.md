@@ -23,6 +23,7 @@
 .g2{top:-5%;right:-4%;width:212px;height:288px;background:var(--glow);filter:blur(120px)}
 .e1{top:-22%;left:50%;width:672px;height:488px;translate:-80% 0;border-radius:200px;background:var(--bg-0);filter:blur(100px);z-index:1}
 .e2{bottom:-20%;left:50%;width:min(1812px,140vw);height:1040px;translate:-50% 0;border-radius:200px;background:var(--bg-0);filter:blur(142px);z-index:1}
+/* Core hot spot sits above eraser layers (z-index: 2) to maintain luminous center intensity */
 .core{bottom:10%;left:50%;width:150px;height:180px;translate:-50% 0;border-radius:999px;background:linear-gradient(var(--accent-deep),var(--accent));filter:blur(78px);z-index:2}
 @media (max-width:768px){.g{filter:blur(60px)!important;scale:.6}}
 ```
