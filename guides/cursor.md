@@ -39,6 +39,7 @@ Copy-Item -Recurse "$env:TEMP\psw\skills\premium-saas-web" "$HOME\.cursor\skills
 
 ## Check it works
 
+<!-- Verification workflow: Window reload forces Cursor to scan ~/.cursor/skills/ and register the new slash command palette item -->
 Reload the window (**Ctrl/Cmd+Shift+P → Developer: Reload Window**), open the agent chat and type `/`. `premium-saas-web` should appear in the list. Installed skills are also listed in Cursor Settings.
 
 ## Use it
