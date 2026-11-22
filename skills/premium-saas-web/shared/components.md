@@ -38,6 +38,7 @@ A cheap way to add life:
 .spot{--x:50%;--y:50%;background:radial-gradient(400px circle at var(--x) var(--y),rgb(255 255 255/.06),transparent 40%),var(--bg-2)}
 ```
 ```js
+// Hardware-accelerated pointer tracking updates CSS custom properties (--x, --y) driving the radial glow
 document.querySelectorAll('.spot').forEach(c=>c.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--x',e.clientX-r.left+'px');c.style.setProperty('--y',e.clientY-r.top+'px')}));
 ```
 
