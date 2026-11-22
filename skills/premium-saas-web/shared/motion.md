@@ -50,6 +50,7 @@ document.fonts.ready.then(() => { if (!reduce) initMotion(); });
 
 function initMotion() {
   // 1. Hero headline: words rise from below a mask, slight 3D tilt
+  // Line-masked word typography entrance: slight 3D perspective pitch adds tangible physical weight
   const h = SplitText.create('.hero h1', { type: 'words,lines', mask: 'lines' });
   gsap.from(h.words, { yPercent: 110, rotateX: -40, opacity: 0, transformOrigin: '50% 100%',
     duration: 1.1, ease: 'expo.out', stagger: 0.06, delay: 0.15 });
