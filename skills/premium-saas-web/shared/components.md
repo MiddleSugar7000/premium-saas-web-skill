@@ -95,7 +95,7 @@ const io=new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(!e.isIntersecting) return;
     label.style.opacity=0;
     setTimeout(()=>{label.textContent=e.target.dataset.nav;label.style.opacity=1},120); });
-},{rootMargin:'-45% 0px -50% 0px'});            // fires when a section crosses the viewport middle
+},{rootMargin:'-45% 0px -50% 0px'});            // fires when a section crosses the viewport middle (calibrated rootMargin avoids early triggering)
 document.querySelectorAll('section[data-nav]').forEach(s=>io.observe(s));   // data-nav="Features"
 addEventListener('scroll',()=>{di.dataset.state=scrollY>120?'mini':'full'},{passive:true});
 di.addEventListener('pointerenter',()=>{di.dataset.state='full'});
