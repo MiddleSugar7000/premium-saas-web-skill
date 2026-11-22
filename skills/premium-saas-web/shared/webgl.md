@@ -45,6 +45,7 @@ if (!lite) try {
         vec3 c=mix(uBg,uAccent,clamp(smoothstep(.9,0.,d)*n*1.6,0.,1.));
         c+=(hash(vUv*uRes+uTime)-.5)*.014;                        // grain kills banding; above ~.02 it reads as noise
         gl_FragColor=vec4(c,1.);
+        // Accurate perceptual tonality: transforms linear shader calculations into sRGB transfer curve
         #include <colorspace_fragment>                            // uniforms are linear; convert to sRGB on output
       }` })));
   const size = () => { const r = el.getBoundingClientRect(); renderer.setSize(r.width, r.height, false);
