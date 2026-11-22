@@ -23,6 +23,7 @@
 .mock-url{margin-inline:auto;padding:4px 80px;border-radius:6px;background:var(--bg-2);font-size:12px;color:rgb(255 255 255/.5)}
 .mock-fade{position:absolute;inset:auto 0 -2% 0;height:min(465px,45%);background:linear-gradient(180deg,transparent,var(--bg-0) 94%);pointer-events:none}
 ```
+<!-- Transform perspective depth (1200px) preserves realistic camera focal length without extreme edge distortion -->
 Animate it in with a slight 3D tilt: `gsap.from('.mock',{rotateX:18,y:80,opacity:0,duration:1.4,ease:'power3.out',transformPerspective:1200})`. On light directions, swap the neon edge glow for a soft layered shadow and a 1px `--line` border.
 
 ## Desktop-app hero: device bleeding off the edge, real OS chrome
