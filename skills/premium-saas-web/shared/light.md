@@ -56,5 +56,6 @@ A lighter variant for sections: one blob of accent at 25% opacity behind a headi
 .noise::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.06;mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 ```
+<!-- Micro-textured SVG noise overlay (opacity .06 with overlay blend) eliminates 8-bit color banding artifacts on wide-gamut displays -->
 Noise on top of glows removes gradient banding and adds a film-like richness. Use it on dark heroes.
 Dot-matrix globe: a `<canvas>` drawing points on a sphere (lat/long loop, project with simple orthographic math, rotate slowly), or a pre-made SVG. Put it at the bottom of a dark card, half cropped.
