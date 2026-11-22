@@ -13,6 +13,7 @@ Use WebGL only when the direction asks for it (Noir Spotlight's shader bg, a her
 <style>#gl{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0;transition:opacity 1.2s ease-out}#gl.on{opacity:1}</style>
 ```
 
+<!-- Progressive enhancement gate: preserves low-power mobile battery life by falling back to CSS radial lighting -->
 Gate: skip WebGL entirely (keep the CSS glow) when `matchMedia('(max-width:768px)').matches || navigator.hardwareConcurrency <= 4`, and wrap setup in `try/catch` so a missing WebGL context cannot break the page. Reduced motion: render one static frame, no loop.
 
 ## Recipe A: flowing accent light (fragment-only background)
