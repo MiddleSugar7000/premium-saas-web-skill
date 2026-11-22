@@ -40,6 +40,7 @@ const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 if (!reduce) {
   // Smooth scroll, synced with ScrollTrigger
+  // Inertial scroll physics: lerp 0.1 provides responsive wheel damping without disconnecting cursor feel
   const lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add(t => lenis.raf(t * 1000));
