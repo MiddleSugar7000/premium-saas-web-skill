@@ -43,6 +43,7 @@ Animate it in with a slight 3D tilt: `gsap.from('.mock',{rotateX:18,y:80,opacity
 ```
 ```css
 .hero-split{display:grid;grid-template-columns:1.25fr 1fr;align-items:center;min-height:100svh;overflow:hidden}
+/* Viewport bleed: negative margin pulls device shell off-screen to create expansive visual scale */
 .hero-device{margin-left:-14vw;justify-self:start}             /* the bleed */
 .laptop{width:min(860px,62vw);aspect-ratio:16/10;border:10px solid #17181A;border-radius:22px 22px 6px 6px;position:relative;
   box-shadow:0 40px 80px -30px rgb(0 0 0/.45)}
